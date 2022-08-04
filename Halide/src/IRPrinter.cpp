@@ -37,8 +37,13 @@ ostream &operator<<(ostream &out, const Type &type) {
     case Type::BFloat:
         out << "bfloat";
         break;
+    case Type::Complex:
+        out << "complex";
+        break;
     }
-    if (!type.is_handle()) {
+    if (type.is_complex()) {
+        out << type.bits() / 2;
+    } else if (!type.is_handle()) {
         out << type.bits();
     }
     if (type.lanes() > 1) out << 'x' << type.lanes();
@@ -386,7 +391,15 @@ void IRPrinter::visit(const IntImm *op) {
 }
 
 void IRPrinter::visit(const UIntImm *op) {
-    stream << "(" << op->type << ")" << op->value;
+    stream << "(" << op->type << ")";
+    if (op->type.is_complex()) {
+        float f32array[2];
+        uint64_t *p64 = (uint64_t *)&f32array[0];
+        *p64 = op->value;
+        stream << "(" << f32array[0] << ", " << f32array[1] << "i)";
+    } else {
+        stream << op->value;
+    }
 }
 
 void IRPrinter::visit(const FloatImm *op) {

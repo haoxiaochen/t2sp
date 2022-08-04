@@ -1,6 +1,7 @@
 #ifndef HALIDE_TYPE_H
 #define HALIDE_TYPE_H
 
+#include "Complex32.h"
 #include "Error.h"
 #include "Float16.h"
 #include "Util.h"
@@ -177,6 +178,8 @@ HALIDE_DECLARE_EXTERN_STRUCT_TYPE(halide_filter_metadata_t);
 HALIDE_DECLARE_EXTERN_STRUCT_TYPE(halide_semaphore_t);
 HALIDE_DECLARE_EXTERN_STRUCT_TYPE(halide_parallel_task_t);
 
+HALIDE_DECLARE_EXTERN_STRUCT_TYPE(Halide::complex32_t);
+
 // You can make arbitrary user-defined types be "Known" using the
 // macro above. This is useful for making Param<> arguments for
 // Generators type safe. e.g.,
@@ -276,6 +279,7 @@ public:
     static const halide_type_code_t UInt = halide_type_uint;
     static const halide_type_code_t Float = halide_type_float;
     static const halide_type_code_t BFloat = halide_type_bfloat;
+    static const halide_type_code_t Complex = halide_type_complex;
     static const halide_type_code_t Handle = halide_type_handle;
     // @}
 
@@ -383,6 +387,12 @@ public:
         return code() == Float || code() == BFloat;
     }
 
+    /** Is this type a complex number type. */
+    HALIDE_ALWAYS_INLINE
+    bool is_complex() const {
+        return code() == Complex;
+    }
+
     /** Is this type a floating point type (float or double). */
     HALIDE_ALWAYS_INLINE
     bool is_bfloat() const {
@@ -488,6 +498,11 @@ inline Type Float(int bits, int lanes = 1) {
 /** Construct a floating-point type in the bfloat format. Only 16-bit currently supported. */
 inline Type BFloat(int bits, int lanes = 1) {
     return Type(Type::BFloat, bits, lanes);
+}
+
+/** Construct a complex number type. Only 32-bit currently supported. */
+inline Type Complex(int bits) {
+    return Type(Type::Complex, bits*2, 1);
 }
 
 /** Construct a boolean type */

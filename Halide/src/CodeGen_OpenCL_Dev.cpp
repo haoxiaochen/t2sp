@@ -85,7 +85,8 @@ string CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::print_type(Type type, AppendSpaceIf
         } else {
             user_error << "Can't represent a float with this many bits in OpenCL C: " << type << "\n";
         }
-
+    } else if (type.is_complex()) {
+        oss << "float2";
     } else {
         if (type.is_uint() && type.bits() > 1) oss << 'u';
         switch (type.bits()) {
@@ -1963,7 +1964,11 @@ void CodeGen_OpenCL_Dev::init_module() {
                << "#define tanh_f32 tanh \n"
                << "#define atanh_f32 atanh \n"
                << "#define fast_inverse_f32 native_recip \n"
-               << "#define fast_inverse_sqrt_f32 native_rsqrt \n";
+               << "#define fast_inverse_sqrt_f32 native_rsqrt \n"
+               << "inline float2 conjugate(float2 x) {return (float2)(x.s0, -x.s1); }\n"
+               << "inline float2 sqrt_c32(float2 x) {return (float2)(sqrt_f32(x.s0), 0.0f); }\n"
+               << "inline float2 fast_inverse_c32(float2 x) {return (float2)(fast_inverse_f32(x.s0), 0.0f); }\n"
+               << "inline float2 fast_inverse_sqrt_c32(float2 x) {return (float2)(fast_inverse_sqrt_f32(x.s0), 0.0f); }\n";
 
     // __shared always has address space __local.
     src_stream << "#define __address_space___shared __local\n";

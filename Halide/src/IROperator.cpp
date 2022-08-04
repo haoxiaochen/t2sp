@@ -344,6 +344,8 @@ Expr make_const_helper(Type t, T val) {
         return UIntImm::make(t, (uint64_t)val);
     } else if (t.is_float()) {
         return FloatImm::make(t, (double)val);
+    } else if (t.is_complex()) {
+        return UIntImm::make(t, (uint64_t)val);
     } else {
         internal_error << "Can't make a constant of type " << t << "\n";
         return Expr();
@@ -1739,6 +1741,8 @@ Expr sqrt(Expr x) {
         return Internal::Call::make(Float(64), "sqrt_f64", {std::move(x)}, Internal::Call::PureExtern);
     } else if (x.type() == Float(16)) {
         return Internal::Call::make(Float(16), "sqrt_f16", {std::move(x)}, Internal::Call::PureExtern);
+    } else if (x.type() == Complex(32)) {
+        return Internal::Call::make(Complex(32), "sqrt_c32", {std::move(x)}, Internal::Call::PureExtern);
     } else {
         return Internal::Call::make(Float(32), "sqrt_f32", {cast<float>(std::move(x))}, Internal::Call::PureExtern);
     }
@@ -1807,15 +1811,29 @@ Expr fast_pow(Expr x, Expr y) {
 }
 
 Expr fast_inverse(Expr x) {
-    user_assert(x.type() == Float(32)) << "fast_inverse only takes float arguments\n";
+    user_assert(x.type() == Float(32) || x.type() == Complex(32)) << "fast_inverse only takes float arguments\n";
     Type t = x.type();
-    return Internal::Call::make(t, "fast_inverse_f32", {std::move(x)}, Internal::Call::PureExtern);
+    if (t == Complex(32)) {
+        return Internal::Call::make(t, "fast_inverse_c32", {std::move(x)}, Internal::Call::PureExtern);
+    } else {
+        return Internal::Call::make(t, "fast_inverse_f32", {std::move(x)}, Internal::Call::PureExtern);
+    }
 }
 
 Expr fast_inverse_sqrt(Expr x) {
-    user_assert(x.type() == Float(32)) << "fast_inverse_sqrt only takes float arguments\n";
+    user_assert(x.type() == Float(32) || x.type() == Complex(32)) << "fast_inverse_sqrt only takes float arguments\n";
     Type t = x.type();
-    return Internal::Call::make(t, "fast_inverse_sqrt_f32", {std::move(x)}, Internal::Call::PureExtern);
+    if (t == Complex(32)) {
+        return Internal::Call::make(t, "fast_inverse_sqrt_c32", {std::move(x)}, Internal::Call::PureExtern);
+    } else {
+        return Internal::Call::make(t, "fast_inverse_sqrt_f32", {std::move(x)}, Internal::Call::PureExtern);
+    }
+}
+
+Expr conjugate(Expr x) {
+    user_assert(x.type() == Complex(32)) << "conj only takes complex arguments\n";
+    Type t = x.type();
+    return Internal::Call::make(t, "conjugate", {std::move(x)}, Internal::Call::PureExtern);
 }
 
 Expr floor(Expr x) {

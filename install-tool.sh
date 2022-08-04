@@ -155,6 +155,7 @@ function install_git_lfs {
     tar -xvf git-lfs-linux-amd64-v$version.tar.gz -C git-lfs > /dev/null
     cd git-lfs
     sed -i "4c prefix=${T2S_PATH}/install" install.sh
+    sed -i "22c git-lfs install --local" install.sh
     ./install.sh
     cd ..
 }

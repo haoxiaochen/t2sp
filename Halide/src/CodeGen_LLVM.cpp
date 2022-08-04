@@ -1522,7 +1522,11 @@ void CodeGen_LLVM::visit(const IntImm *op) {
 }
 
 void CodeGen_LLVM::visit(const UIntImm *op) {
-    value = ConstantInt::get(llvm_type_of(op->type), op->value);
+    if (op->type.is_complex()) {
+        codegen(reinterpret(Complex(32), make_const(UInt(64), op->value)));
+    } else {
+        value = ConstantInt::get(llvm_type_of(op->type), op->value);
+    }
 }
 
 void CodeGen_LLVM::visit(const FloatImm *op) {
@@ -1612,6 +1616,27 @@ void CodeGen_LLVM::visit(const Add *op) {
     Value *b = codegen(op->b);
     if (op->type.is_float()) {
         value = builder->CreateFAdd(a, b);
+    } else if (op->type.is_complex()) {
+        ArrayType *float_array_type = ArrayType::get(f32_t, 2);
+        Value *float_array = builder->CreateAlloca(float_array_type);
+        Value *arr_ptr_0 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 0);
+        Value *arr_ptr_1 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 1);
+        Value *ptr64 = builder->CreatePointerCast(arr_ptr_0, llvm::Type::getInt64PtrTy(*context));
+
+        builder->CreateStore(a, ptr64);
+        Value *a_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *a_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        builder->CreateStore(b, ptr64);
+        Value *b_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *b_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        Value *result_re = builder->CreateFAdd(a_re, b_re);
+        Value *result_im = builder->CreateFAdd(a_im, b_im);
+
+        builder->CreateStore(result_re, arr_ptr_0);
+        builder->CreateStore(result_im, arr_ptr_1);
+        value = builder->CreateLoad(ptr64);
     } else if (op->type.is_int() && op->type.bits() >= 32) {
         // We tell llvm integers don't wrap, so that it generates good
         // code for loop indices.
@@ -1632,6 +1657,27 @@ void CodeGen_LLVM::visit(const Sub *op) {
     Value *b = codegen(op->b);
     if (op->type.is_float()) {
         value = builder->CreateFSub(a, b);
+    } else if (op->type.is_complex()) {
+        ArrayType *float_array_type = ArrayType::get(f32_t, 2);
+        Value *float_array = builder->CreateAlloca(float_array_type);
+        Value *arr_ptr_0 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 0);
+        Value *arr_ptr_1 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 1);
+        Value *ptr64 = builder->CreatePointerCast(arr_ptr_0, llvm::Type::getInt64PtrTy(*context));
+
+        builder->CreateStore(a, ptr64);
+        Value *a_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *a_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        builder->CreateStore(b, ptr64);
+        Value *b_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *b_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        Value *result_re = builder->CreateFSub(a_re, b_re);
+        Value *result_im = builder->CreateFSub(a_im, b_im);
+
+        builder->CreateStore(result_re, arr_ptr_0);
+        builder->CreateStore(result_im, arr_ptr_1);
+        value = builder->CreateLoad(ptr64);
     } else if (op->type.is_int() && op->type.bits() >= 32) {
         // We tell llvm integers don't wrap, so that it generates good
         // code for loop indices.
@@ -1652,6 +1698,31 @@ void CodeGen_LLVM::visit(const Mul *op) {
     Value *b = codegen(op->b);
     if (op->type.is_float()) {
         value = builder->CreateFMul(a, b);
+    } else if (op->type.is_complex()) {
+        ArrayType *float_array_type = ArrayType::get(f32_t, 2);
+        Value *float_array = builder->CreateAlloca(float_array_type);
+        Value *arr_ptr_0 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 0);
+        Value *arr_ptr_1 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 1);
+        Value *ptr64 = builder->CreatePointerCast(arr_ptr_0, llvm::Type::getInt64PtrTy(*context));
+
+        builder->CreateStore(a, ptr64);
+        Value *a_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *a_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        builder->CreateStore(b, ptr64);
+        Value *b_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *b_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        Value *re_re = builder->CreateFMul(a_re, b_re);
+        Value *im_im = builder->CreateFMul(a_im, b_im);
+        Value *re_im = builder->CreateFMul(a_re, b_im);
+        Value *im_re = builder->CreateFMul(a_im, b_re);
+        Value *result_re = builder->CreateFSub(re_re, im_im);
+        Value *result_im = builder->CreateFAdd(re_im, im_re);
+
+        builder->CreateStore(result_re, arr_ptr_0);
+        builder->CreateStore(result_im, arr_ptr_1);
+        value = builder->CreateLoad(ptr64);
     } else if (op->type.is_int() && op->type.bits() >= 32) {
         // We tell llvm integers don't wrap, so that it generates good
         // code for loop indices.
@@ -1678,6 +1749,36 @@ void CodeGen_LLVM::visit(const Div *op) {
         Value *a = codegen(op->a);
         Value *b = codegen(op->b);
         value = builder->CreateFDiv(a, b);
+    } else if (op->type.is_complex()) {
+        Value *a = codegen(op->a);
+        Value *b = codegen(op->b);
+        ArrayType *float_array_type = ArrayType::get(f32_t, 2);
+        Value *float_array = builder->CreateAlloca(float_array_type);
+        Value *arr_ptr_0 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 0);
+        Value *arr_ptr_1 = builder->CreateConstInBoundsGEP2_32(float_array_type, float_array, 0, 1);
+        Value *ptr64 = builder->CreatePointerCast(arr_ptr_0, llvm::Type::getInt64PtrTy(*context));
+
+        builder->CreateStore(a, ptr64);
+        Value *a_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *a_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        builder->CreateStore(b, ptr64);
+        Value *b_re = builder->CreateLoad(f32_t, arr_ptr_0);
+        Value *b_im = builder->CreateLoad(f32_t, arr_ptr_1);
+
+        Value *re_re = builder->CreateFMul(a_re, b_re);
+        Value *im_im = builder->CreateFMul(a_im, b_im);
+        Value *re_im = builder->CreateFMul(a_re, b_im);
+        Value *im_re = builder->CreateFMul(a_im, b_re);
+        Value *abs_square = builder->CreateFAdd(builder->CreateFMul(b_re, b_re), builder->CreateFMul(b_im, b_im));
+        Value *result_re = builder->CreateFAdd(re_re, im_im);
+        result_re = builder->CreateFDiv(result_re, abs_square);
+        Value *result_im = builder->CreateFSub(im_re, re_im);
+        result_im = builder->CreateFDiv(result_im, abs_square);
+
+        builder->CreateStore(result_re, arr_ptr_0);
+        builder->CreateStore(result_im, arr_ptr_1);
+        value = builder->CreateLoad(ptr64);
     } else {
         value = codegen(lower_int_uint_div(op->a, op->b));
     }
@@ -2924,6 +3025,8 @@ void CodeGen_LLVM::visit(const Call *op) {
                     } else {
                         buf_size += 14;  // Scientific notation with 6 decimal places.
                     }
+                } else if (t.is_complex()) {
+                    buf_size += 94;
                 } else if (t == type_of<halide_buffer_t *>()) {
                     // Not a strict upper bound (there isn't one), but ought to be enough for most buffers.
                     buf_size += 512;
@@ -2950,6 +3053,7 @@ void CodeGen_LLVM::visit(const Call *op) {
             llvm::Function *append_double = module->getFunction("halide_double_to_string");
             llvm::Function *append_pointer = module->getFunction("halide_pointer_to_string");
             llvm::Function *append_buffer = module->getFunction("halide_buffer_to_string");
+            // llvm::Function *append_complex = module->getFunction("halide_complex_to_string");
 
             internal_assert(append_string);
             internal_assert(append_int64);
@@ -2988,6 +3092,10 @@ void CodeGen_LLVM::visit(const Call *op) {
                     // Use scientific notation for doubles
                     call_args.push_back(ConstantInt::get(i32_t, t.bits() == 64 ? 1 : 0));
                     dst = builder->CreateCall(append_double, call_args);
+                } else if (t.is_complex()) {
+                    call_args.push_back(codegen(Cast::make(Complex(32), op->args[i])));
+                    call_args.push_back(ConstantInt::get(i32_t, 1));
+                    dst = builder->CreateCall(append_uint64, call_args);
                 } else if (t == type_of<halide_buffer_t *>()) {
                     Value *buf = codegen(op->args[i]);
                     buf = builder->CreatePointerCast(buf, append_buffer->getFunctionType()->getParamType(2));

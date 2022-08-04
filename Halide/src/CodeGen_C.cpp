@@ -1990,7 +1990,19 @@ void CodeGen_C::visit(const Sub *op) {
 }
 
 void CodeGen_C::visit(const Mul *op) {
-    visit_binop(op->type, op->a, op->b, "*");
+    if (op->type.is_complex()) {
+        string sa = print_expr(op->a);
+        string sb = print_expr(op->b);
+        string sa_re = sa + ".s0";
+        string sa_im = sa + ".s1";
+        string sb_re = sb + ".s0";
+        string sb_im = sb + ".s1";
+        print_assignment(op->type, "(float2)(" +
+            sa_re + " * " + sb_re + " - " + sa_im + " * " + sb_im + ", " +
+            sa_re + " * " + sb_im + " + " + sa_im + " * " + sb_re + ")");
+    } else {
+        visit_binop(op->type, op->a, op->b, "*");
+    }
 }
 
 void CodeGen_C::visit(const Div *op) {
@@ -2092,7 +2104,14 @@ void CodeGen_C::visit(const IntImm *op) {
 }
 
 void CodeGen_C::visit(const UIntImm *op) {
-    print_assignment(op->type, "(" + print_type(op->type) + ")(ADD_UINT64_T_SUFFIX(" + std::to_string(op->value) + "))");
+    if (op->type.is_complex()) {
+        float f32array[2];
+        uint64_t *p64 = (uint64_t *)&f32array[0];
+        *p64 = op->value;
+        print_assignment(op->type, "(" + print_type(op->type) + ")(" + std::to_string(f32array[0]) + "f, " + std::to_string(f32array[1]) + "f)");
+    } else {
+        print_assignment(op->type, "(" + print_type(op->type) + ")(ADD_UINT64_T_SUFFIX(" + std::to_string(op->value) + "))");
+    }
 }
 
 void CodeGen_C::visit(const StringImm *op) {

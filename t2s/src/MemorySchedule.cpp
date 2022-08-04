@@ -995,6 +995,7 @@ class GPUStoreInserter : public IRMutator
     bool in_thread = false;
     string output_func;
     string buf_ref_name;
+
     Stmt make_store(string name, Expr ld_idx, size_t len) {
         const auto &st_name = ori_store->name;
         const auto &ld_name = ori_load->name;
@@ -1019,6 +1020,7 @@ class GPUStoreInserter : public IRMutator
             for (size_t i = 0; i < elems.size(); i++)
                 call_args.push_back(elems[i]);
             call_args.push_back(buf_ref_name);
+
             Expr call = Call::make(ld_type, Call::cm_store_2d, call_args, Call::Intrinsic);
             return Evaluate::make(call);
         }

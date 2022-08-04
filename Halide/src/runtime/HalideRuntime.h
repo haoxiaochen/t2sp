@@ -406,6 +406,7 @@ typedef enum halide_type_code_t
     halide_type_float = 2, //!< IEEE floating point numbers
     halide_type_handle = 3, //!< opaque pointer type (void *)
     halide_type_bfloat = 4, //!< floating point numbers in the bfloat format
+    halide_type_complex = 5,
 } halide_type_code_t;
 
 // Note that while __attribute__ can go before or after the declaration,
