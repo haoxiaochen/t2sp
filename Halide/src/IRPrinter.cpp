@@ -470,6 +470,12 @@ void IRPrinter::visit(const Variable *op) {
         stream << '(' << op->type << ')';
     }
     stream << op->name;
+    if (op->param.defined() && op->param.is_symbolic_constant()) {
+		Expr min = op->param.min_value();
+		if (min.defined()) {
+			stream << "(min:" << min << ")\n";
+		}
+    }
 }
 
 void IRPrinter::visit(const Add *op) {

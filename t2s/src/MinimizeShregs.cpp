@@ -22,6 +22,7 @@
 #include "../../Halide/src/Substitute.h"
 #include "./DebugPrint.h"
 #include "./MinimizeShregs.h"
+#include "./SymbolicConstant.h"
 #include "./Utilities.h"
 #include <algorithm>
 
@@ -176,9 +177,9 @@ public:
 
 // A flow dependence, i.e. a write to a read.
 struct FlowDependence {
-    vector<int> distance; // Distance vector. The first/last element corresponds to the innermost/outermost loop.
-    bool        is_up;    // True/false: the write is lexically below/above the read. True also when write is in
-                          // the LHS and read is in the RHS of the same statement.
+    vector<Expr> distance; // Distance vector. The first/last element corresponds to the innermost/outermost loop.
+    bool         is_up;    // True/false: the write is lexically below/above the read. True also when write is in
+                           // the LHS and read is in the RHS of the same statement.
 };
 
 // All flow dependences for a variable.
@@ -189,19 +190,19 @@ struct FlowDependences {
     Type                   type;        // The data type of an access.
 };
 
-vector<int> distance_between_accesses(const string &var, const vector<Expr> &source_args, const vector<Expr> &sink_args) {
+vector<Expr> distance_between_accesses(const string &var, const vector<Expr> &source_args, const vector<Expr> &sink_args) {
     internal_assert(source_args.size() == sink_args.size());
-    vector<int> distance;
+    vector<Expr> distance;
     for (size_t k = 0; k < source_args.size(); k++) {
         // We must ensure the source access (a write) is in terms of the loop variables, not any other expressions.
         internal_assert(source_args[k].as<Variable>());
         // TODO: how to handdle the read op with a constant index? 
         Expr dk = is_const(sink_args[k]) ? Expr(0) : simplify(source_args[k] - sink_args[k]);
-        user_assert(dk.as<IntImm>()) << "Dependence distance vector is not constant:\n"
+        user_assert(can_resolve_as_const(dk)) << "Dependence distance vector is not constant:\n"
                 << "\tWrite: " << var << "(" << to_string<Expr>(source_args) << "\n"
                 << "\tRead:  " << var << "(" << to_string<Expr>(sink_args) << "\n"
                 << "\t" << k << "'th distance element: " << to_string(dk) << " is not constant\n";
-        distance.push_back(dk.as<IntImm>()->value);
+        distance.push_back(dk);
     }
     return distance;
 }
@@ -230,17 +231,17 @@ void collect_dependences_for_shift_regs(const Stmt s,
             }
             internal_assert(ai.args.size() == aj.args.size());
             internal_assert(ai.type == aj.type);
-            vector<int> distance = distance_between_accesses(ai.var, ai.args_without_prefix, aj.args_without_prefix);
+            vector<Expr> distance = distance_between_accesses(ai.var, ai.args_without_prefix, aj.args_without_prefix);
             bool up = (i > j);
             // Check the distance is valid (i.e. >0 if up, otherwise >= 0)
             bool valid = false;
             string error;
             for (int k = distance.size() - 1; k >= 0; k--) {
-                if (distance[k] > 0) {
+                if (can_prove(distance[k] > 0)) {
                     valid = true;
                     break;
                 }
-                if (distance[k] < 0) {
+                if (can_prove(distance[k] < 0)) {
                     valid = false;
                     error = to_string(k) + "'th element = " + to_string(distance[k]) + " is negative";
                     break;
@@ -261,7 +262,7 @@ void collect_dependences_for_shift_regs(const Stmt s,
             user_assert(valid) << "Dependence distance vector is not valid:\n"
                     << "\tWrite:    " << ai.var << "(" << to_string<Expr>(ai.args) << "\n"
                     << "\tRead:     " << aj.var << "(" << to_string<Expr>(aj.args) << "\n"
-                    << "\tDistance: " << to_string<int>(distance) << "\n"
+                    << "\tDistance: " << to_string<Expr>(distance) << "\n"
                     << "\tError:    " << error << "\n";
             if (func_to_deps.find(ai.var) == func_to_deps.end()) {
                 func_to_deps[ai.var] = {ai.args, ai.args_without_prefix, {{distance, up}}, ai.type};
@@ -355,39 +356,48 @@ vector<int> range_to_vector(int from, int to) {
 }
 
 // Vector is positive, looking from the outermost.
-bool vector_is_positive(const vector<int> &v) {
+bool vector_is_positive(const vector<Expr> &v) {
     internal_assert(!v.empty());
     for (int i = v.size() - 1; i >= 0; i--) {
-        if (v[i] > 0) {
+        if (can_prove(v[i] > 0)) {
             return true;
-        } else if (v[i] < 0) {
+        } else if (can_prove(v[i] < 0)) {
             return false;
+        } else if (!can_prove(v[i] == 0)) {
+        	// Not sure if the dimension is positive or not.
+        	return false;
         }
     }
+    // The vector must be zero to reach here.
     return false;
 }
 
 // Vector is zero.
-bool vector_is_zero(const vector<int> &v) {
+bool vector_is_zero(const vector<Expr> &v) {
     internal_assert(!v.empty());
     for (int i = v.size() - 1; i >= 0; i--) {
-       if (v[i] != 0) {
-            return false;
-        }
+       if (!can_prove(v[i] == 0)) {
+           return false;
+       }
     }
     return true;
 }
 
 // Vector is negative, looking from the outermost.
-bool vector_is_negative(const vector<int> &v) {
+bool vector_is_negative(const vector<Expr> &v) {
     internal_assert(!v.empty());
     for (int i = v.size() - 1; i >= 0; i--) {
-       if (v[i] > 0) {
+ 	   // Every distance element must be provably 0, positive or negative. We cannot handle the case when some elements are not provable.
+       if (can_prove(v[i] > 0)) {
             return false;
-       } else if (v[i] < 0) {
+       } else if (can_prove(v[i] < 0)) {
            return true;
-      }
+       } else if (!can_prove(v[i] == 0)) {
+   		   // Not sure if the dimension is negative or not
+   		   return false;
+       }
     }
+    // The vector must be zero to reach here.
     return false;
 }
 
@@ -446,7 +456,7 @@ int outermost_non_zero_loop(const vector<FlowDependence> &dependences, const vec
     for (int i = args.size() - 1; i >= 0; i--) {
         for (auto &d : dependences) {
             internal_assert(d.distance.size() == args.size());
-            if (d.distance[i] != 0) {
+            if (can_prove(d.distance[i] != 0)) {
                 return i;
             }
         }
@@ -457,7 +467,7 @@ int outermost_non_zero_loop(const vector<FlowDependence> &dependences, const vec
 
 bool distances_can_be_zero_at_dims(const vector<FlowDependence> &dependences, const vector<int> &dims) {
     for (auto d : dependences) {
-        vector<int> sub_distance = sub_vector<int>(d.distance, dims);
+        vector<Expr> sub_distance = sub_vector<Expr>(d.distance, dims);
         if (sub_distance.empty() || vector_is_zero(sub_distance)) {
             return true;
         }
@@ -467,7 +477,7 @@ bool distances_can_be_zero_at_dims(const vector<FlowDependence> &dependences, co
 
 bool distances_can_be_non_zero_at_dims(const vector<FlowDependence> &dependences, const vector<int> &dims) {
     for (auto d : dependences) {
-        vector<int> sub_distance = sub_vector<int>(d.distance, dims);
+        vector<Expr> sub_distance = sub_vector<Expr>(d.distance, dims);
         if (!sub_distance.empty() && !vector_is_zero(sub_distance)) {
             return true;
         }
@@ -504,8 +514,11 @@ Expr linearized_extent(const vector<Expr>      &args,
     for (auto d : dims) {
         const Expr &arg = args[d];
         const string &arg_name = arg.as<Variable>()->name;
+        debug(1) << "...To simplify " << extent * loop_extents.at(arg_name) << "\n";
         extent = simplify(extent * loop_extents.at(arg_name));
+        debug(1) << "   ...after simplify " << extent << "\n";
     }
+    debug(1) << "...Linearized extents=" << extent << "\n";
     return extent;
 }
 
@@ -582,24 +595,31 @@ void make_zero_dims(const Function               &func,
 }
 
 // Linearize a specific part of the distance vector.
-int linearized_distance(const vector<Expr>      &args,
-                        const vector<int>       &distance,
-                        const vector<int>       &dims,         // The part of the distance to linearize.
-                        const map<string, Expr> &loop_extents) {
+Expr linearized_distance(const vector<Expr>      &args,
+                         const vector<Expr>      &distance,
+                         const vector<int>       &dims,         // The part of the distance to linearize.
+                         const map<string, Expr> &loop_extents) {
     // Get the sub-distance vector. We require it to be non-negative.
-    vector<int> sub_distance = sub_vector<int>(distance,  dims);
+    vector<Expr> sub_distance = sub_vector<Expr>(distance,  dims);
     internal_assert(!vector_is_negative(sub_distance));
 
-    int lin_distance = 0;
+    Expr lin_distance = 0;
     Expr prev_dim_extent = IntImm::make(Int(32), 1);
+    debug(1) << "........Find liinearized_distance:\n";
     for (auto i : dims) {
-        internal_assert(prev_dim_extent.as<IntImm>());
-        int coefficient = prev_dim_extent.as<IntImm>()->value;
-        lin_distance += coefficient * distance[i];
+    	debug(1) << "\t~~~~ distance=" << distance[i]  << "\n";
+    }
+    debug(1) << "\n\n";
+
+    for (auto i : dims) {
+        lin_distance = simplify(lin_distance + prev_dim_extent * distance[i]);
+        debug(1) << " .....lineardist=" << to_string(lin_distance) << "\n";
         Expr extent = loop_extent(args, loop_extents, i);
+    	debug(1) << "~~~~Prev dim extent=" << to_string(prev_dim_extent) << ". distance=" << distance[i] << ". Loop extent=" << to_string(extent) << "\n";
         prev_dim_extent = simplify(prev_dim_extent * extent);
     }
-    internal_assert(lin_distance >= 0);
+    debug(1) << "..... linearized is: " << lin_distance << "\n";
+    internal_assert(can_prove(lin_distance >= 0));
     return lin_distance;
 }
 
@@ -632,12 +652,12 @@ void make_time_dims(const vector<FlowDependence> &dependences,
     }
 
     bool new_old_values_live_simultaneously = false;
-    int max_linearized_time_distance = 0;
+    Expr max_linearized_time_distance = 0;
     Expr lin_time_extent;
     RegStrategy strategy;
     for (auto &d : dependences) {
         // Get the sub-distance vector
-        vector<int> sub_distance = sub_vector<int>(d.distance, alloc.PE_dims);
+        vector<Expr> sub_distance = sub_vector<Expr>(d.distance, alloc.PE_dims);
         bool is_intra_PE_dependence = sub_distance.empty() || vector_is_zero(sub_distance);
         if (is_intra_PE_dependence) {
             // IR is like this:
@@ -653,13 +673,13 @@ void make_time_dims(const vector<FlowDependence> &dependences,
             new_old_values_live_simultaneously = true;
         }
 
-        int linearized_time_distance = linearized_distance(alloc.args, d.distance, time_dims, loop_extents);
+        Expr linearized_time_distance = linearized_distance(alloc.args, d.distance, time_dims, loop_extents);
         // For now, we require the linearized time distance to be non-negative.
         // TODO: remove this limitation in future. Just imagine the shift registers have two directions: toward left is for
         // a value with positive distance, toward right is for a value with negative distance. So the sum of the absolute
         // values of the positive and negative value is the total number of registers.
-        internal_assert(linearized_time_distance >= 0);
-        if (linearized_time_distance > max_linearized_time_distance) {
+        internal_assert(can_prove(linearized_time_distance >= 0));
+        if (can_prove(linearized_time_distance > max_linearized_time_distance)) {
             max_linearized_time_distance = linearized_time_distance;
         }
     }
@@ -675,7 +695,7 @@ void make_time_dims(const vector<FlowDependence> &dependences,
         // and then
         //    R[0] = ...         // V(x) = ...
         //    ...  = R[1] + R[0] // ...  = V(x - 1) + V(x)
-        lin_time_extent = IntImm::make(Int(32), max_linearized_time_distance + 1);
+        lin_time_extent = max_linearized_time_distance + 1;
         strategy = RegStrategy::Shift;
     } else {
         // The lifetimes will be like this, e.g.:
@@ -691,7 +711,7 @@ void make_time_dims(const vector<FlowDependence> &dependences,
         // and then
         //    R[0] = R[1] + R[0] //  V(x) = V(x - 1) + V(x - 2)
         //    ...  = R[0]        //  ...  = V(x)
-        lin_time_extent = IntImm::make(Int(32), std::max(max_linearized_time_distance, 1));
+        lin_time_extent = max(max_linearized_time_distance, 1);
         strategy = RegStrategy::Rotate;
     }
 
@@ -800,7 +820,7 @@ void decide_shift_reg_alloc_for_unscheduled_stt(const string            &func_na
 // allocation decision.
 vector<Expr> map_args(const string            &func_name,
                       const vector<Expr>      &args_of_access,
-                      const vector<int>       &distance,
+                      const vector<Expr>      &distance,
                       const ShiftRegAlloc     &alloc,
                       const map<string, Expr> &loop_mins,
                       const map<string, Expr> &loop_extents) {
@@ -810,11 +830,13 @@ vector<Expr> map_args(const string            &func_name,
     }
     for (size_t i = 0; i < alloc.linearized_dims.size(); i++) {
         auto &z = alloc.linearized_dims[i];
-        int lin_distance = linearized_distance(alloc.args, distance, z, loop_extents);
-        internal_assert(alloc.linearized_extents[i].as<IntImm>());
-        int lin_extent = alloc.linearized_extents[i].as<IntImm>()->value;
-        internal_assert(lin_distance >= 0 && lin_distance <= lin_extent);
-        if (lin_distance == lin_extent) {
+        Expr lin_distance = linearized_distance(alloc.args, distance, z, loop_extents);
+        Expr lin_extent = alloc.linearized_extents[i];
+        debug(1) << "$$$$Lindist=" << to_string(lin_distance) << "\n";
+        debug(1) << ". Lin_extent=" <<  lin_extent << "\n";
+        internal_assert(can_prove(lin_distance >= 0));
+        internal_assert(can_prove(lin_distance <= lin_extent));
+        if (can_prove(lin_distance == lin_extent)) {
             internal_assert(alloc.strategy[i] == RegStrategy::Rotate);
             lin_distance = 0;
         }
@@ -822,7 +844,7 @@ vector<Expr> map_args(const string            &func_name,
             internal_assert(z.size() == 1);
             new_args.push_back(alloc.args[z[0]]);
         } else {
-            Expr new_arg = IntImm::make(Int(32), lin_distance);
+            Expr new_arg = lin_distance;
             new_args.push_back(new_arg);
         }
     }
@@ -1185,7 +1207,7 @@ public:
             for (auto arg : args) {
                 args_without_prefix.push_back(substitute(arg_map, arg));
             }
-            vector<int> distance = distance_between_accesses(func_name, func_to_regalloc.at(func_name).args_without_prefix, args_without_prefix);
+            vector<Expr> distance = distance_between_accesses(func_name, func_to_regalloc.at(func_name).args_without_prefix, args_without_prefix);
             vector<Expr> new_args = map_args(func_name, args, distance, func_to_regalloc.at(func_name), loop_mins, loop_extents);
             new_args.insert(new_args.begin(), op->args[0]);
             new_args.push_back(mutate(op->args.back()));
@@ -1204,7 +1226,7 @@ public:
             for (auto arg : args) {
                 args_without_prefix.push_back(substitute(arg_map, arg));
             }
-            vector<int> distance = distance_between_accesses(func_name, func_to_regalloc.at(func_name).args_without_prefix, args_without_prefix);
+            vector<Expr> distance = distance_between_accesses(func_name, func_to_regalloc.at(func_name).args_without_prefix, args_without_prefix);
             vector<Expr> new_args = map_args(func_name, args, distance, func_to_regalloc.at(func_name), loop_mins, loop_extents);
             new_args.insert(new_args.begin(), op->args[0]);
             Expr new_call = Call::make(op->type, Call::read_shift_reg, new_args, op->call_type, op->func, op->value_index,

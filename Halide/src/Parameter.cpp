@@ -24,10 +24,11 @@ struct ParameterContents {
     std::vector<BufferConstraint> buffer_constraints;
     Expr scalar_min, scalar_max, scalar_estimate;
     const bool is_buffer;
+    const bool is_symbolic_constant;
 
-    ParameterContents(Type t, bool b, int d, const std::string &n)
+    ParameterContents(Type t, bool b, int d, const std::string &n, bool is_symbolic_constant = false)
         : type(t), dimensions(d), name(n), buffer(Buffer<>()), data(0),
-          host_alignment(t.bytes()), buffer_constraints(dimensions), is_buffer(b) {
+          host_alignment(t.bytes()), buffer_constraints(dimensions), is_buffer(b), is_symbolic_constant(is_symbolic_constant) {
         // stride_constraint[0] defaults to 1. This is important for
         // dense vectorization. You can unset it by setting it to a
         // null expression. (param.set_stride(0, Expr());)
@@ -71,8 +72,8 @@ Parameter::Parameter(Type t, bool is_buffer, int d)
     internal_assert(is_buffer || d == 0) << "Scalar parameters should be zero-dimensional";
 }
 
-Parameter::Parameter(Type t, bool is_buffer, int d, const std::string &name)
-    : contents(new ParameterContents(t, is_buffer, d, name)) {
+Parameter::Parameter(Type t, bool is_buffer, int d, const std::string &name, bool is_symbolic_constant)
+    : contents(new ParameterContents(t, is_buffer, d, name, is_symbolic_constant)) {
     internal_assert(is_buffer || d == 0) << "Scalar parameters should be zero-dimensional";
 }
 
@@ -94,6 +95,11 @@ const std::string &Parameter::name() const {
 bool Parameter::is_buffer() const {
     check_defined();
     return contents->is_buffer;
+}
+
+bool Parameter::is_symbolic_constant() const {
+    check_defined();
+    return contents->is_symbolic_constant;
 }
 
 Expr Parameter::scalar_expr() const {

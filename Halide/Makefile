@@ -837,6 +837,7 @@ T2S_SOURCE_FILES = \
   SpaceTimeTransform.cpp \
   Stensor.cpp \
   StructType.cpp \
+  SymbolicConstant.cpp \
   TriangularLoopOptimize.cpp \
   Utilities.cpp
 
@@ -871,6 +872,7 @@ T2S_HEADER_FILES = \
   SpaceTimeTransform.h \
   Stensor.h \
   StructType.h \
+  SymbolicConstant.h \
   TriangularLoopOptimize.h \
   Utilities.h
 

@@ -104,8 +104,8 @@ Func &Func::merge_ures(std::vector<Func> &ures, bool isolate) {
     if (output_dims.size() != all_dims.size()) {
         ures.back().function().definition().schedule().is_extended_ure() = true;
     }
-    if (!isolate)
-        CheckFuncConstraints::check_merge_ures(*this, ures);
+//    if (!isolate)
+//        CheckFuncConstraints::check_merge_ures(*this, ures);
 
     debug(4) << "After merging " << this->name() << " with " << names_to_string(ures)   << ":\n"
              << to_string(*this, false, true) << "\n";

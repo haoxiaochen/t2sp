@@ -1,4 +1,5 @@
 #include "Simplify_Internal.h"
+#include "Simplify.h"
 
 namespace Halide {
 namespace Internal {
@@ -29,6 +30,49 @@ Expr Simplify::visit(const Max *op, ExprInfo *bounds) {
     }
     if (b_bounds.max_defined && a_bounds.min_defined && b_bounds.max <= a_bounds.min) {
         return a;
+    }
+
+    // A symbolic constant might have min and max, which can be used to resolve the inequality.
+    {
+    	const Variable *va = a.as<Variable>();
+    	Expr va_min, va_max;
+    	if (va && va->param.defined() && va->param.is_symbolic_constant()) {
+    		if (va->param.min_value().defined()) {
+    			va_min = va->param.min_value();
+    		}
+    		if (va->param.max_value().defined()) {
+    			va_max = va->param.max_value();
+    		}
+    	}
+    	const Variable *vb = b.as<Variable>();
+    	Expr vb_min, vb_max;
+    	if (vb && vb->param.defined() && vb->param.is_symbolic_constant()) {
+    		if (vb->param.min_value().defined()) {
+    			vb_min = vb->param.min_value();
+    		}
+    		if (vb->param.max_value().defined()) {
+    			vb_max = vb->param.max_value();
+    		}
+    	}
+
+    	if (va_max.defined() && vb_min.defined() && can_prove(va_max < vb_min)) {
+    		return b;
+   		}
+    	if (va_max.defined() && !vb_min.defined() && can_prove(va_max < b)) {
+			return b;
+   		}
+    	if (!va_max.defined() && vb_min.defined() && can_prove(a < vb_min)) {
+    		return b;
+   		}
+    	if (va_min.defined() && vb_max.defined() && can_prove(va_min >= vb_max)) {
+    		return a;
+   		}
+    	if (va_min.defined() && !vb_max.defined() && can_prove(va_min >= b)) {
+    		return a;
+   		}
+    	if (!va_min.defined() && vb_max.defined() && can_prove(a >= vb_max)) {
+    		return a;
+   		}
     }
 
     if (may_simplify(op->type)) {

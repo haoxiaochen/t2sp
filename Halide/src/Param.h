@@ -74,8 +74,8 @@ public:
 
     /** Construct a scalar parameter of type T with the given name. */
     // @{
-    explicit Param(const std::string &n)
-        : param(type_of<T>(), false, 0, n) {
+    explicit Param(const std::string &n, bool is_symbolic_constant = false)
+        : param(type_of<T>(), false, 0, n, is_symbolic_constant) {
         static_assert(has_static_type, "Cannot use this ctor without an explicit type.");
         check_name();
     }

@@ -19,13 +19,18 @@
 #include "Halide.h"
 #include "util.h"
 
-// Constant parameters (inner loop bounds) of the design
-#include "const-parameters.h"
-
 using namespace Halide;
 
 int main()
 {
+    // Configuration of the systolic array. These are symbolic constants, and thus in the generated OpenCL
+	// file, they would appear as macro names like III, etc. To compile the generated OpenCL file, pass in                  
+	// constant numbers, e.g. -DIII=4.                                                                                                                                                                                                      
+	// These configure the array to have III*JJJ number of PEs, and each PE executes in KKK-wide SIMD.                                                                                                                                           
+	SymbolicConstant<int> III("III", 1), JJJ("JJJ", 1), KKK("KKK", 1); // 1: Positive constants (i.e. >=1)
+	// These configure each PE to update an output tile of II*JJ big, with an A tile of II*KK big and a B tile of KK*JJ big.
+	SymbolicConstant<int> II("II", 1), JJ("JJ", 1), KK("KK", 1);
+
     // Dependences
     #define P               kkk,      jjj,  iii,  jj, ii, kk,     k,  j,i
     #define P_kkk_minus_1   kkk-1,    jjj,  iii,  jj, ii, kk,     k,  j,i

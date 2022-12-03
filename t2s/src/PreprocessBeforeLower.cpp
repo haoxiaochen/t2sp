@@ -20,6 +20,7 @@
 #include "IRVisitor.h"
 #include "Simplify.h"
 #include "Substitute.h"
+#include "SymbolicConstant.h"
 #include <list>
 #include <vector>
 #include "./DebugPrint.h"
@@ -119,7 +120,8 @@ void check_space_time_transform(Func &func, Target target) {
                         for (size_t i = 0; i < param.proj_matrix.size(); i++) {
                             param.proj_matrix[i].push_back(0);
                         }
-                        user_assert(is_const(loop_bound))
+                        debug(4) << "****Loop bound is " << to_string(loop_bound) << "\n";
+                        user_assert(Internal::can_resolve_as_const(loop_bound))
                                 << "We cannot flatten the time loop with dynamic bound."
                                 << "Please provide a schedule vector covering all dependencies\n";
                         param.sch_vector.push_back(loop_bound.as<IntImm>()->value);
@@ -211,7 +213,7 @@ void t2s_preprocess_before_lower(map<string, Func> &env, const Target &target) {
         }
         // Space-time transform
         func.apply_same_loop_transform_to_merged_ures();
-        check_space_time_transform(func, target);
+        //check_space_time_transform(func, target);
     }
 }
 
