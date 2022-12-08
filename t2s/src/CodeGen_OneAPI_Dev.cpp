@@ -850,7 +850,8 @@ string CodeGen_OneAPI_Dev::CodeGen_OneAPI_C::print_type(Type type, AppendSpaceIf
             oss << type.lanes();
             break;
         default:
-            if (GeneratedStructType::nonstandard_vector_type_exists(type)) {
+            size_t index;
+            if (GeneratedVectorType::nonstandard_vector_type_exists(type, type.lanes(), index)) {
                 oss << type.lanes();
                 break;
             } else {
@@ -873,8 +874,9 @@ Expr CodeGen_OneAPI_Dev::CodeGen_OneAPI_C::DefineVectorStructTypes::mutate(const
 
     if (type.lanes() > 1 && !parent->is_standard_opencl_type(type)) {
         // This is a nonstandard vector type
-        if (!GeneratedStructType::nonstandard_vector_type_exists(type)) {
-            GeneratedStructType::record_nonstandard_vector_type(type);
+        size_t index;
+        if (!GeneratedVectorType::nonstandard_vector_type_exists(type, type.lanes(), index)) {
+            GeneratedVectorType::record_nonstandard_vector_type(type, type.lanes(), index);
             // Define a vector type like this:
             //   typedef union {
             //      float __attribute__ ((aligned(4*17 rounded up to power of 2))) s[17];
@@ -4564,7 +4566,8 @@ std::string CodeGen_OneAPI_Dev::EmitOneAPIFunc::print_type(Type type, AppendSpac
                 oss << type.lanes();
                 break;
             default:
-                if (GeneratedStructType::nonstandard_vector_type_exists(type)) {
+                size_t index;
+                if (GeneratedVectorType::nonstandard_vector_type_exists(type, type.lanes(), index)) {
                     oss << type.lanes();
                     break;
                 } else {

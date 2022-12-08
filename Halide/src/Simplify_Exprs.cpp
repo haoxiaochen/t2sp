@@ -43,13 +43,27 @@ Expr Simplify::visit(const Broadcast *op, ExprInfo *bounds) {
 }
 
 Expr Simplify::visit(const Variable *op, ExprInfo *bounds) {
-    if (bounds_and_alignment_info.contains(op->name)) {
-        const ExprInfo &b = bounds_and_alignment_info.get(op->name);
-        if (bounds) {
-            *bounds = b;
+    // If the variable is actually a symbolic constant, check if it has bounds info
+    if (bounds && op->param.defined() && op->param.is_symbolic_constant()) {
+        bool has_bounds = false;
+        if (op->param.min_value().defined()) {
+            Expr min = op->param.min_value();
+            if (min.as<IntImm>()) {
+                bounds->min = min.as<IntImm>()->value;
+                bounds->min_defined = true;
+                has_bounds = true;
+            }
         }
-        if (b.min_defined && b.max_defined && b.min == b.max) {
-            return make_const(op->type, b.min);
+        if (op->param.max_value().defined()) {
+            Expr max = op->param.max_value();
+            if (max.as<IntImm>()) {
+                bounds->max = max.as<IntImm>()->value;
+                bounds->max_defined = true;
+                has_bounds = true;
+            }
+        }
+        if (has_bounds) {
+            return op;
         }
     }
 

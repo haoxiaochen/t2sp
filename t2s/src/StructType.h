@@ -26,6 +26,8 @@
  */
 
 #include "../../Halide/src/IR.h"
+#include "../../Halide/src/IREquality.h"
+#include "./VectorType.h"
 
 namespace Halide {
 namespace Internal {
@@ -36,7 +38,7 @@ using std::pair;
 
 class GeneratedStructType {
 private:
-    bool struct_type_exists(const vector<Type> &field_types, size_t &index) {
+    static bool struct_type_exists(const vector<Type> &field_types, size_t &index) {
         for (size_t i = 0; i < structs.size(); i++) {
             if (structs[i].second.size() != field_types.size()) {
                 continue;
@@ -57,37 +59,11 @@ private:
     }
 
 public:
-    // Non-standard vectors: basic type is standard, but #lanes is not. For example: float9 is not
-    // a standard OpenCL type, and here we can create it.
-    static vector<pair<Type, int>> vectors; // Each entry: basic type, lanes.
-                                                          // For example, for float9: (float, 9)
-
     // Structs, composed of multiple fields.
     static vector<pair<string, vector<Type>>> structs; // Each entry: struct name, field types
     static halide_handle_cplusplus_type dummy;         // A dummy handle named "CGS" (compiler_generated_struct)
 
-    static bool nonstandard_vector_type_exists(const Type &type) {
-        Type basic_type = type.with_lanes(1);
-        int lanes = type.lanes();
-        for (auto v : vectors) {
-            if (v.first == basic_type && v.second == lanes) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    static void record_nonstandard_vector_type(const Type & type) {
-        if (nonstandard_vector_type_exists(type)) {
-            return;
-        }
-        Type basic_type = type.with_lanes(1);
-        int lanes = type.lanes();
-        pair<Type, int> basic_type_lanes = pair<Type, int>(basic_type, lanes);
-        vectors.push_back(basic_type_lanes);
-    }
-
-    GeneratedStructType(const vector<Type> &field_types, size_t &index) {
+    static void record_struct_type(const vector<Type> &field_types, size_t &index) {
         if (struct_type_exists(field_types, index)) {
             return;
         }

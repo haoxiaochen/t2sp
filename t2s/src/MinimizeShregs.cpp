@@ -196,12 +196,12 @@ vector<Expr> distance_between_accesses(const string &var, const vector<Expr> &so
     for (size_t k = 0; k < source_args.size(); k++) {
         // We must ensure the source access (a write) is in terms of the loop variables, not any other expressions.
         internal_assert(source_args[k].as<Variable>());
-        // TODO: how to handdle the read op with a constant index? 
-        Expr dk = is_const(sink_args[k]) ? Expr(0) : simplify(source_args[k] - sink_args[k]);
+        Expr dk = simplify(source_args[k] - sink_args[k]);
         user_assert(can_resolve_as_const(dk)) << "Dependence distance vector is not constant:\n"
                 << "\tWrite: " << var << "(" << to_string<Expr>(source_args) << "\n"
                 << "\tRead:  " << var << "(" << to_string<Expr>(sink_args) << "\n"
                 << "\t" << k << "'th distance element: " << to_string(dk) << " is not constant\n";
+        debug(4) << "...distancefound for Var:" << var << ": " << to_string(dk) <<"\n";
         distance.push_back(dk);
     }
     return distance;
@@ -465,31 +465,21 @@ int outermost_non_zero_loop(const vector<FlowDependence> &dependences, const vec
     return -1;
 }
 
-bool distances_can_be_zero_at_dims(const vector<FlowDependence> &dependences, const vector<int> &dims) {
-    for (auto d : dependences) {
-        vector<Expr> sub_distance = sub_vector<Expr>(d.distance, dims);
-        if (sub_distance.empty() || vector_is_zero(sub_distance)) {
-            return true;
-        }
-    }
-    return false;
-}
-
-bool distances_can_be_non_zero_at_dims(const vector<FlowDependence> &dependences, const vector<int> &dims) {
+bool distances_must_be_zero_at_dims(const vector<FlowDependence> &dependences, const vector<int> &dims) {
     for (auto d : dependences) {
         vector<Expr> sub_distance = sub_vector<Expr>(d.distance, dims);
         if (!sub_distance.empty() && !vector_is_zero(sub_distance)) {
-            return true;
+            return false;
         }
     }
-    return false;
+    return true;
 }
 
 // Find the first dimension at which all distances equal 0 from start (included) before the end.
 // Return end if no such dimension is found.
 int first_zero_dim(const vector<FlowDependence> &dependences, int start, int end) {
     for (int i = start; i < end; i++) {
-        if (distances_can_be_zero_at_dims(dependences, {i}) && !distances_can_be_non_zero_at_dims(dependences, {i})) {
+        if (distances_must_be_zero_at_dims(dependences, {i})) {
             return i;
         }
     }
@@ -500,7 +490,7 @@ int first_zero_dim(const vector<FlowDependence> &dependences, int start, int end
 // Return end if no such dimension is found.
 int first_non_zero_dim(const vector<FlowDependence> &dependences, int start, int end) {
     for (int i = start; i < end; i++) {
-        if (distances_can_be_non_zero_at_dims(dependences, {i})) {
+        if (!distances_must_be_zero_at_dims(dependences, {i})) {
             return i;
         }
     }
@@ -586,7 +576,7 @@ void make_zero_dims(const Function               &func,
     int i = last_PE_dim + 1;
     while (i < outermost_non_zero_dim) {
         auto &min_ext = func.arg_min_extents().at(func.args()[i]);
-        if (!is_const(min_ext.first) || !is_const(min_ext.second)) {
+        if (!can_resolve_as_const(min_ext.first) || !can_resolve_as_const(min_ext.second)) {
             i = make_direct_access_of_zero_dims(dependences, new_extents, i, outermost_non_zero_dim, alloc);
         } else {
             i = make_one_group_of_zero_dims(dependences, loop_extents, i, outermost_non_zero_dim, alloc);
@@ -711,7 +701,7 @@ void make_time_dims(const vector<FlowDependence> &dependences,
         // and then
         //    R[0] = R[1] + R[0] //  V(x) = V(x - 1) + V(x - 2)
         //    ...  = R[0]        //  ...  = V(x)
-        lin_time_extent = max(max_linearized_time_distance, 1);
+        lin_time_extent = simplify(max(max_linearized_time_distance, 1));
         strategy = RegStrategy::Rotate;
     }
 
@@ -799,7 +789,7 @@ void decide_shift_reg_alloc_for_unscheduled_stt(const string            &func_na
         internal_assert(vectorized_dims.size() == 1 && vectorized_dims[0] == 0);
         alloc.vectorized_dim = 0;
         alloc.vectorized_extent = loop_extent(args, loop_extents, alloc.vectorized_dim);
-        if (!distances_can_be_non_zero_at_dims(deps, {0})) {
+        if (distances_must_be_zero_at_dims(deps, {0})) {
             alloc.vectorized_dim_as_space = true;
         }
     }

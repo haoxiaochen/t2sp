@@ -1077,10 +1077,10 @@ public:
             auto loop_name = output_outer_loop(output_func);
             Expr loop_var  = make_var(loop_name);
             Expr load_base = loop_var * int_exp(rw_len);
-            Expr load_idx  = Ramp::make(load_base, 1, rw_len);
+            Expr load_idx  = Ramp::make(load_base, 1, (int32_t) rw_len);
             Stmt store = make_store(output_func, load_idx, rw_len);
             if (rem_sz > 0) {
-                Expr rem_load_idx = Ramp::make(load_base, 1, rem_sz);
+                Expr rem_load_idx = Ramp::make(load_base, 1, (int32_t) rem_sz);
                 Stmt rem_store = make_store(output_func, rem_load_idx, rem_sz);
                 Expr rem_cond = simplify(loop_var == loop.extent-1);
                 store = IfThenElse::make(rem_cond, rem_store, store);
@@ -1253,7 +1253,7 @@ private:
             buf_stri *= loop.bounds[i].extent;
         }
         // buf_base = simplify(buf_offs + buf_base);
-        Expr store_idx = Ramp::make(buf_offs, 1, inst.rw_len);
+        Expr store_idx = Ramp::make(buf_offs, 1, (int32_t) inst.rw_len);
 
         // Building the loop body
         Stmt load_inst = make_load_inst(name, is_init, inst.rw_len, loop.offs, store_idx);
@@ -1490,8 +1490,8 @@ public:
             // for (sink_loop, 0, N)
             if (op->name == func_info[name].sink_loop) {
                 size_t size = space_loop_extents();
-                Expr idx = Ramp::make(0, 1, size);
-                Expr val = Broadcast::make(ure.init_val, size);
+                Expr idx = Ramp::make(0, 1, (int32_t) size);
+                Expr val = Broadcast::make(ure.init_val, (int32_t) size);
                 Stmt init_ure = Store::make(name, val, idx, ure.ori_store->param,
                                             const_true(size), ModulusRemainder());
                 init_ure = IfThenElse::make(func_info[name].if_cond, init_ure);

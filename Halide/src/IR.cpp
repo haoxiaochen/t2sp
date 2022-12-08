@@ -2,6 +2,8 @@
 #include "IRMutator.h"
 #include "IRPrinter.h"
 #include "IRVisitor.h"
+#include "../../t2s/src/VectorType.h"
+#include "../../t2s/src/DebugPrint.h"
 
 namespace Halide {
 namespace Internal {
@@ -103,6 +105,9 @@ Expr Max::make(Expr a, Expr b) {
 Expr EQ::make(Expr a, Expr b) {
     internal_assert(a.defined()) << "EQ of undefined\n";
     internal_assert(b.defined()) << "EQ of undefined\n";
+
+    debug(4) << "......atype=" << a.type() << "  a=" << to_string(a) << "\n";
+    debug(4) << "......btype=" << b.type() << "  b=" << to_string(b) << "\n";
     internal_assert(a.type() == b.type()) << "EQ of mismatched types\n";
 
     EQ *node = new EQ;
@@ -246,31 +251,43 @@ Expr Load::make(Type type, const std::string &name, Expr index, Buffer<> image, 
     return node;
 }
 
-Expr Ramp::make(Expr base, Expr stride, int lanes) {
+Expr Ramp::make(Expr base, Expr stride, Expr lanes) {
     internal_assert(base.defined()) << "Ramp of undefined\n";
     internal_assert(stride.defined()) << "Ramp of undefined\n";
     internal_assert(base.type().is_scalar()) << "Ramp with vector base\n";
     internal_assert(stride.type().is_scalar()) << "Ramp with vector stride\n";
-    internal_assert(lanes > 1) << "Ramp of lanes <= 1\n";
+    internal_assert(!lanes.as<IntImm>() || lanes.as<IntImm>()->value > 1) << "Ramp of lanes <= 1\n";
     internal_assert(stride.type() == base.type()) << "Ramp of mismatched types\n";
 
     Ramp *node = new Ramp;
-    node->type = base.type().with_lanes(lanes);
+    if (lanes.as<IntImm>()) {
+        int num_lanes = lanes.as<IntImm>()->value;
+        node->type = base.type().with_lanes(num_lanes);
+        node->lanes = num_lanes;
+    } else {
+        node->type = Internal::generate_vector(base.type(), lanes);
+        node->lanes = 0;
+    }
     node->base = std::move(base);
     node->stride = std::move(stride);
-    node->lanes = std::move(lanes);
     return node;
 }
 
-Expr Broadcast::make(Expr value, int lanes) {
+Expr Broadcast::make(Expr value, Expr lanes) {
     internal_assert(value.defined()) << "Broadcast of undefined\n";
     internal_assert(value.type().is_scalar()) << "Broadcast of vector\n";
-    internal_assert(lanes != 1) << "Broadcast of lanes 1\n";
+    internal_assert(!lanes.as<IntImm>() || lanes.as<IntImm>()->value != 1) << "Broadcast of lanes 1\n";
 
     Broadcast *node = new Broadcast;
-    node->type = value.type().with_lanes(lanes);
+    if (lanes.as<IntImm>()) {
+        int num_lanes = lanes.as<IntImm>()->value;
+        node->type = value.type().with_lanes(num_lanes);
+        node->lanes = num_lanes;
+    } else {
+        node->type = Internal::generate_vector(value.type(), lanes);
+        node->lanes = 0;
+    }
     node->value = std::move(value);
-    node->lanes = lanes;
     return node;
 }
 

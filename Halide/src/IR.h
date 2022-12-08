@@ -228,9 +228,9 @@ struct Load : public ExprNode<Load> {
  * node with stride 1 as the index. */
 struct Ramp : public ExprNode<Ramp> {
     Expr base, stride;
-    int lanes;
+    int lanes; // If 0, the node's type is a generated vector type that has symbolic lanes.
 
-    static Expr make(Expr base, Expr stride, int lanes);
+    static Expr make(Expr base, Expr stride, Expr lanes);
 
     static const IRNodeType _node_type = IRNodeType::Ramp;
 };
@@ -240,9 +240,9 @@ struct Ramp : public ExprNode<Ramp> {
  * the stride is zero. */
 struct Broadcast : public ExprNode<Broadcast> {
     Expr value;
-    int lanes;
+    int lanes; // If 0, the node's type is a generated vector type that has symbolic lanes.
 
-    static Expr make(Expr value, int lanes);
+    static Expr make(Expr value, Expr lanes);
 
     static const IRNodeType _node_type = IRNodeType::Broadcast;
 };

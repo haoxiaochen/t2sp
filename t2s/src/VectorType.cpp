@@ -16,40 +16,39 @@
 *
 * SPDX-License-Identifier: BSD-2-Clause-Patent
 *******************************************************************************/
-#include "./StructType.h"
+#include "./VectorType.h"
 
 namespace Halide {
 
 using namespace Internal;
 
 namespace Internal {
-    // Initialize the static members of the GeneratedStructType class
-    vector<pair<string, vector<Type>>> GeneratedStructType::structs;
-    halide_handle_cplusplus_type       GeneratedStructType::dummy = halide_handle_cplusplus_type(
-        halide_cplusplus_type_name(halide_cplusplus_type_name::Struct, "CGS"));
+    // Initialize the static members of the GeneratedVectorType class
+    vector<pair<Type, Expr>> GeneratedVectorType::vectors;
+    halide_handle_cplusplus_type GeneratedVectorType::dummy = halide_handle_cplusplus_type(
+        halide_cplusplus_type_name(halide_cplusplus_type_name::Simple, "CGV"));
 
-    Type generate_struct(const vector<Type> &field_types) {
-        // Generate and record a new struct type
+    Type generate_vector(const Type &basic_type, const Expr & lanes) {
+        // Generate and record a new vector type
         size_t index;
-        GeneratedStructType::record_struct_type(field_types, index);
+        GeneratedVectorType::record_nonstandard_vector_type(basic_type, lanes, index);
 
-        // Return a halide type to represent the generated struct type
+        // Return a halide type to represent the generated vector type
         // In the Halide type system, a type has one of the following type code: halide_type_int/unit/float/handle/bfloat,
         // And a type can have "bits" (8 bits wide) and "lanes" (16-bit wide). In order to plug this type
         // into the Halide type system as if it is a usual Halide type, we choose to create this type
-        // as halide_type_handle pointing to a dummy handle named "CGS"(compiler_generated_struct).
-        // We use the "bits" for type id, and so we can create up to 256 different structs.
-        Type halide_type = Type(halide_type_handle, index, 1, &GeneratedStructType::dummy);
+        // as halide_type_handle pointing to a dummy handle named "CGV"(compiler_generated_vector).
+        // We use the "bits" for type id, and so we can create up to 256 different nonstandard vectors.
+        Type halide_type = Type(halide_type_handle, index, 1, &GeneratedVectorType::dummy);
         return halide_type;
     }
-
 } // Internal
 
-bool Type::is_generated_struct() const {
+bool Type::is_generated_vector() const {
     return (code() == halide_type_handle &&
             (handle_type != NULL &&
-             handle_type->inner_name.cpp_type_type == halide_cplusplus_type_name::Struct &&
-             handle_type->inner_name.name =="CGS"));
+             handle_type->inner_name.cpp_type_type == halide_cplusplus_type_name::Simple &&
+             handle_type->inner_name.name =="CGV"));
 }
 
 } // Halide

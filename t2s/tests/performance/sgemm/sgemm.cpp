@@ -27,9 +27,9 @@ int main()
 	// file, they would appear as macro names like III, etc. To compile the generated OpenCL file, pass in                  
 	// constant numbers, e.g. -DIII=4.                                                                                                                                                                                                      
 	// These configure the array to have III*JJJ number of PEs, and each PE executes in KKK-wide SIMD.                                                                                                                                           
-	SymbolicConstant<int> III("III", 1), JJJ("JJJ", 1), KKK("KKK", 1); // 1: Positive constants (i.e. >=1)
+	SymbolicConstant<int> III("III", 1, 100), JJJ("JJJ", 1, 100), KKK("KKK", 1, 100); // 1: Positive constants (i.e. >=1 and <= 100)
 	// These configure each PE to update an output tile of II*JJ big, with an A tile of II*KK big and a B tile of KK*JJ big.
-	SymbolicConstant<int> II("II", 1), JJ("JJ", 1), KK("KK", 1);
+	SymbolicConstant<int> II("II", 1, 100), JJ("JJ", 1, 100), KK("KK", 1, 100);
 
     // Dependences
     #define P               kkk,      jjj,  iii,  jj, ii, kk,     k,  j,i

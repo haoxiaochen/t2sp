@@ -162,8 +162,8 @@ class DataRelaying : public IRMutator {
         Function func;
         internal_assert(function_is_in_environment(param.from_func, env, func));
 
-        int loop_extents = 1;
-        int required_extents = pipe_alloc.depth.as<IntImm>()->value - 1;
+        Expr loop_extents = 1; // The total cycles for a PE to finish computing a sub-tile of results. For example, for GEMM, it equals JJ*II*KK*K*J*I
+        Expr required_extents = pipe_alloc.depth - 1; // The maximum total cycles for the computed sub-tile of a PE to move to close to a boundary of the systolic array to drain. For example, for GEMM, it equals JJ*II*(III-1)
         for (size_t i = 0; i < alloc.args.size(); i++) {
             auto var = alloc.args[i].as<Variable>();
             internal_assert(var);
@@ -172,10 +172,8 @@ class DataRelaying : public IRMutator {
             bool is_pe = std::find(alloc.PE_dims.begin(), alloc.PE_dims.end(), i) != alloc.PE_dims.end();
             if (!is_vectorized && !is_pe) {
                 auto ext_expr = func.get_bounds(var_name).second;
-                user_assert(ext_expr.as<IntImm>())\
-                    << "Only outermost loops can have dynamic bounds\n";
-                loop_extents *= ext_expr.as<IntImm>()->value;
-                if (loop_extents >= required_extents) {
+                loop_extents *= ext_expr;
+                if (can_prove(loop_extents >= required_extents)) {
                     internal_assert(i < alloc.args.size() -1);
                     auto loop_var = alloc.args[i+1].as<Variable>();
                     internal_assert(loop_var);
@@ -184,9 +182,12 @@ class DataRelaying : public IRMutator {
                 }
             }
         }
-        user_assert(loop_extents >= required_extents)
-            << "Please ensure sufficient loops to have explicit bounds,"
-            << "otherwise the data relaying may be failed\n";
+        debug(4) << "....Loop_extents:\n" << to_string(loop_extents) << "\n";
+        debug(4) << "....required_extents:\n" << to_string(required_extents) << "\n";
+        // For GEMM, this requires JJ*II*KK*K*J*I >= JJ*II*(III-1), which should be checked in the host side during execution time of the kernel instead, as K, J, and I are unknown at compile time.
+        //user_assert(can_prove(loop_extents >= required_extents))
+        //    << "Please ensure sufficient loops to have explicit bounds,"
+        //    << "otherwise the data relaying may be failed\n";
     }
 
     // unrolled for (Z.pipe.b, 0, pipe_alloc.bank_extent) {
@@ -239,11 +240,17 @@ class DataRelaying : public IRMutator {
     // }
     Stmt make_write() {
         string chn_temp_name = param.to_func + ".channel.temp";
-        auto num_bank = pipe_alloc.bank_extent.as<IntImm>();
-        internal_assert(num_bank);
+        auto num_bank = pipe_alloc.bank_extent;
+        debug(4) << "...num_bank=" << to_string(num_bank) << "\n";
+        internal_assert(can_prove(num_bank > 0));
 
         // Write data to channel
-        Type vec_t = pipe_alloc.t.with_lanes(num_bank->value);
+        Type vec_t;
+        if (num_bank.as<IntImm>()) {
+            vec_t = pipe_alloc.t.with_lanes(num_bank.as<IntImm>()->value);
+        } else {
+            vec_t = generate_vector(pipe_alloc.t, num_bank);
+        }
         Expr read_temp = Call::make(vec_t, chn_temp_name, {}, Call::Intrinsic);
         vector<Expr> write_args;
         write_args.push_back(param.to_func + ".channel");

@@ -897,7 +897,7 @@ private:
         string var_name = unique_name('t');
         Expr var = Variable::make(op->base.type(), var_name);
         Expr lane = op->base + var * op->stride;
-        ScopedBinding<Interval> p(scope, var_name, Interval(make_const(var.type(), 0), make_const(var.type(), op->lanes - 1)));
+        ScopedBinding<Interval> p(scope, var_name, Interval(make_const(var.type(), 0), op->lanes - 1));
         lane.accept(this);
     }
 

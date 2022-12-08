@@ -108,7 +108,7 @@ Expr Simplify::visit(const Shuffle *op, ExprInfo *bounds) {
             if (op->indices.size() == 1) {
                 return b1->value;
             } else {
-                return Broadcast::make(b1->value, op->indices.size());
+                return Broadcast::make(b1->value, (int32_t) op->indices.size());
             }
         }
     }
@@ -201,7 +201,7 @@ Expr Simplify::visit(const Shuffle *op, ExprInfo *bounds) {
                 }
             }
             if (can_collapse) {
-                return Ramp::make(r->base, r->stride, op->indices.size());
+                return Ramp::make(r->base, r->stride, (int32_t) op->indices.size());
             }
         }
 
@@ -222,7 +222,7 @@ Expr Simplify::visit(const Shuffle *op, ExprInfo *bounds) {
             }
 
             if (can_collapse) {
-                return Ramp::make(new_vectors[0], stride, op->indices.size());
+                return Ramp::make(new_vectors[0], stride, (int32_t) op->indices.size());
             }
         }
     }

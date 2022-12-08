@@ -15,6 +15,7 @@
 #include "Solve.h"
 #include "Substitute.h"
 #include "VectorizeLoops.h"
+#include "../../t2s/src/DebugPrint.h"
 
 namespace Halide {
 namespace Internal {
@@ -393,6 +394,7 @@ class VectorSubs : public IRMutator {
 
     // Widen an expression to the given number of lanes.
     Expr widen(Expr e, int lanes) {
+        internal_assert(lanes > 0);
         if (e.type().lanes() >= lanes) {
             return e;
         } else if (e.type().lanes() == 1) {
@@ -1106,17 +1108,17 @@ class VectorizeLoops : public IRMutator {
 
         Stmt stmt;
         if (for_loop->for_type == ForType::Vectorized) {
-            const IntImm *extent = for_loop->extent.as<IntImm>();
-            if (!extent || extent->value <= 1) {
-                user_error << "Loop over " << for_loop->name
-                           << " has extent " << for_loop->extent
-                           << ". Can only vectorize loops over a "
-                           << "constant extent > 1\n";
-            }
+            user_assert(!for_loop->extent.as<IntImm>() || for_loop->extent.as<IntImm>()->value > 1)
+               << "Loop over " << for_loop->name
+               << " has extent " << for_loop->extent
+               << ". Can only vectorize loops over a "
+               << "constant extent > 1\n";
 
             // Replace the var with a ramp within the body
             Expr for_var = Variable::make(Int(32), for_loop->name);
-            Expr replacement = Ramp::make(for_loop->min, 1, extent->value);
+            Expr replacement = Ramp::make(for_loop->min, 1, for_loop->extent);
+            debug(4) << "...replacement=" << to_string(replacement) << "\n";
+            debug(4) << "...forloop:\n" << to_string(for_loop) << "\n";
             stmt = VectorSubs(for_loop->name, replacement, in_hexagon, target, scatter_vchannels).mutate(for_loop->body);
             stmt = mutate(stmt);
         } else {
