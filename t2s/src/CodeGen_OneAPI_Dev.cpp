@@ -296,6 +296,16 @@ void CodeGen_OneAPI_Dev::init_module() {
         src_stream_oneapi << "#pragma OPENCL EXTENSION cl_intel_channels : enable\n";
     }
 
+    // Bit hack from https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+    // The next highest power of 2 of a 32-bit unsigned int
+    src_stream_oneapi << "#define OR_SHR(v, b) ((v) | ((v) >> (b)))\n";
+    src_stream_oneapi << "#define OR_SHR1(v) OR_SHR(v-1, 1)\n";                 // equivalent to v--; v |= v >> 1
+    src_stream_oneapi << "#define OR_SHR2(v) OR_SHR(OR_SHR1(v), 2)\n";          //               v |= v >> 2
+    src_stream_oneapi << "#define OR_SHR4(v) OR_SHR(OR_SHR2(v), 4)\n";          //               v |= v >> 4
+    src_stream_oneapi << "#define OR_SHR8(v) OR_SHR(OR_SHR4(v), 8)\n";          //               v |= v >> 8
+    src_stream_oneapi << "#define OR_SHR16(v) OR_SHR(OR_SHR8(v), 16)\n";        //               v |= v >> 16
+    src_stream_oneapi << "#define CLOSEST_POWER_OF_TWO(v) (OR_SHR16(v) + 1)\n"; //               v++
+
     char *kernel_num = getenv("HL_KERNEL_NUM");
     if (overlay_kenrel == NULL && kernel_num != NULL) {
         int ip_num = std::atoi(kernel_num);
@@ -886,7 +896,7 @@ Expr CodeGen_OneAPI_Dev::CodeGen_OneAPI_C::DefineVectorStructTypes::mutate(const
              std::ostringstream oss;
              oss << "typedef union {\n"
                  << parent->print_type(type.element_of())
-                 << " __attribute__ ((aligned(" << closest_power_of_two(type.lanes() * type.with_lanes(1).bytes())
+                 << " __attribute__ ((aligned(CLOSEST_POWER_OF_TWO(" << type.lanes() * type.with_lanes(1).bytes() << ")"
                  << ")))" << " s[" << type.lanes() << "];\n"
                  << "struct {" << parent->print_type(type.element_of());
              for (int i = 0; i < type.lanes(); i++) {
@@ -2695,12 +2705,12 @@ void CodeGen_OneAPI_Dev::CodeGen_OneAPI_C::add_kernel(Stmt s,
         s.accept(&storechecker);
 
         // The idea of where to place memory copies is as followes
-        // KEY		
-        // load	store	
-        // 0	0	Do Nothing, no loads or stores used
-        // 1	0	host->device & before
-        // 0	1	device->host & after
-        // 1	1	error 
+        // KEY
+        // load    store
+        // 0    0    Do Nothing, no loads or stores used
+        // 1    0    host->device & before
+        // 0    1    device->host & after
+        // 1    1    error
 
         assert( !(loadcheker.stores_to_memory && storechecker.stores_to_memory) );
 
@@ -3249,21 +3259,21 @@ void CodeGen_OneAPI_Dev::CodeGen_OneAPI_C::add_kernel(Stmt s,
     //     function_btm << get_indent() << "std::cout << \"// return the kernel execution time in nanoseconds\\n\";\n";
     //     function_btm << ""
     //                 << get_indent() << "if(oneapi_kernel_events.size() > 0){\n"
-    //                 << get_indent() << "	double k_earliest_start_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
-    //                 << get_indent() << "	double k_latest_end_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
-    //                 << get_indent() << "	for (unsigned i = 1; i < oneapi_kernel_events.size(); i++) {\n"
-    //                 << get_indent() << "	  double tmp_start = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
-    //                 << get_indent() << "	  double tmp_end = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
-    //                 << get_indent() << "	  if (tmp_start < k_earliest_start_time) {\n"
+    //                 << get_indent() << "    double k_earliest_start_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
+    //                 << get_indent() << "    double k_latest_end_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
+    //                 << get_indent() << "    for (unsigned i = 1; i < oneapi_kernel_events.size(); i++) {\n"
+    //                 << get_indent() << "      double tmp_start = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
+    //                 << get_indent() << "      double tmp_end = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
+    //                 << get_indent() << "      if (tmp_start < k_earliest_start_time) {\n"
     //                 << get_indent() << "         k_earliest_start_time = tmp_start;\n"
-    //                 << get_indent() << "	  }\n"
-    //                 << get_indent() << "	  if (tmp_end > k_latest_end_time) {\n"
+    //                 << get_indent() << "      }\n"
+    //                 << get_indent() << "      if (tmp_end > k_latest_end_time) {\n"
     //                 << get_indent() << "         k_latest_end_time = tmp_end;\n"
-    //                 << get_indent() << "	  }\n"
-    //                 << get_indent() << "	}\n"
-    //                 << get_indent() << "	// Get time in ns\n"
-    //                 << get_indent() << "	double events_time = (k_latest_end_time - k_earliest_start_time);\n"
-    //                 << get_indent() << "	return events_time;\n"
+    //                 << get_indent() << "      }\n"
+    //                 << get_indent() << "    }\n"
+    //                 << get_indent() << "    // Get time in ns\n"
+    //                 << get_indent() << "    double events_time = (k_latest_end_time - k_earliest_start_time);\n"
+    //                 << get_indent() << "    return events_time;\n"
     //                 << get_indent() << "}\n";
     //     function_btm << get_indent() << "return (double)0;\n"
     //                 << "}\n";
@@ -3600,21 +3610,21 @@ void CodeGen_OneAPI_Dev::EmitOneAPIFunc::compile(const LoweredFunc &f){
     stream << get_indent() << "std::cout << \"// return the kernel execution time in nanoseconds\\n\";\n";
     stream  << ""
             << get_indent() << "if(oneapi_kernel_events.size() > 0){\n"
-            << get_indent() << "	double k_earliest_start_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
-            << get_indent() << "	double k_latest_end_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
-            << get_indent() << "	for (unsigned i = 1; i < oneapi_kernel_events.size(); i++) {\n"
-            << get_indent() << "	  double tmp_start = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
-            << get_indent() << "	  double tmp_end = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
-            << get_indent() << "	  if (tmp_start < k_earliest_start_time) {\n"
+            << get_indent() << "    double k_earliest_start_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
+            << get_indent() << "    double k_latest_end_time = oneapi_kernel_events.at(0).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
+            << get_indent() << "    for (unsigned i = 1; i < oneapi_kernel_events.size(); i++) {\n"
+            << get_indent() << "      double tmp_start = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_start>();\n"
+            << get_indent() << "      double tmp_end = oneapi_kernel_events.at(i).get_profiling_info<sycl::info::event_profiling::command_end>();\n"
+            << get_indent() << "      if (tmp_start < k_earliest_start_time) {\n"
             << get_indent() << "         k_earliest_start_time = tmp_start;\n"
-            << get_indent() << "	  }\n"
-            << get_indent() << "	  if (tmp_end > k_latest_end_time) {\n"
+            << get_indent() << "      }\n"
+            << get_indent() << "      if (tmp_end > k_latest_end_time) {\n"
             << get_indent() << "         k_latest_end_time = tmp_end;\n"
-            << get_indent() << "	  }\n"
-            << get_indent() << "	}\n"
-            << get_indent() << "	// Get time in ns\n"
-            << get_indent() << "	double events_time = (k_latest_end_time - k_earliest_start_time);\n"
-            << get_indent() << "	return events_time;\n"
+            << get_indent() << "      }\n"
+            << get_indent() << "    }\n"
+            << get_indent() << "    // Get time in ns\n"
+            << get_indent() << "    double events_time = (k_latest_end_time - k_earliest_start_time);\n"
+            << get_indent() << "    return events_time;\n"
             << get_indent() << "}\n";
     stream  << get_indent() << "return (double)0;\n";
 

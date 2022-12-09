@@ -226,21 +226,6 @@ bool is_power_of_two(uint32_t n)
     return (!(n & (n - 1)));
 }
 
-uint32_t closest_power_of_two(uint32_t n)
-{
-    internal_assert(n != 0);
-    if (is_power_of_two(n)) {
-        return n;
-    }
-    uint32_t count = 0;
-    while( n != 0) {
-        n >>= 1;
-        count += 1;
-    }
-    return 1 << count;
-}
-
-
 namespace {
 class ReplacePrefix: public IRMutator {
     using IRMutator::visit;

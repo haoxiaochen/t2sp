@@ -156,7 +156,7 @@ Expr CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::DefineVectorStructTypes::mutate(const
              std::ostringstream oss;
              oss << "typedef union {\n"
                  << parent->print_type(type.element_of())
-                 << " __attribute__ ((aligned(" << closest_power_of_two(type.lanes() * type.with_lanes(1).bytes())
+                 << " __attribute__ ((aligned(CLOSEST_POWER_OF_TWO(" << type.lanes() * type.with_lanes(1).bytes() << ")"
                  << ")))" << " s[" << type.lanes() << "];\n"
                  << "struct {" << parent->print_type(type.element_of());
              for (int i = 0; i < type.lanes(); i++) {
@@ -2122,6 +2122,16 @@ void CodeGen_OpenCL_Dev::init_module() {
         //enable channels support
         src_stream << "#pragma OPENCL EXTENSION cl_intel_channels : enable\n";
     }
+
+    // Bit hack from https://graphics.stanford.edu/~seander/bithacks.html#RoundUpPowerOf2
+    // The next highest power of 2 of a 32-bit unsigned int
+    src_stream << "#define OR_SHR(v, b) ((v) | ((v) >> (b)))\n";
+    src_stream << "#define OR_SHR1(v) OR_SHR(v-1, 1)\n";                 // equivalent to v--; v |= v >> 1
+    src_stream << "#define OR_SHR2(v) OR_SHR(OR_SHR1(v), 2)\n";          //               v |= v >> 2
+    src_stream << "#define OR_SHR4(v) OR_SHR(OR_SHR2(v), 4)\n";          //               v |= v >> 4
+    src_stream << "#define OR_SHR8(v) OR_SHR(OR_SHR4(v), 8)\n";          //               v |= v >> 8
+    src_stream << "#define OR_SHR16(v) OR_SHR(OR_SHR8(v), 16)\n";        //               v |= v >> 16
+    src_stream << "#define CLOSEST_POWER_OF_TWO(v) (OR_SHR16(v) + 1)\n"; //               v++
 
     char *kernel_num = getenv("HL_KERNEL_NUM");
     if (overlay_kenrel == NULL && kernel_num != NULL) {

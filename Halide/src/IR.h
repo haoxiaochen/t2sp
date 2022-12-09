@@ -502,6 +502,7 @@ struct Call : public ExprNode<Call> {
         bool_to_mask,
         call_cached_indirect_function,
         cast_mask,
+        closest_power_of_two,
         cm_corr_buf_idx,
         cm_load_2d,
         cm_prefetch_2d,

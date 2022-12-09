@@ -28,7 +28,7 @@ namespace Internal {
     halide_handle_cplusplus_type GeneratedVectorType::dummy = halide_handle_cplusplus_type(
         halide_cplusplus_type_name(halide_cplusplus_type_name::Simple, "CGV"));
 
-    Type generate_vector(const Type &basic_type, const Expr & lanes) {
+    Type generate_vector_type(const Type &basic_type, const Expr & lanes) {
         // Generate and record a new vector type
         size_t index;
         GeneratedVectorType::record_nonstandard_vector_type(basic_type, lanes, index);
@@ -42,6 +42,14 @@ namespace Internal {
         Type halide_type = Type(halide_type_handle, index, 1, &GeneratedVectorType::dummy);
         return halide_type;
     }
+
+    pair<Type, Expr> generated_vector_type_info(const Type &type) {
+        internal_assert(type.is_generated_vector());
+        size_t index = type.bits(); // We have used the "bits" field as the index of the type in GeneratedVectorType::vectors.
+        internal_assert(index < GeneratedVectorType::vectors.size());
+        return GeneratedVectorType::vectors[index];
+    }
+
 } // Internal
 
 bool Type::is_generated_vector() const {

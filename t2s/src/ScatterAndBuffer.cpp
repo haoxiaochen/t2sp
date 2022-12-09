@@ -35,6 +35,7 @@
 #include "./DebugPrint.h"
 #include "./ScatterAndBuffer.h"
 #include "./SliceExprTree.h"
+#include "./SymbolicConstant.h"
 #include "./Utilities.h"
 
 namespace Halide{
@@ -89,796 +90,6 @@ public:
 
 using ScatterBufferArgs = map<string,ScatterBufferArg>;
 
-/**
- * detect the conditions of "read channel" stmt
- * Now one feeder can only read from loader once.
- * we will only keep all the conds related to the space loop variables.
- * (the reason for that:
- *    When inserting buffers, we need a counter to decide 
- *    which buffer or which position we should write or read in.
- *    We will inc the counter no matter whether reading or writing buffer happens.
- *    so if the cond is like:
- *      if(unroll_jj == constantx){...} or
- *      if(serial_jj == xxx){...}
- *    we can remove these conditions.
- * )
- * If we introduce an empty space_loops, we will keep all the conds
- *    
- */
-
-class CondDetect:public IRVisitor{
-    using IRVisitor::visit;
-private:
-    const vector<string>& space_loops; //we will keep the conds related to these variables
-    const Expr& read_channel;
-    bool found_space_loop = false;
-    bool only_constant_vars = true;
-    bool found_read_channel = false;
-    Expr tmp_cond;
-    bool remove;
-    void visit(const IfThenElse *op) override{
-        Expr condition = detect_condition(op->condition);
-        op->then_case.accept(this);
-        if(found_read_channel){
-            if(cond.defined())
-                cond = condition && cond;
-            else
-            {
-                cond = condition;
-            }
-            
-            if(op->else_case.defined())
-                op->else_case.accept(this);
-        }else{
-            if(op->else_case.defined())
-                op->else_case.accept(this);
-            if(found_read_channel){
-                if(cond.defined())
-                    cond = !condition && cond;
-                else
-                {
-                    cond = !condition;
-                }
-            }
-        }
-    }
-    Expr detect_condition(Expr condition){ //for get the new condition from the IfThenElse*op
-        found_space_loop = false;
-        only_constant_vars = true;
-        tmp_cond = Expr();
-        condition.accept(this);
-        if(!tmp_cond.defined()){
-            tmp_cond = condition;
-        }
-        if(remove)
-            if(!found_space_loop || only_constant_vars){
-                tmp_cond = const_true();
-            }
-        return tmp_cond;
-    }
-    void visit(const Call* op) override{
-        if(op->is_intrinsic(Call::read_channel)){
-            if(equal(op, read_channel)){
-                user_assert(!found_read_channel)
-                    <<"If Afeeder buffer Aloader, Afeeder can only read once from Aloader through channel.\n";
-                found_read_channel = true;
-            }
-        }
-        IRVisitor::visit(op);
-    }
-    void visit(const And* op) override{ 
-        Expr newa,newb;
-        found_space_loop = false;
-        only_constant_vars = true;
-        op->a.accept(this);
-        newa = op->a;
-        if(remove)
-            if(!(op->a.as<And>() || op->a.as<Or>())){
-                if(!found_space_loop || only_constant_vars){
-                    newa = const_true();
-                }
-            }
-        found_space_loop = false;
-        only_constant_vars = true;
-        op->b.accept(this);
-        newb = op->b;
-        if(remove)
-            if(!(op->b.as<And>() || op->b.as<Or>())){
-                if(!found_space_loop|| only_constant_vars){
-                    newb = const_true();
-                }
-            }
-        found_space_loop = false;
-        only_constant_vars = true;
-        tmp_cond = And::make(newa, newb);
-    }
-    void visit(const Or *op) override{
-        Expr newa,newb;
-        found_space_loop = false;
-        only_constant_vars = true;
-        op->a.accept(this);
-        newa = op->a;
-        if(remove)
-            if(!(op->a.as<And>() || op->a.as<Or>())){
-                if(!found_space_loop || only_constant_vars){
-                    newa = const_true();
-                }
-            }
-        found_space_loop = false;
-        only_constant_vars = true;
-        newb = op->b;
-        op->b.accept(this);
-        if(remove)
-            if(!(op->b.as<And>() || op->b.as<Or>())){
-                if(!found_space_loop || only_constant_vars){
-                    newb = const_true();
-                }
-            }
-        found_space_loop = false;
-        only_constant_vars = true;
-        tmp_cond = Or::make(newa,newb); 
-    }
-    void visit(const Variable *op) override{
-        for(const auto & space_loop : space_loops){
-            if(space_loop == op->name){
-                found_space_loop = true;
-                return;
-            }
-        }
-        only_constant_vars = false;
-        return;
-    }
-public:
-    Expr cond;
-    CondDetect(const vector<string>& _space_loops, const Expr& _read_channel, bool _remove)
-        :space_loops(_space_loops), read_channel(_read_channel), remove(_remove), cond(nullptr){}
-
-};
-
-/*
-B = A(oi,oj,ok,kk,ii,jj); //jj is unrolled 
-B.isolate_producer_chain(A,Aloader,Afeeder);
-Afeeder.buffer(Aloader,ok, BufferStrategy::Double); //buffer loop is ok
-Aloader.remove(kk); //the user should guarantee that
-                   //the loops outside buffer loop should be the same between Aloader and Afeeder
-                   //the loops inner buffer loop should be the same except some removal loops
-
-the code generated is like the following:
- Aloader: 
-       ....
- Afeeder:
-     realize buffer[2][ii][jj];
-     realize counter[jj]; //init is 0
-     let read_buffer_num = (kk * ii); 
-     let write_buffer_num = ii;
-     let block_length = max(read_buffer_num,write_buffer_num);
-     let block_num = oi * oj * ok;
-     while(1):
-        for jj:
-            if(cond){ // this cond is the original cond in original Afeeder
-                     // in this example, it's const_true
-                bool idx = (counter[jj] / block_length)%2; // which buffer to write into
-                int buffer_ii = (counter[jj] % block_length); //the pos in the buffer
-                int counter_no = counter[jj] / counter_length;
-                if(counter_no < block_num && buffer_ii < write_buffer_num){
-                    Type tmp = read_channel();
-                    write_buffer(tmp, buffer[cast<int>(idx)][buffer_ii][jj]);
-                }
-                if(counter_no > 0 && counter_no <= block_num && buffer_ii < read_buffer_num){
-                    Type tmp = read_buffer(buffer[cast<int>(!idx)][buffer_ii][jj]);
-                    write_channel(tmp);
-                }
-            }
-            // we have to inc the counter outside the cond
-            // but if there are some conds about space loop (here, jj), we'll keep those conds
-            if(counter_no <= block_num)
-                counter[j]++;
-*/                  
-class BufferInserter: public IRMutator{
-    using IRMutator::visit;
-    const map<string, Function>& envs;
-    const ScatterBufferArgs& scatterbuffer_args;
-    const string& caller_name;
-    int loop_level = 0;
-    vector<Expr> loop_mins;
-    vector<Expr> loop_extents;
-    vector<string> loop_names;
-    vector<int> unroll_loop_indexes;
-    vector<ForType> for_types;
-    Stmt visit(const For *op) override{
-        if(ends_with(op->name,".run_on_device")){
-            return IRMutator::visit(op);
-        }
-        loop_names.push_back(op->name);
-        for_types.push_back(op->for_type);
-        loop_level += 1;
-        int this_level = loop_level;
-        if(op->for_type == ForType::Unrolled){
-            unroll_loop_indexes.push_back(this_level - 1);
-        }
-        Expr new_min = IRMutator::mutate(op->min);
-        loop_mins.push_back(new_min);
-        Expr new_extent = IRMutator::mutate(op->extent);
-        loop_extents.push_back(new_extent);
-        Stmt new_body = IRMutator::mutate(op->body);
-        auto iter = scatterbuffer_args.find(caller_name);
-        const string& buffer_loop = iter->second.buffer_loop;
-        const string& producer = iter->second.producer;
-        Type data_type = iter->second.read_node.type();
-        debug(4) << "inserting buffer: "<<op->name<<"\n";
-        string cycle_name = caller_name + ".cycle.temp";
-        if(this_level == loop_level){
-            string buffer_name = caller_name + "_buffer_.ibuffer";
-            Expr original_condition = Expr();
-            {//find the original_condition and data type of the data
-                const Call * read_channel = iter->second.read_node.as<Call>();
-                CondDetect condDetect(vector<string>(), read_channel,false);
-                new_body.accept(&condDetect);
-                original_condition = condDetect.cond;
-            }
-            debug(4)<<"The original condition is "<<original_condition<<"\n";
-            
-            Expr new_condition = Expr(); 
-                //this condition will remove all the conditions like:
-                // 1. if(unroll_jj == constantx){...}
-                // 2. if(serial_jj == xxx){...} 
-            {// generate new condition for inc counter
-                const Call * read_channel = iter->second.read_node.as<Call>();
-                vector<string> space_loops;
-                for(size_t i = 0;i < unroll_loop_indexes.size();++i){
-                    int index = unroll_loop_indexes[i];
-                    space_loops.push_back(loop_names[index]);
-                }
-                CondDetect condDetect(space_loops, read_channel,true);
-                new_body.accept(&condDetect);
-                new_condition = condDetect.cond;
-            }
-            internal_assert(!new_condition.defined() || equal(new_condition,const_true()))
-                <<"condition = "<<new_condition
-                <<", now the Afeeder cannot have some complicated conditions.\n";
-
-            debug(4)<<"The new condition is "<<new_condition<<"\n";
-
-            vector<Expr> cycle_args;
-                //counter is an array, its same dimension is unroll loops
-            {
-                for(size_t i = 0;i < unroll_loop_indexes.size();++i){
-                    int index = unroll_loop_indexes[i];
-                    cycle_args.push_back(
-                        Variable::make(Int(32), loop_names[index]) - loop_mins[index]
-                    );
-                }
-            }
-
-            
-            
-
-            Expr idx; 
-                //which buffer to write for double buffer
-            {
-                idx = (Variable::make(Int(32),"period") & 1);
-            }
-
-            //calculate buffer size and buffer arg (read and write)
-            vector<Expr> buffer_args;
-            Region buffer_dims;
-
-            //how many times to read or write in one period
-            //writes means "write to buffer"
-            //read means "read buffer"
-            int writes = 1, reads = 1;
-            { //calculate buffer_args, buffer_dims, reads, writes
-                bool inBufferLoop = false;
-                const auto& remove_params = 
-                    envs.find(producer)->second.definition().schedule().remove_params();
-                buffer_dims.push_back(Range(0,2));
-                for(size_t i = 0;i < loop_names.size();++i){
-                    if(inBufferLoop){
-                        internal_assert(loop_extents[i].as<IntImm>())
-                                    <<"the loop bounds inner buffer loop must be constant. "
-                                    <<split_string(loop_names[i],".").back() <<" in func "
-                                    <<caller_name << " is not.\n";
-                        int loop_extent = loop_extents[i].as<IntImm>()->value;
-                        bool isRemoved = false;
-                        //whether this loop is removed in its producer
-                        //if true, this loop is one of buffer dimension
-                        for(size_t j = 0;j < remove_params.size();++j){
-                            if(ends_with(loop_names[i],"." + remove_params[j])){
-                                isRemoved = true;
-                                break;
-                            }
-                        }
-                        if(!isRemoved){
-                            buffer_args.push_back(Variable::make(Int(32),loop_names[i]));
-                            buffer_dims.push_back(Range(loop_mins[i],loop_extents[i]));
-                            if(for_types[i] != ForType::Unrolled){
-                                writes = writes * loop_extent;
-                            }
-                        }
-                        if(for_types[i] != ForType::Unrolled){
-                            reads = reads * loop_extent;
-                        }
-                    }
-                    if(ends_with(loop_names[i],"." + buffer_loop)){
-                        inBufferLoop = true;
-                    }
-                }
-
-                int extent = buffer_dims.back().extent.as<IntImm>()->value;
-                int new_extent = 1;
-                while(new_extent < extent)
-                    new_extent <<= 1;
-                buffer_dims.back() = Range(buffer_dims.back().min,new_extent);
-
-                user_assert(reads >= writes)
-                    <<"When buffering, the product of removal loop dimensions "
-                    <<"must exceed scatter loop dimension. If meeting this condition, "
-                    <<"the delay of reading memory can be hiden well\n";
-            }
-
-            int init = reads - writes;
-            
-
-            Expr period, offset;
-                //iter_no : which iter to read and write now
-                //iter_pos : read (or write) how many times in this iter now
-            {
-                period = 
-                    Call::make(Int(32),cycle_name, cycle_args, Call::PureIntrinsic) /
-                    reads;
-                offset =
-                    Call::make(Int(32),cycle_name,cycle_args,Call::PureIntrinsic) %
-                    reads;
-            }
-
-            // this part will change "new_body" stmt, take care
-            {// replace reading channel with reading buffer
-                vector<Expr> read_buffer_args(buffer_args);
-                read_buffer_args.insert(
-                    read_buffer_args.begin(),
-                    Not::make(Cast::make(Bool(),Variable::make(Int(32),"idx")))
-                );
-                Expr read_buffer = Call::make(data_type,buffer_name,read_buffer_args,Call::PureIntrinsic);
-                new_body = substitute(iter->second.read_node,read_buffer,new_body);
-
-                Expr counter = 
-                    Call::make(Int(32),cycle_name,cycle_args,Call::PureIntrinsic) - reads;
-                if(!loop_names.empty()){
-                    int beg = loop_names.size() - 1;
-                    for(int i = beg;i >= 0; --i){
-                        if(for_types[i] == ForType::Unrolled)
-                            continue;
-                        Expr var = (counter % loop_extents[i]) + loop_mins[i];
-                        new_body = LetStmt::make(loop_names[i],var,new_body);
-                        counter = counter / loop_extents[i];
-                    }
-                };
-                Expr read_buffer_cond = (Variable::make(Int(32),"period") > 0);
-                new_body = IfThenElse::make(read_buffer_cond,new_body);
-            }
-
-            // this part will change "new_body" stmt, take care
-            {// add read channel and write buffer part
-                vector<Expr> write_buffer_args(buffer_args);
-                write_buffer_args.insert(write_buffer_args.begin(),Cast::make(Bool(),Variable::make(Int(32),"idx")));
-                Stmt write_buffer = Provide::make(buffer_name,{iter->second.read_node},write_buffer_args);
-                if(original_condition.defined()){
-                    write_buffer = IfThenElse::make(original_condition,write_buffer);
-                }
-                Expr write_buffer_cond = (Variable::make(Int(32),"offset") >= init);
-                Expr counter = 
-                    writes * Variable::make(Int(32),"period") + 
-                    Variable::make(Int(32), "offset") - init;
-                vector<Expr> new_loop_vars;
-                vector<string> new_loop_names;
-                if(!loop_names.empty()){
-                    const auto &remove_params = envs.find(producer)->second.definition().schedule().remove_params();
-                    int beg = loop_names.size() - 1;
-                    for(int i = beg; i >= 0;--i){
-                        if(for_types[i] == ForType::Unrolled)
-                            continue;
-                        bool isRemove = false;
-                        for(size_t j = 0; j < remove_params.size();++j){
-                            if(ends_with(loop_names[i], "." + remove_params[j])){
-                                isRemove = true;
-                                break;
-                            }
-                        }
-                        new_loop_names.push_back(loop_names[i]);
-                        if(!isRemove){
-                            Expr var = (counter % loop_extents[i]) + loop_mins[i];
-                            new_loop_vars.push_back(var);
-                            counter = counter / loop_extents[i];
-                        }else{
-                            new_loop_vars.push_back(loop_mins[i]);
-                        }
-                        
-                    }
-                }
-                
-                for(size_t i = 0;i < new_loop_vars.size(); ++i){
-                    write_buffer = LetStmt::make(
-                        new_loop_names[i], new_loop_vars[i],write_buffer
-                    );
-                }
-                write_buffer = IfThenElse::make(write_buffer_cond, write_buffer);
-                new_body = Block::make(write_buffer, new_body);
-            }
-
-            // this part will change "new_body" stmt, take care
-            {// add "inc counter" part in the end of new_body
-                Stmt inc_counter = Provide::make(cycle_name,{Call::make(Int(32),cycle_name,cycle_args,Call::PureIntrinsic)+1},cycle_args);
-                // Expr inc_counter_cond = (Variable::make(Int(32),"period") <= Variable::make(Int(32),"period_num"));
-                Expr inc_counter_cond = const_true();
-                if(new_condition.defined())
-                    inc_counter_cond = new_condition && inc_counter_cond;
-                inc_counter = IfThenElse::make(inc_counter_cond, inc_counter);
-                new_body = Block::make(new_body,inc_counter);
-            }
-        
-            new_body = LetStmt::make("idx",idx,new_body);
-            new_body = LetStmt::make("period",period,new_body);
-            new_body = LetStmt::make("offset",offset,new_body);
-
-            // remove the serial for loops, only keep the space loop
-            for(size_t i = 0;i < unroll_loop_indexes.size();++i){
-                int index = unroll_loop_indexes[i];
-                new_body = For::make(
-                    loop_names[index], loop_mins[index], loop_extents[index],ForType::Unrolled, op->device_api,new_body
-                );
-            }
-                
-            Expr period_num;
-            // PERIOD in document
-            {
-                const auto& remove_params = envs.find(producer)->second.definition().schedule().remove_params();
-                for(size_t i = 0;i < loop_names.size();++i){
-                    for(size_t j = 0;j < remove_params.size();++j){
-                        if(ends_with(loop_names[i],"." + remove_params[j])){
-                            user_error
-                                <<"Removed loop in func : "<<producer
-                                <<", cannot outside buffer loop "<<buffer_loop
-                                <<"( func "<<caller_name<<" buffer "<<producer
-                                <<" at loop "<<buffer_loop<<" )\n";
-                        }
-                    }
-                    if(period_num.defined()){
-                        period_num = period_num * loop_extents[i];
-                    }else{
-                        period_num = loop_extents[i];
-                    }
-                    if(ends_with(loop_names[i],"."+buffer_loop)){
-                        break;
-                    }
-                }
-            }
-
-            new_body = For::make(caller_name+".s0.outermost_loop.infinite",0,10,ForType::Serial,op->device_api,new_body);
-
-            Region cycle_dims;
-                //counter is an array, its same dimension is unroll loops
-            {
-                for(size_t i = 0;i < loop_names.size(); ++i){
-                    if(for_types[i] == ForType::Unrolled){
-                        cycle_dims.push_back(Range(loop_mins[i],loop_extents[i]));
-                    }
-                }
-            }
-
-            {//init the counters
-                Stmt init_counter = Provide::make(cycle_name,{init},cycle_args);
-                for(size_t i = 0;i < unroll_loop_indexes.size();++i){
-                    int index = unroll_loop_indexes[i];
-                    int min = loop_mins[index].as<IntImm>()->value;
-                    int extent = loop_extents[index].as<IntImm>()->value;
-                    Stmt tmp_stmt;
-                    for(int j = min; j < extent;++j){
-                        if(tmp_stmt.defined()){
-                            tmp_stmt = Block::make(tmp_stmt,substitute(loop_names[index],j,init_counter));
-                        }else{
-                            tmp_stmt = substitute(loop_names[index],j,init_counter);
-                        }
-                    }
-                    init_counter = tmp_stmt;
-                }
-                new_body = Block::make(init_counter, new_body);
-            }
-
-            // realize counters and buffers 
-            new_body = Realize::make(
-                buffer_name,{data_type},MemoryType::Auto,buffer_dims,const_true(),new_body
-            );
-            new_body = Realize::make(
-                cycle_name, {Int(32)}, MemoryType::Auto,cycle_dims, const_true(),new_body
-            );
-
-
-            // new_body = LetStmt::make(
-            //     "period_num", period_num, new_body
-            // );
-        }
-        return new_body;
-    }
-        
-public:
-    BufferInserter(
-        const map<string, Function>& _envs, 
-        const ScatterBufferArgs& _scatterbuffer_args, 
-        const string& _caller_name):
-    envs(_envs), scatterbuffer_args(_scatterbuffer_args), caller_name(_caller_name){}
-};
-
-class ScatterInserter: public IRMutator{
-    using IRMutator::visit;
-    const map<string, Function>& envs;
-    const ScatterBufferArgs& scatterbuffer_args;
-    const string& caller_name;
-    int loop_level = 0;
-    vector<Expr> loop_mins;
-    vector<Expr> loop_extents;
-    vector<string> loop_names;
-    vector<int> unroll_loop_indexes;
-    vector<ForType> for_types;
-    Stmt visit(const For *op) override{
-        auto iter = scatterbuffer_args.find(caller_name);
-        const string& producer = iter->second.producer;
-        const string& scatter_loop = iter->second.scatter_loop;
-        string shreg_name = caller_name + "_scatter_" + producer + ".shreg";
-        Type data_type = iter->second.read_node.type();
-        if(ends_with(op->name,".run_on_device")){
-            Stmt new_body = IRMutator::mutate(op->body);
-            if (iter->second.scatter_strategy != ScatterStrategy::FPGAReg) {
-                new_body = For::make(
-                    shreg_name.substr(0,shreg_name.size() - string(".shreg").size()) +".run_on_device", 0, 1,
-                    ForType::Parallel, DeviceAPI::OpenCL, new_body
-                );
-            }
-            new_body = For::make(
-                op->name,op->min,op->extent,op->for_type,op->device_api,new_body
-            );
-            if (iter->second.scatter_strategy != ScatterStrategy::FPGAReg) {
-                Region range_args;
-                for(auto index : unroll_loop_indexes){
-                    range_args.push_back(Range(loop_mins[index], loop_extents[index]));
-                }
-                new_body = Realize::make(shreg_name,
-                        {data_type},
-                        MemoryType::Auto, range_args,
-                        const_true(), new_body);
-            }
-            return new_body;
-        }
-        loop_level++;
-        int loop_now = loop_level;
-        loop_names.push_back(op->name);
-        for_types.push_back(op->for_type);
-        if(op->for_type == ForType::Unrolled){
-            unroll_loop_indexes.push_back(loop_now - 1);
-        }
-        Expr new_min = mutate(op->min);
-        loop_mins.push_back(new_min);
-        Expr new_extent = mutate(op->extent);
-        loop_extents.push_back(new_extent);
-        Stmt new_body = mutate(op->body);
-        
-
-        if(loop_now == loop_level){ //inner most loop level
-            debug(4) << "Scattering : enter innermost loop.\n";
-            // Basic Exprs
-            bool scatter_along_removed = false;
-            {
-                const auto &remove_params = envs.find(producer)->second.definition().schedule().remove_params();
-                for(size_t i = 0;i < remove_params.size();++i){
-                    if(remove_params[i] == scatter_loop){
-                        scatter_along_removed = true;
-                        break;
-                    }
-                }
-            }
-            string origin_loop_name = "";  
-            int scatter_loop_extent = 0, scatter_loop_min = 0;
-            for(size_t i = 0;i < loop_names.size(); ++i){
-                if(ends_with(loop_names[i],"." + scatter_loop)){
-                    origin_loop_name = loop_names[i];
-                    scatter_loop_extent = loop_extents[i].as<IntImm>()->value;
-                    scatter_loop_min = loop_mins[i].as<IntImm>()->value;
-                    break;
-                }
-            }
-            string  new_loop_name = origin_loop_name + ".scatter";
-            Expr origin_loop_var = Variable::make(Int(32), origin_loop_name);
-            Expr scatter_var =  Variable::make(Int(32), new_loop_name);
-
-            
-            vector<Expr> shreg_args;
-            for(size_t i = 0; i < unroll_loop_indexes.size(); ++i){
-                int index = unroll_loop_indexes[i];
-                string unroll_loop = loop_names[index];
-                shreg_args.push_back(Variable::make(Int(32), unroll_loop));
-            }
-
-            bool strategy_up = iter->second.scatter_strategy == ScatterStrategy::Up || iter->second.scatter_strategy == ScatterStrategy::FPGAReg;
-
-            // if (ii == 0)/(ii == I - 1)
-            Expr cond_read = EQ::make(origin_loop_var, strategy_up ? scatter_loop_min : (scatter_loop_min + scatter_loop_extent - 1));
-
-            // if (ii == t)
-            //      consume feederA.temp (typically, send it to the core systolic array via a channel.)
-            // feederA.temp = __fpga_reg(feederA.temp)
-            // Basic Exprs
-            Expr origin_call_node = iter->second.read_node;
-            
-
-            // record condition in slicer
-            CondDetect slicer(vector<string>(),origin_call_node,false);
-            new_body.accept(&slicer);
-            Expr cond = slicer.cond;
-
-            // read inputA(ii->t)
-            Expr read_from_channel = Expr();
-            if(strategy_up){
-                if(origin_call_node.as<Call>()){
-                    read_from_channel = substitute(origin_loop_var, scatter_loop_min, origin_call_node);
-                }     
-                else
-                    read_from_channel = substitute(origin_loop_var, scatter_var, origin_call_node);
-            }else{
-                if(origin_call_node.as<Call>()){
-                    read_from_channel = substitute(origin_loop_var, (scatter_loop_min + scatter_loop_extent - 1), origin_call_node);
-                }else{
-                    read_from_channel = substitute(origin_loop_var, scatter_var, origin_call_node);
-                }
-                
-            }
-            
-            vector<Expr> tmp_data_args;
-                //unroll loop dims except scatter loop
-            for(size_t i = 0;i < unroll_loop_indexes.size();++i){
-                int index = unroll_loop_indexes[i];
-                string unroll_name = loop_names[index];
-                if(unroll_name == origin_loop_name)
-                    continue;
-                tmp_data_args.push_back(Variable::make(Int(32),unroll_name));
-            }
-
-            Expr var_read_channel = read_from_channel;
-            // we want to move the read channel stmt outside the scatter loop
-            {
-
-                read_from_channel = Call::make(data_type,producer+".scatter.temp",tmp_data_args,Call::PureIntrinsic);
-            }
-            
-            // feederA[ii]
-            vector<Expr> read_shreg_args(shreg_args);
-            read_shreg_args.insert(read_shreg_args.begin(), shreg_name);
-            Expr read_from_shreg_now = Call::make(iter->second.read_node.type(), Call::read_shift_reg, read_shreg_args, Call::Intrinsic);
-
-            // feederA[ii-1]/feederA[ii+1]
-            Expr read_from_shreg_before = substitute(origin_loop_var,
-                                                strategy_up ? Sub::make(origin_loop_var, 1) : Add::make(origin_loop_var, 1),
-                                                read_from_shreg_now);
-
-            // feederA[ii] = read inputA(ii->t)
-            vector<Expr> write_shreg_args(shreg_args);
-            write_shreg_args.insert(write_shreg_args.begin(), shreg_name);
-            write_shreg_args.push_back(read_from_channel);
-            Stmt write_shreg_from_channel = Evaluate::make(
-                                                Call::make(iter->second.read_node.type(),
-                                                        Call::write_shift_reg,
-                                                        write_shreg_args,
-                                                        Call::Intrinsic));
-
-            //  feederA[ii] = feederA[ii-1]/feederA[ii+1]
-            Stmt write_shreg_from_shreg = substitute(read_from_channel, read_from_shreg_before, write_shreg_from_channel);
-            // Stmt read_from_fifo = Evaluate::make(write_shreg_from_shreg);
-
-            //  if (ii == 0)/(ii == I - 1)
-            //      feederA[ii] = read inputA(ii->t)
-            //  else
-            //      feederA[ii] = feederA[ii-1]/feederA[ii+1]
-            Stmt write_shreg = IfThenElse::make(cond_read, write_shreg_from_channel, write_shreg_from_shreg);
-
-            
-
-            if(cond.defined()){
-                Expr new_cond = substitute(origin_loop_name,Variable::make(Int(32),new_loop_name),cond);
-                write_shreg = IfThenElse::make(new_cond, write_shreg);
-            }
-                
-
-            // rw_block = rw_block.defined() ? Block::make(rw_block, rw_stmt) : Block::make({rw_stmt});
-
-            // replace call_node in op->body
-            if (iter->second.scatter_strategy == ScatterStrategy::FPGAReg) {
-                new_body = substitute(origin_call_node, read_from_channel, new_body);
-            } else {
-                new_body = substitute(origin_call_node, read_from_shreg_now, new_body);
-            }            
-
-            // update body: if (condition) RWStmt; if t == i updated_body
-            if(!scatter_along_removed)
-                new_body = IfThenElse::make(EQ::make(scatter_var, origin_loop_var), new_body);
-            
-            if (iter->second.scatter_strategy == ScatterStrategy::FPGAReg) {
-                Stmt pipeline_reg = Provide::make(producer + ".scatter.temp", {Call::make(data_type, Call::fpga_reg, {read_from_channel}, Call::Intrinsic)}, tmp_data_args);
-                new_body = Block::make(new_body, pipeline_reg);
-            } else {
-                new_body = Block::make(write_shreg, new_body);
-            }
-
-            new_body = For::make(origin_loop_name,scatter_loop_min,scatter_loop_extent,ForType::Unrolled,op->device_api,new_body);
-            
-            Expr new_cond = substitute(
-                    origin_loop_name,
-                    Variable::make(Int(32),new_loop_name),
-                    cond
-                );
-            
-            // if(envs.find(producer) != envs.end()){
-            //     auto remove_loops = envs.find(producer)->second.definition().schedule().remove_params();
-            //     bool isRemoved = false;
-            //     for(auto remove_loop : remove_loops){
-            //         if(ends_with(op->name,"."+remove_loop)){
-            //             isRemoved = true;
-            //         }
-            //     }
-            //     if(isRemoved){
-            //         if(new_cond.defined()){
-            //             new_cond = new_cond && (Variable::make(Int(32),op->name+".scatter") == op->min);
-            //         }else{
-            //             new_cond = Variable::make(Int(32),op->name+".scatter") == op->min;
-            //         }
-            //     }
-            // }
-            Stmt new_stmt = Stmt();
-            if(new_cond.defined()){
-                new_stmt = IfThenElse::make(new_cond,Provide::make(producer + ".scatter.temp",{var_read_channel},tmp_data_args));
-            }else{
-                new_stmt = Provide::make(producer + ".scatter.temp",{var_read_channel},tmp_data_args);
-            }
-            new_body = Block::make(new_stmt,new_body);
-            {
-                int beg = unroll_loop_indexes.size() - 1;
-                for(int i = beg;i >= 0; --i){
-                    int index = unroll_loop_indexes[i];
-                    if(loop_names[index] == origin_loop_name){
-                        continue;
-                    }
-                    new_body = For::make(loop_names[index],loop_mins[index],loop_extents[index],ForType::Unrolled,op->device_api,new_body);
-                }
-            }
-            if(!scatter_along_removed)
-                new_body = For::make(new_loop_name,scatter_loop_min,scatter_loop_extent,ForType::Serial,op->device_api,new_body);
-            {
-                int beg = loop_names.size() - 1;
-                for(int i = beg;i >= 0; --i){
-                    if(for_types[i] == ForType::Unrolled){
-                        continue;
-                    }
-                    new_body = For::make(loop_names[i],loop_mins[i],loop_extents[i],for_types[i],op->device_api,new_body);
-                }
-            }
-
-            Region ranges;
-            for(size_t i = 0;i < unroll_loop_indexes.size();++i){
-                int index = unroll_loop_indexes[i];
-                string unroll_name = loop_names[index];
-                if(unroll_name == origin_loop_name)
-                    continue;
-                ranges.push_back(Range(loop_mins[index], loop_extents[index]));
-            }
-            new_body = Realize::make(producer + ".scatter.temp",{data_type},MemoryType::Auto,ranges,const_true(),new_body);
-        }
-        return new_body;
-    }
-public:
-    ScatterInserter(
-        const map<string, Function>& _envs, 
-        const ScatterBufferArgs& _scatterbuffer_args, 
-        const string& _caller_name):
-    envs(_envs), scatterbuffer_args(_scatterbuffer_args), caller_name(_caller_name){}
-};
-
 // Transform IR to buffer and scatter incoming data. The code closely follows this document:
 //   ../doc/compiler_design/buffer.md
 // So read the document first in order to understand the code.
@@ -905,12 +116,12 @@ private:
     Type TYPE;               // Type of the incoming data
     vector<int> WRITE_LOOPS; // Serial loops in the producer below the buffer insertion point. Elements: indices to loops
     vector<int> READ_LOOPS;  // Serial loops in the consumer below the buffer insertion point. Elements: indices to loops
-    uint32_t WRITES;         // Product of the extents of WRITE_LOOPS
-    uint32_t READS;          // Product of the extents of READ_LOOPS
-    int32_t BUFFERS;         // Number of double buffers (i.e. extent of the scatter loop)
-    int32_t BANKS;           // The last dimension of a buffer, which usually equals BUFFERS, rounded up to a power of two
-    uint32_t CYCLES_PER_PERIOD;
-    uint32_t INIT;           // The cycle in a period when buffer writing should start.
+    Expr WRITES;             // Product of the extents of WRITE_LOOPS
+    Expr READS;              // Product of the extents of READ_LOOPS
+    Expr BUFFERS;            // Number of double buffers (i.e. extent of the scatter loop)
+    Expr BANKS;              // The last dimension of a buffer, which usually equals BUFFERS, rounded up to a power of two
+    Expr CYCLES_PER_PERIOD;
+    Expr INIT;               // The cycle in a period when buffer writing should start.
     Expr PERIODS;            // Total periods
     Expr cycle;              // Current cycle
     Expr in_v;               // Incoming value read from the input channel in the current cycle
@@ -1070,11 +281,10 @@ private:
                         // serial in the consumer. Scatter loop is an exception: it is excluded here,
                         // but may be added in the end.
                         string undecorated_loop_name = extract_after_tokens(loop_name, 2);
-                        user_assert(loop_extent.as<IntImm>()) << "Loop " << undecorated_loop_name
+                        user_assert(can_resolve_as_const(loop_extent)) << "Loop " << undecorated_loop_name
                                 <<" in func " << envs.find(producer)->second.name()
                                 << " is below the buffer loop, and is expected to have a constant extent.";
-                        int loop_extent_val = loop_extent.as<IntImm>()->value;
-                        WRITES = WRITES * loop_extent_val;
+                        WRITES = WRITES * loop_extent;
                         WRITE_LOOPS.push_back(i);
                     }
                 } else {
@@ -1086,11 +296,10 @@ private:
                     // NOTE: we check if a loop is serial based on its current for_type in the consumer.
                     // So READ_LOOPS are those that are currently serial in the consumer.
                     string undecorated_loop_name = extract_after_tokens(loop_name, 2);
-                    user_assert(loop_extent.as<IntImm>()) << "Loop " << undecorated_loop_name
+                    user_assert(can_resolve_as_const(loop_extent)) << "Loop " << undecorated_loop_name
                             <<" in func " << func_name
                             << " is below the buffer loop, and is expected to have a constant extent.";
-                    int loop_extent_val = loop_extent.as<IntImm>()->value;
-                    READS = READS * loop_extent_val;
+                    READS = READS * loop_extent;
                     READ_LOOPS.push_back(i);
                 }
             } else {
@@ -1101,8 +310,8 @@ private:
             }
             if(ends_with(loop_name, "." + scatter_loop)){
                 original_scatter_loop = i;
-                internal_assert(loop_extent.as<IntImm>());
-                BUFFERS = loop_extent.as<IntImm>()->value;
+                internal_assert(can_resolve_as_const(loop_extent));
+                BUFFERS = loop_extent;
             }
         }
 
@@ -1121,13 +330,13 @@ private:
         }
         debug(4) << "\nPERIODS: " << PERIODS << "\n";
 
-        if (READS < WRITES) {
-            user_warning << "Buffering in func " << func_name << ": READS (" << READS << ")" << " < WRITES("
-                    << WRITES << "). This buffer might not be able to hide the latency of reading from the main memory\n";
-        }
+        debug(0) << "NOTE: Buffering in func " << func_name << " works better when READS >= WRITES, i.e.:\n\t  "
+                <<  READS << " >= " << WRITES << "\n\t"
+                << "Otherwise, it still works, but the buffer might not be able to hide the latency of reading from the main memory.\n\t"
+                << "You may add some assertion into your host application to ensure the constraint holds\n";
 
-        CYCLES_PER_PERIOD = std::max(READS, WRITES);
-        INIT = (READS >= WRITES) ? (READS - WRITES) : 0;
+        CYCLES_PER_PERIOD = Select::make(READS >= WRITES, READS, WRITES);
+        INIT = Select::make(READS >= WRITES, READS - WRITES, 0);
 
         for(size_t i = 0; i < loops.size(); i++){
             auto &l = loops[i];
@@ -1198,9 +407,8 @@ private:
             NonScatter_NonReuse_Write_Loops.push_back(i);
 
             Expr loop_extent = std::get<2>(l);
-            internal_assert(loop_extent.as<IntImm>());
-            int loop_extent_val = loop_extent.as<IntImm>()->value;
-            buf.dims.push_back(Range(0, loop_extent_val));
+            internal_assert(can_resolve_as_const(loop_extent));
+            buf.dims.push_back(Range(0, loop_extent));
             buf.write_args.push_back(Variable::make(Int(32),loop_name));
             buf.read_args.push_back(Variable::make(Int(32),loop_name));
         }
@@ -1213,23 +421,21 @@ private:
                 continue;
             }
             Expr loop_extent = nonscatter_unroll_loop_dims[i].extent;
-            internal_assert(loop_extent.as<IntImm>());
-            int loop_extent_val = loop_extent.as<IntImm>()->value;
-            buf.dims.push_back(Range(0, loop_extent_val));
+            internal_assert(can_resolve_as_const(loop_extent));
+            buf.dims.push_back(Range(0, loop_extent));
             buf.write_args.push_back(nonscatter_unroll_loop_vars[i]);
             buf.read_args.push_back(nonscatter_unroll_loop_vars[i]);
         }
 
         if (!scatter_loop_removed_in_producer) {
-            BANKS = (int32_t)closest_power_of_two((uint32_t)BUFFERS);
-            buf.dims.push_back(Range(0, Expr(BANKS)));
+            BANKS = Call::make(Int(32), Call::closest_power_of_two, {BUFFERS}, Call::Intrinsic);
+            buf.dims.push_back(Range(0, BANKS));
             buf.write_args.push_back(buf_loop_var);
             buf.read_args.push_back(buf_loop_var);
         } else {
             auto dim = buf.dims.back();
-            internal_assert(dim.extent.as<IntImm>());
-            int extent = dim.extent.as<IntImm>()->value;
-            BANKS = (int32_t)closest_power_of_two((uint32_t)extent);
+            internal_assert(can_resolve_as_const(dim.extent));
+            BANKS = Call::make(Int(32), Call::closest_power_of_two, {dim.extent}, Call::Intrinsic);
             buf.dims.back() = Range(dim.min, BANKS);
         }
     }
@@ -1267,21 +473,21 @@ private:
         intialize_common_constants();
 
         value = Variable::make(TYPE, func_name + "_value.shreg");
-        time_stamp = Variable::make(UInt(32), func_name + "_time_stamp.shreg");
-        cycle = Variable::make(UInt(32), func_name + "_cycle.temp");
+        time_stamp = Variable::make(Int(32), func_name + "_time_stamp.shreg");
+        cycle = Variable::make(Int(32), func_name + "_cycle.temp");
         in_v = Variable::make(TYPE, func_name + "_in_v.temp");
         buf_loop_var = Variable::make(Int(32), func_name + ".s0.buf");
         const string &original_scatter_loop_name = std::get<0>(loops[original_scatter_loop]);
         original_scatter_loop_var = Variable::make(Int(32), original_scatter_loop_name);
-        period = Variable::make(UInt(32), "period");
-        offset = Variable::make(UInt(32), "offset");
+        period = Variable::make(Int(32), "period");
+        offset = Variable::make(Int(32), "offset");
         time_to_write_buffer = Variable::make(Bool(1), "time_to_write_buffer");
 
-        _cycle = Variable::make(UInt(32), "_cycle");
-        _period = Variable::make(UInt(32), "_period");
-        _offset = Variable::make(UInt(32), "_offset");
+        _cycle = Variable::make(Int(32), "_cycle");
+        _period = Variable::make(Int(32), "_period");
+        _offset = Variable::make(Int(32), "_offset");
         _time_to_write_buffer = Variable::make(Bool(1), "_time_to_write_buffer");
-        _owner = Variable::make(UInt(32), "_owner");
+        _owner = Variable::make(Int(32), "_owner");
         _idx = Variable::make(Bool(1), "_idx");
         _time_to_read = Variable::make(Bool(1), "_time_to_read");
 
@@ -1324,14 +530,14 @@ public:
         for (auto b : buffers_info) {
             new_body = Realize::make(b.name, {b.type}, MemoryType::Auto, b.dims, const_true(), new_body);
         }
-        new_body = Realize::make(var_name(cycle), {UInt(32)}, MemoryType::Auto, nonscatter_unroll_loop_dims, const_true(), new_body);
+        new_body = Realize::make(var_name(cycle), {Int(32)}, MemoryType::Auto, nonscatter_unroll_loop_dims, const_true(), new_body);
         new_body = Realize::make(var_name(in_v), {TYPE}, MemoryType::Auto, nonscatter_unroll_loop_dims, const_true(), new_body);
         // new_body = For::make(replace_postfix(var_name(time_stamp), ".shreg", ".run_on_device"), 0, 1, ForType::Parallel, DeviceAPI::OpenCL, new_body);
         new_body = For::make(replace_postfix(var_name(time_stamp), ".shreg", ".run_on_device"), 0, 1, ForType::Parallel, op->device_api, new_body); 
         // new_body = For::make(replace_postfix(var_name(value), ".shreg", ".run_on_device"), 0, 1, ForType::Parallel, DeviceAPI::OpenCL, new_body);  
         new_body = For::make(replace_postfix(var_name(value), ".shreg", ".run_on_device"), 0, 1, ForType::Parallel, op->device_api, new_body);
         new_body = For::make(op->name, op->min, op->extent, op->for_type, op->device_api, new_body);
-        new_body = Realize::make(var_name(time_stamp), {UInt(32)}, MemoryType::Auto, unroll_loop_dims, const_true(), new_body);
+        new_body = Realize::make(var_name(time_stamp), {Int(32)}, MemoryType::Auto, unroll_loop_dims, const_true(), new_body);
         new_body = Realize::make(var_name(value), {TYPE}, MemoryType::Auto, unroll_loop_dims, const_true(), new_body);
         return new_body;
     }
@@ -1380,7 +586,7 @@ public:
         for (auto &v : nonscatter_unroll_loop_vars) {
             unrolled_loops_name.push_back(v.as<Variable>()->name);
         }
-        Stmt inc_cycle = Provide::make(var_name(cycle), {Call::make(UInt(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic) + 1}, nonscatter_unroll_loop_vars);
+        Stmt inc_cycle = Provide::make(var_name(cycle), {Call::make(Int(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic) + 1}, nonscatter_unroll_loop_vars);
         if (check_is_single_PE(true, original_read_condition, unrolled_loops_name, {}, single_PE_cond, unrolled_loops_without_terms)) {
             inc_cycle = IfThenElse::make(single_PE_cond, inc_cycle);
         }
@@ -1421,8 +627,8 @@ public:
         for (int i = nonscatter_unroll_loops.size() - 1; i >= 0; i--) {
             auto &l = loops[nonscatter_unroll_loops[i]];
             string name = std::get<0>(l);
-            int min = std::get<1>(l).as<IntImm>()->value;
-            int extent = std::get<2>(l).as<IntImm>()->value;
+            Expr min = std::get<1>(l);
+            Expr extent = std::get<2>(l);
             init_cycle = For::make(name + "_init", min, extent, ForType::Unrolled, device_api, init_cycle);
         }
         new_body = Block::make(init_cycle, new_body);
@@ -1466,21 +672,21 @@ public:
             Expr scatter_loop_tmp = Variable::make(Int(32), original_scatter_loop_name + "_tmp");
             Expr new_condition = substitute(original_scatter_loop_name, scatter_loop_tmp, original_read_condition);
             read_input = IfThenElse::make(new_condition, read_input);
-            Expr total_writes_so_far = Variable::make(UInt(32), "total_writes_so_far");
-            Expr scatter_loop_val = (total_writes_so_far  % Expr((uint32_t)BUFFERS)) + scatter_loop_min;
+            Expr total_writes_so_far = Variable::make(Int(32), "total_writes_so_far");
+            Expr scatter_loop_val = total_writes_so_far  % BUFFERS + scatter_loop_min;
             read_input = LetStmt::make(var_name(scatter_loop_tmp), scatter_loop_val, read_input);
-            read_input = LetStmt::make(var_name(total_writes_so_far), period * Expr(WRITES) + offset - Expr(INIT), read_input);
+            read_input = LetStmt::make(var_name(total_writes_so_far), period * WRITES + offset - INIT, read_input);
         }
 
         Expr condition = time_to_write_buffer;
         read_input = IfThenElse::make(condition, read_input);
 
-        read_input = LetStmt::make(var_name(time_to_write_buffer), (offset >= Expr(INIT)), read_input);
+        read_input = LetStmt::make(var_name(time_to_write_buffer), (offset >= INIT), read_input);
 
-        Expr offset_val = Call::make(UInt(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic) % Expr(CYCLES_PER_PERIOD);
+        Expr offset_val = Call::make(Int(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic) % Expr(CYCLES_PER_PERIOD);
         read_input = LetStmt::make(var_name(offset), offset_val, read_input);
 
-        Expr period_val = Call::make(UInt(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic) / Expr(CYCLES_PER_PERIOD);
+        Expr period_val = Call::make(Int(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic) / Expr(CYCLES_PER_PERIOD);
         read_input = LetStmt::make(var_name(period), period_val, read_input);
 
         new_body = Block::make(read_input, new_body);
@@ -1506,8 +712,8 @@ public:
 
         vector<Expr> write_time_stamp0_args(unroll_loop_vars);
         write_time_stamp0_args.insert(write_time_stamp0_args.begin(), var_name(time_stamp));
-        write_time_stamp0_args.push_back( Call::make(UInt(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic));
-        Stmt write_time_stamp0 = Evaluate::make(Call::make(UInt(32), Call::write_shift_reg, write_time_stamp0_args, Call::Intrinsic));
+        write_time_stamp0_args.push_back( Call::make(Int(32), var_name(cycle), nonscatter_unroll_loop_vars, Call::PureIntrinsic));
+        Stmt write_time_stamp0 = Evaluate::make(Call::make(Int(32), Call::write_shift_reg, write_time_stamp0_args, Call::Intrinsic));
 
         Stmt base = Block::make(write_value0, write_time_stamp0);
 
@@ -1532,12 +738,12 @@ public:
 
         vector<Expr> read_time_stamp_args(prev_args);
         read_time_stamp_args.insert(read_time_stamp_args.begin(), var_name(time_stamp));
-        Expr read_time_stamp = Call::make(UInt(32), Call::read_shift_reg, read_time_stamp_args, Call::PureIntrinsic);
+        Expr read_time_stamp = Call::make(Int(32), Call::read_shift_reg, read_time_stamp_args, Call::PureIntrinsic);
 
         vector<Expr> shift_time_stamp_args(unroll_loop_vars);
         shift_time_stamp_args.insert(shift_time_stamp_args.begin(), var_name(time_stamp));
         shift_time_stamp_args.push_back(read_time_stamp);
-        Stmt shift_time_stamp =  Evaluate::make(Call::make(UInt(32), Call::write_shift_reg, shift_time_stamp_args, Call::Intrinsic));
+        Stmt shift_time_stamp =  Evaluate::make(Call::make(Int(32), Call::write_shift_reg, shift_time_stamp_args, Call::Intrinsic));
 
         Stmt recursion = Block::make(shift_value, shift_time_stamp);
 
@@ -1599,7 +805,7 @@ public:
         // originally, and such a loop is added separately in two places:
         // (1) as the new innermost loop if it is the scatter loop, (2) as the loops
         // right below the outermost loop (see add_nonscatter_unroll_loops).
-        Expr writes = _offset - Expr(INIT); // Total writes in the current period
+        Expr writes = _offset - INIT; // Total writes in the current period
         for(int i = WRITE_LOOPS.size() - 1; i >= 0; i--){
             int loop_index = WRITE_LOOPS[i];
             auto &l = loops[loop_index];
@@ -1629,20 +835,21 @@ public:
         // We can optimize the calculation of owner.  
         if (!scatter_loop_removed_in_producer) {
             write_buffer = IfThenElse::make(buf_loop_var == _owner, write_buffer);
-            _owner_value = (_offset - Expr((uint32_t)INIT)) % Expr((uint32_t)BUFFERS);
+            _owner_value = (_offset - INIT) % BUFFERS;
         } else {
-            _owner_value = (_period * Expr((uint32_t)WRITES) + _offset - Expr((uint32_t)INIT)) % Expr((uint32_t)BUFFERS);
+            _owner_value = (_period * WRITES + _offset - INIT) % BUFFERS;
         }
+
         write_buffer = IfThenElse::make(_time_to_write_buffer, write_buffer);
         new_body = Block::make(write_buffer, new_body);
         new_body = LetStmt::make(var_name(_idx), Cast::make(Bool(), _period & 0x1), new_body);
         new_body = LetStmt::make(var_name(_owner), _owner_value, new_body);
-        new_body = LetStmt::make(var_name(_time_to_write_buffer), _offset >= Expr(INIT), new_body);
-        new_body = LetStmt::make(var_name(_offset), _cycle % Expr(CYCLES_PER_PERIOD), new_body);
-        new_body = LetStmt::make(var_name(_period), _cycle / Expr(CYCLES_PER_PERIOD), new_body);
+        new_body = LetStmt::make(var_name(_time_to_write_buffer), _offset >= INIT, new_body);
+        new_body = LetStmt::make(var_name(_offset), _cycle % CYCLES_PER_PERIOD, new_body);
+        new_body = LetStmt::make(var_name(_period), _cycle / CYCLES_PER_PERIOD, new_body);
         vector<Expr> read_time_stamp_args(unroll_loop_vars);
         read_time_stamp_args.insert(read_time_stamp_args.begin(), var_name(time_stamp));
-        new_body = LetStmt::make(var_name(_cycle), Call::make(UInt(32), Call::read_shift_reg, read_time_stamp_args, Call::PureIntrinsic), new_body);
+        new_body = LetStmt::make(var_name(_cycle), Call::make(Int(32), Call::read_shift_reg, read_time_stamp_args, Call::PureIntrinsic), new_body);
     }
 
     /* Make IR as:
@@ -1693,9 +900,8 @@ public:
         new_body = IfThenElse::make(_time_to_read, new_body);
 
         // Expr periods_unfinished = (_period <= PERIODS);
-        Expr val = (READS >= WRITES) ? (_period > 0) :
-                   ((_period > 0) && (_offset < Expr(READS)));
-        new_body = LetStmt::make("_time_to_read", val, new_body);
+         Expr val = Select::make(READS >= WRITES, _period > 0, And::make(_period > 0, _offset < READS));
+         new_body = LetStmt::make("_time_to_read", val, new_body);
     }
 };
 
@@ -1719,22 +925,6 @@ public:
             int cases = (iter->second.buffer_loop != "") * 2 + (iter->second.scatter_loop != "");
             Stmt new_body;
             switch(cases){
-                case 1:{
-                    debug(4)<<"Func "<< op->name <<": scatters data from "
-                            << iter->second.producer <<" along loop "
-                            << iter->second.scatter_loop << "\n";
-                    ScatterInserter scatterInserter(envs, scatterbuffer_args,op->name);
-                    new_body = scatterInserter.mutate(op->body);
-                    break;
-                }
-                case 2:{
-                    debug(4)<<"Func "<< op->name <<": buffers data from "
-                            << iter->second.producer <<" at loop "
-                            << iter->second.buffer_loop << "\n";
-                    BufferInserter bufferInserter(envs, scatterbuffer_args,op->name);
-                    new_body = bufferInserter.mutate(op->body);
-                    break;
-                }
                 case 3:{
                     debug(4)<<"Func "<< op->name <<": buffers and scatters data from "
                             << iter->second.producer <<", buffers at loop "
@@ -1751,6 +941,9 @@ public:
                                                       iter->second.loops);
                     new_body =  scatterAndBuffer.mutate(op->body);
                     break;
+                }
+                default: {
+                    user_assert(false) << "Scattering and buffering must be used together. Support of scattering only or buffering only has been discontinued.\n";
                 }
             }
             return ProducerConsumer::make(op->name,true,new_body);
@@ -1853,7 +1046,7 @@ public:
                 user_assert(op->for_type == ForType::Unrolled)
                     <<func_name<<" scatters data from "<<iter->second.producer <<" along loop "<<scatter_loop
                     <<". The loop is expected to be unrolled.\n";
-                user_assert(op->min.as<IntImm>() && op->extent.as<IntImm>())
+                user_assert(can_resolve_as_const(op->min) && can_resolve_as_const(op->extent))
                     <<func_name<<" scatters data from "<<iter->second.producer <<" along loop "<<scatter_loop
                     <<". The loop is expected to have constant bounds.\n";
             }

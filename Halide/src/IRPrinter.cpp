@@ -8,6 +8,7 @@
 #include "IROperator.h"
 #include "Module.h"
 #include "Target.h"
+#include "../../t2s/src/VectorType.h"
 
 namespace Halide {
 
@@ -29,7 +30,12 @@ ostream &operator<<(ostream &out, const Type &type) {
         break;
     case Type::Handle:
         if (type.handle_type) {
-            out << "(" << type.handle_type->inner_name.name << " *)";
+            if (type.is_generated_vector()) {
+                std::pair<Type, Expr> pair = generated_vector_type_info(type); // Pair: basic type, lanes
+                out << std::get<0>(pair) << 'x' << std::get<1>(pair);
+            } else {
+                out << "(" << type.handle_type->inner_name.name << " *)";
+            }
         } else {
             out << "(void *)";
         }
@@ -471,10 +477,10 @@ void IRPrinter::visit(const Variable *op) {
     }
     stream << op->name;
 /*    if (op->param.defined() && op->param.is_symbolic_constant()) {
-		Expr min = op->param.min_value();
-		if (min.defined()) {
-			stream << "(min:" << min << ")";
-		}
+        Expr min = op->param.min_value();
+        if (min.defined()) {
+            stream << "(min:" << min << ")";
+        }
     }*/
 }
 

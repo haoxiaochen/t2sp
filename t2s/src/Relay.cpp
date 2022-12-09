@@ -249,7 +249,7 @@ class DataRelaying : public IRMutator {
         if (num_bank.as<IntImm>()) {
             vec_t = pipe_alloc.t.with_lanes(num_bank.as<IntImm>()->value);
         } else {
-            vec_t = generate_vector(pipe_alloc.t, num_bank);
+            vec_t = generate_vector_type(pipe_alloc.t, num_bank);
         }
         Expr read_temp = Call::make(vec_t, chn_temp_name, {}, Call::Intrinsic);
         vector<Expr> write_args;

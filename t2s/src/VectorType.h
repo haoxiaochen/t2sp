@@ -74,7 +74,10 @@ public:
 
 /* Generate a nonstandard vector type whose lanes is not standard or symbolic. Return this generated
  * vector type as a Halide type so that it can be used in the Halide IR. */
-Type generate_vector(const Type &basic_type, const Expr & lanes);
+Type generate_vector_type(const Type &basic_type, const Expr & lanes);
+
+/* Return the basic type and lanes of a compiler-generated vector type */
+pair<Type, Expr> generated_vector_type_info(const Type &type);
 
 }// Internal
 } // Halide

@@ -31,6 +31,9 @@ Expr Add::make(Expr a, Expr b) {
 }
 
 Expr Sub::make(Expr a, Expr b) {
+    if (a.type() != b.type()) {
+        debug(4) << "...failed in sub: (" << to_string(a.type()) << ")" << to_string(a) << " - (" << to_string(b.type()) << ")" << to_string(b) <<"\n";
+    }
     internal_assert(a.defined()) << "Sub of undefined\n";
     internal_assert(b.defined()) << "Sub of undefined\n";
     internal_assert(a.type() == b.type()) << "Sub of mismatched types\n";
@@ -265,7 +268,7 @@ Expr Ramp::make(Expr base, Expr stride, Expr lanes) {
         node->type = base.type().with_lanes(num_lanes);
         node->lanes = num_lanes;
     } else {
-        node->type = Internal::generate_vector(base.type(), lanes);
+        node->type = Internal::generate_vector_type(base.type(), lanes);
         node->lanes = 0;
     }
     node->base = std::move(base);
@@ -284,7 +287,7 @@ Expr Broadcast::make(Expr value, Expr lanes) {
         node->type = value.type().with_lanes(num_lanes);
         node->lanes = num_lanes;
     } else {
-        node->type = Internal::generate_vector(value.type(), lanes);
+        node->type = Internal::generate_vector_type(value.type(), lanes);
         node->lanes = 0;
     }
     node->value = std::move(value);
@@ -608,6 +611,7 @@ const char *const intrinsic_op_names[] = {
     "bool_to_mask",
     "call_cached_indirect_function",
     "cast_mask",
+    "closest_power_of_two",
     "cm_corr_buf_idx",
     "cm_load_2d",
     "cm_prefetch_2d",
