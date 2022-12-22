@@ -433,6 +433,8 @@ public:
     }
 
     Stmt visit(const Realize *op) override {
+        static int count = 0;
+        count++;
         if (op->name == param.from_func + ".shreg") {
             pipe_alloc.t = op->types[0];
         }
@@ -442,6 +444,7 @@ public:
             Region channel_bounds;
             channel_bounds.push_back(Range(0, pipe_alloc.bank_extent));
             channel_bounds.push_back(op->bounds.back());
+            debug(4) << "!!!RealizeMake:" << count << ", " << op->name << " " << to_string(channel_bounds) << "\n";
             return Realize::make(op->name, op->types, op->memory_type, channel_bounds, op->condition, body);
         }
         // We need to reserve sufficient space to accomodate output values
@@ -451,8 +454,10 @@ public:
             Region pipe_bounds;
             pipe_bounds.push_back(Range(0, pipe_alloc.bank_extent));
             pipe_bounds.push_back(Range(0, pipe_alloc.depth));
+            debug(4) << "!!!RealizeMake:" << count << ", " << op->name << " " << to_string(pipe_bounds) << "\n";
             body = Realize::make(pipe_alloc.name+".shreg", op->types, op->memory_type, pipe_bounds, const_true(), body);
         }
+        debug(4) << "!!!RealizeMake:" << count << ", " << op->name << " " << to_string(op->bounds) << "\n";
         return Realize::make(op->name, op->types, op->memory_type, op->bounds, op->condition, body);
     }
 
@@ -471,11 +476,12 @@ class LateReorder : public IRMutator {
     string func;
 
     struct LoopInfo {
+        int level;
         Expr min, extent;
         ForType for_type;
         DeviceAPI device_api;
     };
-    map<string, LoopInfo> ori_loops;
+    map<string, map<string, LoopInfo>> ori_loops; // Func name -> (Loop name -> original loop info)
 
 public:
     using IRMutator::visit;
@@ -488,7 +494,6 @@ public:
             auto it = std::find(funcs.begin(), funcs.end(), op->name);
             loop_level = it != funcs.end() ? loops.size()-1 : -1;
             func = it != funcs.end() ? op->name : "";
-            ori_loops.clear();
         }
         return IRMutator::visit(op);
     }
@@ -524,16 +529,22 @@ public:
     }
 
     Stmt visit(const Realize *op) override {
+        static int count=0;
+        count++;
         Stmt body = mutate(op->body);
+        debug(4) << "****Originalbounds of RealizeMake:" << count << ", " << op->name << " " << to_string(op->bounds) << "\n";
         auto it = std::find(funcs.begin(), funcs.end(), op->name);
         if (it != funcs.end()) {
             Region bounds(op->bounds.size(), Range(0, 1));
+            // Reorder the bounds according to the new loops' order
             for (size_t i = 0; i < loops.size(); i++) {
-                auto &loop_info = ori_loops.at(loops[i]);
-                bounds[i] = Range(loop_info.min, loop_info.extent);
+                auto &loop_info = ori_loops.at(op->name).at(loops[i]);
+                bounds[i] = op->bounds[loop_info.level];
             }
+            debug(4) << "****RealizeMake:" << count << ", " << op->name << " " << to_string(bounds) << "\n";
             return Realize::make(op->name, op->types, op->memory_type, bounds, op->condition, body);
         }
+        debug(4) << "****RealizeMake:" << count << ", " << op->name << " " << to_string(op->bounds) << "\n";
         return Realize::make(op->name, op->types, op->memory_type, op->bounds, op->condition, body);
     }
 
@@ -541,14 +552,15 @@ public:
         if (func.empty() || ends_with(op->name, "run_on_device")) {
             return IRMutator::visit(op);
         }
-        ori_loops[extract_last_token(op->name)] = { op->min, op->extent, op->for_type, op->device_api };
+        debug(4) << "....Forloop: original=" << op->name << ", lasttoken=" << extract_last_token(op->name) << " with extent=" << to_string(op->extent) << "\n";
+        ori_loops[func][extract_last_token(op->name)] = {loop_level, op->min, op->extent, op->for_type, op->device_api };
         loop_level -= 1;
         Stmt body = mutate(op->body);
         loop_level += 1;
 
         internal_assert(loop_level >= 0 && loop_level < (int)loops.size());
         string name = extract_before_tokens(op->name, 2) + "." + loops[loop_level];
-        LoopInfo &l = ori_loops.at(loops[loop_level]);
+        LoopInfo &l = ori_loops.at(func).at(loops[loop_level]);
         return For::make(name, l.min, l.extent, l.for_type, l.device_api, body);
     }
 };

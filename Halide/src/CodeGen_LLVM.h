@@ -86,6 +86,9 @@ public:
         const std::string &suffix,
         const std::vector<std::pair<std::string, ExternSignature>> &externs);
 
+    /** Add an entry to the symbol table for a symbolic constant. */
+    void sym_push_const(const std::string &name);
+
 protected:
     CodeGen_LLVM(Target t);
 

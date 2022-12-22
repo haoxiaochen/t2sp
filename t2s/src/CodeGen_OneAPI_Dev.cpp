@@ -15,6 +15,7 @@
 #include "../../Halide/src/Simplify.h"
 #include "../../Halide/src/Substitute.h"
 #include "DebugPrint.h"
+#include "SymbolicConstant.h"
 #include "Utilities.h"
 
 namespace Halide {
@@ -4689,7 +4690,7 @@ bool CodeGen_OneAPI_Dev::CodeGen_OneAPI_C::is_irregular(Region &bounds) {
     bool irregular_bounds = false;
     for (int i = bounds.size()-1; i >= 0; i--) {
         Expr extent = bounds[i].extent;
-        if (!is_const(extent)) {
+        if (!can_resolve_as_const(extent)) {
             irregular_bounds = true;
             break;
         }

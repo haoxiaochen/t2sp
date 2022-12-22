@@ -31,6 +31,7 @@
 #include "Simplify.h"
 #include "Util.h"
 #include "../../t2s/src/DebugPrint.h"
+#include "../../t2s/src/SymbolicConstant.h"
 
 #if !(__cplusplus > 199711L || _MSC_VER >= 1800)
 
@@ -1431,6 +1432,10 @@ void CodeGen_LLVM::sym_push(const string &name, llvm::Value *value) {
     symbol_table.push(name, value);
 }
 
+void CodeGen_LLVM::sym_push_const(const string &name) {
+    symbol_table.push(name, value);
+}
+
 void CodeGen_LLVM::sym_pop(const string &name) {
     symbol_table.pop(name);
 }
@@ -1462,6 +1467,9 @@ bool CodeGen_LLVM::sym_exists(const string &name) const {
 Value *CodeGen_LLVM::codegen(Expr e) {
     internal_assert(e.defined());
     value = nullptr;
+    if (e.as<Variable>() && can_resolve_as_const(e)) {
+        debug(4) << "..... here\n";
+    }
     e.accept(this);
     internal_assert(value) << "Codegen of an expr did not produce an llvm value\n";
     // TODO: skip this correctness check for bool vectors,
@@ -1474,6 +1482,8 @@ Value *CodeGen_LLVM::codegen(Expr e) {
     // implementation of prefetch.
     // See https://github.com/halide/Halide/issues/4211.
     const bool is_prefetch = e.as<Call>() && e.as<Call>()->is_intrinsic(Call::prefetch);
+//    debug(4) << "... isboolvec=" << is_bool_vector << ", ispretch=" << is_prefetch
+//            << ", tyishandle=" << e.type().is_handle()  << ", getype=" <<
     internal_assert(is_bool_vector || is_prefetch ||
                     e.type().is_handle() ||
                     value->getType()->isVoidTy() ||
@@ -4418,7 +4428,7 @@ void CodeGen_LLVM::visit(const Realize *op) {
 
 void CodeGen_LLVM::visit(const Provide *op) {
     if (ends_with(op->name, ".temp")) {
-    	internal_assert(op->values.size() == 1);
+        internal_assert(op->values.size() == 1);
         internal_assert(op->args.size() == 0);
         Value *lval = sym_get(op->name);
         Value *rval = codegen(op->values[0]);

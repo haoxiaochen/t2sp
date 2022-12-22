@@ -930,7 +930,7 @@ private:
                              << ", extent: " << current_extents[j] << "\n";
                 }
             }
-	    if (!equal(reuse_loops_extents_prod, 1)) {
+        if (!equal(reuse_loops_extents_prod, 1)) {
                 // Remove the part of the index for the contiguous reuse loops starting from the outermost level 
                 index = index % inner_loops_extents_prod;
             }
@@ -982,12 +982,14 @@ private:
 
     // Some buffer-realted values are lost, and thus we need to re-generate them
     Stmt rebuild_buffer_stmt(string name, Type buf_t, int dims, Stmt body) {
+        debug(4) << "!!!rebuildBUfferStmt: name=" << name <<"\n";
         vector<string> min_name(dims), extent_name(dims), stride_name(dims);
         for (int i = 0; i < dims; i++) {
             string d = std::to_string(i);
             min_name[i] = name + ".min." + d;
             stride_name[i] = name + ".stride." + d;
             extent_name[i] = name + ".extent." + d;
+            debug(4) << "\tmin=" << min_name[i] << ", stride=" << stride_name[i] << ", extent=" << extent_name[i] << "\n";
         }
         vector<Expr> min_var(dims), extent_var(dims), stride_var(dims);
         for (int i = 0; i < dims; i++) {
@@ -1023,6 +1025,7 @@ private:
                 body = rebuild_buffer_stmt(channel, buf_t, dims, body);
                 continue;
             }
+            debug(4) << "***rebuild letstmt: insert:" << p.first <<"=" << to_string(p.second) << "\n";
             if (cgs_for_mem_channels.find(channel) == cgs_for_mem_channels.end()) {
                 body = LetStmt::make(p.first, p.second, body);
                 continue;
@@ -1038,6 +1041,8 @@ private:
                 value = (idx == 0) ? cur_dim * cgs_for_mem_channels[channel].size
                             : substitute(last_dim, cur_dim, value);
             }
+            debug(4) << "***rebuild letstmt: original:" << p.first <<"=" << to_string(p.second) << "\n";
+            debug(4) << "\tnow:" << name <<"=" << to_string(value) << "\n";
             body = LetStmt::make(name, value, body);
             if (idx == 0) {
                 if (type == "extent")

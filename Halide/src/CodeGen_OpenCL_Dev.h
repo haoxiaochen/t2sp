@@ -26,13 +26,18 @@ public:
                     const std::string &name,
                     const std::vector<DeviceArgument> &args) override;
 
-    // Only for Intel FPGAs: declare compiler-generated vectors/structs, and channels,
-    // before the kernel code.
+    // Only for Intel FPGAs:
+    // Declare compiler-generated vectors/structs, and channels, before the kernel code.
     void print_global_data_structures_before_kernel(const Stmt *op) {
         clc.print_global_data_structures_before_kernel(op);
     }
+    // Gather info of shift register allocation
     void gather_shift_regs_allocates(const Stmt *op) {
         clc.gather_shift_regs_allocates(op);
+    }
+    // Gather info of symbolic constants
+    void gather_symbolic_constants(const Stmt *op, std::vector<const Variable *> &symbolic_constants) {
+        clc.gather_symbolic_constants(op, symbolic_constants);
     }
 
     /** (Re)initialize the GPU kernel module. This is separate from compile,
@@ -64,6 +69,7 @@ protected:
                         const std::vector<DeviceArgument> &args);
         void print_global_data_structures_before_kernel(const Stmt *op);
         void gather_shift_regs_allocates(const Stmt *op);
+        void gather_symbolic_constants(const Stmt *op, std::vector<const Variable *> &symbolic_constants);
 
     protected:
         using CodeGen_C::visit;
@@ -157,6 +163,19 @@ protected:
             void visit(const Realize *op) override;
             void print_irregular_bounds_allocates(std::string reg_name, std::string type, std::string name, Region space_bounds, Region time_bounds, int space_bound_level);
         };
+
+        // For gathering symbolic constants
+        class GatherSymbolicConstants : public IRVisitor {
+            using IRVisitor::visit;
+        private:
+            CodeGen_OpenCL_C* parent;
+            std::vector<const Variable *> &symbolic_constants; // For symbolic constants
+        public:
+            GatherSymbolicConstants(CodeGen_OpenCL_C* parent, std::vector<const Variable *> &symbolic_constants) :
+                    parent(parent), symbolic_constants(symbolic_constants) {}
+            void visit(const Variable *v) override;
+        };
+
         std::map<std::string, std::vector<std::string>> shift_regs_allocates; // For all shift regs
         std::map<std::string, size_t> shift_regs_bounds; // Only for shift regs whose types are nonstandard_vectors
         std::map<std::string, size_t> temp_regs_bounds; // Only for temp regs whose types are nonstandard_vectors

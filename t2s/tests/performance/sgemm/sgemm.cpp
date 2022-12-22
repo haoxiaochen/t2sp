@@ -98,7 +98,7 @@ int main()
 #ifdef GPU
     C.compile_to_host("sgemm-interface", { A, B }, "gemm", IntelGPU);
 #else
-    C.compile_to_host("sgemm-interface", { A, B }, "gemm", IntelFPGA);
+    C.compile_to_host("sgemm-interface", { A, B, III, II, JJ, KK }, "gemm", IntelFPGA);
 #endif
     printf("Success\n");
     return 0;

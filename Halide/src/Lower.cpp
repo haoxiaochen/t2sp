@@ -648,6 +648,11 @@ Module lower(const vector<Function> &output_funcs,
             continue;
         }
 
+//        if (arg.param.defined() && arg.param.is_symbolic_constant()) {
+            // This argument is a symbolic constant. Not to be instantiated by a function call, but by a macro in the command line, thus not really an argument
+  //          continue;
+  //      }
+
         internal_assert(arg.arg.is_input()) << "Expected only input Arguments here";
 
         bool found = false;

@@ -3,6 +3,7 @@
 #include <fstream>
 
 #include "CSE.h"
+#include "CodeGen_GPU_Host.h"
 #include "CodeGen_Internal.h"
 #include "CodeGen_OpenCL_Dev.h"
 #include "Debug.h"
@@ -14,6 +15,7 @@
 #include "Simplify.h"
 #include "Substitute.h"
 #include "../../t2s/src/DebugPrint.h"
+#include "../../t2s/src/SymbolicConstant.h"
 #include "../../t2s/src/Utilities.h"
 
 namespace Halide {
@@ -308,6 +310,7 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const For *loop) {
                         needs_unrolling |= true;
                 }
             }
+            needs_unrolling &= is_const(loop->extent);
             if (needs_unrolling) {
                 Expr extent = simplify(loop->extent);
                 Stmt body = loop->body;
@@ -2475,13 +2478,13 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::DeclareChannels::visit(const Realize 
         for (size_t i = 0; i < bounds.size(); i++) {
             Range b = bounds[i];
             Expr extent = b.extent;
-            const IntImm *e_extent = extent.as<IntImm>();
-            internal_assert(e_extent != NULL);
+            std::ostringstream oss;
+            oss << extent;
             if (i < bounds.size() - 1) {
-                internal_assert(e_extent->value > 0);
-                bounds_str += "[" + std::to_string(e_extent->value) + "]";
+                internal_assert(Internal::can_prove(extent > 0));
+                bounds_str += "[" + oss.str() + "]";
             } else {
-                attributes = " __attribute__((depth(" + std::to_string(e_extent->value) +  "))) ";
+                attributes = " __attribute__((depth(" + oss.str() +  "))) ";
             }
         }
         internal_assert(op->types.size() == 1) << "In generating Intel OpenCL for FPGAs, a single type is expected for a channel.\n";
@@ -2529,7 +2532,7 @@ bool CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::is_irregular(Region &bounds) {
     bool irregular_bounds = false;
     for (int i = bounds.size()-1; i >= 0; i--) {
         Expr extent = bounds[i].extent;
-        if (!is_const(extent)) {
+        if (!can_resolve_as_const(extent)) {
             irregular_bounds = true;
             break;
         }
@@ -2647,10 +2650,10 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::GatherShiftRegsAllocates::visit(const
             for (int i = bounds.size()-1; i >= 0; i--) {
                 Range b = bounds[i];
                 Expr extent = b.extent;
-                const IntImm *e_extent = extent.as<IntImm>();
-                internal_assert(e_extent != NULL);
-                internal_assert(e_extent->value > 0);
-                bounds_str = "[" + std::to_string(e_extent->value) + "]" + bounds_str;
+                internal_assert(can_prove(extent > 0));
+                std::ostringstream oss;
+                oss << extent;
+                bounds_str = "[" + oss.str() + "]" + bounds_str;
             }
             rhs << type << " " << parent->print_name(op->name) << bounds_str << ";\n";
             std::vector<std::string> names = split_string(op->name, ".");
@@ -2692,6 +2695,19 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::GatherShiftRegsAllocates::visit(const
         }
     }
     IRVisitor::visit(op);
+}
+
+void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::GatherSymbolicConstants::visit(const Variable *v) {
+    if (v->param.defined() && v->param.is_symbolic_constant()) {
+        symbolic_constants.push_back(v);
+    } else {
+        IRVisitor::visit(v);
+    }
+}
+
+void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::gather_symbolic_constants(const Stmt *op, std::vector<const Variable *>& symbolic_constants) {
+    GatherSymbolicConstants gatherer(this, symbolic_constants);
+    op->accept(&gatherer);
 }
 
 void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Realize *op) {

@@ -142,7 +142,7 @@ private:
     void visit(const Variable *op) override {
         IRGraphVisitor::visit(op);
         // A symbolic constant should be set with a macro during compilation, e.g. "aoc -DJJJ=8 ...", thus it is not an argument in a function call.
-        if (op->param.defined() && !op->param.is_symbolic_constant()) {
+        if (op->param.defined() /*&& !op->param.is_symbolic_constant()*/) {
             include_parameter(op->param);
         }
         include_buffer(op->image);

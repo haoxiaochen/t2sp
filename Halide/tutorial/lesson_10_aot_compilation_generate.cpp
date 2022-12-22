@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
     Var x, y;
 
     // The pipeline will depend on one scalar parameter.
-    Param<uint8_t> offset;
+    Param<uint8_t> offset("offset");
 
     // And take one grayscale 8-bit input buffer. The first
     // constructor argument gives the type of a pixel, and the second

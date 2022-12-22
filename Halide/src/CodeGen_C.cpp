@@ -2451,6 +2451,10 @@ void CodeGen_C::visit(const Call *op) {
         rhs << print_name(op->name);
     } else if (op->is_intrinsic(Call::annotate)) {
         rhs << print_expr(0);
+    } else if (op->is_intrinsic(Call::closest_power_of_two)) {
+        internal_assert(op->args.size() == 1);
+        string arg0 = print_expr(op->args[0]);
+        rhs << op->name << "(" << arg0 << ")";
     } else if (op->is_intrinsic()) {
         // TODO: other intrinsics
         internal_error << "Unhandled intrinsic in C backend: " << op->name << '\n';
@@ -2847,7 +2851,7 @@ void CodeGen_C::visit(const Broadcast *op) {
 
 void CodeGen_C::visit(const Provide *op) {
     if (ends_with(op->name, ".temp")) {
-    	internal_assert(op->values.size() == 1);
+        internal_assert(op->values.size() == 1);
         internal_assert(op->args.size() == 0);
         string value = print_expr(op->values[0]);
         string name = print_name(op->name);

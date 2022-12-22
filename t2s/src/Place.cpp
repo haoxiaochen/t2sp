@@ -228,20 +228,39 @@ private:
         Stmt body = mutate(op->body);
         string name = op->name;
         Expr value = op->value;
+        debug(4) << "Looking at Letstmt: " << name << "=" << to_string(value) << "\n";
         if (!get_channel_name(op->name).empty()) {
             string func_name = extract_first_token(op->name);
             string new_func_name = func_name + ".mem_channel";
             name = name.replace(name.find(func_name), func_name.length(), new_func_name);
+            if (op->name == "A_serializer.k.extent_realized") {
+                debug(4) << "!!!*****BODY:\n" << to_string(body) << "\n\n";
+            }
+            body = substitute(op->name, Variable::make(Int(32), name), body);
+            if (op->name == "A_serializer.k.extent_realized") {
+                debug(4) << "$$$*****NEWBODY:\n" << to_string(body) << "\n\n";
+            }
             if (extract_token(op->name, 2) == "stride") {
                 int idx = atoi(extract_token(op->name, 3).c_str());
                 string last_dim = func_name + ".stride." + to_string(idx -1);
                 string new_last_dim = new_func_name + ".stride." + to_string(idx -1);
                 value = substitute(last_dim, Variable::make(Int(32), new_last_dim), value);
             }
+            static int count=0;
+            count++;
+            debug(4) << "!!!!InsertLetstbackup: " << count << ":" << name << "=" << to_string(value) << "\n";
+            // All the backed up LetStmts have new name at the left sides. However, their right sides might still refer to old names.
+            // Scan all the backed up LetStmts and replace any old name with the corresponding new name.
+            for (auto &l : letstmts_backup) {
+                l.second = substitute(op->name, Variable::make(Int(32), name), l.second);
+//                original_to_new_name.push_back({op->name, name});
+            }
             letstmts_backup.push_back({ name, value });
+//            debug(4) << "!!!!oldtonewname: " << count << ":" << op->name << "=" << name << "\n";
         } else {
             letstmts_backup.push_back({ name, value });
         }
+        debug(4) << "\tMNake a new " << name << "=" << to_string(value) << "\n";
         return LetStmt::make(name, value, body);
     }
 

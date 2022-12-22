@@ -176,6 +176,16 @@ void CodeGen_GPU_Host<CodeGen_CPU>::compile_func(const LoweredFunc &f,
 
             // Gather shift registers' allocations.
             ((CodeGen_OpenCL_Dev *)cgdev[DeviceAPI::OpenCL])->gather_shift_regs_allocates(&f.body);
+
+            // Gather symbolic constants
+            /*std::vector<const Variable*> symbolic_constants;
+            ((CodeGen_OpenCL_Dev *)cgdev[DeviceAPI::OpenCL])->gather_symbolic_constants(&f.body, symbolic_constants);
+            for (auto sym : symbolic_constants) {
+                //llvm::Value *value = codegen(sym);
+                //llvm::Type * ty = llvm_type_of(sym->type);
+                //llvm::Value *value = Constant::getNullValue(ty->getPointerTo());
+                //this->sym_push_const(sym->name);
+            }*/
         }
         if (target.has_feature(Target::IntelFPGA) && target.has_feature(Target::OneAPI)) {
             internal_assert(cgdev.find(DeviceAPI::OneAPI) != cgdev.end());

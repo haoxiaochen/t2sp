@@ -150,7 +150,7 @@ class LoopReplacer : public IRMutator {
     }
 
     Stmt visit(const For* op) override {
-        if (in_device && op->for_type == ForType::Unrolled) {
+        if (in_device && op->for_type == ForType::Unrolled && is_const(op->extent)) {
             Stmt body = mutate(op->body);
             return For::make(op->name, op->min, op->extent, for_type, op->device_api, body);
         } else {
