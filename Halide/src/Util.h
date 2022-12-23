@@ -453,7 +453,7 @@ struct IsRoundtrippable {
 };
 
 /** Emit a version of a string that is a valid identifier in C (. is replaced with _) */
-std::string c_print_name(const std::string &name);
+std::string c_print_name(const std::string &name, bool add_underscore_to_alpha = true);
 
 }  // namespace Internal
 }  // namespace Halide

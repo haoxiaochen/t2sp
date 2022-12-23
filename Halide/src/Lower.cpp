@@ -666,6 +666,14 @@ Module lower(const vector<Function> &output_funcs,
             debug(1) << "Embedding image " << arg.buffer.name() << "\n";
             result_module.append(arg.buffer);
         } else if (!found) {
+        	if (arg.param.defined() && arg.param.is_symbolic_constant()) {
+            	// A symbolic constant is not passed in with an argument, but with a command line option like -DIII=4
+        		// Add the symbolic constant as a fake argument, just to avoid troubles later for undefined symbols. But later in code generation,
+        		// do not really generate an argument in the function's signature.
+        		public_args.push_back(arg.arg);
+        		debug(4) << "Add a fake argument " << arg.arg.name << "\n";
+        		continue;
+        	}
             std::ostringstream err;
             err << "Generated code refers to ";
             if (arg.arg.is_buffer()) {

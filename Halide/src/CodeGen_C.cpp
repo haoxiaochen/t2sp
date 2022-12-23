@@ -13,6 +13,7 @@
 #include "Type.h"
 #include "Util.h"
 #include "Var.h"
+#include "../../t2s/src/DebugPrint.h"
 #include "../../t2s/src/Utilities.h"
 
 namespace Halide {
@@ -1945,7 +1946,13 @@ void CodeGen_C::close_scope(const std::string &comment) {
 }
 
 void CodeGen_C::visit(const Variable *op) {
-    id = print_name(op->name);
+	if (op->param.defined() && op->param.is_symbolic_constant()) {
+		// Print a symbolic constant as is, without any decoration. Programmer should ensure that there is no
+		// conflict with any C keyword.
+		id = c_print_name(op->name, false);
+	} else {
+		id = print_name(op->name);
+	}
 }
 
 void CodeGen_C::visit(const Cast *op) {
@@ -2453,6 +2460,7 @@ void CodeGen_C::visit(const Call *op) {
         rhs << print_expr(0);
     } else if (op->is_intrinsic(Call::closest_power_of_two)) {
         internal_assert(op->args.size() == 1);
+        debug(4) << "****closepower: " << to_string(op->args[0]) << "\n";
         string arg0 = print_expr(op->args[0]);
         rhs << op->name << "(" << arg0 << ")";
     } else if (op->is_intrinsic()) {
