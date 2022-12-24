@@ -70,9 +70,12 @@ struct Argument {
     /* The estimates (if any) and default/min/max values (if any) for this Argument. */
     ArgumentEstimates argument_estimates;
 
+    /** True if the argument is actually a symbolic constant: a fake argument */
+    bool is_symbolic_constant = false;
+
     Argument() = default;
     Argument(const std::string &_name, Kind _kind, const Type &_type, int _dimensions,
-             const ArgumentEstimates &argument_estimates);
+             const ArgumentEstimates &argument_estimates, bool _is_symbolic_constant = false);
 
     // Not explicit, so that you can put Buffer in an argument list,
     // to indicate that it shouldn't be baked into the object file,
@@ -82,7 +85,8 @@ struct Argument {
         : name(im.name()),
           kind(InputBuffer),
           dimensions(im.dimensions()),
-          type(im.type()) {
+          type(im.type()),
+          is_symbolic_constant(false) {
     }
 
     bool is_buffer() const {

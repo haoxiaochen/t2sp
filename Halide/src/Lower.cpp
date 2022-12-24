@@ -670,7 +670,9 @@ Module lower(const vector<Function> &output_funcs,
             	// A symbolic constant is not passed in with an argument, but with a command line option like -DIII=4
         		// Add the symbolic constant as a fake argument, just to avoid troubles later for undefined symbols. But later in code generation,
         		// do not really generate an argument in the function's signature.
-        		public_args.push_back(arg.arg);
+        	    Argument fake_arg = arg.arg;
+        	    fake_arg.is_symbolic_constant = true;
+        		public_args.push_back(fake_arg);
         		debug(4) << "Add a fake argument " << arg.arg.name << "\n";
         		continue;
         	}

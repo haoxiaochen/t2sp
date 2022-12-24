@@ -14,8 +14,9 @@ HostClosure::HostClosure(Stmt s, const std::string &loop_variable) {
 std::vector<DeviceArgument> HostClosure::arguments() {
     std::vector<DeviceArgument> res;
     for (const auto &v : vars) {
-        debug(2) << "var: " << v.first << "\n";
-        res.push_back(DeviceArgument(v.first, false, v.second, 0));
+        bool is_symbolic_constant = (std::find(symbolic_constants.begin(), symbolic_constants.end(), v.first) != symbolic_constants.end());
+        debug(2) << "var: " << v.first << (std::string)(is_symbolic_constant ? "symbolic constant" : "") << "\n";
+        res.push_back(DeviceArgument(v.first, false, v.second, 0, 0, is_symbolic_constant));
     }
     for (const auto &b : buffers) {
         debug(2) << "buffer: " << b.first << " " << b.second.size;

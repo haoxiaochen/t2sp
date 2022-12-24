@@ -46,13 +46,13 @@ if [ "$2" != "fpga" -a "$2" != "gpu" ]; then
 fi
 
 export T2S_PATH="$( cd "$(dirname $(realpath "$BASH_SOURCE") )" >/dev/null 2>&1 ; pwd -P )" # The path to this script
-TOOLS_PATH=$T2S_PATH/install
+TOOLS_PATH=$HOME/old-t2sp/install
 
 # Modify these 3 paths if you installed your own versions of gcc or llvm-clang
 # gcc should be located at $GCC_PATH/bin
-GCC_PATH=/usr                                                                                                               
-export LLVM_CONFIG=/usr/bin/llvm-config     
-export CLANG=/usr/bin/clang 
+GCC_PATH=$TOOLS_PATH/gcc-7.5.0
+export LLVM_CONFIG=$TOOLS_PATH/bin/llvm-config
+export CLANG=$TOOLS_PATH/bin/clang
 
 if [ "$1" = "local" -a "$2" = "fpga" ]; then
     # Modify according to your machine's setting

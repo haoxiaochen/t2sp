@@ -78,6 +78,9 @@ public:
     /** External variables referenced. */
     std::map<std::string, Type> vars;
 
+    /** (Fake) vars that are actually symbolic constants. */
+    std::vector<std::string> symbolic_constants;
+
     /** External allocations referenced. */
     std::map<std::string, Buffer> buffers;
 };

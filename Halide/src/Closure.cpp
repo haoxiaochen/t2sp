@@ -96,6 +96,9 @@ void Closure::visit(const Variable *op) {
     } else {
         debug(3) << "Adding " << op->name << " to closure\n";
         vars[op->name] = op->type;
+        if (op->param.defined() && op->param.is_symbolic_constant()) {
+            symbolic_constants.push_back(op->name);
+        }
     }
 }
 

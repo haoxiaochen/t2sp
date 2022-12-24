@@ -20,7 +20,7 @@
 #include "sgemm-interface.h"
 
 // Constant parameters (inner loop bounds) of the design
-#include "const-parameters.h"
+//#include "const-parameters.h"
 
 // Outer loop bounds for testing
 #ifdef TINY // For verifying correctness only

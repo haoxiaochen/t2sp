@@ -1725,7 +1725,16 @@ void CodeGen_C::compile(const LoweredFunc &f) {
         return;
     }
 
-    const std::vector<LoweredArgument> &args = f.args;
+    const std::vector<LoweredArgument> &_args = f.args;
+    // First, remove these fake arguments that are really symbolic constants.
+    std::vector<LoweredArgument> args;
+    for (auto a : _args) {
+        debug(4) << "**OCL arg:" << a.name << (string)(a.is_symbolic_constant ? ", SymbolicC" : "") << "\n";
+        if (!a.is_symbolic_constant) {
+            args.push_back(a);
+        }
+    }
+
 
     have_user_context = false;
     for (size_t i = 0; i < args.size(); i++) {
@@ -2817,11 +2826,15 @@ void CodeGen_C::visit(const For *op) {
                       }
                   });
 
+        size_t arg_count = 0;
         for (size_t i = 0; i < closure_args.size(); i++) {
             auto &arg = closure_args[i];
+            if (arg.is_symbolic_constant) {
+                continue;
+            }
             stream << get_indent() << "status = clSetKernelArg("
                    << "kernel[current_kernel], "
-                   << i << ", ";
+                   << arg_count++ << ", ";
             if (arg.is_buffer) {
                 stream << "sizeof(cl_mem), "
                        << "(void *)&((device_handle *)_halide_buffer_get_device(" << print_name(arg.name + ".buffer") << "))->mem";

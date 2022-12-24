@@ -60,6 +60,9 @@ struct DeviceArgument {
     bool read;
     bool write;
 
+    /** True if the argument is actually a symbolic constant: a fake argument */
+    bool is_symbolic_constant;
+
     /** Alignment information for integer parameters. */
     ModulusRemainder alignment;
 
@@ -69,14 +72,16 @@ struct DeviceArgument {
           size(0),
           packed_index(0),
           read(false),
-          write(false) {
+          write(false),
+          is_symbolic_constant(false) {
     }
 
     DeviceArgument(const std::string &_name,
                    bool _is_buffer,
                    Type _type,
                    uint8_t _dimensions,
-                   size_t _size = 0)
+                   size_t _size = 0,
+                   bool _is_symbolic_constant = false)
         : name(_name),
           is_buffer(_is_buffer),
           dimensions(_dimensions),
@@ -84,7 +89,8 @@ struct DeviceArgument {
           size(_size),
           packed_index(0),
           read(_is_buffer),
-          write(_is_buffer) {
+          write(_is_buffer),
+          is_symbolic_constant(_is_symbolic_constant) {
     }
 };
 

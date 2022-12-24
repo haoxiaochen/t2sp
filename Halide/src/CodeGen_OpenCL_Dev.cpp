@@ -1829,9 +1829,18 @@ class IsAutorun : public IRVisitor {
 
 void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::add_kernel(Stmt s,
                                                       const string &name,
-                                                      const vector<DeviceArgument> &args) {
+                                                      const vector<DeviceArgument> &_args) {
 
     debug(2) << "Adding OpenCL kernel " << name << "\n";
+
+    // First, remove these fake arguments that are really symbolic constants.
+    vector<DeviceArgument> args;
+    for (auto a : _args) {
+        debug(4) << "**OCL arg:" << a.name << (string)(a.is_symbolic_constant ? ", SymbolicC" : "") << "\n";
+        if (!a.is_symbolic_constant) {
+            args.push_back(a);
+        }
+    }
 
     //debug(2) << "Eliminating bool vectors\n";
     //s = eliminate_bool_vectors(s);

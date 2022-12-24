@@ -338,7 +338,7 @@ void CodeGen_Posix::visit(const Allocate *alloc) {
     }
     if (ends_with(alloc->name, ".temp")) {
         AllocaInst *alloca_temp = builder->CreateAlloca(i32_t, NULL, alloc->name);
-        alloca_temp->setAlignment((llvm::MaybeAlign)4);
+        alloca_temp->setAlignment(4);
         sym_push(alloc->name, alloca_temp);
         codegen(alloc->body);
         sym_pop(alloc->name);

@@ -383,7 +383,9 @@ void CodeGen_GPU_Host<CodeGen_CPU>::visit(const For *loop) {
 
         // Determine the arguments that must be passed into the halide function
         vector<DeviceArgument> closure_args = c.arguments();
-
+        for (auto a : closure_args) {
+            debug(4) << "**new OCL arg:" << a.name << (string)(a.is_symbolic_constant ? ", SymbolicC" : "") << "\n";
+        }
         // Sort the args by the size of the underlying type. This is
         // helpful for avoiding struct-packing ambiguities in metal,
         // which passes the scalar args as a struct.
