@@ -58,6 +58,7 @@ protected:
     public:
         CodeGen_OpenCL_C(std::ostream &s, Target t)
             : CodeGen_C(s, t) {
+            this->clean_code = (getenv("CLEANCODE") != NULL);
         }
         void add_kernel(Stmt stmt,
                         const std::string &name,
@@ -164,6 +165,27 @@ protected:
         // For saving the pointer args streamed from scehduler
         std::map<std::string, std::string> pointer_args;
 
+        /** If clean_code is true, any Expr will be printed as a single string without any intermediate assignment; otherwise, it is decomposed into
+        *   sub-expressions and every sub-expression is printed as a string. */
+        bool clean_code;
+
+        std::string print_expr(Expr) override;
+        std::string print_assignment(Type t, const std::string &rhs) override;
+        void close_scope(const std::string &comment) override;
+
+        /** Precedence of the operator according to the C standard */
+        int precedence_of_op(const char *op);
+
+        /** The operator of the expression in C */
+        void op_of_expr(const Expr & e, char * op);
+
+        /** If the op takes precedent over the operator of the expression e?
+         *  This is used to determine if a parenthesis should be generated around e.
+         */
+        bool op_takes_precedent(const char *op, const Expr &e);
+
+        void visit_for_helper(const For *);
+
         void visit(const For *) override;
         void visit(const Ramp *op) override;
         void visit(const Broadcast *op) override;
@@ -182,6 +204,7 @@ protected:
         void visit(const Allocate *op) override;
         void visit(const Free *op) override;
         void visit(const AssertStmt *op) override;
+        void visit(const Evaluate *) override;
         void visit(const Shuffle *op) override;
         void visit(const Min *op) override;
         void visit(const Max *op) override;
