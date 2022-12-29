@@ -1905,6 +1905,14 @@ void CodeGen_C::compile(const Buffer<> &buffer) {
 string CodeGen_C::print_expr(Expr e) {
     id = "$$ BAD ID $$";
     e.accept(this);
+    if (this->compact_expr) {
+        for (const auto &p : cache) {
+            if (p.second == id) {
+                return p.first;
+            }
+        }
+        // The expression might be a constant, for example, and thus no intermediate variable is used.
+    }
     return id;
 }
 
@@ -1928,12 +1936,18 @@ string CodeGen_C::print_assignment(Type t, const std::string &rhs) {
     auto cached = cache.find(rhs);
     if (cached == cache.end()) {
         id = unique_name('_');
-        stream << get_indent() << print_type(t, AppendSpace) << (output_kind == CPlusPlusImplementation ? "const " : "") << id << " = " << rhs << ";\n";
+        if (!this->compact_expr) {
+            stream << get_indent() << print_type(t, AppendSpace) << (output_kind == CPlusPlusImplementation ? "const " : "") << id << " = " << rhs << ";\n";
+        }
         cache[rhs] = id;
     } else {
         id = cached->second;
     }
-    return id;
+    if (this->compact_expr) {
+        return rhs;
+    } else {
+        return id;
+    }
 }
 
 void CodeGen_C::open_scope() {
@@ -1954,6 +1968,119 @@ void CodeGen_C::close_scope(const std::string &comment) {
     }
 }
 
+int CodeGen_C::precedence_of_op(const char *op) {
+    // Per https://en.cppreference.com/w/c/language/operator_precedence
+    if (strcmp(op, "!") == 0 || strcmp(op, "~") == 0) {
+        return 2;
+    }
+    if (strcmp(op, "*") == 0 || strcmp(op, "/") == 0 || strcmp(op, "%") == 0) {
+        return 3;
+    }
+    if (strcmp(op, "+") == 0 || strcmp(op, "-") == 0) {
+        return 4;
+    }
+    if (strcmp(op, "<<") == 0 || strcmp(op, ">>") == 0) {
+        return 5;
+    }
+    if (strcmp(op, "<") == 0 || strcmp(op, "<=") == 0 || strcmp(op, ">") == 0 || strcmp(op, ">=") == 0) {
+        return 6;
+    }
+    if (strcmp(op, "==") == 0 || strcmp(op, "!=") == 0) {
+        return 7;
+    }
+    if (strcmp(op, "&") == 0) {
+        return 8;
+    }
+    if (strcmp(op, "^") == 0) {
+        return 9;
+    }
+    if (strcmp(op, "|") == 0) {
+        return 10;
+    }
+    if (strcmp(op, "&&") == 0) {
+        return 11;
+    }
+    if (strcmp(op, "||") == 0) {
+        return 12;
+    }
+    if (strcmp(op, "?:") == 0) {
+        return 13;
+    }
+
+    internal_assert(strcmp(op, "Variable") == 0 || strcmp(op, "Immediate") == 0 || strcmp(op, "Call") == 0);
+    return 1;
+}
+
+void CodeGen_C::op_of_expr(const Expr & e, char * op) {
+    internal_assert(op != NULL);
+    if (e.as<Variable>()) {
+        strncpy(op, "Variable", 15);
+    } else if (e.as<IntImm>() || e.as<UIntImm>() || e.as<StringImm>() ||e.as<FloatImm>()) {
+        strncpy(op, "Immediate", 15);
+    } else if (e.as<Cast>() || e.as<Max>() || e.as<Min>()) {
+        strncpy(op, "Call", 15);
+    } else if (e.as<Add>()) {
+        strncpy(op, "+", 15);
+    } else if (e.as<Sub>()) {
+        strncpy(op, "-", 15);
+    } else if (e.as<Mul>()) {
+        strncpy(op, "*", 15);
+    } else if (e.as<Div>()) {
+        strncpy(op, "/", 15);
+    } else if (e.as<Mod>()) {
+        strncpy(op, "%", 15);
+    } else if (e.as<EQ>()) {
+        strncpy(op, "==", 15);
+    } else if (e.as<NE>()) {
+        strncpy(op, "!=", 15);
+    } else if (e.as<LT>()) {
+        strncpy(op, "<", 15);
+    } else if (e.as<LE>()) {
+        strncpy(op, "<=", 15);
+    } else if (e.as<GT>()) {
+        strncpy(op, ">", 15);
+    } else if (e.as<GE>()) {
+        strncpy(op, ">=", 15);
+    } else if (e.as<And>()) {
+        strncpy(op, "&&", 15);
+    } else if (e.as<Or>()) {
+        strncpy(op, "||", 15);
+    } else if (e.as<Not>()) {
+        strncpy(op, "!", 15);
+    } else if (e.as<Select>()) {
+        strncpy(op, "?:", 15);
+    } else {
+        const Call *call = e.as<Call>();
+        if (call) {
+            if (call->name == "bitwise_and") {
+                strncpy(op, "&", 15);
+            } else if (call->name == "bitwise_not") {
+                strncpy(op, "~", 15);
+            } else if (call->name == "bitwise_or") {
+                strncpy(op, "|", 15);
+            } else if (call->name == "bitwise_xor") {
+                strncpy(op, "^", 15);
+            } else if (call->name == "shift_left") {
+                strncpy(op, "<<", 15);
+            } else if (call->name == "shift_right") {
+                strncpy(op, ">>", 15);
+            } else {
+                strncpy(op, "Call", 15);
+            }
+        } else {
+            // All the other types of expressions will be generatd as function calls.
+            strncpy(op, "Call", 15);
+        }
+    }
+}
+
+
+bool CodeGen_C::op_takes_precedent(const char *op, const Expr &e) {
+    char e_op[20];
+    op_of_expr(e, e_op);
+    return (precedence_of_op(op) < precedence_of_op(e_op));
+}
+
 void CodeGen_C::visit(const Variable *op) {
 	if (op->param.defined() && op->param.is_symbolic_constant()) {
 		// Print a symbolic constant as is, without any decoration. Programmer should ensure that there is no
@@ -1971,7 +2098,21 @@ void CodeGen_C::visit(const Cast *op) {
 void CodeGen_C::visit_binop(Type t, Expr a, Expr b, const char *op) {
     string sa = print_expr(a);
     string sb = print_expr(b);
-    print_assignment(t, sa + " " + op + " " + sb);
+    static int count=0;
+    count++;
+    debug(4) << "^^^^visitbinop: " << count << ": " << sa << ",  " << std::string(op) << ", " << sb << "\n";
+    if (this->compact_expr) {
+        string sa1 = op_takes_precedent(op, a) ? "(" + sa + ")" : sa;
+        string sb1 = op_takes_precedent(op, b) ? "(" + sb + ")" : sb;
+        print_assignment(t, sa1 + " " + op + " " + sb1);
+
+        debug(4) << "    ^^^^visitbinop: " << count << ": " << sa1 << ",  " << std::string(op) << ", " << sb1 << "\n";
+
+    } else {
+        print_assignment(t, sa + " " + op + " " + sb);
+
+        debug(4) << "    same\n";
+    }
 }
 
 void CodeGen_C::visit(const Add *op) {
@@ -2255,13 +2396,13 @@ void CodeGen_C::visit(const Call *op) {
         open_scope();
         string true_case = print_expr(op->args[1]);
         stream << get_indent() << result_id << " = " << true_case << ";\n";
-        close_scope("if " + cond_id);
+        close_scope(""); //"if " + cond_id);
         if (op->args[2].defined()) {
             stream << get_indent() << "else\n";
             open_scope();
             string false_case = print_expr(op->args[2]);
             stream << get_indent() << result_id << " = " << false_case << ";\n";
-            close_scope("if " + cond_id + " else");
+            close_scope(""); //"if " + cond_id + " else");
         }
         rhs << result_id;
     } else if (op->is_intrinsic(Call::require)) {
@@ -2471,7 +2612,7 @@ void CodeGen_C::visit(const Call *op) {
         internal_assert(op->args.size() == 1);
         debug(4) << "****closepower: " << to_string(op->args[0]) << "\n";
         string arg0 = print_expr(op->args[0]);
-        rhs << op->name << "(" << arg0 << ")";
+        rhs << "CLOSEST_POWER_OF_TWO(" << arg0 << ")";
     } else if (op->is_intrinsic()) {
         // TODO: other intrinsics
         internal_error << "Unhandled intrinsic in C backend: " << op->name << '\n';
@@ -2796,7 +2937,7 @@ void CodeGen_C::visit(const For *op) {
             << " + " << id_extent
             << "; "
             << print_name(op->name)
-            << "++)\n";
+            << "++) ";
 
         open_scope();
         op->body.accept(this);
@@ -3051,11 +3192,18 @@ void CodeGen_C::visit(const Evaluate *op) {
     // Skip the evaluation of some intrinsics
     bool skip_eval = false;
     if (auto call = op->value.as<Call>()) {
-        if (call->is_intrinsic(Call::overlay) || call->is_intrinsic(Call::overlay_switch) || call->is_intrinsic(Call::annotate))
+        debug(4) << "^^EvaluateCall: " << to_string(op) << "\n";
+        if (call->is_intrinsic(Call::overlay) || call->is_intrinsic(Call::overlay_switch) || call->is_intrinsic(Call::annotate) ||  call->is_intrinsic(Call::write_array) ||
+            call->is_intrinsic(Call::write_channel) || call->is_intrinsic(Call::write_channel_nb) || call->is_intrinsic(Call::write_mem_channel) ||
+            call->is_intrinsic(Call::write_shift_reg) || call->is_intrinsic(Call::read_channel)) {
             skip_eval = true;
+        }
     }
     string id = print_expr(op->value);
     if (!skip_eval) {
+        static int count=0;
+        count++;
+        debug(4) << "^^Evalueate to void:" << count << ": id is (" << id << ")" << ". Original expr is:" << to_string(op) << "\n";
         stream << get_indent() << "(void)" << id << ";\n";
     }
 }

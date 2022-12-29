@@ -251,10 +251,10 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const For *loop) {
         }
         loop->body.accept(this);
     } else if(ends_with(loop->name, ".infinite")){
-        stream << get_indent() << "while(1)\n";
+        stream << get_indent() << "while(1) ";
         open_scope();
         loop->body.accept(this);
-        close_scope("while "+print_name(loop->name));
+        close_scope(""); //"while "+print_name(loop->name));
     } else if (ends_with(loop->name,"remove")){
         loop->body.accept(this);
     } else if (loop->for_type == ForType::DelayUnroll) {
@@ -1504,7 +1504,23 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit_binop(Type t, Expr a, Expr b, c
     string sa = print_expr(a);
     string sb = print_expr(b);
     if (is_standard_opencl_type(t) && is_standard_opencl_type(a.type())) {
-        print_assignment(t, sa + " " + op + " " + sb);
+        string sa = print_expr(a);
+        string sb = print_expr(b);
+        static int count=0;
+        count++;
+        debug(4) << "^^^^visitbinop: " << count << ": " << sa << ",  " << std::string(op) << ", " << sb << "\n";
+        if (this->compact_expr) {
+            string sa1 = op_takes_precedent(op, a) ? "(" + sa + ")" : sa;
+            string sb1 = op_takes_precedent(op, b) ? "(" + sb + ")" : sb;
+            print_assignment(t, sa1 + " " + op + " " + sb1);
+
+            debug(4) << "    ^^^^visitbinop: " << count << ": " << sa1 << ",  " << std::string(op) << ", " << sb1 << "\n";
+
+        } else {
+            print_assignment(t, sa + " " + op + " " + sb);
+
+            debug(4) << "    same\n";
+        }
     } else {
         // Output something like bool16 x = {a.s0 op b.s0, a.s1 op b.s0, ...}
         internal_assert(t.is_vector() && a.type().is_vector() && t.lanes() == a.type().lanes());
@@ -1565,6 +1581,22 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Cast *op) {
 }
 
 void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Select *op) {
+    if (this->compact_expr && op->false_value.defined()) {
+        string cond_id = print_expr(op->condition);
+        string true_value = print_expr(op->true_value);
+        string false_value = print_expr(op->false_value);
+
+        char select_op[3];
+        select_op[0] = '?';
+        select_op[1] = ':';
+        select_op[2] = '\0';
+
+        string cond_id1 = op_takes_precedent(select_op, op->condition) ? "(" + cond_id + ")" : cond_id;
+        string true_value1 = op_takes_precedent(select_op, op->true_value) ? "(" + true_value + ")" : true_value;
+        string false_value1 = op_takes_precedent(select_op, op->false_value) ? "(" + false_value + ")" : false_value;
+        print_assignment(op->type,  cond_id1 + " ? " + true_value1 + " : " + false_value1);
+        return;
+    }
     // The branch(es) might contain actions with side effects like a channel read.
     // Thus we must guard the branch(es).
     // So first convert to if_then_else.
@@ -1577,16 +1609,16 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Select *op) {
 
 void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const IfThenElse *op) {
     string cond_id = print_expr(op->condition);
-    stream << get_indent() << "if (" << cond_id << ")\n";
+    stream << get_indent() << "if (" << cond_id << ") ";
     open_scope();
     op->then_case.accept(this);
-    close_scope("if " + cond_id);
+    close_scope(""); //"if " + cond_id);
 
     if (op->else_case.defined()) {
-        stream << get_indent() << "else\n";
+        stream << get_indent() << "else ";
         open_scope();
         op->else_case.accept(this);
-        close_scope("if " + cond_id + " else");
+        close_scope("");//"if " + cond_id + " else");
     }
 }
 
@@ -2745,14 +2777,20 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Realize *op) {
         }
         print_stmt(op->body);
     } else if(ends_with(op->name,".ibuffer")){
+        debug(4) << "^^^^^relize ibuff: " << to_string(op) << "\n\n";
+
         std::string string_bound = "" ;
         std::vector<std::string> access_exprs;
         for (Range b : op->bounds) {
             access_exprs.push_back(print_expr(b.extent));
+
+            debug(4) << "^^^bound: " << access_exprs.back() << "\n";
         }
         for (std::string ae : access_exprs) {
             string_bound += "[" + ae + "]";
         }
+        debug(4) << "^^^boundstr: " << string_bound << "\n";
+
         for(size_t i=0;i<op->types.size();i++) {
             std::string name = op->name.substr(0, op->name.length()-std::string(".ibuffer").size());
             string buffer_name = name + '.' + std::to_string(i) + ".ibuffer";

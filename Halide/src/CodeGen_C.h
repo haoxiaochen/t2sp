@@ -35,7 +35,7 @@ public:
     };
 
     /** Initialize a C code generator pointing at a particular output
-     * stream (e.g. a file, or std::cout) */
+     * stream (e.g. a file, or std::cout). */
     CodeGen_C(std::ostream &dest,
               Target target,
               OutputKind output_kind = CImplementation,
@@ -71,6 +71,11 @@ protected:
     /** Controls whether this instance is generating declarations or
      * definitions and whether the interface us extern "C" or C++. */
     OutputKind output_kind;
+
+    /** If compact_expr is true, any Expr will be printed
+     * as a single string without any intermediate assignment; otherwise, it is decomposed into
+     * sub-expressions and every sub-expression is printed as a string. */
+    bool compact_expr;
 
     /** A cache of generated values in scope */
     std::map<std::string, std::string> cache;
@@ -185,6 +190,17 @@ protected:
     void forward_declare_type_if_needed(const Type &t);
 
     void set_name_mangling_mode(NameMangling mode);
+
+    /** Precedence of the operator according to the C standard */
+    int precedence_of_op(const char *op);
+
+    /** The operator of the expression in C */
+    void op_of_expr(const Expr & e, char * op);
+
+    /** If the op takes precedent over the operator of the expression e?
+     *  This is used to determine if a parenthesis should be generated around e.
+     */
+    bool op_takes_precedent(const char *op, const Expr &e);
 
     using IRPrinter::visit;
 

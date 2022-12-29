@@ -63,6 +63,7 @@ protected:
     public:
         CodeGen_OpenCL_C(std::ostream &s, Target t)
             : CodeGen_C(s, t) {
+            this->compact_expr = (getenv("COMPACTEXPR") != NULL);
         }
         void add_kernel(Stmt stmt,
                         const std::string &name,
