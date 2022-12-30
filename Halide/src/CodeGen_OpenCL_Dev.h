@@ -206,6 +206,8 @@ protected:
         void visit(const AssertStmt *op) override;
         void visit(const Evaluate *) override;
         void visit(const Shuffle *op) override;
+//        void visit(const Div *op) override;
+//        void visit(const Mod *op) override;
         void visit(const Min *op) override;
         void visit(const Max *op) override;
         void visit(const Atomic *op) override;

@@ -2451,6 +2451,11 @@ void CodeGen_C::visit(const Call *op) {
         rhs << print_name(op->name);
     } else if (op->is_intrinsic(Call::annotate)) {
         rhs << print_expr(0);
+    } else if (op->is_intrinsic(Call::fmod)) {
+        string arg0 = print_expr(op->args[0]);
+        string arg1 = print_expr(op->args[1]);
+        rhs << "fmod(" << arg0 << ", " << arg1 << ")";
+        print_assignment(op->type, rhs.str());
     } else if (op->is_intrinsic()) {
         // TODO: other intrinsics
         internal_error << "Unhandled intrinsic in C backend: " << op->name << '\n';

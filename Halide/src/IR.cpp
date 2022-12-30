@@ -601,6 +601,7 @@ const char *const intrinsic_op_names[] = {
     "div_round_to_zero",
     "dynamic_shuffle",
     "extract_mask_element",
+    "fmod",
     "fpga_reg",
     "gather",
     "glsl_texture_load",

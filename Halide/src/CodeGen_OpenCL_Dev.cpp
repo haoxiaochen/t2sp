@@ -369,14 +369,22 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::op_of_expr(const Expr & e, char * op)
 
 bool CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::op_takes_precedent(const char *op, const Expr &e) {
     char e_op[20];
-    op_of_expr(e, e_op);
+    if (e.as<Div>()) {
+        // Div can be generated as >>, +/-, or /. Use the one with the lowest precedence, i.e. >>
+        e_op[0] = '>'; e_op[1] = '>'; e_op[2] = '\0';
+    } else if (e.as<Mod>()) {
+        // Mod can be generated as &, +/-, fmod(), or %. Use the one with the lowest precedence, i.e. &
+        e_op[0] = '&'; e_op[1] = '\0';
+    } else {
+        op_of_expr(e, e_op);
+    }
     return (precedence_of_op(op) < precedence_of_op(e_op));
 }
 
 void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit_for_helper(const For *op) {
     if (!ends_with(op->name, ".run_on_device")) {
         string id_min = print_expr(op->min);
-        string id_extent = print_expr(op->extent);
+        string id_ub = print_expr(simplify(op->min + op->extent));
 
         if (op->for_type == ForType::Parallel) {
             stream << get_indent() << "#pragma omp parallel for\n";
@@ -392,8 +400,7 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit_for_helper(const For *op) {
             << " = " << id_min
             << "; "
             << print_name(op->name)
-            << " < " << id_min
-            << " + " << id_extent
+            << " < " << id_ub
             << "; "
             << print_name(op->name)
             << (this->clean_code ? (string)"++) " : (string)"++)\n");
@@ -2028,6 +2035,15 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Shuffle *op) {
     }
 }
 
+/*
+void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Div *op) {
+    visit_binop(op->type, op->a, op->b, "/");
+}
+
+void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Mod *op) {
+    visit_binop(op->type, op->a, op->b, "%");
+}
+*/
 void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Max *op) {
     print_expr(Call::make(op->type, "max", {op->a, op->b}, Call::Extern));
 }

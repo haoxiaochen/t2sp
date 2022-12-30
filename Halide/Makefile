@@ -836,6 +836,7 @@ T2S_SOURCE_FILES = \
   SliceExprTree.cpp \
   SpaceTimeTransform.cpp \
   Stensor.cpp \
+  StrengthReduction.cpp \
   StructType.cpp \
   TriangularLoopOptimize.cpp \
   Utilities.cpp
@@ -870,6 +871,7 @@ T2S_HEADER_FILES = \
   SliceExprTree.h \
   SpaceTimeTransform.h \
   Stensor.h \
+  StrengthReduction.h \
   StructType.h \
   TriangularLoopOptimize.h \
   Utilities.h
