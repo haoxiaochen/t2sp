@@ -42,7 +42,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"156"
+                , "line":"160"
               }
             ]
           }
@@ -90,7 +90,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"359"
+                , "line":"363"
               }
             ]
           }
@@ -155,7 +155,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"502"
+                , "line":"506"
               }
             ]
           }
@@ -186,7 +186,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"505"
+                , "line":"509"
               }
             ]
           }
@@ -217,7 +217,7 @@
       , "target_ii":"Not specified"
       , "achieved_fmax":"240.0"
       , "achieved_ii":1
-      , "latency":51
+      , "latency":62
       , "max_interleaving":1
       , "is_fmax_bottleneck":"No"
       , "is_loop_header":"Yes"
@@ -234,7 +234,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"508"
+                , "line":"512"
               }
             ]
           }
@@ -299,7 +299,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"804"
+                , "line":"809"
               }
             ]
           }
@@ -347,7 +347,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1006"
+                , "line":"1011"
               }
             ]
           }
@@ -412,7 +412,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1151"
+                , "line":"1156"
               }
             ]
           }
@@ -443,7 +443,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1154"
+                , "line":"1159"
               }
             ]
           }
@@ -474,7 +474,7 @@
       , "target_ii":"Not specified"
       , "achieved_fmax":"240.0"
       , "achieved_ii":1
-      , "latency":51
+      , "latency":62
       , "max_interleaving":1
       , "is_fmax_bottleneck":"No"
       , "is_loop_header":"Yes"
@@ -491,7 +491,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1157"
+                , "line":"1162"
               }
             ]
           }
@@ -573,7 +573,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1376"
+                , "line":"1382"
               }
             ]
           }
@@ -604,7 +604,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1380"
+                , "line":"1386"
               }
             ]
           }
@@ -652,7 +652,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1383"
+                , "line":"1389"
               }
             ]
           }
@@ -734,7 +734,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"82"
+                , "line":"86"
               }
             ]
           }
@@ -782,7 +782,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"86"
+                , "line":"90"
               }
             ]
           }
@@ -813,7 +813,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"89"
+                , "line":"93"
               }
             ]
           }
@@ -861,7 +861,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"92"
+                , "line":"96"
               }
             ]
           }
@@ -943,7 +943,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"285"
+                , "line":"289"
               }
             ]
           }
@@ -991,7 +991,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"289"
+                , "line":"293"
               }
             ]
           }
@@ -1022,7 +1022,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"292"
+                , "line":"296"
               }
             ]
           }
@@ -1070,7 +1070,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"295"
+                , "line":"299"
               }
             ]
           }
@@ -1152,7 +1152,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"730"
+                , "line":"735"
               }
             ]
           }
@@ -1200,7 +1200,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"734"
+                , "line":"739"
               }
             ]
           }
@@ -1231,7 +1231,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"737"
+                , "line":"742"
               }
             ]
           }
@@ -1279,7 +1279,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"740"
+                , "line":"745"
               }
             ]
           }
@@ -1344,7 +1344,7 @@
       , "target_ii":"Not specified"
       , "achieved_fmax":"240.0"
       , "achieved_ii":1
-      , "latency":8
+      , "latency":9
       , "max_interleaving":1
       , "is_fmax_bottleneck":"No"
       , "is_loop_header":"Yes"
@@ -1361,7 +1361,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"932"
+                , "line":"937"
               }
             ]
           }
@@ -1409,7 +1409,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"936"
+                , "line":"941"
               }
             ]
           }
@@ -1440,7 +1440,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"939"
+                , "line":"944"
               }
             ]
           }
@@ -1488,7 +1488,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"942"
+                , "line":"947"
               }
             ]
           }
@@ -1570,7 +1570,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1410"
+                , "line":"1416"
               }
             ]
           }
@@ -1601,7 +1601,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1414"
+                , "line":"1420"
               }
             ]
           }
@@ -1649,7 +1649,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":"1417"
+                , "line":"1423"
               }
             ]
           }
@@ -1699,7 +1699,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":137
+          , "line":141
         }
       ]
       , "loop_hierachy":
@@ -1720,7 +1720,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":340
+          , "line":344
         }
       ]
       , "loop_hierachy":
@@ -1741,7 +1741,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":478
+          , "line":482
         }
       ]
       , "loop_hierachy":
@@ -1775,7 +1775,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":785
+          , "line":790
         }
       ]
       , "loop_hierachy":
@@ -1796,7 +1796,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":987
+          , "line":992
         }
       ]
       , "loop_hierachy":
@@ -1817,7 +1817,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":1126
+          , "line":1131
         }
       ]
       , "loop_hierachy":
@@ -1851,7 +1851,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":1371
+          , "line":1377
         }
       ]
       , "loop_hierachy":
@@ -1885,7 +1885,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":74
+          , "line":78
         }
       ]
       , "loop_hierachy":
@@ -1925,7 +1925,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":277
+          , "line":281
         }
       ]
       , "loop_hierachy":
@@ -1965,7 +1965,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":722
+          , "line":727
         }
       ]
       , "loop_hierachy":
@@ -2005,7 +2005,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":924
+          , "line":929
         }
       ]
       , "loop_hierachy":
@@ -2045,7 +2045,7 @@
       [
         {
           "filename":"a.cl"
-          , "line":1402
+          , "line":1408
         }
       ]
       , "loop_hierachy":

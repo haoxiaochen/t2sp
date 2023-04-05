@@ -4,34 +4,34 @@
   "name":"Quartus Fit Clock Summary"
   ,"columns":["", "Kernel fmax", "2x clock fmax"]  ,"children":[
   {
-    "name":"Frequency (MHz)","data":["Kernel fmax": 237.00 ,"2x clock fmax": 474.00]
+    "name":"Frequency (MHz)","data":["Kernel fmax": 244.00 ,"2x clock fmax": 488.00]
   }
 ]}
 ,"quartusFitResourceUsageSummary":
 {
   "name":"Quartus Fit Resource Utilization Summary"
   ,"columns":["", "ALMs", "FFs", "RAMs", "DSPs", "MLABs"]  ,"children":[
-  {"name":"Full design (all kernels)","data":["ALMs": 227951.3 ,"FFs": 487034 ,"RAMs": 318 ,"DSPs": 1026 ,"MLABs": 1068  ]
+  {"name":"Full design (all kernels)","data":["ALMs": 229620.0 ,"FFs": 489149 ,"RAMs": 370 ,"DSPs": 1026 ,"MLABs": 1063  ]
   }
 ,
-  {"name":"Intel_Internal_Collect_Autorun_Profiling","data":["ALMs": 68.0 ,"FFs": 156 ,"RAMs": 0 ,"DSPs": 0 ,"MLABs": 0]
+  {"name":"Intel_Internal_Collect_Autorun_Profiling","data":["ALMs": 66.6 ,"FFs": 153 ,"RAMs": 0 ,"DSPs": 0 ,"MLABs": 0]
   }
 ,
-  {"name":"kernel_AFeeder","data":["ALMs": 11807.0 ,"FFs": 36436 ,"RAMs": 104 ,"DSPs": 0 ,"MLABs": 400]
+  {"name":"kernel_AFeeder","data":["ALMs": 11335.5 ,"FFs": 36238 ,"RAMs": 104 ,"DSPs": 0 ,"MLABs": 400]
   }
 ,
-  {"name":"kernel_ALoader","data":["ALMs": 1960.2 ,"FFs": 4368 ,"RAMs": 17 ,"DSPs": 1 ,"MLABs": 14]
+  {"name":"kernel_ALoader","data":["ALMs": 1948.0 ,"FFs": 4288 ,"RAMs": 17 ,"DSPs": 1 ,"MLABs": 14]
   }
 ,
-  {"name":"kernel_BFeeder","data":["ALMs": 5904.0 ,"FFs": 19225 ,"RAMs": 52 ,"DSPs": 0 ,"MLABs": 158]
+  {"name":"kernel_BFeeder","data":["ALMs": 6036.7 ,"FFs": 19191 ,"RAMs": 104 ,"DSPs": 0 ,"MLABs": 158]
   }
 ,
-  {"name":"kernel_BLoader","data":["ALMs": 2000.7 ,"FFs": 4337 ,"RAMs": 17 ,"DSPs": 1 ,"MLABs": 18]
+  {"name":"kernel_BLoader","data":["ALMs": 1981.0 ,"FFs": 4384 ,"RAMs": 17 ,"DSPs": 1 ,"MLABs": 18]
   }
 ,
-  {"name":"kernel_Out","data":["ALMs": 204148.7 ,"FFs": 418065 ,"RAMs": 128 ,"DSPs": 1024 ,"MLABs": 440]
+  {"name":"kernel_Out","data":["ALMs": 206214.0 ,"FFs": 420424 ,"RAMs": 128 ,"DSPs": 1024 ,"MLABs": 435]
   }
 ,
-  {"name":"kernel_unloader","data":["ALMs": 2062.7 ,"FFs": 4447 ,"RAMs": 0 ,"DSPs": 0 ,"MLABs": 38]
+  {"name":"kernel_unloader","data":["ALMs": 2038.2 ,"FFs": 4471 ,"RAMs": 0 ,"DSPs": 0 ,"MLABs": 38]
   }
 ]}}

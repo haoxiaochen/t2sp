@@ -34,7 +34,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":165
+                    , "line":169
                   }
                 ]
               ]
@@ -42,7 +42,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"8"
@@ -73,7 +73,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":231
+                    , "line":235
                   }
                 ]
               ]
@@ -81,7 +81,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_DB_0_ibuffer"
@@ -113,7 +113,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":254
+                    , "line":258
                   }
                 ]
               ]
@@ -121,7 +121,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_DB_0_ibuffer"
@@ -153,7 +153,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":231
+                    , "line":235
                   }
                 ]
               ]
@@ -161,7 +161,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_DB_0_ibuffer"
@@ -193,7 +193,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":254
+                    , "line":258
                   }
                 ]
               ]
@@ -201,7 +201,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_DB_0_ibuffer"
@@ -233,7 +233,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":231
+                    , "line":235
                   }
                 ]
               ]
@@ -241,7 +241,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_DB_0_ibuffer"
@@ -273,7 +273,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":254
+                    , "line":258
                   }
                 ]
               ]
@@ -281,7 +281,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_DB_0_ibuffer"
@@ -313,7 +313,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":231
+                    , "line":235
                   }
                 ]
               ]
@@ -321,7 +321,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_DB_0_ibuffer"
@@ -353,7 +353,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":254
+                    , "line":258
                   }
                 ]
               ]
@@ -361,7 +361,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_DB_0_ibuffer"
@@ -393,7 +393,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":266
+                    , "line":270
                   }
                 ]
               ]
@@ -401,7 +401,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"26"
@@ -432,7 +432,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":156
+                    , "line":160
                   }
                 ]
               ]
@@ -488,7 +488,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":145
+                    , "line":149
                   }
                 ]
               ]
@@ -506,8 +506,8 @@
                   , "Requested size":"65536 bytes"
                   , "Implemented size":"65536 bytes"
                   , "Number of banks":"4"
-                  , "Bank width":"256 bits"
-                  , "Bank depth":"512 words"
+                  , "Bank width":"512 bits"
+                  , "Bank depth":"256 words"
                   , "Total replication":"1"
                   , "Reference":
                   [
@@ -563,7 +563,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":368
+                    , "line":372
                   }
                 ]
               ]
@@ -571,7 +571,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"8"
@@ -602,7 +602,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":434
+                    , "line":438
                   }
                 ]
               ]
@@ -610,7 +610,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_DB_0_ibuffer"
@@ -642,7 +642,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":456
+                    , "line":460
                   }
                 ]
               ]
@@ -650,7 +650,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_DB_0_ibuffer"
@@ -682,7 +682,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":434
+                    , "line":438
                   }
                 ]
               ]
@@ -690,7 +690,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_DB_0_ibuffer"
@@ -722,7 +722,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":456
+                    , "line":460
                   }
                 ]
               ]
@@ -730,7 +730,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_DB_0_ibuffer"
@@ -762,7 +762,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":434
+                    , "line":438
                   }
                 ]
               ]
@@ -770,7 +770,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_DB_0_ibuffer"
@@ -802,7 +802,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":456
+                    , "line":460
                   }
                 ]
               ]
@@ -810,7 +810,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_DB_0_ibuffer"
@@ -842,7 +842,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":434
+                    , "line":438
                   }
                 ]
               ]
@@ -850,7 +850,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_DB_0_ibuffer"
@@ -882,7 +882,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":456
+                    , "line":460
                   }
                 ]
               ]
@@ -890,7 +890,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_DB_0_ibuffer"
@@ -922,7 +922,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":468
+                    , "line":472
                   }
                 ]
               ]
@@ -930,7 +930,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"26"
@@ -961,7 +961,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":359
+                    , "line":363
                   }
                 ]
               ]
@@ -1017,7 +1017,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":348
+                    , "line":352
                   }
                 ]
               ]
@@ -1035,8 +1035,8 @@
                   , "Requested size":"65536 bytes"
                   , "Implemented size":"65536 bytes"
                   , "Number of banks":"4"
-                  , "Bank width":"256 bits"
-                  , "Bank depth":"512 words"
+                  , "Bank width":"512 bits"
+                  , "Bank depth":"256 words"
                   , "Total replication":"1"
                   , "Reference":
                   [
@@ -1157,7 +1157,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":538
+                    , "line":542
                   }
                 ]
               ]
@@ -1165,7 +1165,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"5"
@@ -1196,7 +1196,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":541
+                    , "line":545
                   }
                 ]
               ]
@@ -1204,7 +1204,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"5"
@@ -1235,7 +1235,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":683
+                    , "line":688
                   }
                 ]
               ]
@@ -1246,7 +1246,7 @@
                   , "Width":"256 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
-                  , "Start Cycle":"51"
+                  , "Start Cycle":"62"
                   , "Latency":"0"
                   , "Reference":
                   [
@@ -1274,7 +1274,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":508
+                    , "line":512
                   }
                 ]
               ]
@@ -1296,7 +1296,7 @@
               [
                 {
                   "type":"table"
-                  , "Start Cycle":"51"
+                  , "Start Cycle":"62"
                   , "Latency":"1"
                 }
               ]
@@ -1306,7 +1306,7 @@
           [
             {
               "type":"table"
-              , "Latency":"51"
+              , "Latency":"62"
               , "II":"1"
               , "Subloops":"No"
               , "Pipelined":"Yes"
@@ -1367,7 +1367,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":813
+                    , "line":818
                   }
                 ]
               ]
@@ -1375,7 +1375,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"8"
@@ -1406,7 +1406,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":879
+                    , "line":884
                   }
                 ]
               ]
@@ -1414,7 +1414,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_T_DB_0_ibuffer"
@@ -1446,7 +1446,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":901
+                    , "line":906
                   }
                 ]
               ]
@@ -1454,7 +1454,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_T_DB_0_ibuffer"
@@ -1486,7 +1486,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":879
+                    , "line":884
                   }
                 ]
               ]
@@ -1494,7 +1494,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_T_DB_0_ibuffer"
@@ -1526,7 +1526,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":901
+                    , "line":906
                   }
                 ]
               ]
@@ -1534,7 +1534,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_T_DB_0_ibuffer"
@@ -1566,7 +1566,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":879
+                    , "line":884
                   }
                 ]
               ]
@@ -1574,7 +1574,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_T_DB_0_ibuffer"
@@ -1606,7 +1606,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":901
+                    , "line":906
                   }
                 ]
               ]
@@ -1614,7 +1614,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_T_DB_0_ibuffer"
@@ -1646,7 +1646,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":879
+                    , "line":884
                   }
                 ]
               ]
@@ -1654,7 +1654,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_AFeeder_T_DB_0_ibuffer"
@@ -1686,7 +1686,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":901
+                    , "line":906
                   }
                 ]
               ]
@@ -1694,7 +1694,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_AFeeder_T_DB_0_ibuffer"
@@ -1726,7 +1726,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":913
+                    , "line":918
                   }
                 ]
               ]
@@ -1734,7 +1734,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"26"
@@ -1765,7 +1765,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":804
+                    , "line":809
                   }
                 ]
               ]
@@ -1821,7 +1821,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":793
+                    , "line":798
                   }
                 ]
               ]
@@ -1839,8 +1839,8 @@
                   , "Requested size":"65536 bytes"
                   , "Implemented size":"65536 bytes"
                   , "Number of banks":"4"
-                  , "Bank width":"256 bits"
-                  , "Bank depth":"512 words"
+                  , "Bank width":"512 bits"
+                  , "Bank depth":"256 words"
                   , "Total replication":"1"
                   , "Reference":
                   [
@@ -1896,7 +1896,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1015
+                    , "line":1020
                   }
                 ]
               ]
@@ -1904,7 +1904,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"8"
@@ -1935,7 +1935,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1081
+                    , "line":1086
                   }
                 ]
               ]
@@ -1943,7 +1943,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_T_DB_0_ibuffer"
@@ -1975,7 +1975,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1104
+                    , "line":1109
                   }
                 ]
               ]
@@ -1983,7 +1983,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_T_DB_0_ibuffer"
@@ -2015,7 +2015,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1081
+                    , "line":1086
                   }
                 ]
               ]
@@ -2023,7 +2023,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_T_DB_0_ibuffer"
@@ -2055,7 +2055,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1104
+                    , "line":1109
                   }
                 ]
               ]
@@ -2063,7 +2063,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_T_DB_0_ibuffer"
@@ -2095,7 +2095,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1081
+                    , "line":1086
                   }
                 ]
               ]
@@ -2103,7 +2103,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_T_DB_0_ibuffer"
@@ -2135,7 +2135,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1104
+                    , "line":1109
                   }
                 ]
               ]
@@ -2143,7 +2143,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_T_DB_0_ibuffer"
@@ -2175,7 +2175,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1081
+                    , "line":1086
                   }
                 ]
               ]
@@ -2183,7 +2183,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Stores to":"_BFeeder_T_DB_0_ibuffer"
@@ -2215,7 +2215,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1104
+                    , "line":1109
                   }
                 ]
               ]
@@ -2223,7 +2223,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Pipelined never-stall"
                   , "Stall-free":"Yes"
                   , "Loads from":"_BFeeder_T_DB_0_ibuffer"
@@ -2255,7 +2255,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1116
+                    , "line":1121
                   }
                 ]
               ]
@@ -2263,7 +2263,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"26"
@@ -2294,7 +2294,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1006
+                    , "line":1011
                   }
                 ]
               ]
@@ -2350,7 +2350,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":995
+                    , "line":1000
                   }
                 ]
               ]
@@ -2368,8 +2368,8 @@
                   , "Requested size":"65536 bytes"
                   , "Implemented size":"65536 bytes"
                   , "Number of banks":"4"
-                  , "Bank width":"256 bits"
-                  , "Bank depth":"512 words"
+                  , "Bank width":"512 bits"
+                  , "Bank depth":"256 words"
                   , "Total replication":"1"
                   , "Reference":
                   [
@@ -2490,7 +2490,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1188
+                    , "line":1193
                   }
                 ]
               ]
@@ -2498,7 +2498,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"5"
@@ -2529,7 +2529,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1191
+                    , "line":1196
                   }
                 ]
               ]
@@ -2537,7 +2537,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"1024 bits"
+                  , "Width":"2048 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"5"
@@ -2568,7 +2568,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1333
+                    , "line":1339
                   }
                 ]
               ]
@@ -2579,7 +2579,7 @@
                   , "Width":"256 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
-                  , "Start Cycle":"51"
+                  , "Start Cycle":"62"
                   , "Latency":"0"
                   , "Reference":
                   [
@@ -2607,7 +2607,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1157
+                    , "line":1162
                   }
                 ]
               ]
@@ -2629,7 +2629,7 @@
               [
                 {
                   "type":"table"
-                  , "Start Cycle":"51"
+                  , "Start Cycle":"62"
                   , "Latency":"1"
                 }
               ]
@@ -2639,7 +2639,7 @@
           [
             {
               "type":"table"
-              , "Latency":"51"
+              , "Latency":"62"
               , "II":"1"
               , "Subloops":"No"
               , "Pipelined":"Yes"
@@ -2765,7 +2765,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1389
+                    , "line":1395
                   }
                 ]
               ]
@@ -2804,7 +2804,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1390
+                    , "line":1396
                   }
                 ]
               ]
@@ -2843,7 +2843,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1392
+                    , "line":1398
                   }
                 ]
               ]
@@ -2882,7 +2882,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1383
+                    , "line":1389
                   }
                 ]
               ]
@@ -3075,7 +3075,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":114
+                    , "line":118
                   }
                 ]
               ]
@@ -3083,7 +3083,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Burst-coalesced"
                   , "Stall-free":"No"
                   , "Start Cycle":"7"
@@ -3114,7 +3114,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":124
+                    , "line":128
                   }
                 ]
               ]
@@ -3122,7 +3122,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"136"
@@ -3153,7 +3153,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":92
+                    , "line":96
                   }
                 ]
               ]
@@ -3346,7 +3346,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":317
+                    , "line":321
                   }
                 ]
               ]
@@ -3354,7 +3354,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Burst-coalesced"
                   , "Stall-free":"No"
                   , "Start Cycle":"7"
@@ -3385,7 +3385,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":327
+                    , "line":331
                   }
                 ]
               ]
@@ -3393,7 +3393,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"136"
@@ -3424,7 +3424,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":295
+                    , "line":299
                   }
                 ]
               ]
@@ -3617,7 +3617,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":762
+                    , "line":767
                   }
                 ]
               ]
@@ -3625,7 +3625,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Burst-coalesced"
                   , "Stall-free":"No"
                   , "Start Cycle":"7"
@@ -3656,7 +3656,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":772
+                    , "line":777
                   }
                 ]
               ]
@@ -3664,7 +3664,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"136"
@@ -3695,7 +3695,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":740
+                    , "line":745
                   }
                 ]
               ]
@@ -3793,7 +3793,7 @@
           [
             {
               "type":"table"
-              , "Latency":"8"
+              , "Latency":"9"
               , "II":"1"
               , "Subloops":"Yes"
               , "Pipelined":"Yes"
@@ -3888,7 +3888,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":964
+                    , "line":969
                   }
                 ]
               ]
@@ -3896,7 +3896,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Type":"Burst-coalesced"
                   , "Stall-free":"No"
                   , "Start Cycle":"7"
@@ -3927,7 +3927,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":974
+                    , "line":979
                   }
                 ]
               ]
@@ -3935,7 +3935,7 @@
               [
                 {
                   "type":"table"
-                  , "Width":"256 bits"
+                  , "Width":"512 bits"
                   , "Depth":"256"
                   , "Stall-free":"No"
                   , "Start Cycle":"136"
@@ -3966,7 +3966,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":942
+                    , "line":947
                   }
                 ]
               ]
@@ -4124,7 +4124,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1423
+                    , "line":1429
                   }
                 ]
               ]
@@ -4163,7 +4163,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1426
+                    , "line":1432
                   }
                 ]
               ]
@@ -4202,7 +4202,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":1417
+                    , "line":1423
                   }
                 ]
               ]
@@ -4311,7 +4311,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":785
+            , "line":790
           }
         ]
       ]
@@ -4319,7 +4319,7 @@
       [
         {
           "type":"table"
-          , "Width":"1024 bits"
+          , "Width":"2048 bits"
           , "Depth":"256"
         }
       ]
@@ -4333,7 +4333,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":137
+            , "line":141
           }
         ]
       ]
@@ -4341,7 +4341,7 @@
       [
         {
           "type":"table"
-          , "Width":"1024 bits"
+          , "Width":"2048 bits"
           , "Depth":"256"
         }
       ]
@@ -4355,7 +4355,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":785
+            , "line":790
           }
         ]
       ]
@@ -4363,7 +4363,7 @@
       [
         {
           "type":"table"
-          , "Width":"256 bits"
+          , "Width":"512 bits"
           , "Depth":"256"
         }
       ]
@@ -4377,7 +4377,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":137
+            , "line":141
           }
         ]
       ]
@@ -4385,7 +4385,7 @@
       [
         {
           "type":"table"
-          , "Width":"256 bits"
+          , "Width":"512 bits"
           , "Depth":"256"
         }
       ]
@@ -4399,7 +4399,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":987
+            , "line":992
           }
         ]
       ]
@@ -4407,7 +4407,7 @@
       [
         {
           "type":"table"
-          , "Width":"1024 bits"
+          , "Width":"2048 bits"
           , "Depth":"256"
         }
       ]
@@ -4421,7 +4421,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":340
+            , "line":344
           }
         ]
       ]
@@ -4429,7 +4429,7 @@
       [
         {
           "type":"table"
-          , "Width":"1024 bits"
+          , "Width":"2048 bits"
           , "Depth":"256"
         }
       ]
@@ -4443,7 +4443,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":987
+            , "line":992
           }
         ]
       ]
@@ -4451,7 +4451,7 @@
       [
         {
           "type":"table"
-          , "Width":"256 bits"
+          , "Width":"512 bits"
           , "Depth":"256"
         }
       ]
@@ -4465,7 +4465,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":340
+            , "line":344
           }
         ]
       ]
@@ -4473,7 +4473,7 @@
       [
         {
           "type":"table"
-          , "Width":"256 bits"
+          , "Width":"512 bits"
           , "Depth":"256"
         }
       ]
@@ -4487,7 +4487,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":1371
+            , "line":1377
           }
         ]
       ]
@@ -4509,7 +4509,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":1126
+            , "line":1131
           }
         ]
       ]
@@ -4531,7 +4531,7 @@
         [
           {
             "filename":"a.cl"
-            , "line":478
+            , "line":482
           }
         ]
       ]
@@ -4904,15 +4904,15 @@
       , "to":76
     }
     , {
-      "from":74
-      , "to":77
-    }
-    , {
       "from":72
       , "to":77
     }
     , {
       "from":73
+      , "to":77
+    }
+    , {
+      "from":74
       , "to":77
     }
     , {
@@ -5292,15 +5292,15 @@
       , "to":152
     }
     , {
-      "from":150
-      , "to":153
-    }
-    , {
       "from":148
       , "to":153
     }
     , {
       "from":149
+      , "to":153
+    }
+    , {
+      "from":150
       , "to":153
     }
     , {

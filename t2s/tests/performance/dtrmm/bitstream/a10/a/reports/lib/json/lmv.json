@@ -16,7 +16,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -56,7 +56,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -96,7 +96,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -136,7 +136,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -176,7 +176,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -216,7 +216,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -256,7 +256,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -296,7 +296,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -336,7 +336,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -376,7 +376,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -416,7 +416,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -456,7 +456,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -496,7 +496,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -536,7 +536,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -576,7 +576,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":242
+                , "line":238
               }
             ]
           ]
@@ -616,7 +616,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":265
+                , "line":261
               }
             ]
           ]
@@ -662,7 +662,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":156
+                    , "line":152
                   }
                 ]
               ]
@@ -677,7 +677,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -721,7 +721,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -765,7 +765,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -809,7 +809,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -853,7 +853,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -897,7 +897,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -941,7 +941,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -985,7 +985,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":156
+                        , "line":152
                       }
                     ]
                   ]
@@ -1029,14 +1029,14 @@
                   [
                     {
                       "type":"brief"
-                      , "text":"65536B requested\n65536B implemented"
+                      , "text":"262144B requested\n262144B implemented"
                     }
                   ]
-                  , "Requested size":"65536 bytes"
-                  , "Implemented size":"65536 bytes"
+                  , "Requested size":"262144 bytes"
+                  , "Implemented size":"262144 bytes"
                   , "Number of banks":"8"
                   , "Bank width":"512 bits"
-                  , "Bank depth":"128 words"
+                  , "Bank depth":"512 words"
                   , "Total replication":"1"
                   , "Reference":
                   [
@@ -1074,7 +1074,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":446
+                , "line":441
               }
             ]
           ]
@@ -1114,7 +1114,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":468
+                , "line":463
               }
             ]
           ]
@@ -1154,7 +1154,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":446
+                , "line":441
               }
             ]
           ]
@@ -1194,7 +1194,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":468
+                , "line":463
               }
             ]
           ]
@@ -1234,7 +1234,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":446
+                , "line":441
               }
             ]
           ]
@@ -1274,7 +1274,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":468
+                , "line":463
               }
             ]
           ]
@@ -1314,7 +1314,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":446
+                , "line":441
               }
             ]
           ]
@@ -1354,7 +1354,7 @@
             [
               {
                 "filename":"a.cl"
-                , "line":468
+                , "line":463
               }
             ]
           ]
@@ -1400,7 +1400,7 @@
                 [
                   {
                     "filename":"a.cl"
-                    , "line":360
+                    , "line":355
                   }
                 ]
               ]
@@ -1415,7 +1415,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":360
+                        , "line":355
                       }
                     ]
                   ]
@@ -1459,7 +1459,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":360
+                        , "line":355
                       }
                     ]
                   ]
@@ -1503,7 +1503,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":360
+                        , "line":355
                       }
                     ]
                   ]
@@ -1547,7 +1547,7 @@
                     [
                       {
                         "filename":"a.cl"
-                        , "line":360
+                        , "line":355
                       }
                     ]
                   ]
@@ -1591,14 +1591,14 @@
                   [
                     {
                       "type":"brief"
-                      , "text":"65536B requested\n65536B implemented"
+                      , "text":"262144B requested\n262144B implemented"
                     }
                   ]
-                  , "Requested size":"65536 bytes"
-                  , "Implemented size":"65536 bytes"
+                  , "Requested size":"262144 bytes"
+                  , "Implemented size":"262144 bytes"
                   , "Number of banks":"4"
                   , "Bank width":"512 bits"
-                  , "Bank depth":"256 words"
+                  , "Bank depth":"1024 words"
                   , "Total replication":"1"
                   , "Reference":
                   [

@@ -1,7 +1,7 @@
 {"rows":[
-{"debug":[[{"filename":"/home/u166759/t2sp/t2s/tests/performance/syr2k/a.cl"
-,"line":145}]]
-,"details":["/home/u166759/t2sp/t2s/tests/performance/syr2k/a.cl:145:58: warning: attributes numreadports/numwriteports/numports_readonly_writeonly are deprecated
+{"debug":[[{"filename":"/home/u172305/t2sp/t2s/tests/performance/syr2k/a.cl"
+,"line":149}]]
+,"details":["/home/u172305/t2sp/t2s/tests/performance/syr2k/a.cl:149:58: warning: attributes numreadports/numwriteports/numports_readonly_writeonly are deprecated
 , use max_replicates attribute instead"]
 ,"name":"attributes numreadports/numwriteports/numports_readonly_writeonly are deprecated
 , use max_replicates attribute instead"}

@@ -1,0 +1,3 @@
+{"nodes":[
+{"debug":[[{"filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl","line":"139"}]],"details":[{"text":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl:139:58: warning: unknown attribute 'numwriteports' ignored [-Wunknown-attributes]"}],"name":"unknown attribute 'numwriteports' ignored [-Wunknown-attributes]"}
+]}

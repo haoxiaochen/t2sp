@@ -4,5 +4,5 @@
 {"data":["19.4.0 Build 64"],"name":"AOC Version"},
 {"data":["19.2.0 Build 57 Pro"],"name":"Quartus Version"},
 {"data":["aoc -v -report -g -profile -fpc -fp-relaxed -no-interleaving=default ./a.cl -o ./a.aocx -board=pac_a10"],"name":"Command"},
-{"data":["Fri Sep 30 00:16:50 2022"],"name":"Reports Generated At"}
+{"data":["Fri Oct  7 05:43:07 2022"],"name":"Reports Generated At"}
 ]}

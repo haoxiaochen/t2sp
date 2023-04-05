@@ -18,9 +18,9 @@
         #define II         16 // 4
         #define KK         8//2 // 4
     #elif S10
-        #define KKK         16
-        #define JJJ         8
-        #define III         16
+        #define KKK         8
+        #define JJJ         4
+        #define III         8
         #define JJ          32
         #define II          16
         #define KK          16
@@ -28,9 +28,9 @@
         #define KKK         8
         #define JJJ         4
         #define III         8 
-        #define JJ          16
-        #define II          8
-        #define KK          8
+        #define KK          16
+        #define JJ          32
+        #define II          16
     #endif
 #endif
 

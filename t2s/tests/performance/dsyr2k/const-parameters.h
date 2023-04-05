@@ -43,10 +43,10 @@
         #define II          16
         #define KK          8
     #else   // For A10
-        #define KKK         4
+        #define KKK         8
         #define JJJ         4
         #define III         4
-        #define KK          16
+        #define KK          8
         #define JJ          16
         #define II          16
     #endif

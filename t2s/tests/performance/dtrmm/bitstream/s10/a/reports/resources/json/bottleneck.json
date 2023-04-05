@@ -1,0 +1,3268 @@
+{
+  "bottlenecks":
+  [
+    {
+      "name":"Global variable"
+      , "id":3470
+      , "src":"480"
+      , "dst":"505"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_ALoader.B2"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"76"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"76"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":480
+          , "start":"4.00"
+          , "parent":"kernel_ALoader.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":76
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":481
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":76
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":504
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":76
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":505
+          , "end":"4.00"
+          , "parent":"kernel_ALoader.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":76
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":480
+          , "to":481
+        }
+        , {
+          "from":481
+          , "to":504
+        }
+        , {
+          "from":504
+          , "to":505
+        }
+        , {
+          "from":480
+          , "to":505
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3471
+      , "src":"516"
+      , "dst":"525"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_ALoader.B4"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"79"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"79"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":516
+          , "start":"4.00"
+          , "parent":"kernel_ALoader.B4"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":79
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":517
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":79
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":524
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":79
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":525
+          , "end":"4.00"
+          , "parent":"kernel_ALoader.B4"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":79
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":516
+          , "to":517
+        }
+        , {
+          "from":517
+          , "to":524
+        }
+        , {
+          "from":524
+          , "to":525
+        }
+        , {
+          "from":516
+          , "to":525
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Feedback"
+      , "id":3472
+      , "src":"554"
+      , "dst":"563"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_ALoader.B5"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Loop: ":"kernel_ALoader.B5"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"83"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"83"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Feedback"
+          , "id":554
+          , "start":"4.00"
+          , "parent":"kernel_ALoader.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":76
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":562
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":83
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":563
+          , "end":"4.00"
+          , "parent":"kernel_ALoader.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":83
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":554
+          , "to":562
+        }
+        , {
+          "from":562
+          , "to":563
+        }
+        , {
+          "from":554
+          , "to":563
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3473
+      , "src":"579"
+      , "dst":"614"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_ALoader.B7"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"86"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"88"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"88"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"90"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"86"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"88"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"88"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"88"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"88"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"90"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":579
+          , "start":"4.00"
+          , "parent":"kernel_ALoader.B7"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":86
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":591
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":90
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":593
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":594
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":596
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":597
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":599
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":86
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":601
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":602
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":604
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":90
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":606
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":86
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":614
+          , "end":"4.00"
+          , "parent":"kernel_ALoader.B7"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":86
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":594
+          , "to":596
+        }
+        , {
+          "from":593
+          , "to":597
+        }
+        , {
+          "from":579
+          , "to":599
+        }
+        , {
+          "from":596
+          , "to":601
+        }
+        , {
+          "from":597
+          , "to":602
+        }
+        , {
+          "from":591
+          , "to":604
+        }
+        , {
+          "from":579
+          , "to":606
+        }
+        , {
+          "from":599
+          , "to":606
+        }
+        , {
+          "from":606
+          , "to":614
+        }
+        , {
+          "from":579
+          , "to":614
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"'_124,_AFeeder_cycle_temp'"
+      , "id":3474
+      , "src":"645"
+      , "dst":"650"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_AFeeder.B1"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"'_124,_AFeeder_cycle_temp'"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"265"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"265"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"'_124,_AFeeder_cycle_temp'"
+          , "id":645
+          , "start":"12.00"
+          , "parent":"kernel_AFeeder.B1"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":138
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":649
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":265
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":650
+          , "end":"12.00"
+          , "parent":"kernel_AFeeder.B1"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":265
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":645
+          , "to":649
+        }
+        , {
+          "from":649
+          , "to":650
+        }
+        , {
+          "from":645
+          , "to":650
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"'_BLoader_s0_i,_BLoader_s0_k,_129'"
+      , "id":3475
+      , "src":"1073"
+      , "dst":"1097"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_BLoader.B2"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"'_BLoader_s0_i,_BLoader_s0_k,_129'"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"279"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"279"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"279"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"'_BLoader_s0_i,_BLoader_s0_k,_129'"
+          , "id":1073
+          , "start":"4.00"
+          , "parent":"kernel_BLoader.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":279
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1074
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":279
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1096
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":279
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1097
+          , "end":"4.00"
+          , "parent":"kernel_BLoader.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":279
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1073
+          , "to":1074
+        }
+        , {
+          "from":1074
+          , "to":1096
+        }
+        , {
+          "from":1096
+          , "to":1097
+        }
+        , {
+          "from":1073
+          , "to":1097
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3476
+      , "src":"1108"
+      , "dst":"1120"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_BLoader.B4"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"282"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"282"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":1108
+          , "start":"4.00"
+          , "parent":"kernel_BLoader.B4"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":282
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1109
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":282
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1119
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":282
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1120
+          , "end":"4.00"
+          , "parent":"kernel_BLoader.B4"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":282
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1108
+          , "to":1109
+        }
+        , {
+          "from":1109
+          , "to":1119
+        }
+        , {
+          "from":1119
+          , "to":1120
+        }
+        , {
+          "from":1108
+          , "to":1120
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3477
+      , "src":"1147"
+      , "dst":"1156"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_BLoader.B5"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"286"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":1147
+          , "start":"4.00"
+          , "parent":"kernel_BLoader.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":279
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1155
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":286
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1156
+          , "end":"4.00"
+          , "parent":"kernel_BLoader.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":286
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1147
+          , "to":1155
+        }
+        , {
+          "from":1155
+          , "to":1156
+        }
+        , {
+          "from":1147
+          , "to":1156
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"'_BLoader_s0_kk'"
+      , "id":3478
+      , "src":"1170"
+      , "dst":"1180"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_BLoader.B7"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"'_BLoader_s0_kk'"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"288"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"288"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"'_BLoader_s0_kk'"
+          , "id":1170
+          , "start":"5.00"
+          , "parent":"kernel_BLoader.B7"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":288
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1179
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":288
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1180
+          , "end":"5.00"
+          , "parent":"kernel_BLoader.B7"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":288
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1170
+          , "to":1179
+        }
+        , {
+          "from":1179
+          , "to":1180
+        }
+        , {
+          "from":1170
+          , "to":1180
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3479
+      , "src":"1204"
+      , "dst":"1214"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_BLoader.B9"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"290"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":1204
+          , "start":"5.00"
+          , "parent":"kernel_BLoader.B9"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":290
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1213
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":290
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1214
+          , "end":"5.00"
+          , "parent":"kernel_BLoader.B9"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":290
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1204
+          , "to":1213
+        }
+        , {
+          "from":1213
+          , "to":1214
+        }
+        , {
+          "from":1204
+          , "to":1214
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3480
+      , "src":"1246"
+      , "dst":"1259"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_BLoader.B12"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"292"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":1246
+          , "start":"5.00"
+          , "parent":"kernel_BLoader.B12"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":292
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1253
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":292
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1259
+          , "end":"5.00"
+          , "parent":"kernel_BLoader.B12"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":292
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1246
+          , "to":1253
+        }
+        , {
+          "from":1253
+          , "to":1259
+        }
+        , {
+          "from":1246
+          , "to":1259
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"'_243,_BFeeder_cycle_temp'"
+      , "id":3481
+      , "src":"1300"
+      , "dst":"1305"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_BFeeder.B1"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"'_243,_BFeeder_cycle_temp'"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"466"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"466"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"'_243,_BFeeder_cycle_temp'"
+          , "id":1300
+          , "start":"12.00"
+          , "parent":"kernel_BFeeder.B1"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":340
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1304
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":466
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1305
+          , "end":"12.00"
+          , "parent":"kernel_BFeeder.B1"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":466
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1300
+          , "to":1304
+        }
+        , {
+          "from":1304
+          , "to":1305
+        }
+        , {
+          "from":1300
+          , "to":1305
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"'_X_s0_i,_X_s0_k,_248'"
+      , "id":3482
+      , "src":"1539"
+      , "dst":"1568"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_Out.B2"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"'_X_s0_i,_X_s0_k,_248'"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"493"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"493"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"476"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"'_X_s0_i,_X_s0_k,_248'"
+          , "id":1539
+          , "start":"4.00"
+          , "parent":"kernel_Out.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":476
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1540
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":476
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1567
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":493
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1568
+          , "end":"4.00"
+          , "parent":"kernel_Out.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":493
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1539
+          , "to":1540
+        }
+        , {
+          "from":1540
+          , "to":1567
+        }
+        , {
+          "from":1567
+          , "to":1568
+        }
+        , {
+          "from":1539
+          , "to":1568
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"'_X_s0_j'"
+      , "id":3483
+      , "src":"1579"
+      , "dst":"1586"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_Out.B4"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"'_X_s0_j'"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"496"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"496"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"476"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"'_X_s0_j'"
+          , "id":1579
+          , "start":"4.00"
+          , "parent":"kernel_Out.B4"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":476
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1585
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":496
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1580
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":476
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1586
+          , "end":"4.00"
+          , "parent":"kernel_Out.B4"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":496
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1579
+          , "to":1580
+        }
+        , {
+          "from":1585
+          , "to":1586
+        }
+        , {
+          "from":1579
+          , "to":1586
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Feedback"
+      , "id":3484
+      , "src":"1613"
+      , "dst":"1622"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_Out.B5"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Loop: ":"kernel_Out.B5"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"500"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"432.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"500"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"500"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"503"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Feedback"
+          , "id":1613
+          , "start":"1.00"
+          , "parent":"kernel_Out.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":476
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1626
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":500
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1624
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":503
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1621
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":500
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1622
+          , "end":"1.00"
+          , "parent":"kernel_Out.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":500
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1613
+          , "to":1621
+        }
+        , {
+          "from":1621
+          , "to":1622
+        }
+        , {
+          "from":1613
+          , "to":1622
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Feedback"
+      , "id":3485
+      , "src":"1650"
+      , "dst":"1698"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_Out.B7"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Loop: ":"kernel_Out.B7"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"503"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"388.8"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"503"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"505"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"505"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"507"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"507"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"711"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"487"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"487"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"487"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"487"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"487"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"503"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"505"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"505"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"507"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Feedback"
+          , "id":1650
+          , "start":"3.00"
+          , "parent":"kernel_Out.B7"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":503
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1679
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":505
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1673
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":507
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1688
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":503
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1684
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":505
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":1686
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":507
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1681
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":503
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":1676
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":505
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":2900
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":711
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":2902
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":507
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":2903
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":487
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":2904
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":487
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":2906
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":505
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":2907
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":487
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":2908
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":487
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":2909
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":487
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":1698
+          , "end":"3.00"
+          , "parent":"kernel_Out.B7"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":503
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":1650
+          , "to":1688
+        }
+        , {
+          "from":1679
+          , "to":1684
+        }
+        , {
+          "from":1673
+          , "to":1686
+        }
+        , {
+          "from":1650
+          , "to":1681
+        }
+        , {
+          "from":2900
+          , "to":2903
+        }
+        , {
+          "from":2902
+          , "to":2903
+        }
+        , {
+          "from":2902
+          , "to":2904
+        }
+        , {
+          "from":2904
+          , "to":2907
+        }
+        , {
+          "from":2906
+          , "to":2907
+        }
+        , {
+          "from":2903
+          , "to":2908
+        }
+        , {
+          "from":2906
+          , "to":2908
+        }
+        , {
+          "from":2906
+          , "to":2909
+        }
+        , {
+          "from":1688
+          , "to":1698
+        }
+        , {
+          "from":1650
+          , "to":1698
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3486
+      , "src":"3098"
+      , "dst":"3115"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_unloader.B2"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"730"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"727"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":3098
+          , "start":"4.00"
+          , "parent":"kernel_unloader.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":727
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3099
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":727
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":3114
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":730
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":3115
+          , "end":"4.00"
+          , "parent":"kernel_unloader.B2"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":730
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":3098
+          , "to":3099
+        }
+        , {
+          "from":3099
+          , "to":3114
+        }
+        , {
+          "from":3114
+          , "to":3115
+        }
+        , {
+          "from":3098
+          , "to":3115
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3487
+      , "src":"3122"
+      , "dst":"3128"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_unloader.B3"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"733"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":3122
+          , "start":"4.00"
+          , "parent":"kernel_unloader.B3"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":727
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":3127
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":733
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":3128
+          , "end":"4.00"
+          , "parent":"kernel_unloader.B3"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":733
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":3122
+          , "to":3127
+        }
+        , {
+          "from":3127
+          , "to":3128
+        }
+        , {
+          "from":3122
+          , "to":3128
+          , "reverse":1
+        }
+      ]
+    }
+    , {
+      "name":"Global variable"
+      , "id":3488
+      , "src":"3138"
+      , "dst":"3149"
+      , "type":"fMAX/II"
+      , "brief":"Data dependency"
+      , "loop":"kernel_unloader.B5"
+      , "details":
+      [
+        {
+          "type":"table"
+          , "Variable on critical loop carried feedback path: ":"Global variable"
+          , "Declared at: ":
+          [
+            {
+              "type":"text"
+              , "text":"%L"
+              , "links":
+              [
+                {
+                  "filename":"Unknown location"
+                  , "line":"0"
+                }
+              ]
+            }
+          ]
+          , "Dependency: ":"Data dependency"
+          , "Estimated fmax reduced to: ":"480.0"
+          , "Loop feedback path that raised II and/or lowered fMAX: ":
+          [
+            {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"738"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"738"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"740"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"+(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Select(%L)"
+              , "links":
+              [
+                {
+                  "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                  , "line":"747"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+      , "nodes":
+      [
+        {
+          "name":"Global variable"
+          , "id":3138
+          , "start":"5.00"
+          , "parent":"kernel_unloader.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3141
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3144
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3168
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3167
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3166
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":3165
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":738
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":3139
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":738
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3163
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Select"
+          , "id":3162
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":3161
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":740
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"+"
+          , "id":3159
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+        , {
+          "name":"Feedback"
+          , "id":3149
+          , "end":"5.00"
+          , "parent":"kernel_unloader.B5"
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u172305/t2sp/t2s/tests/performance/trmm/a.cl"
+                , "line":747
+              }
+            ]
+          ]
+          , "type":"inst"
+        }
+      ]
+      , "links":
+      [
+        {
+          "from":3138
+          , "to":3141
+        }
+        , {
+          "from":3141
+          , "to":3144
+        }
+        , {
+          "from":3138
+          , "to":3139
+        }
+        , {
+          "from":3144
+          , "to":3149
+        }
+        , {
+          "from":3138
+          , "to":3149
+          , "reverse":1
+        }
+      ]
+    }
+  ]
+}
