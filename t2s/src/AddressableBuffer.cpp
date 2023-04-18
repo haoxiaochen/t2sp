@@ -1402,6 +1402,10 @@ public:
             if (loops.size() == 1) {
                 // The outermost loop. Increase its extent by 1
                 extent += 1;
+            } else if (loops.size() == 2) {
+                Expr original_outer_extent = extents[0];
+                Expr outer_loop_var = Variable::make(Int(32), loops[0]);
+                extent = extent + outer_loop_var / original_outer_extent;
             }
             loops.pop_back();
             mins.pop_back();
