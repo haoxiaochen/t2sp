@@ -106,6 +106,8 @@ class DataRelaying : public IRMutator {
     string flattened_loop;
     int loop_level = 0;
     bool inside_pipe = false;
+    string outermost_loop;  // The outermost loop name
+    Expr original_outer_extent;
     struct {
         string name;
         string original_channel_name;
@@ -418,6 +420,8 @@ public:
         // Record the outermost loop's extent to be used for guarding read_channel
         if (inside_pipe && loop_level == 0) {
             pipe_alloc.valid_cond = Variable::make(Int(32), op->name) < op->extent;
+            outermost_loop = op->name;
+            original_outer_extent = op->extent;
         }
         loop_level += 1;
         Stmt body = mutate(op->body);
@@ -428,6 +432,11 @@ public:
             body = For::make(op->name, op->min, op->extent + 1,
                              op->for_type, op->device_api, body);
             return make_flag_init(body);
+        }
+        if (inside_pipe && !is_const(op->min) && op->min.as<Variable>() && op->min.as<Variable>()->name == outermost_loop) {
+            Expr outer_loop_var = Variable::make(Int(32), outermost_loop);
+            return For::make(op->name, op->min, op->extent + outer_loop_var / original_outer_extent,
+                             op->for_type, op->device_api, body);
         }
         // Find the first zero dims under which data relaying operations are inserted
         vector<int> zero_dims = get_zero_dims();
