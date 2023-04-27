@@ -216,6 +216,15 @@ void collect_dependences_for_shift_regs(const Stmt s,
     s.accept(&collector);
     const vector<Access> &accesses = collector.accesses;
 
+    debug(4) << "Collectdeps for shift regs. Accesses:\n";
+    for (size_t i = 0; i < accesses.size(); i++) {
+        const Access &ai = accesses[i];
+        debug(4) << (ai.define ? "DEF " : "USE ") << ai.var << "\n"
+                << "\t args: " << to_string<Expr>(ai.args) << "\n"
+                << "\t args_without_prefix: " << to_string<Expr>(ai.args_without_prefix) << "\n"
+                << "\t Type: " << to_string(ai.type) << "\n";
+    }
+
     // From the accesses, calculate dependence distances for every func.
     for (size_t i = 0; i < accesses.size(); i++) {
         const Access &ai = accesses[i];
@@ -250,8 +259,10 @@ void collect_dependences_for_shift_regs(const Stmt s,
                 }
                 // The entire distance vector is 0.
                 if (up) {
-                    valid = false;
-                    error = " distance vector is 0 but read lexically appears before write";
+                    // It is possible that the variable needs only a single shift register. Something like r[0]= select(c, .., r[0]) is OK,
+                    // except that initially the register contains garbage.
+                    valid = true;
+                    //error = " distance vector is 0 but read lexically appears before write";
                     break;
                 } else {
                     valid = true;

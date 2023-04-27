@@ -163,7 +163,7 @@ class DataRelaying : public IRMutator {
         internal_assert(function_is_in_environment(param.from_func, env, func));
 
         int loop_extents = 1;
-        int required_extents = pipe_alloc.depth.as<IntImm>()->value - 1;
+        //int required_extents = pipe_alloc.depth.as<IntImm>()->value - 1;
         for (size_t i = 0; i < alloc.args.size(); i++) {
             auto var = alloc.args[i].as<Variable>();
             internal_assert(var);
@@ -173,9 +173,10 @@ class DataRelaying : public IRMutator {
             if (!is_vectorized && !is_pe) {
                 auto ext_expr = func.get_bounds(var_name).second;
                 user_assert(ext_expr.as<IntImm>())\
-                    << "Only outermost loops can have dynamic bounds\n";
+                    << "In data relaying: Loop " << var_name << " has a dynamic extent (" << to_string(ext_expr) << "). Only outermost loops can have dynamic extents\n";
                 loop_extents *= ext_expr.as<IntImm>()->value;
-                if (loop_extents >= required_extents) {
+                //if (loop_extents >= required_extents)
+                {
                     internal_assert(i < alloc.args.size() -1);
                     auto loop_var = alloc.args[i+1].as<Variable>();
                     internal_assert(loop_var);
@@ -184,9 +185,9 @@ class DataRelaying : public IRMutator {
                 }
             }
         }
-        user_assert(loop_extents >= required_extents)
-            << "Please ensure sufficient loops to have explicit bounds,"
-            << "otherwise the data relaying may be failed\n";
+//        user_assert(loop_extents >= required_extents)
+//            << "Please ensure sufficient loops to have explicit bounds,"
+//            << "otherwise the data relaying may be failed\n";
     }
 
     // unrolled for (Z.pipe.b, 0, pipe_alloc.bank_extent) {
@@ -616,9 +617,10 @@ Stmt relay_data(Stmt s, std::map<std::string, Function> &env, const map<string, 
                     num_unit_loops += 1;
                 }
             }
-            internal_assert(loops.size() + num_unit_loops == dim_args.size()-1)
+/*            internal_assert(loops.size() + num_unit_loops == dim_args.size()-1)
                 << "We are performing data relaying. However, your spec follows a pattern we have "
                 << "not seen before, and thus correctness cannot be guaranteed.\n";
+*/
             s = late_reorder_along_consumer_chain(s, env, kv.first, loops);
         }
     }

@@ -60,6 +60,7 @@ fi
 
 export T2S_PATH="$( cd "$(dirname $(realpath "$BASH_SOURCE") )" >/dev/null 2>&1 ; pwd -P )" # The path to this script
 TOOLS_PATH=$T2S_PATH/install
+TOOLS_PATH=/home/u89062/a10-intelLabs-t2sp/install
 
 # Modify these 3 paths if you installed your own versions of gcc or llvm-clang
 # gcc should be located at $GCC_PATH/bin

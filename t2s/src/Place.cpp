@@ -424,9 +424,9 @@ private:
             Region bounds = op->bounds;
             bounds.clear();
             for (size_t i = 0; i < op->bounds.size(); i++) {
-                if (is_one(op->bounds[i].extent)) {
+                /*if (is_one(op->bounds[i].extent)) {
                     remove_dim_map[op->name].push_back(i);
-                } else {
+                } else*/ {
                     bounds.emplace_back(op->bounds[i].min, op->bounds[i].extent);
                 }
             }
@@ -964,7 +964,7 @@ public:
                     if (it != space_loops.end()) {
                         Expr diff = simplify(read_node->args[i] - op->args[i]);
                         if (is_const(diff) && !is_zero(diff)) {
-                            // Find a dimension where the value is propogated
+                            // Found a dimension where the value is propogated
                             write_args[i] = 0;
                             internal_assert(shift_dims.find(write_name->value) == shift_dims.end());
                             shift_dims[write_name->value] = i;

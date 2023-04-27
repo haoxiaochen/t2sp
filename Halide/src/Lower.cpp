@@ -264,9 +264,9 @@ Module lower(const vector<Function> &output_funcs,
     s = replace_references_with_shift_registers(s, env, reg_size_map);
     debug(2) << "Lowering after replacing references with channels and shift registers:\n" << s << "\n\n";
 
-    debug(1) << "Simplifying IfThenElse without keeping unit loops...\n";
-    s = no_if_simplify(s, false);
-    debug(2) << "Lowering after simplifying IfThenElse without keeping unit loops:\n" << s << "\n\n";
+//    debug(1) << "Simplifying IfThenElse without keeping unit loops...\n";
+//    s = no_if_simplify(s, false);
+//    debug(2) << "Lowering after simplifying IfThenElse without keeping unit loops:\n" << s << "\n\n";
 
     if (t.has_feature(Target::IntelFPGA)) {
         debug(1) << "Minimizing shift registers...\n";
