@@ -1,0 +1,6 @@
+{"rows":[
+{"debug":[[{"filename":"/home/u166759/t2sp/t2s/tests/lasa/hemm/hemm.cl"
+,"line":91}]]
+,"details":["/home/u166759/t2sp/t2s/tests/lasa/hemm/hemm.cl:91:17: warning: '&&' within '||'"]
+,"name":"'&&' within '||'"}
+]}

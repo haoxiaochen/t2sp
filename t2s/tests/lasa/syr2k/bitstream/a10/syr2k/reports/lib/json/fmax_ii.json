@@ -1,0 +1,2094 @@
+{
+  "basicblocks":
+  {
+    "kernel_aFeeder.B0":
+    {
+      "name":"kernel_aFeeder.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aFeeder.B1":
+    {
+      "name":"kernel_aFeeder.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"171"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bFeeder.B0":
+    {
+      "name":"kernel_bFeeder.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bFeeder.B1":
+    {
+      "name":"kernel_bFeeder.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"381"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out.B0":
+    {
+      "name":"kernel_Out.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Out.B1":
+    {
+      "name":"kernel_Out.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Out.B2":
+    {
+      "name":"kernel_Out.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"523"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out.B3":
+    {
+      "name":"kernel_Out.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"527"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out.B4":
+    {
+      "name":"kernel_Out.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Out.B5":
+    {
+      "name":"kernel_Out.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":50
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"529"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out.B6":
+    {
+      "name":"kernel_Out.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aFeeder_T.B0":
+    {
+      "name":"kernel_aFeeder_T.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aFeeder_T.B1":
+    {
+      "name":"kernel_aFeeder_T.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"837"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bFeeder_T.B0":
+    {
+      "name":"kernel_bFeeder_T.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bFeeder_T.B1":
+    {
+      "name":"kernel_bFeeder_T.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1046"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out_T.B0":
+    {
+      "name":"kernel_Out_T.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Out_T.B1":
+    {
+      "name":"kernel_Out_T.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Out_T.B2":
+    {
+      "name":"kernel_Out_T.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1190"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out_T.B3":
+    {
+      "name":"kernel_Out_T.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1194"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out_T.B4":
+    {
+      "name":"kernel_Out_T.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Out_T.B5":
+    {
+      "name":"kernel_Out_T.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":50
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1196"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Out_T.B6":
+    {
+      "name":"kernel_Out_T.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Add.B0":
+    {
+      "name":"kernel_Add.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Add.B1":
+    {
+      "name":"kernel_Add.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Add.B2":
+    {
+      "name":"kernel_Add.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":6
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1419"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Add.B3":
+    {
+      "name":"kernel_Add.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1423"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_Add.B4":
+    {
+      "name":"kernel_Add.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Add.B5":
+    {
+      "name":"kernel_Add.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_Add.B6":
+    {
+      "name":"kernel_Add.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":12
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1425"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader.B0":
+    {
+      "name":"kernel_aLoader.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader.B1":
+    {
+      "name":"kernel_aLoader.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader.B2":
+    {
+      "name":"kernel_aLoader.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"92"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader.B3":
+    {
+      "name":"kernel_aLoader.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader.B4":
+    {
+      "name":"kernel_aLoader.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"99"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader.B5":
+    {
+      "name":"kernel_aLoader.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"102"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader.B6":
+    {
+      "name":"kernel_aLoader.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader.B7":
+    {
+      "name":"kernel_aLoader.B7"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader.B8":
+    {
+      "name":"kernel_aLoader.B8"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":185
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":4
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"104"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader.B0":
+    {
+      "name":"kernel_bLoader.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader.B1":
+    {
+      "name":"kernel_bLoader.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader.B2":
+    {
+      "name":"kernel_bLoader.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"302"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader.B3":
+    {
+      "name":"kernel_bLoader.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader.B4":
+    {
+      "name":"kernel_bLoader.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":8
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"309"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader.B5":
+    {
+      "name":"kernel_bLoader.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"312"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader.B6":
+    {
+      "name":"kernel_bLoader.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader.B7":
+    {
+      "name":"kernel_bLoader.B7"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader.B8":
+    {
+      "name":"kernel_bLoader.B8"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":185
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":4
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"314"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader_T.B0":
+    {
+      "name":"kernel_aLoader_T.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader_T.B1":
+    {
+      "name":"kernel_aLoader_T.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader_T.B2":
+    {
+      "name":"kernel_aLoader_T.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"758"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader_T.B3":
+    {
+      "name":"kernel_aLoader_T.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader_T.B4":
+    {
+      "name":"kernel_aLoader_T.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":8
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"765"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader_T.B5":
+    {
+      "name":"kernel_aLoader_T.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"768"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_aLoader_T.B6":
+    {
+      "name":"kernel_aLoader_T.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader_T.B7":
+    {
+      "name":"kernel_aLoader_T.B7"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_aLoader_T.B8":
+    {
+      "name":"kernel_aLoader_T.B8"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":185
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":4
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"770"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader_T.B0":
+    {
+      "name":"kernel_bLoader_T.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader_T.B1":
+    {
+      "name":"kernel_bLoader_T.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader_T.B2":
+    {
+      "name":"kernel_bLoader_T.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":34
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"967"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader_T.B3":
+    {
+      "name":"kernel_bLoader_T.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader_T.B4":
+    {
+      "name":"kernel_bLoader_T.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"974"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader_T.B5":
+    {
+      "name":"kernel_bLoader_T.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"977"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_bLoader_T.B6":
+    {
+      "name":"kernel_bLoader_T.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader_T.B7":
+    {
+      "name":"kernel_bLoader_T.B7"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_bLoader_T.B8":
+    {
+      "name":"kernel_bLoader_T.B8"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":185
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":4
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"979"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_unloader.B0":
+    {
+      "name":"kernel_unloader.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":2
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_unloader.B1":
+    {
+      "name":"kernel_unloader.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_unloader.B2":
+    {
+      "name":"kernel_unloader.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":6
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1446"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_unloader.B3":
+    {
+      "name":"kernel_unloader.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":5
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1450"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_unloader.B4":
+    {
+      "name":"kernel_unloader.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_unloader.B5":
+    {
+      "name":"kernel_unloader.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_unloader.B6":
+    {
+      "name":"kernel_unloader.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":12
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"syr2k.cl"
+                , "line":"1452"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "Intel_Internal_Collect_Autorun_Profiling.B0":
+    {
+      "name":"Intel_Internal_Collect_Autorun_Profiling.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"240.0"
+      , "achieved_ii":1
+      , "latency":1
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+  }
+  , "functions":
+  {
+    "kernel_aFeeder":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":152
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_aFeeder__no_loop":
+        [
+          "kernel_aFeeder.B0"
+        ]
+        , "kernel_aFeeder.B1":
+        [
+          "kernel_aFeeder.B1"
+        ]
+      }
+    }
+    , "kernel_bFeeder":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":362
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_bFeeder__no_loop":
+        [
+          "kernel_bFeeder.B0"
+        ]
+        , "kernel_bFeeder.B1":
+        [
+          "kernel_bFeeder.B1"
+        ]
+      }
+    }
+    , "kernel_Out":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":500
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_Out__no_loop":
+        [
+          "kernel_Out.B0"
+          , "kernel_Out.B1"
+        ]
+        , "kernel_Out.B2":
+        [
+          "kernel_Out.B2"
+          , "kernel_Out.B3"
+          , "kernel_Out.B4"
+        ]
+        , "kernel_Out.B3":
+        [
+          "kernel_Out.B3"
+          , "kernel_Out.B5"
+          , "kernel_Out.B6"
+        ]
+        , "kernel_Out.B5":
+        [
+          "kernel_Out.B5"
+        ]
+      }
+    }
+    , "kernel_aFeeder_T":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":818
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_aFeeder_T__no_loop":
+        [
+          "kernel_aFeeder_T.B0"
+        ]
+        , "kernel_aFeeder_T.B1":
+        [
+          "kernel_aFeeder_T.B1"
+        ]
+      }
+    }
+    , "kernel_bFeeder_T":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":1027
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_bFeeder_T__no_loop":
+        [
+          "kernel_bFeeder_T.B0"
+        ]
+        , "kernel_bFeeder_T.B1":
+        [
+          "kernel_bFeeder_T.B1"
+        ]
+      }
+    }
+    , "kernel_Out_T":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":1166
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_Out_T__no_loop":
+        [
+          "kernel_Out_T.B0"
+          , "kernel_Out_T.B1"
+        ]
+        , "kernel_Out_T.B2":
+        [
+          "kernel_Out_T.B2"
+          , "kernel_Out_T.B3"
+          , "kernel_Out_T.B4"
+        ]
+        , "kernel_Out_T.B3":
+        [
+          "kernel_Out_T.B3"
+          , "kernel_Out_T.B5"
+          , "kernel_Out_T.B6"
+        ]
+        , "kernel_Out_T.B5":
+        [
+          "kernel_Out_T.B5"
+        ]
+      }
+    }
+    , "kernel_Add":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":1414
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_Add__no_loop":
+        [
+          "kernel_Add.B0"
+          , "kernel_Add.B1"
+        ]
+        , "kernel_Add.B2":
+        [
+          "kernel_Add.B2"
+          , "kernel_Add.B3"
+          , "kernel_Add.B4"
+        ]
+        , "kernel_Add.B3":
+        [
+          "kernel_Add.B3"
+          , "kernel_Add.B6"
+          , "kernel_Add.B5"
+        ]
+        , "kernel_Add.B6":
+        [
+          "kernel_Add.B6"
+        ]
+      }
+    }
+    , "kernel_aLoader":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":82
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_aLoader__no_loop":
+        [
+          "kernel_aLoader.B0"
+          , "kernel_aLoader.B1"
+        ]
+        , "kernel_aLoader.B2":
+        [
+          "kernel_aLoader.B2"
+          , "kernel_aLoader.B4"
+          , "kernel_aLoader.B3"
+        ]
+        , "kernel_aLoader.B4":
+        [
+          "kernel_aLoader.B4"
+          , "kernel_aLoader.B5"
+          , "kernel_aLoader.B6"
+        ]
+        , "kernel_aLoader.B5":
+        [
+          "kernel_aLoader.B5"
+          , "kernel_aLoader.B8"
+          , "kernel_aLoader.B7"
+        ]
+        , "kernel_aLoader.B8":
+        [
+          "kernel_aLoader.B8"
+        ]
+      }
+    }
+    , "kernel_bLoader":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":292
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_bLoader__no_loop":
+        [
+          "kernel_bLoader.B0"
+          , "kernel_bLoader.B1"
+        ]
+        , "kernel_bLoader.B2":
+        [
+          "kernel_bLoader.B2"
+          , "kernel_bLoader.B4"
+          , "kernel_bLoader.B3"
+        ]
+        , "kernel_bLoader.B4":
+        [
+          "kernel_bLoader.B4"
+          , "kernel_bLoader.B5"
+          , "kernel_bLoader.B6"
+        ]
+        , "kernel_bLoader.B5":
+        [
+          "kernel_bLoader.B5"
+          , "kernel_bLoader.B8"
+          , "kernel_bLoader.B7"
+        ]
+        , "kernel_bLoader.B8":
+        [
+          "kernel_bLoader.B8"
+        ]
+      }
+    }
+    , "kernel_aLoader_T":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":748
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_aLoader_T__no_loop":
+        [
+          "kernel_aLoader_T.B0"
+          , "kernel_aLoader_T.B1"
+        ]
+        , "kernel_aLoader_T.B2":
+        [
+          "kernel_aLoader_T.B2"
+          , "kernel_aLoader_T.B4"
+          , "kernel_aLoader_T.B3"
+        ]
+        , "kernel_aLoader_T.B4":
+        [
+          "kernel_aLoader_T.B4"
+          , "kernel_aLoader_T.B5"
+          , "kernel_aLoader_T.B6"
+        ]
+        , "kernel_aLoader_T.B5":
+        [
+          "kernel_aLoader_T.B5"
+          , "kernel_aLoader_T.B8"
+          , "kernel_aLoader_T.B7"
+        ]
+        , "kernel_aLoader_T.B8":
+        [
+          "kernel_aLoader_T.B8"
+        ]
+      }
+    }
+    , "kernel_bLoader_T":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":957
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_bLoader_T__no_loop":
+        [
+          "kernel_bLoader_T.B0"
+          , "kernel_bLoader_T.B1"
+        ]
+        , "kernel_bLoader_T.B2":
+        [
+          "kernel_bLoader_T.B2"
+          , "kernel_bLoader_T.B4"
+          , "kernel_bLoader_T.B3"
+        ]
+        , "kernel_bLoader_T.B4":
+        [
+          "kernel_bLoader_T.B4"
+          , "kernel_bLoader_T.B5"
+          , "kernel_bLoader_T.B6"
+        ]
+        , "kernel_bLoader_T.B5":
+        [
+          "kernel_bLoader_T.B5"
+          , "kernel_bLoader_T.B8"
+          , "kernel_bLoader_T.B7"
+        ]
+        , "kernel_bLoader_T.B8":
+        [
+          "kernel_bLoader_T.B8"
+        ]
+      }
+    }
+    , "kernel_unloader":
+    {
+      "debug":
+      [
+        {
+          "filename":"syr2k.cl"
+          , "line":1438
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_unloader__no_loop":
+        [
+          "kernel_unloader.B0"
+          , "kernel_unloader.B1"
+        ]
+        , "kernel_unloader.B2":
+        [
+          "kernel_unloader.B2"
+          , "kernel_unloader.B3"
+          , "kernel_unloader.B4"
+        ]
+        , "kernel_unloader.B3":
+        [
+          "kernel_unloader.B3"
+          , "kernel_unloader.B6"
+          , "kernel_unloader.B5"
+        ]
+        , "kernel_unloader.B6":
+        [
+          "kernel_unloader.B6"
+        ]
+      }
+    }
+    , "Intel_Internal_Collect_Autorun_Profiling":
+    {
+      "debug":
+      [
+        {
+          "filename":"Unknown location"
+          , "line":0
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "Intel_Internal_Collect_Autorun_Profiling__no_loop":
+        [
+          "Intel_Internal_Collect_Autorun_Profiling.B0"
+        ]
+      }
+    }
+  }
+}

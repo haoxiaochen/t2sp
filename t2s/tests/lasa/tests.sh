@@ -39,14 +39,17 @@ cd $PATH_TO_SCRIPT
 if [ "$target" == "a10" -o "$target" == "s10" ]; then
     # FPGA: Verify correctness with tiny problem sizes and emulator
     ./test.sh $location gemm $target tiny emulator
-    ./test.sh $location hemm $target tiny emulator
     ./test.sh $location trmm $target tiny emulator
     ./test.sh $location syrk $target tiny emulator
     ./test.sh $location syr2k $target tiny emulator
+    ./test.sh $location hemm $target tiny emulator
+    ./test.sh $location herk $target tiny emulator
+    ./test.sh $location her2k $target tiny emulator
     ./test.sh $location gemv $target tiny emulator
     ./test.sh $location trmv $target tiny emulator
     ./test.sh $location symv $target tiny emulator
     ./test.sh $location ger $target tiny emulator
+    ./test.sh $location dot $target tiny emulator
 else
     echo "Performance testing on $target not supported yet in this release"
     exit

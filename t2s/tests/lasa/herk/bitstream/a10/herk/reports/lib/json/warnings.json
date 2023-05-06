@@ -1,0 +1,8 @@
+{"rows":[
+{"debug":[[{"filename":"/home/u166759/t2sp/t2s/tests/lasa/herk/herk.cl"
+,"line":138}]]
+,"details":["/home/u166759/t2sp/t2s/tests/lasa/herk/herk.cl:138:59: warning: attributes numreadports/numwriteports/numports_readonly_writeonly are deprecated
+, use max_replicates attribute instead"]
+,"name":"attributes numreadports/numwriteports/numports_readonly_writeonly are deprecated
+, use max_replicates attribute instead"}
+]}
