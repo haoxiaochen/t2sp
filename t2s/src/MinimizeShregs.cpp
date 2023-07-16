@@ -645,18 +645,19 @@ void make_time_dims(const vector<FlowDependence> &dependences,
         // Get the sub-distance vector
         vector<int> sub_distance = sub_vector<int>(d.distance, alloc.PE_dims);
         bool is_intra_PE_dependence = sub_distance.empty() || vector_is_zero(sub_distance);
+        bool temp_new_old_values_live_simultaneously = false;
         if (is_intra_PE_dependence) {
             // IR is like this:
             //    V(x) = ...
             //    ...  = V(x - 1) + V(x)
             // In this case, the new value V(x) and old value V(x - 1) are live simultaneously in an iteration of loop x.
             if (!d.is_up && vector_is_positive(d.distance)) {
-                new_old_values_live_simultaneously = true;
+                temp_new_old_values_live_simultaneously = true;
             }
         } else {
             // This is an inter-PE dependence. At a time step, an old value in a PE1 is being read by another PE2, and PE1
             // is also writing a new value. Therefore, both new and old values live simultaneously in a PE.
-            new_old_values_live_simultaneously = true;
+            temp_new_old_values_live_simultaneously = true;
         }
 
         int linearized_time_distance = linearized_distance(alloc.args, d.distance, time_dims, loop_extents);
@@ -667,6 +668,7 @@ void make_time_dims(const vector<FlowDependence> &dependences,
         internal_assert(linearized_time_distance >= 0);
         if (linearized_time_distance > max_linearized_time_distance) {
             max_linearized_time_distance = linearized_time_distance;
+            new_old_values_live_simultaneously = temp_new_old_values_live_simultaneously;
         }
     }
     if (new_old_values_live_simultaneously) {

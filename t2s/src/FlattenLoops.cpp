@@ -1029,7 +1029,8 @@ private:
     string current_loop;                                     // Current serial or unroll loop
     string loop_enclosing_mem_channel_access;                // The loop that immediately encloses a read/write_mem_channel
     int num_mem_channel_accesses;                            // With loop unrolling, there might be multiple accesses to a channel
-    Expr path_condition;                                     // The path condition to a read/write_mem_channel
+    Expr path_condition;                                     // Current path condition
+    Expr read_condition;                                     // Path condition that encloses the read to a memory channel
     Expr single_PE_condition;                                // The part of the path condition that checks for a single PE.
                                                              // E.g. given path condition "some cond && u0=0 && u1=0", where u0 and u1
                                                              // are unrolled loops, the single_PE_condition = "u0=0 && u1=0".
@@ -1149,6 +1150,7 @@ public:
             loop_enclosing_mem_channel_access.clear();
             num_mem_channel_accesses = 0;
             path_condition = const_true();
+            read_condition = const_true();
             single_PE_condition = const_true();
         } else {
             in_function = false;
@@ -1216,8 +1218,8 @@ public:
             // At least one access exists. However, accesses to partitions (with the same address) are not counted
             int inc_num = num_mem_channel_accesses == 0 ? 1 : num_mem_channel_accesses;
             Stmt inc = Provide::make("addr.temp", {Call::make(Int(32), "addr.temp", {}, Call::Intrinsic) + inc_num}, {});
-            if (!equal(single_PE_condition, const_true())) {
-                inc = IfThenElse::make(single_PE_condition, inc);
+            if (!equal(read_condition, const_true())) {
+                inc = IfThenElse::make(read_condition, inc);
             }
             body = Block::make(body, inc);
         }
@@ -1330,6 +1332,7 @@ public:
             loop_enclosing_mem_channel_access = current_loop;
             vector<string> unrolled_loops_without_terms;
             check_is_single_PE(on_device, path_condition, unrolled_loops, {}, single_PE_condition, unrolled_loops_without_terms);
+            read_condition = path_condition;
 
             internal_assert(op->args[0].as<StringImm>());
             string name = op->args[0].as<StringImm>()->value;

@@ -151,8 +151,8 @@ int main()
     BFeeder_T.vectorize(kkk);
 
     // Output path
-    // Out_T.relay(Z_T, iii);
-    Out_T.relay(Z_T, jjj);
+    Out_T.relay(Z_T, iii);
+    // Out_T.relay(Z_T, jjj);
     X_T.vectorize(kkk);
 
     // I/O network for E
