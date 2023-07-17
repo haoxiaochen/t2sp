@@ -27,30 +27,34 @@ using namespace Halide;
 int main()
 {
     // Dependences
-    #define P                     ii,      i,   k
-    #define P_ii_minus_1          ii-1,    i,   k
-    #define P_i_minus_1           ii,      i-1, k
-    #define P_prev_psum           ii+1,    i,   k-1
-    #define P_prev_boundary_psum  ii-II+1, i+1, k-1
-    #define P_Out                               k
+    #define P                     ii,      jj,   i,   k,   j
+    #define P_jj_minus_1          ii,      jj-1, i,   k,   j
+    #define P_ii_minus_1          ii-1,    jj,   i,   k,   j
+    #define P_i_minus_1           ii,      jj,   i-1, k,   j
+    #define P_prev_psum           ii+1,    jj,   i,   k-1, j
+    #define P_prev_boundary_psum  ii-II+1, jj,   i+1, k-1, j
+    #define P_Out                          jj,        k,   j
 
     // Linearized addresses
     #define total_i               (ii+II*i)
+    #define total_j               (jj+JJ*j)
+
+    #define J       (B.dim(0).extent() /JJ)
 
     // Type of the data to process in C and T2S
     #define CTYPE float
     #define TTYPE Float(32)
 
     // Inputs
-    ImageParam A("A", TTYPE, 2), b("b", TTYPE, 1);
+    ImageParam A("A", TTYPE, 2), B("B", TTYPE, 2);
 
     // UREs
-    Var ii("ii"), k("k"), i("i");
+    Var ii("ii"), jj("jj"), k("k"), i("i"), j("j");
     URE uA("uA", TTYPE, {P}), uX("uX", TTYPE, {P}), uY("uY", TTYPE, {P}), Out("Out");
-    uA(P) = A(total_i+k, k);
+    uA(P) = select(jj == 0, A(total_i+k, k), uA(P_jj_minus_1));
     uX(P) = select(i == 0,
                 select(ii == 0,
-                    (b(k) - select(k == 0, 0, uY(P_prev_psum))) / uA(P),
+                    (B(total_j, k) - select(k == 0, 0, uY(P_prev_psum))) / uA(P),
                     uX(P_ii_minus_1)),
                 uX(P_i_minus_1));
     uY(P) = select(k == 0, 0,
@@ -65,21 +69,22 @@ int main()
 
     // Explicitly set the loop bounds
     uA.set_bounds(ii, 0, II,  i, 0, I)
+      .set_bounds(jj, 0, JJ,  j, 0, J)
       .set_bounds(k,  0, K);
 
     // Create a systolic array
-    uA.space_time_transform(ii);
+    uA.space_time_transform(ii, jj);
 
     // I/O network
     Stensor DA("aLoader", DRAM);
     Stensor DB("bLoader", DRAM);
-    Stensor DX("unloader", DRAM), x("deserializer");
+    Stensor DX("unloader", DRAM), X("deserializer");
     A >> DA.out(ii) >> FIFO(256);
-    b >> DB >> FIFO(256);
-    Out >> FIFO(256) >> DX >> x(k);
+    B >> DB.out(jj) >> FIFO(256);
+    Out >> FIFO(256) >> DX >> X(k, j);
 
     // Compile the kernel to an FPGA bitstream, and expose a C interface for the host to invoke
-    x.compile_to_host("trsv-interface", { A, b }, "trsv", IntelFPGA);
+    X.compile_to_host("trsm-interface", { A, B }, "trsm", IntelFPGA);
     printf("Success\n");
     return 0;
 }
