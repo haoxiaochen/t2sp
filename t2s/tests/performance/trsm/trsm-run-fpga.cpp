@@ -44,7 +44,7 @@ int main()
     const int TOTAL_I = II * I;
     const int TOTAL_J = JJ * J;
     assert(TOTAL_I == K);
-    Halide::Runtime::Buffer<float> a(TOTAL_I+K, K), x(K, TOTAL_J);
+    Halide::Runtime::Buffer<float> a(TOTAL_I+K, K), x(K, TOTAL_J), b(TOTAL_J, TOTAL_I);
 
     for (size_t i = 0; i < TOTAL_I; i++) {
         for (size_t k = 0; k < K; k++) {
@@ -55,11 +55,16 @@ int main()
 
     for (size_t k = 0; k < K; k++) {
         for (size_t j = 0; j < TOTAL_J; j++) {
+#ifdef TINY
             x(k, j) = random()%10;
+#else
+            b(j, k) = random()%10;
+#endif
         }
     }
 
-    Halide::Runtime::Buffer<float> b(TOTAL_J, TOTAL_I);
+#ifdef TINY
+    cout << "Generate input matrix by performing matrix multiplication...\n";
     for (size_t i = 0; i < TOTAL_I; i++) {
         for (size_t j = 0; j < TOTAL_J; j++) {
             float psum = 0.0f;
@@ -69,6 +74,8 @@ int main()
             b(j, i) = psum;
         }
     }
+    cout << "Input generated\n";
+#endif
 
     Halide::Runtime::Buffer<float> out_x(JJ, K, J);
     trsm(a, b, out_x);
