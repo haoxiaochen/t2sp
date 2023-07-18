@@ -1,0 +1,196 @@
+{
+  "nodes":
+  [
+    {
+      "name":"Intel_Internal_Collect_Autorun_Profiling"
+      , "id":1308801528
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"Intel_Internal_Collect_Autorun_Profiling.B0"
+          , "id":1309178384
+          , "type":"bb"
+        }
+      ]
+    }
+    , {
+      "name":"kernel_unloader"
+      , "id":1308799928
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_unloader.B0"
+          , "id":1309417088
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_unloader.B2"
+          , "id":1309429120
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 8"
+              , "id":1356699040
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 9"
+              , "id":1331966992
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_unloader.B1"
+          , "id":1309421872
+          , "type":"bb"
+        }
+      ]
+    }
+    , {
+      "name":"kernel_Out"
+      , "id":1308612968
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_Out.B3"
+          , "id":1308860944
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_Out.B1"
+          , "id":1308860016
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 1"
+              , "id":1314273712
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 0"
+              , "id":1314144400
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_Out.B2"
+          , "id":1308860864
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 2"
+              , "id":1314450992
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 3"
+              , "id":1314887840
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_Out.B0"
+          , "id":1308859632
+          , "type":"bb"
+        }
+      ]
+    }
+    , {
+      "name":"kernel_bLoader"
+      , "id":1308789000
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_bLoader.B0"
+          , "id":1309360640
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_bLoader.B2"
+          , "id":1309311472
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_bLoader.B4"
+          , "id":1309311632
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_bLoader.B1"
+          , "id":1309372208
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 5"
+              , "id":1327730288
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_bLoader.B3"
+          , "id":1309311552
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 7"
+              , "id":1329444448
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 6"
+              , "id":1312985280
+              , "type":"cluster"
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"kernel_aLoader"
+      , "id":1308786424
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_aLoader.B2"
+          , "id":1309279072
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 4"
+              , "id":1347373040
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_aLoader.B0"
+          , "id":1308921792
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_aLoader.B1"
+          , "id":1309263280
+          , "type":"bb"
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+  ]
+}

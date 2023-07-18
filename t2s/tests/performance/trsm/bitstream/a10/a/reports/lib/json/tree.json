@@ -1,0 +1,310 @@
+{
+  "nodes":
+  [
+    {
+      "name":"kernel_Out"
+      , "id":1567841128
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_Out.B6"
+          , "id":1568158512
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 4"
+              , "id":1660110752
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 5"
+              , "id":1660108688
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_Out.B3"
+          , "id":1568158272
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_Out.B2"
+          , "id":1568142080
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_Out.B0"
+          , "id":1568140624
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 0"
+              , "id":1651516816
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_Out.B1"
+          , "id":1568141120
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 1"
+              , "id":1654679808
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_Out.B4"
+          , "id":1568158352
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 2"
+              , "id":1655140704
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 3"
+              , "id":1655764704
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_Out.B5"
+          , "id":1568158432
+          , "type":"bb"
+        }
+      ]
+    }
+    , {
+      "name":"kernel_aLoader"
+      , "id":1568043096
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_aLoader.B2"
+          , "id":1577180496
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_aLoader.B3"
+          , "id":1577871456
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_aLoader.B0"
+          , "id":1570970480
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 6"
+              , "id":2416520688
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_aLoader.B4"
+          , "id":1577871536
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 8"
+              , "id":2068595120
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_aLoader.B1"
+          , "id":1576811392
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 7"
+              , "id":2415424560
+              , "type":"cluster"
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"kernel_bLoader"
+      , "id":1568048488
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_bLoader.B1"
+          , "id":1577931920
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 10"
+              , "id":2068585408
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_bLoader.B3"
+          , "id":1577932896
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 11"
+              , "id":2053382288
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_bLoader.B4"
+          , "id":1577932976
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_bLoader.B0"
+          , "id":1577920976
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 9"
+              , "id":2068584736
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_bLoader.B6"
+          , "id":1577933136
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_bLoader.B2"
+          , "id":1577932816
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_bLoader.B5"
+          , "id":1577933056
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 12"
+              , "id":2005611584
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 13"
+              , "id":1894897312
+              , "type":"cluster"
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"kernel_unloader"
+      , "id":1568054056
+      , "type":"kernel"
+      , "children":
+      [
+        {
+          "name":"kernel_unloader.B0"
+          , "id":1578263024
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 14"
+              , "id":1903043264
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_unloader.B6"
+          , "id":1578312080
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_unloader.B2"
+          , "id":1578311760
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_unloader.B4"
+          , "id":1578311920
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 16"
+              , "id":1862750768
+              , "type":"cluster"
+            }
+            , {
+              "name":"Cluster 17"
+              , "id":1966709600
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_unloader.B1"
+          , "id":1578310784
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 15"
+              , "id":1862198208
+              , "type":"cluster"
+            }
+          ]
+        }
+        , {
+          "name":"kernel_unloader.B3"
+          , "id":1578311840
+          , "type":"bb"
+        }
+        , {
+          "name":"kernel_unloader.B5"
+          , "id":1578312000
+          , "type":"bb"
+          , "children":
+          [
+            {
+              "name":"Cluster 18"
+              , "id":1964364128
+              , "type":"cluster"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+  , "links":
+  [
+  ]
+}

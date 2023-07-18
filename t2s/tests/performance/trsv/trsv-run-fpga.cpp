@@ -54,7 +54,7 @@ int main()
 #ifdef TINY
         x(k) = random()%10;
 #else
-        b(k, j) = random()%10;
+        b(k) = random()%10;
 #endif
     }
 
