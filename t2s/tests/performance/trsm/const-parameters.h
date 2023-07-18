@@ -40,7 +40,7 @@
         #define K          8192
     #else
         #define II         16
-        #define JJ         32
+        #define JJ         56
         #define I          512
         #define K          8192
     #endif

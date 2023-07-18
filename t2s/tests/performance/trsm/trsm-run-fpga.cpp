@@ -96,7 +96,7 @@ int main()
     float number_bytes = (float)TOTAL_I * (float)K * 4 +
                          (float)K * TOTAL_J * 4 +
                          (float)TOTAL_I * 4;
-    float exec_time= ExecTime();
+    float exec_time = ExecTime("kernel_unloader");
     roofline(mem_bandwidth, compute_roof, number_ops, number_bytes,exec_time);
     if (fopen("roofline.png", "r") == NULL) {
         cout << "Failed to draw roofline!\n";

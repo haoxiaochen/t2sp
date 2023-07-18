@@ -41,7 +41,7 @@ int main()
 {
     const int TOTAL_I = II * I;
     assert(TOTAL_I == K);
-    Halide::Runtime::Buffer<float> a(TOTAL_I+K, K), x(K);
+    Halide::Runtime::Buffer<float> a(TOTAL_I+K, K), x(K), b(TOTAL_I);
 
     for (size_t i = 0; i < TOTAL_I; i++) {
         for (size_t k = 0; k < K; k++) {
@@ -51,10 +51,15 @@ int main()
     }
 
     for (size_t k = 0; k < K; k++) {
+#ifdef TINY
         x(k) = random()%10;
+#else
+        b(k, j) = random()%10;
+#endif
     }
 
-    Halide::Runtime::Buffer<float> b(TOTAL_I);
+#ifdef TINY
+    cout << "Generate input vector by performing matrix-vector multiplication...\n";
     for (size_t i = 0; i < TOTAL_I; i++) {
         float psum = 0.0f;
         for (size_t k = 0; k < K; k++) {
@@ -62,6 +67,8 @@ int main()
         }
         b(i) = psum;
     }
+    cout << "Input generated\n";
+#endif
 
     Halide::Runtime::Buffer<float> out_x(K);
     trsv(a, b, out_x);
@@ -80,7 +87,7 @@ int main()
     float number_bytes = (float)TOTAL_I * (float)K * 4 +
                          (float)K * 4 +
                          (float)TOTAL_I * 4;
-    float exec_time= ExecTime();
+    float exec_time= ExecTime("kernel_unloader");
     roofline(mem_bandwidth, compute_roof, number_ops, number_bytes,exec_time);
     if (fopen("roofline.png", "r") == NULL) {
         cout << "Failed to draw roofline!\n";
