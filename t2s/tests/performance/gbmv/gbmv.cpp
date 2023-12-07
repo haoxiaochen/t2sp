@@ -67,57 +67,38 @@ int main()
       .set_bounds(i,   0, I,   k,   0, K)
       .set_bounds(vi,  0, VI);
     fX.space_time_transform(vi);
-    // fX.blocks(i, k).threads(ii, kk);
 
-    Var lin_k("lin_k"), lin_i("lin_i"), blk_i("blk_i"), all_i("all_i");
-    Func Scol("Scol", Place::Device), Srow("Srow", Place::Device);
-    Scol(lin_i, kk, i, k) = RightOut(lin_i % VI, (lin_i/VI) % III, lin_k/(VI*III), kk, i, k);
-    Srow(lin_k, ii, i, k) = TopOut(lin_k % KKK, ii, lin_k / KKK, i, k);
-    Scol.set_bounds(lin_i, 0, VI*III*II, i, 0, I)
-        .set_bounds(kk, 0, KK, k, 0, K);
-    Srow.set_bounds(lin_k, 0, KKK*K, k, 0, K)
-        .set_bounds(ii, 0, II, i, 0, I);
-
-    Func blkReduce("blkReduce", Place::Device);
-    RDom blkRow(0, KKK*KK, 0, II), blkCol(0, VI*III*II, 0, KK);
-    blkReduce(blk_i, i, k) = 0.0f;
-    blkReduce(blkCol.x + blkCol.y*KKK, i, k) += Scol(blkCol.x, blkCol.y, i, k);
-    blkReduce(blkRow.x + blkRow.y*III*VI, i, k) += Srow(blkRow.x, blkRow.y, i, k);
-    blkReduce.set_bounds(blk_i, 0, VI*III*II+KKK*KK-1)
-             .set_bounds(i, 0, I, k, 0, K);
-    // blkReduce.blocks(i, k);
+    // GPU can have many threads running in parallel.
+#ifdef GPU
+    X.gpu_blocks(j, i).gpu_threads(jj, ii);
+#endif
 
     // I/O network
-    // Stensor DA(DRAM), DX(DRAM), SA(SRAM), SX(SRAM);
-    // Stensor ST(SRAM), SR(SRAM), DP(DRAM), psum, Y;
-    // A >> DA.out(vi) >> SA.scope(i).out(vi) >> fX;
-    // X >> DX.out(vi) >> SX.scope(i).out(vi) >> fX;
-    // TopOut >> Srow(kkk+KKK*kk, ii).scope(i) >> blkReduce;
-    // RightOut >> Scol(vi+VI*iii+VI*III*ii, kk).scope(i) >> blkReduce;
-    // blkReduce >> Dpsum >> allReduce >> Y(all_i-Ku);
-    Func A_serializer("A_serializer", Place::Host), DA("DA", Place::Device);
-    fX.isolate_producer_chain(A, A_serializer, DA);
+    Stensor DA("DA", DRAM), DX("DX", DRAM), SA("SA", SRAM), SX("SX", SRAM);
+    Stensor DTopOut("DTopOut", DRAM), DRightOut("DRightOut", DRAM);
+    A >> DA.out(vi) >> SA.scope(kk).out(vi) >> fX;
+    X >> DX >> SX.scope(kk) >> fX;
+    TopOut >> DTopOut;
+    RightOut >> DRightOut;
+    Stensor::realize(IntelFPGA);
 
-    Func X_serializer("X_serializer", Place::Host), DX("DX", Place::Device), SX("SX", Place::Device);
-    fX.isolate_producer_chain(X, X_serializer, DX, SX);
-    DX.remove(vi, iii, ii);
-    X_serializer.remove(vi, iii, ii, i);
-    SX.buffer(DX, i);
-
-    Func Dpsum("Dpsum", Place::Device);
-    blkReduce.isolate_consumer_chain(Dpsum);
-
-    Func allReduce("allReduce", Place::Host);
-    RDom blkDim(0, VI*III*II+KKK*KK-1, 0, I, 0, K);
-    allReduce(all_i) = 0.0f;
-    allReduce(blkDim.x + VI*III*II*blkDim.y + KKK*KK*blkDim.z) += Dpsum(blkDim.x, blkDim.y, blkDim.z);
-    allReduce.set_bounds(all_i, 0, VI*III*II*I+KKK*KK*K-1);
+    Func Out("Out", Place::Host);
+    Func DTopOutWrapper = DTopOut.get_wrapper_func();
+    Func DRightOutWrapper = DRightOut.get_wrapper_func();
+    Var flat_dim;
+    RDom col(0, VI, 0, III), row(0, KKK);
+    Out(flat_dim, ii, kk, i, k) = 0.0f;
+    Out(row.x, ii, kk, i, k) += DTopOutWrapper(row.x, ii, kk, i, k);
+    Out(col.x + VI*col.y + KKK-1, ii, kk, i, k) += DRightOutWrapper(col.x, col.y, ii, kk, i, k);
+    Out.set_bounds(flat_dim, 0, VI*III+KKK-1)
+       .set_bounds(ii, 0, II, kk, 0, KK)
+       .set_bounds(i, 0, I, k, 0, K);
 
     // Compile the kernel to an FPGA bitstream, and expose a C interface for the host to invoke
     Target acc = get_host_target();
     acc.set_feature(Target::IntelFPGA);
     acc.set_feature(Target::EnableSynthesis);
-    allReduce.compile_to_host("gbmv-interface", { A, X }, "gbmv", acc);
+    Out.compile_to_host("gbmv-interface", { A, X }, "gbmv", acc);
     printf("Success\n");
 
     return 0;

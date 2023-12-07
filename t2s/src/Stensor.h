@@ -60,6 +60,8 @@ struct Stensor
         : Stensor(unique_name("s"), HOST) {}
 
     Func stensor_realize_wrapper(Starget t);
+    Func get_wrapper_func();
+    static void realize(Starget t);
     void realize(Buffer<> dst, Starget t);
     void compile_jit(Starget t);
     void compile_to_host(string file_name, const vector<Argument> &args,

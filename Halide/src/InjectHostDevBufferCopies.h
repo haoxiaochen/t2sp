@@ -17,7 +17,7 @@ Stmt call_extern_and_assert(const std::string &name, const std::vector<Expr> &ar
 
 /** Inject calls to halide_device_malloc, halide_copy_to_device, and
  * halide_copy_to_host as needed. */
-Stmt inject_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<std::string, Function> &env);
+Stmt inject_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<std::string, Function> &env, const std::vector<std::string> &order);
 
 }  // namespace Internal
 }  // namespace Halide

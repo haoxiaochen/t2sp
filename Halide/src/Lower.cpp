@@ -504,7 +504,7 @@ Module lower(const vector<Function> &output_funcs,
                  << s << "\n\n";
 
         debug(1) << "Injecting host <-> dev buffer copies...\n";
-        s = inject_host_dev_buffer_copies(s, t, env);
+        s = inject_host_dev_buffer_copies(s, t, env, order);
         debug(2) << "Lowering after injecting host <-> dev buffer copies:\n"
                  << s << "\n\n";
 
@@ -516,7 +516,7 @@ Module lower(const vector<Function> &output_funcs,
         // Always mark buffers host dirty. Buffers will otherwise not be correctly copied for
         // other pipelines with device feature enabled.
         debug(1) << "Injecting host <-> dev buffer copies...\n";
-        s = inject_host_dev_buffer_copies(s, t, env);
+        s = inject_host_dev_buffer_copies(s, t, env, order);
         debug(2) << "Lowering after injecting host <-> dev buffer copies:\n"
                     << s << "\n\n";
     }

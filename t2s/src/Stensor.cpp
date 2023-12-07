@@ -434,13 +434,13 @@ class RealizeOnFPGA
 
     void isolate_consumer(Schain &c) {
         vector<Func> consumers;
-        if (c.stensors.back().position == DRAM) {
-            // If the host stensor is not specified, we automatically generate it
-            string host_name = c.outf.name() + "_deserializer";
-            Stensor s_host(host_name);
-            s_host.schain_idx = c.stensors[0].schain_idx;
-            c.stensors.push_back(s_host);
-        }
+        // If the host stensor is not specified, we automatically generate it
+        // if (c.stensors.back().position == DRAM) {
+        //     string host_name = c.outf.name() + "_deserializer";
+        //     Stensor s_host(host_name);
+        //     s_host.schain_idx = c.stensors[0].schain_idx;
+        //     c.stensors.push_back(s_host);
+        // }
 
         // Isolate subsequent consumers
         for (auto &s : c.stensors) {
@@ -565,7 +565,7 @@ class RealizeOnFPGA
                     debug(1) << "T2X emits: " << producers[i].name() << ".scatter("
                              << prev.name() << ", " << v_scatter << ");\n";
                 }
-                if (v_banks.size() == 1 && v_banks.size() == prev_dims.size()) {
+                if (c.stensors[i].transposed) {
                     producers[i].scatter(prev, v_banks[0], ScatterStrategy::ForwardVector);
                     debug(1) << "T2X emits: " << producers[i].name() << ".scatter("
                              << prev.name() << ", " << v_banks[0] << ", ScatterStrategy::ForwardVector);\n";
@@ -642,6 +642,9 @@ class RealizeOnFPGA
                              << prev.name() << ", " << v_scope << ", {"
                              << to_string(transposed_args) << "}, {" << to_string(args) << "});\n";
                 } else {
+                    internal_assert(i > 0);
+                    auto &remove_params = c.funcs[i-1].function().definition().schedule().remove_params();
+                    if (remove_params.empty()) continue;
                     producers[i].buffer(prev, v_scope);
                     debug(1) << "T2X emits: " << producers[i].name() << ".buffer("
                              << prev.name() << ", " << v_scope << ");\n";
@@ -840,8 +843,7 @@ public:
     RealizeOnFPGA(FindVars &_v, FindProducerForOutput &_p)
         : fv(_v), fpo(_p) {}
 
-    Func realize() {
-        Func out;
+    void realize() {
         for (auto &c: schains) {
             check_inclusiveness(c);
             find_banks(c);
@@ -861,14 +863,8 @@ public:
                 vectorize(c);
                 partition(c);
                 min_depth(c);
-                // The last function is on host
-                if (!c.funcs.empty() && c.funcs.back().function().place() == Place::Host) {
-                    out = c.funcs.back();
-                }
             }
         }
-        internal_assert(out.defined());
-        return out;
     }
 };
 
@@ -961,15 +957,11 @@ Stensor &operator>>(Stensor &s, const FIFO &fifo) {
     return s;
 }
 
-Func Stensor::stensor_realize_wrapper(Starget t) {
-    int c = this->schain_idx;
-    user_assert(schains[c].is_output)
-        << "Please realize the stensors on the output path\n";
-    user_assert(this->position == SMemType::HOST)
-        << "Stensors must be realized on the host\n";
-
+void Stensor::realize(Starget t) {
     map<string, Func> env;
-    Func outf = schains[c].outf;
+    user_assert(schains.back().is_output)
+        << "Please specify an output path as the last stensor chain\n";
+    Func outf = schains.back().outf;
     env = outf.pipeline().compute_environment();
 
     Func f;
@@ -977,10 +969,8 @@ Func Stensor::stensor_realize_wrapper(Starget t) {
         FindVars fv(env);
         FindProducerForOutput fpo(env);
         RealizeOnFPGA fpga(fv, fpo);
-        f = fpga.realize();
-        internal_assert(f.function().place() == Place::Host);
-    }
-    if (t == Starget::IntelGPU) {
+        fpga.realize();
+    } else {
         int num_gpu_vars = 0;
         for (auto &p : env) {
             if (p.second.function().place() == Place::Device) {
@@ -991,7 +981,30 @@ Func Stensor::stensor_realize_wrapper(Starget t) {
         }
         FindVars fv(env);
         RealizeOnGPU gpu(fv, num_gpu_vars);
-        f = gpu.realize();
+        gpu.realize();
+    }
+}
+
+Func Stensor::get_wrapper_func() {
+    int c = this->schain_idx;
+    auto &sc = schains[c];
+    for (size_t i = 0; i < sc.stensors.size(); ++i) {
+        if (sc.stensors[i].name == this->name) {
+            return sc.funcs[i];
+        }
+    }
+    return Func();
+}
+
+Func Stensor::stensor_realize_wrapper(Starget t) {
+    Func f;
+    realize(t);
+    for (auto &sc : schains) {
+        if (sc.is_output) {
+            internal_assert(!f.defined());
+            f = sc.funcs.back();
+            internal_assert(f.function().place() == Place::Host);
+        }
     }
     return f;
 }

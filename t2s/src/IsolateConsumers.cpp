@@ -83,6 +83,7 @@ Func &Func::isolate_consumer(Func c) {
 
     // This Func will not be inlined into the consumer
     this->compute_root();
+    c.compute_root();
 
     return *this;
 }

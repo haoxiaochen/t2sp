@@ -911,7 +911,18 @@ vector<string> find_consumers_on_a_place(const vector<string> &all_consumers,  c
     return consumers;
 }
 
-Stmt move_around_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<string, Function> &env) {
+std::vector<string> sort_functions(const std::vector<string> &funcs, const std::vector<string> &order) {
+    std::vector<string> sorted_funcs;
+    for (const auto &o : order) {
+        auto it = std::find(funcs.begin(), funcs.end(), o);
+        if (it != funcs.end()) {
+            sorted_funcs.push_back(o);
+        }
+    }
+    return sorted_funcs;
+}
+
+Stmt move_around_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<string, Function> &env, const std::vector<string> &order) {
     // In the current IR, right below every FPGA kernel, we may set device dirty for the output buffer of the kernel, if any,
     // and free the input buffers of the kernel, if any. The assumption is that the kernel has been launched and finished.
     // However, this is not the case: for an Intel FPGA, we use OpenCL runtime with multiple command queues; We enqueue every
@@ -976,6 +987,22 @@ Stmt move_around_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<
             // If several UREs are merged, and the the output function is part of them, these UREs are nestly defined.
             // The one of them that appears at the outermost of the nest should be treated as the output kernel.
             map<string, string> func_to_representative = map_func_to_representative(env);
+            if (output_kernels.size() > 1) {
+                auto it = output_kernels.begin();
+                while (it != output_kernels.end()) {
+                    auto func = env.at(*it);
+                    auto isolated_from = func.isolated_from_as_consumer();
+                    if (!isolated_from.empty()) {
+                        const string &represenative = func_to_representative.at(isolated_from);
+                        auto representative_func = env.at(represenative);
+                        auto merged_ures = representative_func.merged_func_names();
+                        auto sorted_ures = sort_functions(merged_ures, order);
+                        if (!merged_ures.empty() && isolated_from != sorted_ures.back()) {
+                            it = output_kernels.erase(it);
+                        } else it++;
+                    }
+                }
+            }
             map<string, string> names_to_match_for_output_kernel;
             for (size_t i = 0; i < output_kernels.size(); i++) {
                 const string &represenative = func_to_representative.at(output_kernels[i]);
@@ -992,7 +1019,7 @@ Stmt move_around_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<
     return s;
 }
 
-Stmt inject_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<string, Function> &env) {
+Stmt inject_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<string, Function> &env, const std::vector<string> &order) {
     // Handle internal allocations
     s = InjectBufferCopies(t).mutate(s);
 
@@ -1006,7 +1033,7 @@ Stmt inject_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<strin
     }
 
     // If necessary, ajust the positions where the buffer actions are placed.
-    s = move_around_host_dev_buffer_copies(s, t, env);
+    s = move_around_host_dev_buffer_copies(s, t, env, order);
     return s;
 }
 
