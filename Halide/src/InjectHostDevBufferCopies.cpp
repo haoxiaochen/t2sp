@@ -945,7 +945,8 @@ Stmt move_around_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<
                 FPGA_kernels.push_back(r.first);
                 bool is_output_kernel = false;
                 if (r.second.size() == 0) { // no consumer at all
-                    is_output_kernel = true;
+                    // is_output_kernel = true;
+                    continue;
                 } else {
                     // Consumers must be either all on the device, or all on the host.
                     vector<string> host_consumers   = find_consumers_on_a_place(r.second, env, Place::Host);

@@ -202,9 +202,11 @@ string names_to_string(const vector<Var> &v) {
 
 string names_to_string(const vector<ImageParam> &im) {
     std::ostringstream s;
+    if (im.size() > 1) s << "{";
     for (size_t i = 0; i < im.size(); i++) {
         s << ((i==0) ? "" : ", ") << im[i].name();
     }
+    if (im.size() > 1) s << "}";
     return s.str();
 }
 

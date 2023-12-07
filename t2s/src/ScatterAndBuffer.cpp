@@ -453,7 +453,8 @@ class BufferInserter: public IRMutator{
                         counter = counter / loop_extents[i];
                     }
                 };
-                Expr read_buffer_cond = (Variable::make(Int(32),"period") > 0);
+                Expr read_buffer_cond = (Variable::make(Int(32),"period") <= Variable::make(Int(32),"period_num")) &&
+                                        (Variable::make(Int(32),"period") > 0);
                 new_body = IfThenElse::make(read_buffer_cond,new_body);
             }
 
@@ -465,7 +466,8 @@ class BufferInserter: public IRMutator{
                 if(original_condition.defined()){
                     write_buffer = IfThenElse::make(original_condition,write_buffer);
                 }
-                Expr write_buffer_cond = (Variable::make(Int(32),"offset") >= init);
+                Expr write_buffer_cond = (Variable::make(Int(32),"period") < Variable::make(Int(32),"period_num")) &&
+                                        (Variable::make(Int(32),"offset") >= init);
                 Expr counter = 
                     writes * Variable::make(Int(32),"period") + 
                     Variable::make(Int(32), "offset") - init;
@@ -551,7 +553,8 @@ class BufferInserter: public IRMutator{
                 }
             }
 
-            new_body = For::make(caller_name+".s0.outermost_loop.infinite",0,10,ForType::Serial,op->device_api,new_body);
+            // new_body = For::make(caller_name+".s0.outermost_loop.infinite",0,10,ForType::Serial,op->device_api,new_body);
+            new_body = For::make(caller_name + ".s0.outermost_loop", 0, Expr((period_num+1)*writes), ForType::Serial, op->device_api, new_body);
 
             // Region cycle_dims;
             //counter is an array, its same dimension is unroll loops
@@ -594,9 +597,9 @@ class BufferInserter: public IRMutator{
             );
 
 
-            // new_body = LetStmt::make(
-            //     "period_num", period_num, new_body
-            // );
+            new_body = LetStmt::make(
+                "period_num", period_num, new_body
+            );
         }
         return new_body;
     }
@@ -1395,8 +1398,8 @@ public:
         add_nonscatter_unroll_loops(op->device_api, new_body);
 
         // TODO: change here into while(1)
-        new_body = For::make(func_name + ".s0.outermost_loop.infinite", 0, 10, ForType::Serial, op->device_api, new_body);  
-        // new_body = For::make(func_name + ".s0.outermost_loop", 0, Expr(PERIODS + 1) * Expr(CYCLES_PER_PERIOD), ForType::Serial, op->device_api, new_body);
+        // new_body = For::make(func_name + ".s0.outermost_loop.infinite", 0, 10, ForType::Serial, op->device_api, new_body);
+        new_body = For::make(func_name + ".s0.outermost_loop", 0, Expr(PERIODS + 1) * Expr(CYCLES_PER_PERIOD), ForType::Serial, op->device_api, new_body);
 
         initialize(op->device_api, new_body);
     }
@@ -1478,7 +1481,7 @@ public:
             read_input = LetStmt::make(var_name(total_writes_so_far), period * Expr(WRITES) + offset - Expr(INIT), read_input);
         }
 
-        Expr condition = time_to_write_buffer;
+        Expr condition = (period < PERIODS) && time_to_write_buffer;
         read_input = IfThenElse::make(condition, read_input);
 
         read_input = LetStmt::make(var_name(time_to_write_buffer), (offset >= Expr(INIT)), read_input);
@@ -1698,9 +1701,9 @@ public:
 
         new_body = IfThenElse::make(_time_to_read, new_body);
 
-        // Expr periods_unfinished = (_period <= PERIODS);
-        Expr val = (READS >= WRITES) ? (_period > 0) :
-                   ((_period > 0) && (_offset < Expr(READS)));
+        Expr periods_unfinished = (_period <= PERIODS);
+        Expr val = (READS >= WRITES) ? ((_period > 0) && periods_unfinished) :
+                   ((_period > 0) && periods_unfinished && (_offset < Expr(READS)));
         new_body = LetStmt::make("_time_to_read", val, new_body);
     }
 };
@@ -2197,10 +2200,11 @@ Stmt scatter_buffer(Stmt s, const std::map<std::string, Function> &env){
     ScatterBufferInserter sbi(env, scatterbuffer_args, all_loops);
     s = sbi.mutate(s);
 
+/*
     // For double buffering, a producer needs send one more period of trash data to the consumer
     OneMorePeriod omp(scatterbuffer_args, env);
     s = omp.mutate(s);
-
+*/
     // Finalize scatter loops.
     // First, find all the loops to be serialized in the entire IR.
     vector<string> all_loops_to_serialize;

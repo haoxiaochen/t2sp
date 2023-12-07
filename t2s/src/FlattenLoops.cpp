@@ -1210,6 +1210,7 @@ public:
         if (op->for_type == ForType::Unrolled) {
             unrolled_loops.push_back(op->name);
         }
+        string prev_loop = current_loop;
         current_loop = op->name;
         Stmt body = mutate(op->body);
 
@@ -1223,13 +1224,14 @@ public:
             }
             body = Block::make(body, inc);
         }
-
-        if (ends_with(op->name, ".run_on_device") && !loop_enclosing_mem_channel_access.empty()) {
-            // For device function, allocate the counter inside the run_on_device loop
-            body = Block::make(Provide::make("addr.temp", {0}, {}), body); // set the counter to zero
-            body = Realize::make("addr.temp", {Int(32)}, MemoryType::Auto, {}, const_true(), body);
-        }
         Stmt s = For::make(op->name, op->min, op->extent, op->for_type, op->device_api, body);
+        if (ends_with(prev_loop, ".run_on_device")
+            && !ends_with(current_loop, ".run_on_device")
+            && !loop_enclosing_mem_channel_access.empty()) {
+            // For device function, allocate the counter above the outermost device loop
+            s = Block::make(Provide::make("addr.temp", {0}, {}), s); // set the counter to zero
+            s = Realize::make("addr.temp", {Int(32)}, MemoryType::Auto, {}, const_true(), s);
+        }
         return s;
     }
 
