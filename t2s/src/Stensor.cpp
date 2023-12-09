@@ -39,6 +39,7 @@ struct Schain {
     vector<Func> funcs;
 };
 vector<Schain> schains;
+Starget target = None;
 
 Stensor &Stensor::scope(Var v) {
     v_scope = v;
@@ -318,7 +319,7 @@ struct FindVars
             const Func &f = p.second;
             f.value().accept(&fuv);
             // UREs have the same iteration space, so we just check the one applied merge_ures
-            if (f.function().place() == Place::Device && !f.function().definition().schedule().is_merged()) {
+            if (!f.function().definition().schedule().is_merged()) {
                 if (f.function().has_merged_defs()) {
                     ures.push_back(f);
                 }
@@ -917,13 +918,19 @@ class RealizeOnGPU
     }
 
     void gpu_store(Schain &c) {
-        for (auto &s : c.stensors) {
-            if (s.dims.size() > 0) {
-                c.outf.gpu_store(s.dims, s.name);
-                debug(1) << "T2X emits: " << c.outf.name() << ".gpu_store("
-                         << to_string(s.dims) << ", " << s.name << ");\n";
+        auto &s = c.stensors.back();
+        vector<Expr> args;
+        if (!s.dims.empty()) {
+            args = s.dims;
+        } else {
+            vector<Var> vars = c.outf.args();
+            for (auto v : vars) {
+                args.push_back(v);
             }
         }
+        c.outf.gpu_store(args, s.name);
+        debug(1) << "T2X emits: " << c.outf.name() << ".gpu_store({"
+                 << to_string(args) << "}, " << s.name << ");\n";
     }
 
 public:
@@ -961,6 +968,7 @@ void Stensor::realize(Starget t) {
     map<string, Func> env;
     user_assert(schains.back().is_output)
         << "Please specify an output path as the last stensor chain\n";
+    target = t;
     Func outf = schains.back().outf;
     env = outf.pipeline().compute_environment();
 
@@ -986,10 +994,13 @@ void Stensor::realize(Starget t) {
 }
 
 Func Stensor::get_wrapper_func() {
+    user_assert(target != None)
+        << "Please apply Stensor::realize(target) before getting its wrapper function.\n";
     int c = this->schain_idx;
     auto &sc = schains[c];
     for (size_t i = 0; i < sc.stensors.size(); ++i) {
         if (sc.stensors[i].name == this->name) {
+            if (target == IntelGPU) return sc.outf;
             return sc.funcs[i];
         }
     }
@@ -1002,7 +1013,11 @@ Func Stensor::stensor_realize_wrapper(Starget t) {
     for (auto &sc : schains) {
         if (sc.is_output) {
             internal_assert(!f.defined());
-            f = sc.funcs.back();
+            if (t == IntelFPGA) {
+                f = sc.funcs.back();
+            } else {
+                f = sc.outf;
+            }
             internal_assert(f.function().place() == Place::Host);
         }
     }

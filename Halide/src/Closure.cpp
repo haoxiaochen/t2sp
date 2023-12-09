@@ -1,5 +1,6 @@
 #include "Closure.h"
 #include "Debug.h"
+#include "../../t2s/src/Utilities.h"
 
 namespace Halide {
 namespace Internal {
@@ -62,11 +63,11 @@ void Closure::visit(const Call *op) {
         op->args[i].accept(this);
 
     if (op->is_intrinsic(Call::cm_load_2d)) {
-        auto &name = op->args[0].as<Variable>()->name;
+        auto name = op->args[0].as<Variable>()->name;
         found_buffer_ref(name, op->type, true, false, Halide::Buffer<>());
     }
     if (op->is_intrinsic(Call::cm_store_2d)) {
-        auto &name = op->args[0].as<Variable>()->name;
+        auto name = remove_postfix(op->args[0].as<Variable>()->name, ".buffer");
         found_buffer_ref(name, op->type, false, true, Halide::Buffer<>());
     }
 }

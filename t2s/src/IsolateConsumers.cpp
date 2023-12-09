@@ -82,7 +82,7 @@ Func &Func::isolate_consumer(Func c) {
     c.function().isolated_from_as_consumer() = name();
 
     // This Func will not be inlined into the consumer
-    this->compute_root();
+    // this->compute_root();
     c.compute_root();
 
     return *this;

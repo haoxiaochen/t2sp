@@ -255,15 +255,17 @@ Module lower(const vector<Function> &output_funcs,
     debug(2) << "Lowering after removing code that depends on undef values:\n"
              << s << "\n\n";
 
-    debug(1) << "Placing device functions...\n";
-    s = place_device_functions(s, env, t);
-    debug(2) << "Lowering after placing device functions:\n" << s << "\n\n";
+    if (t.has_feature(Target::IntelFPGA)) {
+        debug(1) << "Placing device functions...\n";
+        s = place_device_functions(s, env, t);
+        debug(2) << "Lowering after placing device functions:\n" << s << "\n\n";
 
-    debug(1) << "Replacing references with channels and shift registers...\n";
-    add_reference_names(s, env, reg_size_map);
-    s = replace_references_with_channels(s, env, global_bounds);
-    s = replace_references_with_shift_registers(s, env, reg_size_map);
-    debug(2) << "Lowering after replacing references with channels and shift registers:\n" << s << "\n\n";
+        debug(1) << "Replacing references with channels and shift registers...\n";
+        add_reference_names(s, env, reg_size_map);
+        s = replace_references_with_channels(s, env, global_bounds);
+        s = replace_references_with_shift_registers(s, env, reg_size_map);
+        debug(2) << "Lowering after replacing references with channels and shift registers:\n" << s << "\n\n";
+    }
 
     debug(1) << "Simplifying IfThenElse without keeping unit loops...\n";
     s = no_if_simplify(s, false);
@@ -488,10 +490,12 @@ Module lower(const vector<Function> &output_funcs,
     debug(2) << "Lowering after simplifying correlated differences:\n"
              << s << '\n';
 
-    debug(1) << "Replace memory channel with references...\n";
-    s = replace_mem_channels(s, env, letstmts_backup);
-    debug(2) << "Lowering after replacing memory channels:\n"
-             << s << "\n\n";
+    if (t.has_feature(Target::IntelFPGA)) {
+        debug(1) << "Replace memory channel with references...\n";
+        s = replace_mem_channels(s, env, letstmts_backup);
+        debug(2) << "Lowering after replacing memory channels:\n"
+                << s << "\n\n";
+    }
 
     if (t.has_gpu_feature() ||
         t.has_feature(Target::OpenGLCompute) ||

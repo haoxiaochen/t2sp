@@ -1037,9 +1037,9 @@ public:
                     bounds_needed[i] = false;
                 }
 
-                if (stages[i].func.has_shift_reg()) {
-                    bounds_needed[i] = false;
-                }
+                // if (stages[i].func.has_shift_reg()) {
+                //     bounds_needed[i] = false;
+                // }
 
                 if (bounds_needed[i]) {
                     for (size_t j = 0; j < stages[i].consumers.size(); j++) {

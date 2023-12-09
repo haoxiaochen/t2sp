@@ -554,7 +554,7 @@ class BufferInserter: public IRMutator{
             }
 
             // new_body = For::make(caller_name+".s0.outermost_loop.infinite",0,10,ForType::Serial,op->device_api,new_body);
-            new_body = For::make(caller_name + ".s0.outermost_loop", 0, Expr((period_num+1)*writes), ForType::Serial, op->device_api, new_body);
+            new_body = For::make(caller_name + ".s0.outermost_loop", 0, Expr((period_num+1)*reads), ForType::Serial, op->device_api, new_body);
 
             // Region cycle_dims;
             //counter is an array, its same dimension is unroll loops

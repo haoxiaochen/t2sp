@@ -1855,8 +1855,10 @@ Stage &Stage::compute_with(LoopLevel loop_level, const map<string, LoopAlignStra
 
     FuseLoopLevel &fuse_level = original_def.schedule().fuse_level();
     if (!fuse_level.level.lock().is_inlined()) {
-        user_warning << name() << " already has a compute_with at " << fuse_level.level.to_string()
-                     << ". Replacing it with a new compute_with at " << loop_level.to_string() << "\n";
+        if (fuse_level.level.to_string() != loop_level.to_string()) {
+            user_warning << name() << " already has a compute_with at " << fuse_level.level.to_string()
+                        << ". Replacing it with a new compute_with at " << loop_level.to_string() << "\n";
+        }
     }
     fuse_level.level = loop_level;
     fuse_level.align = align;
@@ -2417,12 +2419,27 @@ Func &Func::reorder(const std::vector<VarOrRVar> &vars) {
                 f.reorder(out_var_order);
             }
         }
-        VarOrRVar innermost_loop = vars[0];
-        for (auto it = func.definition().schedule().merged_ures().rbegin(); it != func.definition().schedule().merged_ures().rend() - 1; it++) {
-            // Use compute_with iteratively to achieve merge_ure
-            it->compute_with(*(it + 1), innermost_loop);
+        // This part should be aligned with merge_ures
+        auto ures = func.definition().schedule().merged_ures();
+        size_t num_outputs = 0;
+        for (auto f : ures) {
+            if (f.func.definition().schedule().is_output()) num_outputs++;
         }
-        func.definition().schedule().merged_ures()[0].compute_with(*this, innermost_loop);
+        VarOrRVar innermost_loop = vars[0];
+        Func last_non_output_func = *this;
+        if (ures.size() > num_outputs) {
+            last_non_output_func = *(ures.rbegin() + num_outputs);
+        }
+        for (auto it = ures.rbegin(); it != ures.rbegin()+num_outputs; it++) {
+            it->compute_with(last_non_output_func, innermost_loop);
+        }
+        if (ures.size() > num_outputs) {
+            // Use compute_with iteratively to achieve merge_ure
+            for (auto it = ures.rbegin()+num_outputs; it != ures.rend()-1; it++) {
+                it->compute_with(*(it + 1), innermost_loop);
+            }
+        }
+        ures[0].compute_with(*this, innermost_loop);
     }
 
     return *this;

@@ -90,7 +90,7 @@ struct GPUBufInfo {
 };
 map<string, GPUBufInfo> gpu_bufs;
 
-struct {
+struct StoreInfo {
     StoreParams sp;
     struct {
         InstType type;
@@ -102,7 +102,8 @@ struct {
         Range loop;
         size_t rem_sz;
     } outer;
-} store_func;
+};
+map<string, StoreInfo> store_funcs;
 
 inline int int_val(Expr e) {
     auto v = simplify(e).as<IntImm>();
@@ -280,7 +281,7 @@ public:
         tmp_info.if_cond   = nested_cond;
         tmp_info.func_type = func.output_types()[0];
         tmp_info.sink_loop = "";
-        
+
         for (size_t i = 0; i < loop_vars.size(); i++) {
             bool is_space = find(space_loops.begin(), space_loops.end(), i) != space_loops.end();
             if (is_space) {
@@ -310,12 +311,12 @@ public:
 class GPUStoreBuilder
 {
     const map<string, Function> &env;
-    string output_func;
+    vector<string> output_funcs;
 
     // The layout is specified in undecorated form, like iii, jjj
     // now we need to transform it into decorated form, like A.s0.iii, A.s0.jjj
-    void update_shape_args() {
-        auto &shape_args = store_func.sp.shape_args;
+    void update_shape_args(std::string f) {
+        auto &shape_args = store_funcs[f].sp.shape_args;
         map<string, Expr> real_loops;
         map<string, Expr> fix_bounds;
 
@@ -335,8 +336,8 @@ class GPUStoreBuilder
     }
 
     // Fuse multiple dimension into the linearized address
-    Expr get_flatten_expr() {
-        auto &shape_args = store_func.sp.shape_args;
+    Expr get_flatten_expr(string f) {
+        auto &shape_args = store_funcs[f].sp.shape_args;
         map<string, Expr> fix_loops;
         for (size_t i = 0; i < loop_vars.size(); i++) {
             fix_loops.insert({ loop_vars[i], loop_bounds[i].extent-1});
@@ -354,15 +355,15 @@ class GPUStoreBuilder
     // Replace space loops with a inner var and a output var,
     // where the inner var is vectorized with length rw_len and the outer var is the times of vectorized writes
     // TODO: I think it is no longer needed, the inner var is exactly the first space loop
-    Expr fuse_space_loops(Expr flatten) {
-        const auto &rw_len = store_func.sp.rw_len;
+    Expr fuse_space_loops(string f, Expr flatten) {
+        const auto &rw_len = store_funcs[f].sp.rw_len;
         internal_assert(rw_len);
         map<string, Expr> rev_exprs;
         vector<Expr> space_loop_bounds;
         Expr fused;
 
-        string outer_name = output_outer_loop(output_func);
-        string inner_name = output_inner_loop(output_func);
+        string outer_name = output_outer_loop(f);
+        string inner_name = output_inner_loop(f);
         Expr inner_var = make_var(inner_name);
         Expr outer_var = make_var(outer_name);
         Expr var = outer_var;
@@ -381,12 +382,12 @@ class GPUStoreBuilder
         return fused;
     }
 
-    auto get_outer_loop(void)
-    -> decltype(store_func.outer) {
-        const auto &rw_len = store_func.sp.rw_len;
+    auto get_outer_loop(string f)
+    -> decltype(StoreInfo::outer) {
+        const auto &rw_len = store_funcs[f].sp.rw_len;
         internal_assert(rw_len);
 
-        Expr sz = space_loop_extents();
+        Expr sz = get_output_size(f);
         Expr min = 0;
         Expr ext = simplify(sz /int_exp(rw_len));
         size_t rem_sz = int_val(simplify(sz - int_exp(rw_len) * ext));
@@ -397,15 +398,15 @@ class GPUStoreBuilder
     }
 
     // We get a scatter store instruction, by replacing inner var with the index from 0 to rw_len
-    auto get_scatter_store_inst(Expr fused)
-    -> decltype(store_func.st_inst) {
-        const auto &rw_len = store_func.sp.rw_len;
+    auto get_scatter_store_inst(string f, Expr fused)
+    -> decltype(StoreInfo::st_inst) {
+        const auto &rw_len = store_funcs[f].sp.rw_len;
         internal_assert(rw_len);
 
         map<string, Expr> fix_loops;
         vector<Expr> idxes;
-        string outer_name = output_outer_loop(output_func);
-        string inner_name = output_inner_loop(output_func);
+        string outer_name = output_outer_loop(f);
+        string inner_name = output_inner_loop(f);
         Expr inner_var = make_var(inner_name);
         Expr outer_var = make_var(outer_name);
 
@@ -431,23 +432,43 @@ class GPUStoreBuilder
 
     // We get a block store instruction, where the first dimension is the first space loop
     // TODO: It is can be generalized as we have done for load instructions
-    auto get_2d_store_inst(Expr fused_arg0, Expr fused_arg1)
-    -> decltype(store_func.st_inst) {
-        const auto &rw_len = store_func.sp.rw_len;
-        string outer_name = output_outer_loop(output_func);
-        string inner_name = output_inner_loop(output_func);
+    auto get_2d_store_inst(string f, Expr fused_arg0, Expr fused_arg1)
+    -> decltype(StoreInfo::st_inst) {
+        const auto &rw_len = store_funcs[f].sp.rw_len;
+        string outer_name = output_outer_loop(f);
+        string inner_name = output_inner_loop(f);
 
-        int ext_0 = int_val(loop_bounds[space_loops[0]].extent);
+        int ext_0 = get_output_size(f, true);
         int ext_1 = rw_len / ext_0;
         Expr addr_0 = substitute(inner_name, 0, fused_arg0);
-        Expr addr_1 = substitute(inner_name, 0, fused_arg1);
         addr_0 = simplify(substitute(outer_name, 0, addr_0));
-        addr_1 = simplify(substitute(outer_name, 0, addr_1));
-
+        Expr addr_1 = 0;
+        if (fused_arg1.defined()) {
+            addr_1 = substitute(inner_name, 0, fused_arg1);
+            addr_1 = simplify(substitute(outer_name, 0, addr_1));
+        }
         Expr offs = Shuffle::make_concat({ 0, 0 });
         Expr addr = Shuffle::make_concat({ addr_0, addr_1 });
         Expr elem = Shuffle::make_concat({ ext_0, ext_1 });
         return { InstType::MediaBlock, elem, offs, addr };
+    }
+
+    int get_output_size(string f, bool inner = false) {
+        Function func;
+        internal_assert(function_is_in_environment(f, env, func));
+        vector<Expr> args = func.definition().args();
+        int sz = 1;
+        for (auto idx : space_loops) {
+            auto it = std::find_if(args.begin(), args.end(), [&](Expr e){
+                                    string var = e.as<Variable>()->name;
+                                    return extract_last_token(loop_vars[idx]) == var; });
+            if (it != args.end()) {
+                int extent = int_val(loop_bounds[idx].extent);
+                if (inner) return extent;
+                sz *= extent;
+            }
+        }
+        return sz;
     }
 
 public:
@@ -457,34 +478,30 @@ public:
     void get_store_func() {
         for (auto &kv : func_info) {
             if (kv.second.is_output) {
-                output_func = kv.first;
+                output_funcs.push_back(kv.first);
             }
         }
-        if (output_func.empty()) {
-            // TODO: now we have only one output function
-            return;
+        if (output_funcs.empty()) return;
+
+        for (auto f : output_funcs) {
+            Function func;
+            internal_assert(function_is_in_environment(f, env, func));
+            store_funcs[f].sp = func.definition().schedule().store_params();
+            const auto &shape_args = store_funcs[f].sp.shape_args;
+
+            update_shape_args(f);
+            store_funcs[f].sp.rw_len = get_output_size(f);
+            if (shape_args.size() == 2) {
+                Expr fused_arg0 = fuse_space_loops(f, shape_args[0]);
+                Expr fused_arg1 = fuse_space_loops(f, shape_args[1]);
+                store_funcs[f].st_inst = get_2d_store_inst(f, fused_arg0, fused_arg1);
+            } else {
+                Expr flatten    = get_flatten_expr(f);
+                Expr fused_expr = fuse_space_loops(f, flatten);
+                store_funcs[f].st_inst = get_2d_store_inst(f, fused_expr, Expr());
+            }
+            store_funcs[f].outer   = get_outer_loop(f);
         }
-        Function func;
-        internal_assert(function_is_in_environment(output_func, env, func));
-        store_func.sp = func.definition().schedule().store_params();
-        const auto &shape_args = store_func.sp.shape_args;
-        if (shape_args.empty()) {
-            // No need to transform layout
-            return;
-        }
-        update_shape_args();
-        if (shape_args.size() == 2) {
-            store_func.sp.rw_len = space_loop_extents();
-            Expr fused_arg0    = fuse_space_loops(shape_args[0]);
-            Expr fused_arg1    = fuse_space_loops(shape_args[1]);
-            store_func.st_inst = get_2d_store_inst(fused_arg0, fused_arg1);
-            store_func.outer   = get_outer_loop();
-            return;
-        }
-        Expr flatten       = get_flatten_expr();
-        Expr fused_expr    = fuse_space_loops(flatten);
-        store_func.st_inst = get_scatter_store_inst(fused_expr);
-        store_func.outer   = get_outer_loop();
     }
 };
 
@@ -735,18 +752,22 @@ class GPUBufferBuilder
         }
         IndexFinder dim_0, dim_1;
         dim_0.im_arg = simplify(substitute(fix_loops, im_args[name][0]));
-        dim_1.im_arg = simplify(substitute(fix_loops, im_args[name][1]));
         dim_0.find_under_loops(buff_loop);
-        dim_1.find_under_loops(buff_loop);
         // Remove repeated values
         auto beg_0 = dim_0.index.begin(), end_0 = dim_0.index.end();
-        auto beg_1 = dim_1.index.begin(), end_1 = dim_1.index.end();
-        std::sort(beg_0, end_0), std::sort(beg_1, end_1);
+        std::sort(beg_0, end_0);
         dim_0.index.erase(std::unique(beg_0, end_0), end_0);
-        dim_1.index.erase(std::unique(beg_1, end_1), end_1);
         // Get allocation size
         auto size_0 = Range(0, int_exp(dim_0.index.size()));
-        auto size_1 = Range(0, int_exp(dim_1.index.size()));
+        auto size_1 = Range(0, 1);
+        if (im_args[name].size() > 1) {
+            dim_1.im_arg = simplify(substitute(fix_loops, im_args[name][1]));
+            dim_1.find_under_loops(buff_loop);
+            auto beg_1 = dim_1.index.begin(), end_1 = dim_1.index.end();
+            std::sort(beg_1, end_1);
+            dim_1.index.erase(std::unique(beg_1, end_1), end_1);
+            size_1 = Range(0, int_exp(dim_1.index.size()));
+        }
         gpu_bufs[name].allocation = { size_0, size_1 };
 
         // Merge indexes
@@ -777,14 +798,26 @@ class GPUBufferBuilder
             idx_1 += ext_1;
         }
         // Add instructions
-        for (size_t j = 0; j < exts_1.size(); j++) {
+        if (exts_1.size() > 0) {
+            for (size_t j = 0; j < exts_1.size(); j++) {
+                for (size_t i = 0; i < exts_0.size(); i++) {
+                    GPUBufInfo::LOAD2 ld;
+                    ld.ext_0 = exts_0[i], ld.off_0 = offs_0[i];
+                    ld.ext_1 = exts_1[j], ld.off_1 = offs_1[j];
+                    debug(1) << "Load matrix " << name << " that starts at ("
+                            << ld.off_0 << ", " << ld.off_1 << "), and with extents ("
+                            << ld.ext_0 << ", " << ld.ext_1 << ")\n";
+                    gpu_bufs[name].load_inst.push_back(std::move(ld));
+                }
+            }
+        } else {
             for (size_t i = 0; i < exts_0.size(); i++) {
                 GPUBufInfo::LOAD2 ld;
                 ld.ext_0 = exts_0[i], ld.off_0 = offs_0[i];
-                ld.ext_1 = exts_1[j], ld.off_1 = offs_1[j];
-                debug(1) << "Load matrix " << name << " that starts at ("
-                        << ld.off_0 << ", " << ld.off_1 << "), and with extents ("
-                        << ld.ext_0 << ", " << ld.ext_1 << ")\n";
+                ld.ext_1 = 1, ld.off_1 = 0;
+                debug(1) << "Load vector " << name << " that starts at ("
+                        << ld.off_0 << "), and with extents ("
+                        << ld.ext_0 << ")\n";
                 gpu_bufs[name].load_inst.push_back(std::move(ld));
             }
         }
@@ -815,14 +848,16 @@ class GPUBufferBuilder
             addr = Call::make(Int(32), Call::cm_corr_buf_idx, call_args, Call::Intrinsic);
         }
         int stri = dim_0.index.size();
-        if (exts_1.size() == 1) {
-            addr += dim_1.im_arg * stri;
-        } else {
-            vector<Expr> call_args;
-            call_args.push_back(dim_1.im_arg);
-            call_args.push_back(Shuffle::make_concat(cond_1));
-            call_args.push_back(Shuffle::make_concat(acc_1));
-            addr += Call::make(Int(32), Call::cm_corr_buf_idx, call_args, Call::Intrinsic) * stri;
+        if (exts_1.size() > 0) {
+            if (exts_1.size() == 1) {
+                addr += dim_1.im_arg * stri;
+            } else {
+                vector<Expr> call_args;
+                call_args.push_back(dim_1.im_arg);
+                call_args.push_back(Shuffle::make_concat(cond_1));
+                call_args.push_back(Shuffle::make_concat(acc_1));
+                addr += Call::make(Int(32), Call::cm_corr_buf_idx, call_args, Call::Intrinsic) * stri;
+            }
         }
         gpu_bufs[name].access_idx = addr;
     }
@@ -832,15 +867,15 @@ class GPUBufferBuilder
         if (region.size() == 0) {
             return { UNDEFINED };
         }
-        if (region.size() == 2) {
+        if (region.size() <= 2) {
             int ext_0 = region[0].extent.as<IntImm>()->value;
-            int ext_1 = region[1].extent.as<IntImm>()->value;
+            int ext_1 = region.size() < 2 ? 1 : region[1].extent.as<IntImm>()->value;
             size_t rw_len = ext_0 * ext_1;
             Expr elem = Shuffle::make_concat({ ext_1, ext_0 });
 
             internal_assert(is_zero(region[0].min));
             region[0].extent  = 0;
-            last_arg.arg_idx  = 1;
+            last_arg.arg_idx  = region.size()-1;
             last_arg.num_iter = ext_1;
             return { InstType::MediaBlock, elem, rw_len };
         }
@@ -989,27 +1024,26 @@ public:
 
 class GPUStoreInserter : public IRMutator
 {
-    const Load  *ori_load;
-    const Store *ori_store;
-    bool in_output = false;
     bool in_thread = false;
-    string output_func;
-    string buf_ref_name;
+    const Store *visiting_store = NULL;
+    std::map<string, std::pair<const Store*, const Load*>> ori_nodes;
+    std::map<string, string> func_to_stensor_name;
 
     Stmt make_store(string name, Expr ld_idx, size_t len) {
-        const auto &st_name = ori_store->name;
-        const auto &ld_name = ori_load->name;
-        const auto &sp = store_func.sp;
-        const auto &st = store_func.st_inst;
-        Type ld_type = func_info[output_func].func_type.with_lanes(len);
+        auto ori_store = ori_nodes[name].first;
+        auto ori_load = ori_nodes[name].second;
+        internal_assert(ori_store && ori_load);
+        const auto &sp = store_funcs[name].sp;
+        const auto &st = store_funcs[name].st_inst;
+        Type ld_type = func_info[name].func_type.with_lanes(len);
 
         if (st.type == InstType::MediaBlock) {
             vector<Expr> call_args;
             const auto &elems = st.elem.as<Shuffle>()->vectors;
             const auto &offs  = st.offs.as<Shuffle>()->vectors;
 
-            Expr var_ld = Variable::make(Handle(), ld_name);
-            Expr var_st = Variable::make(Handle(), st_name);
+            Expr var_ld = Variable::make(Handle(), ori_load->name);
+            Expr var_st = Variable::make(Handle(), name + ".buffer");
             call_args.push_back(var_st);
             for (size_t i = 0; i < offs.size(); i++) {
                 Expr var_addr = make_var(addr_name(name, "store", "", i));
@@ -1019,13 +1053,13 @@ class GPUStoreInserter : public IRMutator
             call_args.push_back(ld_idx);
             for (size_t i = 0; i < elems.size(); i++)
                 call_args.push_back(elems[i]);
-            call_args.push_back(buf_ref_name);
+            call_args.push_back(func_to_stensor_name[name]);
 
             Expr call = Call::make(ld_type, Call::cm_store_2d, call_args, Call::Intrinsic);
             return Evaluate::make(call);
         }
 
-        Expr load = Load::make(ld_type, ld_name, ld_idx,
+        Expr load = Load::make(ld_type, ori_load->name, ld_idx,
                                ori_load->image, ori_load->param, const_true(len), ori_load->alignment);
         Expr var_addr = make_var(addr_name(name, "store"));
         Expr var_elem = make_var(elem_name(name, "store"), sp.rw_len);
@@ -1033,6 +1067,12 @@ class GPUStoreInserter : public IRMutator
             var_elem = Shuffle::make_slice(var_elem, 0, 1, len);
         return Store::make(name, load, var_addr +var_elem +st.offs,
                            ori_store->param, const_true(len), ori_store->alignment);
+    }
+
+    string sink_loop_of(string loop) {
+        auto it = std::find_if(func_to_stensor_name.begin(), func_to_stensor_name.end(),
+                               [&](const std::pair<string, string> &kv){ return func_info[kv.first].sink_loop == loop; });
+        return it != func_to_stensor_name.end() ? it->first : "";
     }
 public:
     using IRMutator::visit;
@@ -1044,61 +1084,61 @@ public:
             Function func;
             internal_assert(function_is_in_environment(kv.first, env, func));
             if (kv.second.is_output && func.definition().schedule().has_store()) {
-                output_func = kv.first;
-                buf_ref_name = func.definition().schedule().store_params().name;
+                func_to_stensor_name[kv.first] = func.definition().schedule().store_params().name;
             }
         }
     }
 
     Stmt visit(const For *op) override {
-        if (output_func.empty())
+        if (func_to_stensor_name.empty()) {
             return IRMutator::visit(op);
-
-        const auto &output = func_info[output_func];
-        const auto &sp = store_func.sp;
-        const auto &st = store_func.st_inst;
-        const auto &outer = store_func.outer;
-
+        }
         Stmt body;
         body = mutate(op->body);
         // innermost thread loop
         in_thread = in_thread==false && op->for_type==ForType::GPUThread ?true :false;
 
-        if (in_thread && st.type==InstType::Scatter) {
-            string let_elem_name = elem_name(output_func, "store");
-            body = LetStmt::make(let_elem_name, st.elem, body);
-        }
-        if (op->name == output.sink_loop) {
-            internal_assert(ori_load && ori_store);
+        // if (in_thread && st.type==InstType::Scatter) {
+        //     string let_elem_name = elem_name(output_func, "store");
+        //     body = LetStmt::make(let_elem_name, st.elem, body);
+        // }
+        string f = sink_loop_of(op->name);
+        if (!f.empty()) {
+            auto &output = func_info[f];
+            const auto &sp = store_funcs[f].sp;
+            const auto &st = store_funcs[f].st_inst;
+            const auto &outer = store_funcs[f].outer;
+
             const auto &loop = outer.loop;
             size_t rw_len = sp.rw_len;
             size_t rem_sz = outer.rem_sz;
 
-            auto loop_name = output_outer_loop(output_func);
+            auto loop_name = output_outer_loop(f);
             Expr loop_var  = make_var(loop_name);
             Expr load_base = loop_var * int_exp(rw_len);
             Expr load_idx  = Ramp::make(load_base, 1, rw_len);
-            Stmt store = make_store(output_func, load_idx, rw_len);
+            Stmt store = make_store(f, load_idx, rw_len);
             if (rem_sz > 0) {
                 Expr rem_load_idx = Ramp::make(load_base, 1, rem_sz);
-                Stmt rem_store = make_store(output_func, rem_load_idx, rem_sz);
+                Stmt rem_store = make_store(f, rem_load_idx, rem_sz);
                 Expr rem_cond = simplify(loop_var == loop.extent-1);
                 store = IfThenElse::make(rem_cond, rem_store, store);
             }
 
             Stmt for_node = For::make(loop_name, loop.min, loop.extent,
                                       ForType::Unrolled, op->device_api, store);
-            if (st.type == InstType::Scatter)
-                for_node = LetStmt::make(addr_name(output_func, "store"), st.addr, for_node);
-            else {
+            if (st.type == InstType::Scatter) {
+                for_node = LetStmt::make(addr_name(f, "store"), st.addr, for_node);
+            } else {
                 auto &addrs = st.addr.as<Shuffle>()->vectors;
                 for (size_t i = 0; i < addrs.size(); i++) {
-                    string let_addr_name = addr_name(output_func, "store", "", i);
+                    string let_addr_name = addr_name(f, "store", "", i);
                     for_node = LetStmt::make(let_addr_name, addrs[i], for_node);
                 }
             }
-            if (!is_one(output.if_cond))
+            if (!is_one(output.if_cond)) {
                 for_node = IfThenElse::make(output.if_cond, for_node);
+            }
             body = For::make(op->name, op->min, op->extent, op->for_type, op->device_api, body);
             body = Block::make(body, for_node);
             return body;
@@ -1106,23 +1146,43 @@ public:
         return For::make(op->name, op->min, op->extent, op->for_type, op->device_api, body);
     }
 
+    Expr visit(const Load *op) override {
+        if (visiting_store) {
+            string name = visiting_store->name;
+            ori_nodes[name] = { visiting_store, op };
+        }
+        return IRMutator::visit(op);
+    }
+
     Stmt visit(const Store *op) override {
-        if (op->name == output_func) {
-            in_output = true;
-            ori_load  = op->value.as<Load>();
-            ori_store = op;
+        if (func_to_stensor_name.count(op->name)) {
+            visiting_store = op;
+            mutate(op->value);
+            visiting_store = NULL;
+            // In-situ replacement
+            if (func_info[op->name].sink_loop.empty()) {
+                Stmt store = make_store(op->name, 0, 1);
+                const auto &st = store_funcs[op->name].st_inst;
+                auto &addrs = st.addr.as<Shuffle>()->vectors;
+                for (size_t i = 0; i < addrs.size(); i++) {
+                    string let_addr_name = addr_name(op->name, "store", "", i);
+                    store = LetStmt::make(let_addr_name, addrs[i], store);
+                }
+                return store;
+            }
             return Stmt();
         }
         return IRMutator::visit(op);
     }
 
     Stmt visit(const IfThenElse *op) override {
-        in_output = false;
-        Stmt then_case = mutate(op->then_case);
-        Stmt else_case = mutate(op->else_case);
-        if (!in_output)
-            return IfThenElse::make(op->condition, then_case, else_case);
-        return then_case;
+        if (auto store = op->then_case.as<Store>()) {
+            if (func_to_stensor_name.count(store->name)) {
+                internal_assert(!op->else_case.defined());
+                return mutate(op->then_case);
+            }
+        }
+        return IRMutator::visit(op);
     }
 };
 
@@ -1215,9 +1275,12 @@ private:
 
             Expr var_addr_0 = make_var(addr_name(name, "load", "", 0));
             call_args.push_back(simplify(var_addr_0 + in.off_0));
-            Expr var_addr_1 = make_var(addr_name(name, "load", "", 1));
-            call_args.push_back(simplify(var_addr_1 + in.off_1));
-
+            if (param.dimensions() == 2) {
+                Expr var_addr_1 = make_var(addr_name(name, "load", "", 1));
+                call_args.push_back(simplify(var_addr_1 + in.off_1));
+            } else {
+                call_args.push_back(0);
+            }
             int size = in.ext_0 * in.ext_1;
             Expr store_idx = Ramp::make(acc_size, 1, size);
             acc_size += size;
@@ -1231,7 +1294,10 @@ private:
             block = !block.defined() ? call_node : Block::make(block, call_node);
         }
 
-        auto addrs = gpu_bufs[name].iter_loop.addr.as<Shuffle>()->vectors;
+        auto addr = gpu_bufs[name].iter_loop.addr;
+        vector<Expr> addrs;
+        if (addr.as<Shuffle>()) addrs = addr.as<Shuffle>()->vectors;
+        else addrs.push_back(addr);
         for (size_t i = 0; i < addrs.size(); i++) {
             string let_addr_name = addr_name(name, "load", "", i);
             block = LetStmt::make(let_addr_name, addrs[i], block);
@@ -1290,9 +1356,10 @@ private:
     }
 
     Stmt visit(const For *op) override {
+        if (ends_with(op->name, "__thread_id_x")) {
+            in_kernel = true;
+        }
         Stmt body = mutate(op->body);
-        // True at the beginning of a kernel (the first GPU loop)
-        in_kernel = (in_kernel==false && op->for_type==ForType::GPUThread) ? true : false;
 
         for (auto func : gpu_bufs) {
             string name = func.first;
@@ -1301,7 +1368,7 @@ private:
             const auto &ld_inst = info.iter_inst;
             // const auto &cp_inst = info.copy_inst;
 
-            if (extract_token(op->name, 3) == info.fp.store_at) {
+            if (in_kernel && extract_token(op->name, 3) == info.fp.store_at) {
                 // Build the loops bottom-up and insert copy instruction
                 // size_t sz = val(cp_inst.dest.extent);
                 // if (sz > 0) {
@@ -1332,7 +1399,7 @@ private:
                 body = LetStmt::make(let_elem_name, ld_inst.elem, body);
             }
         }
-        if (in_kernel) {
+        if (ends_with(op->name, "__thread_id_x")) {
             // The allocated register buffers are inserted at the beginning of a kernel
             for (auto name : alloc_buf) {
                 const auto &info = gpu_bufs[name];
@@ -1343,6 +1410,7 @@ private:
                 body = Allocate::make(buf_name(name), image_param[name].type(),
                                     info.fp.store_in, buf_size, const_true(), body);
             }
+            in_kernel = false;
         }
         body = For::make(op->name, op->min, op->extent, op->for_type, op->device_api, body);
         // if (out_body.defined()) {
@@ -1533,7 +1601,7 @@ public:
     void visit(const For* op) override {
         op->body.accept(this);
         for (auto &v : loop_vars) {
-            if (extract_token(op->name, 3) == extract_token(v, 3)) {
+            if (extract_before_tokens(op->name, 3) == v) {
                 new_loop_vars[v] = Variable::make(Int(32), op->name);
             }
         }
@@ -1582,7 +1650,9 @@ void update_loop_vars(Stmt s) {
         info.iter_loop.addr = substitute(lc.new_loop_vars, info.iter_loop.addr);
         info.init_loop.addr = substitute(lc.new_loop_vars, info.init_loop.addr);
     }
-    store_func.st_inst.addr = substitute(lc.new_loop_vars, store_func.st_inst.addr);
+    for (auto &kv : store_funcs) {
+        kv.second.st_inst.addr = substitute(lc.new_loop_vars, kv.second.st_inst.addr);
+    }
 }
 
 Stmt do_prepare_memory_schedule(Stmt s, const map<string, Function> &env, const Adaptor &stt) {

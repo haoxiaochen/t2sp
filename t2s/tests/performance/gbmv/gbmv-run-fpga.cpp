@@ -65,11 +65,11 @@ int main()
 
     int TOTAL_I = ((Ku + Kl + 1 + (VI * III - 1)) / (VI * III)) * (VI * III);
     int I = TOTAL_I / (VI * III);
-    Halide::Runtime::Buffer<float> bandedA(TOTAL_K, TOTAL_I);
+    Halide::Runtime::Buffer<float> bandedA(TOTAL_I, TOTAL_K);
     for (int k = 0; k < TOTAL_K; k++) {
         int j = Ku - k;
         for (int i = max(0, k-Ku); i < min(TOTAL_K, k+Kl+1); i++) {
-            bandedA(k, i+j) = A(k, i);
+            bandedA(i+j, k) = A(k, i);
         }
     }
     Halide::Runtime::Buffer<float> O(VI*III+KKK-1, II, KK, I, K);

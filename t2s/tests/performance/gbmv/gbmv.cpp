@@ -39,8 +39,8 @@ int main()
     #define total_k           (kkk + KKK*kk + KKK*KK*k)
 
     // Outer loop bounds, which are determined by input sizes
-    #define I               (A.dim(1).extent() / (VI * III * II))
-    #define K               (A.dim(0).extent() / (KKK * KK))
+    #define I               (A.dim(0).extent() / (VI * III * II))
+    #define K               (A.dim(1).extent() / (KKK * KK))
 
     // Type of the data to process in C and T2S
     #define CTYPE float
@@ -57,7 +57,7 @@ int main()
     MV(P) = select(kkk == 0 || (vi == VI-1 && iii == III-1), 0,
                     select(vi == VI-1, MV(P_kkk_minus_1_iii_plus_1),
                                        MV(P_kkk_minus_1_vi_plus_1))
-                  ) + A(total_k, total_i) * fX(P);
+                  ) + A(total_i, total_k) * fX(P);
     TopOut(P_top) = select(vi == 0 && iii == 0, MV(P));
     RightOut(P_right) = select(kkk == KKK-1, select(vi == 0 && iii == 0, 0, MV(P)));
 
@@ -70,7 +70,7 @@ int main()
 
     // GPU can have many threads running in parallel.
 #ifdef GPU
-    X.gpu_blocks(j, i).gpu_threads(jj, ii);
+    fX.gpu_blocks(i, k).gpu_threads(ii);
 #endif
 
     // I/O network
@@ -80,7 +80,11 @@ int main()
     X >> DX >> SX.scope(kk) >> fX;
     TopOut >> DTopOut;
     RightOut >> DRightOut;
+#ifdef GPU
+    Stensor::realize(IntelGPU);
+#else
     Stensor::realize(IntelFPGA);
+#endif
 
     Func Out("Out", Place::Host);
     Func DTopOutWrapper = DTopOut.get_wrapper_func();
@@ -96,8 +100,12 @@ int main()
 
     // Compile the kernel to an FPGA bitstream, and expose a C interface for the host to invoke
     Target acc = get_host_target();
+#ifdef GPU
+    acc.set_feature(Target::IntelGPU);
+#else
     acc.set_feature(Target::IntelFPGA);
     acc.set_feature(Target::EnableSynthesis);
+#endif
     Out.compile_to_host("gbmv-interface", { A, X }, "gbmv", acc);
     printf("Success\n");
 

@@ -36,7 +36,7 @@
 #include "const-parameters.h"
 
 #ifdef TINY // For verifying correctness only
-    #define N       4
+    #define N       1
 #else
     #define N       1024
 #endif

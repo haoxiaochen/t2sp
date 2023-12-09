@@ -5,6 +5,7 @@
 #include "IROperator.h"
 #include "Simplify.h"
 #include "Substitute.h"
+#include "../../t2s/src/Utilities.h"
 
 namespace Halide {
 namespace Internal {
@@ -342,8 +343,12 @@ void CodeGen_CM_Dev::CodeGen_CM_C::print_media_block_rw(Type t, vector<Expr> arg
     int rows = args[6].as<IntImm>()->value;
     // internal_assert(cols <= 8);
     int bytes = t.bits() / 8;
-    int max_cols_at_once = (cols < 8 ? cols : 8);
-    int max_rows_at_once = 256 / (max_cols_at_once*bytes);
+    int max_cols_at_once = 128 / bytes;
+    int max_rows_at_once = 1;
+    if (rows > 1) {
+        max_cols_at_once = (cols < 8 ? cols : 8);
+        max_rows_at_once = 256 / (max_cols_at_once*bytes);
+    }
 
     for (int i = 0; i < rows; i += max_rows_at_once) {
         int rows_at_once = i + max_rows_at_once <= rows ? max_rows_at_once : rows-i;
@@ -351,17 +356,32 @@ void CodeGen_CM_Dev::CodeGen_CM_C::print_media_block_rw(Type t, vector<Expr> arg
             int cols_at_once = j + max_cols_at_once <= cols ? max_cols_at_once : cols-j;
 
             // Replace the buffer name with the one specified in stensors
-            string name = is_write ? args[7].as<StringImm>()->value : print_expr(args[0]);
+            string name = is_write ? args.back().as<StringImm>()->value : print_expr(args[0]);
             stream << get_indent() << (is_write ? "write(" : "read(");
             stream << print_name(name) << ", ";
             stream << print_expr(args[1] * bytes) << ", ";
-            stream << print_expr(args[2] + i) << ", ";
+            if (rows > 1) {
+                stream << print_expr(args[2] + i) << ", ";
+            }
             auto ramp = args[4].as<Ramp>();
-            stream << print_expr(args[3]) << ".select<"
-               << ramp->lanes << ", " << ramp->stride << ">(" << ramp->base << ")"
-               << ".format<" << print_type(t) << ", " << rows << ", " << cols << ">()"
-               << ".select<" << rows_at_once << ", 1, " << cols_at_once << ", 1>("
-               << i << ", " << j << "));\n";
+            if (ramp) {
+                stream << print_expr(args[3]);
+                if (rows > 1) {
+                    stream << ".select<" << ramp->lanes << ", " << ramp->stride << ">(" << ramp->base << ")"
+                           << ".format<" << print_type(t) << ", " << rows << ", " << cols << ">()";
+                }
+                stream << ".select<";
+                if (rows > 1) {
+                    stream << rows_at_once << ", 1, ";
+                }
+                stream << cols_at_once << ", 1>(";
+                if (rows > 1) {
+                    stream << i << ", ";
+                }
+                stream << j << "));\n";
+            } else {
+                stream << print_expr(args[3]) << "(" << print_expr(args[4]) << "));\n";
+            }
         }
     }
 }
@@ -695,10 +715,11 @@ public:
     void visit(const Call *op) override {
         if (op->is_intrinsic(Call::cm_store_2d)) {
             internal_assert(op->args[0].as<Variable>());
-            auto &name = op->args[0].as<Variable>()->name;
-            if (name == buf_name && op->args.size() == 8) {
-                internal_assert(op->args[7].as<StringImm>());
-                ref_name = op->args[7].as<StringImm>()->value;
+            auto name = remove_postfix(op->args[0].as<Variable>()->name, ".buffer");
+            if (name == buf_name) {
+                auto last_arg = op->args.back();
+                internal_assert(last_arg.as<StringImm>());
+                ref_name = last_arg.as<StringImm>()->value;
             }
         }
     }

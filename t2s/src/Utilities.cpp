@@ -77,7 +77,7 @@ string extract_before_tokens(const string &str, int num_tokens) {
             }
         }
     }
-    return "";
+    return str;
 }
 
 string extract_after_tokens(const string &str, int num_tokens) {

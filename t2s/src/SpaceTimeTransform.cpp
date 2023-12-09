@@ -588,7 +588,7 @@ class SpaceTimeTransformer : public IRMutator {
                             }
                         }
                     }
-                    merged_func.has_shift_reg(true);
+                    // merged_func.has_shift_reg(true);
                 }
             }
             auto &src_vars = param_vector[0].src_vars;
@@ -1104,9 +1104,9 @@ class PreRewriter : public IRMutator {
 
 // Move realize nodes inner the GPU thread loops
 // Otherwise the code generator cannot find them
-class PostRewriter : public IRMutator {
+class MoveBufferUnderDeviceScope : public IRMutator {
   public:
-    PostRewriter(const std::map<std::string, Function>& _env)
+    MoveBufferUnderDeviceScope(const std::map<std::string, Function>& _env)
         : env(_env) {}
 
   private:
@@ -1117,23 +1117,35 @@ class PostRewriter : public IRMutator {
     std::string last_gpu_loop;
 
     Stmt visit(const Realize *op) override {
-        realize_nodes.push_back(op);
-        return mutate(op->body);
+        Function func = env.at(op->name);
+        if (ends_with(op->name, "_temp")) {
+            realize_nodes.push_back(op);
+            return mutate(op->body);
+        }
+        if (func.definition().schedule().is_merged() || func.has_merged_defs()) {
+            if (!func.definition().schedule().is_output()) {
+                realize_nodes.push_back(op);
+                return mutate(op->body);
+            }
+        }
+        return IRMutator::visit(op);
     }
 
     Stmt visit(const ProducerConsumer *op) override {
-        return mutate(op->body);
+        auto it = std::find_if(realize_nodes.begin(), realize_nodes.end(),
+                               [&](const Realize* r){ return r->name == op->name; });
+        if (it != realize_nodes.end()) return mutate(op->body);
+        return IRMutator::visit(op);
     }
 
     Stmt visit(const For *op) override {
         if (op->for_type == ForType::GPUThread) {
             last_gpu_loop = op->name;
         }
-
         Stmt body = mutate(op->body);
         if (op->name == last_gpu_loop) {
             for (auto &r : realize_nodes) {
-                // body = ProducerConsumer::make(r->name, true, body);
+                body = ProducerConsumer::make(r->name, true, body);
                 body = Realize::make(r->name, r->types, r->memory_type, r->bounds, r->condition, body);
             }
         }
@@ -1155,7 +1167,7 @@ Stmt apply_space_time_transform(Stmt s,
     if (target.has_feature(Target::IntelGPU)) {
         PreRewriter rewriter(env);
         s = rewriter.mutate(s);
-        debug(4) << "Convert systolic into broadcast on GPUs:\n"
+        debug(4) << "After converting systolic into broadcast on GPUs:\n"
                  << s << "\n";
     }
     // Apply space time transformation
@@ -1163,8 +1175,10 @@ Stmt apply_space_time_transform(Stmt s,
     s = mutator.mutate(s);
 
     if (target.has_feature(Target::IntelGPU)) {
-        PostRewriter rewriter(env);
+        MoveBufferUnderDeviceScope rewriter(env);
         s = rewriter.mutate(s);
+        debug(4) << "After moving buffers under device scope:\n"
+                 << s << "\n";
         // Export original loops to memory-related schedules,
         // since transformed loops may confuse the bound inference on GPUs
         Adaptor loops = {mutator.loop_vars, mutator.loop_mins, mutator.loop_extents};

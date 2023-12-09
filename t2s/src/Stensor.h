@@ -33,7 +33,8 @@ enum SMemType {
 
 enum Starget {
     IntelGPU,
-    IntelFPGA
+    IntelFPGA,
+    None
 };
 
 struct FuncOrStensor;

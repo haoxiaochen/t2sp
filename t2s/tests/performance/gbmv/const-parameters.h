@@ -21,16 +21,15 @@
 
 // Inner loop bounds, which are static constant parameters of the design
 #ifdef GPU
-    #define KKK         8
-    #define JJJ         8
-    #define III         32
-    #define JJ          8
-    #define II          2
+    #define KKK         32
+    #define VI          16
+    #define III         1
+    #define II          8
     #define KK          1
 #else // FPGA
     #ifdef TINY // For verifying correctness only
         #define VI          8
-        #define III         1
+        #define III         8
         #define II          1
         #define KK          1
         #define KKK         64

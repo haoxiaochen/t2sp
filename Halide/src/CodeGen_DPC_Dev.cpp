@@ -2,7 +2,8 @@
 #include "IROperator.h"
 #include "Simplify.h"
 #include "Substitute.h"
-#include "fstream"
+#include "../../t2s/src/Utilities.h"
+#include <fstream>
 #include <cmath>
 #include <sstream>
 #include <stack>
@@ -703,10 +704,11 @@ public:
     void visit(const Call *op) override {
         if (op->is_intrinsic(Call::cm_store_2d)) {
             internal_assert(op->args[0].as<Variable>());
-            auto &name = op->args[0].as<Variable>()->name;
-            if (name == buf_name && op->args.size() == 8) {
-                internal_assert(op->args[7].as<StringImm>());
-                ref_name = op->args[7].as<StringImm>()->value;
+            auto name = remove_postfix(op->args[0].as<Variable>()->name, ".buffer");
+            if (name == buf_name) {
+                auto last_arg = op->args.back();
+                internal_assert(last_arg.as<StringImm>());
+                ref_name = last_arg.as<StringImm>()->value;
             }
         }
     }

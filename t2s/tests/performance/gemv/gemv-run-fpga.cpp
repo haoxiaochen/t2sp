@@ -46,77 +46,47 @@
 
 using namespace std;
 
-#define MATRIX_OP_IDENTITY 0;
-#define MATRIX_OP_TRANSPOSE 1;
-
 int main()
 {
-    const int TOTAL_I = III * II * I;
-    const int TOTAL_K = KKK * KK * K;
+    const int TOTAL_I = VI * III * II * I;
+    const int TOTAL_K = KK * K;
 
-    int opa;
-    opa = MATRIX_OP_IDENTITY;
+    Halide::Runtime::Buffer<float> a(TOTAL_K, TOTAL_I), x(TOTAL_K);
 
-    float alpha, beta;
-    Halide::Runtime::Buffer<float> a(TOTAL_K, TOTAL_I), x(TOTAL_K), yy(TOTAL_I);
-
-    alpha = random();
-    beta = random();
     for (size_t i = 0; i < TOTAL_I; i++) {
-        for (size_t j = 0; j < TOTAL_K; j++) {
-            a(j, i) = random();
+        for (size_t k = 0; k < TOTAL_K; k++) {
+            a(i, k) = random();
         }
     }
 
-    for (size_t j = 0; j < TOTAL_K; j++) {
-        x(j) = random();
+    for (size_t k = 0; k < TOTAL_K; k++) {
+        x(k) = random();
     }
 
-    for (size_t i = 0; i < TOTAL_I; i++) {
-        yy(i) = random() * random();
-    }
-
-    Halide::Runtime::Buffer<float> y(III, II, I);
+    Halide::Runtime::Buffer<float> y(VI, III, II, I);
     gemv(a, x, y);
 
 #ifdef TINY
-    // Validate the results
-    // for (int i = 0; i < I; i++)
-    //     for (int ii = 0; ii < II; ii++)
-    //         for (int iii = 0; iii < III; iii++) {
-    //             size_t total_i = iii + III * ii + III * II * i;
-    //             float golden = beta * yy(total_i);
-
-    //             for (int j = 0; j < TOTAL_K; j++) {
-    //                 float aa = opa == 0 ? a(j, total_i) : a(total_i, j);
-    //                 float xx = x(j);
-    //                 golden += alpha * aa * xx;
-    //             }
-
-    //             cout << golden << " " << y(iii, ii, i) << endl;
-    //             assert(fabs(golden - y(iii, ii, i)) < 0.005*fabs(golden));
-    //         }
     for (int i = 0; i < I; i++)
-        for (int ii = 0; ii < II; ii++)
-            for (int iii = 0; iii < III; iii++) {
-                size_t total_i = iii + III * ii + III * II * i;
-                float golden = 0;
-                for (int j = 0; j < TOTAL_K; j++) {
-                    float aa = a(j, total_i);
-                    float xx = x(j);
-                    golden += aa * xx;
-                }
-                assert(fabs(golden - y(iii, ii, i)) < 0.005*fabs(golden));
+      for (int ii = 0; ii < II; ii++)
+        for (int iii = 0; iii < III; iii++)
+          for (int vi = 0; vi < VI; vi++) {
+            size_t total_i = vi + VI*iii + VI*III*ii + VI*III*II*i;
+            float golden = 0;
+            for (int k = 0; k < TOTAL_K; k++) {
+                golden += a(total_i, k) * x(k);
             }
+            assert(fabs(golden - y(vi, iii, ii, i)) < 0.005*fabs(golden));
+        }
 #else
     // Report performance. DSPs, FMax and ExecTime are automatically figured out from the static analysis
     // during FPGA synthesis and and the dynamic profile during the FGPA execution.
     float mem_bandwidth = 34; // pac_a10 on DevCloud has 34GB/s memory bandwidth
     float compute_roof = 2 * DSPs() * FMax();
-    float number_ops = 2 * (float)(III * II * I) * (float)(KKK * KK * K); // Total operations (GFLOP for GEMV), independent of designs
-    float number_bytes = (float)(KKK * III) * (float)(KK * II) * (float)(K * I) * 4 +
-                         (float)(KKK * KK * K) * 4 +
-                         (float)(III * II * I) * 4;
+    float number_ops = 2 * (float)(VI * III * II * I) * (float)(KK * K); // Total operations (GFLOP for GEMV), independent of designs
+    float number_bytes = (float)(VI * III) * (float)(KK * II) * (float)(K * I) * 4 +
+                         (float)(KK * K) * 4 +
+                         (float)(VI * III * II * I) * 4;
     float exec_time= ExecTime();
     roofline(mem_bandwidth, compute_roof, number_ops, number_bytes,exec_time);
     if (fopen("roofline.png", "r") == NULL) {
