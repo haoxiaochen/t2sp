@@ -35,10 +35,10 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
 
   ```
   # For Arria 10 FPGA
-  qsub -q batch@v-qsvr-fpga -l nodes=arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
+  qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
   
   # For Stratix 10 FPGA
-  qsub -q batch@v-qsvr-fpga -l nodes=darby:ppn=2  -d $HOME/t2sp $HOME/t2sp/install-tools.sh
+  qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2  -d $HOME/t2sp $HOME/t2sp/install-tools.sh
   
   # For GEN 9.5 GPU
   qsub -l nodes=1:gen9:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh 
