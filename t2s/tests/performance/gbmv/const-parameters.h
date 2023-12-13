@@ -34,10 +34,11 @@
         #define KK          1
         #define KKK         64
     #elif S10
-        #define KKK	        1
-        #define III	        64
-        #define II	        64
-        #define KK	        8192
+        #define VI          64
+        #define III         64
+        #define II          1
+        #define KK          1
+        #define KKK         8192
     #else
         #define VI          32
         #define III         64

@@ -51,7 +51,7 @@ int main()
     const int TOTAL_I = VI * III * II * I;
     const int TOTAL_K = KK * K;
 
-    Halide::Runtime::Buffer<float> a(TOTAL_K, TOTAL_I), x(TOTAL_K);
+    Halide::Runtime::Buffer<float> a(TOTAL_I, TOTAL_K), x(TOTAL_K);
 
     for (size_t i = 0; i < TOTAL_I; i++) {
         for (size_t k = 0; k < TOTAL_K; k++) {

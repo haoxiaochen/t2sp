@@ -76,10 +76,10 @@ int main()
     // I/O network
     Stensor DA("DA", DRAM), DX("DX", DRAM), SA("SA", SRAM), SX("SX", SRAM);
     Stensor DTopOut("DTopOut", DRAM), DRightOut("DRightOut", DRAM);
-    A >> DA.out(vi) >> SA.scope(kk).out(vi) >> fX;
-    X >> DX >> SX.scope(kk) >> fX;
-    TopOut >> DTopOut;
-    RightOut >> DRightOut;
+    A >> DA.out(vi) >> FIFO(256) >> SA.scope(kk).out(vi) >> FIFO(256) >> fX;
+    X >> DX >> FIFO(256) >> SX.scope(kk) >> FIFO(256) >> fX;
+    TopOut >> FIFO(256) >> DTopOut;
+    RightOut >> FIFO(256) >> DRightOut;
 #ifdef GPU
     Stensor::realize(IntelGPU);
 #else

@@ -18,7 +18,7 @@ else
     location="$1"
 fi
 
-if [ "$2" != "gemm" -a "$2" != "dgemm" -a "$2" != "cgemm" -a "$2" != "zgemm" -a "$2" != "conv"  -a  "$2" != "capsule" -a "$2" != "pairhmm" -a "$2" != "qrd" -a "$2" != "trmm" -a "$2" != "symv" -a "$2" != "syr2k" -a "$2" != "trsv" -a "$2" != "trsm" -a "$2" != "gbmv" ]; then
+if [ "$2" != "gemm" -a "$2" != "dgemm" -a "$2" != "cgemm" -a "$2" != "zgemm" -a "$2" != "conv"  -a  "$2" != "capsule" -a "$2" != "pairhmm" -a "$2" != "qrd" -a "$2" != "trmm" -a "$2" != "symv" -a "$2" != "syr2k" -a "$2" != "trsv" -a "$2" != "trsm" -a "$2" != "gbmv" -a "$2" != "gemv" ]; then
     show_usage
     return
 else

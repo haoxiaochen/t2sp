@@ -19,6 +19,9 @@ function aoc_options {
     else
         aoc_opt="-v -profile -fpc -fp-relaxed -high-effort -board=$FPGA_BOARD"
     fi
+    if [ "$workload" == "gbmv" -o "$workload" == "gemv" ]; then
+        aoc_opt+=" -no-interleaving=default"
+    fi
     echo "$aoc_opt"
 }
 
@@ -55,7 +58,7 @@ function test_fpga_kernel {
 }
 
 function generate_test_fpga_kernel {
-    source ../../../setenv.sh $location fpga
+    source ../../../setenv.sh $location opencl fpga
     cd $workload
     if [ "$target" == "s10" -a "$size" == "LARGE" ]; then
         size="S10"

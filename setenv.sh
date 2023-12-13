@@ -110,7 +110,7 @@ if [ "$1" = "devcloud" -a "$2" = "opencl" -a "$3" = "fpga" ]; then
         tools_setup -t  A10DS 1.2.1
         export FPGA_BOARD=pac_a10
     else
-        if grep "fpga,darby" tmp.txt; then
+        if grep "fpga,stratix10" tmp.txt; then
             tools_setup -t S10DS
             export FPGA_BOARD=pac_s10_dc
         else

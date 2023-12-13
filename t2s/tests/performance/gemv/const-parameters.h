@@ -32,14 +32,14 @@
         #define II          1
         #define KK          32
     #elif S10
-        #define KKK         1
-        #define III         64
-        #define II          32
+        #define VI          64
+        #define III         32
+        #define II          1
         #define KK          32
     #else
-        #define KKK         1
+        #define VI          32
         #define III         32
-        #define II          32
+        #define II          1
         #define KK          32
     #endif
 #endif
