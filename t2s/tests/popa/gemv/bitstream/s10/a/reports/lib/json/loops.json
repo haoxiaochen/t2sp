@@ -1,0 +1,3501 @@
+{
+  "columns":
+  ["", "Pipelined", "II", "Speculated iterations", "Details"]
+  , "children":
+  [
+    {
+      "name":"Kernel: kernel_aLoader"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+            , "line":76
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: kernel_aLoader.B6"
+        }
+        , {
+          "type":"text"
+          , "text":"Use the %L report to view more details"
+          , "links":
+          [
+            {
+              "view":"Fmax II Report"
+            }
+          ]
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_aLoader.B2"
+          , "data":
+          ["Yes", ">=1", "4"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                , "line":88
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: enabled."
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_aLoader.B3"
+              , "data":
+              ["Yes", ">=1", "4"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                    , "line":91
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: enabled."
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_aLoader.B6"
+                  , "data":
+                  ["Yes", "~1", "0"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                        , "line":93
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: disabled."
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"100"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"103"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"107"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"111"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"125"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                            , "line":97
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                    , {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                            , "line":119
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_aFeeder"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+            , "line":136
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_aFeeder.B2"
+          , "data":
+          ["Yes", ">=1", "4"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                , "line":143
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: enabled."
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_aFeeder.B3"
+              , "data":
+              ["Yes", ">=1", "4"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                    , "line":146
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: enabled."
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_aFeeder.B6"
+                  , "data":
+                  ["Yes", "~1", "4"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                        , "line":148
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: enabled."
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"150"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"160"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                            , "line":154
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_xLoader"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+            , "line":168
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: kernel_xLoader.B6"
+        }
+        , {
+          "type":"text"
+          , "text":"Use the %L report to view more details"
+          , "links":
+          [
+            {
+              "view":"Fmax II Report"
+            }
+          ]
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_xLoader.B2"
+          , "data":
+          ["Yes", ">=1", "4"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                , "line":176
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: enabled."
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_xLoader.B3"
+              , "data":
+              ["Yes", ">=1", "4"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                    , "line":179
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: enabled."
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_xLoader.B6"
+                  , "data":
+                  ["Yes", "~1", "0"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                        , "line":181
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: disabled."
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"187"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"188"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_xFeeder"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+            , "line":198
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_xFeeder.B2"
+          , "data":
+          ["Yes", "~1", "7"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                , "line":214
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: enabled."
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instructions:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Channel Read Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"224"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Channel Write Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"258"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_Out"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+            , "line":267
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck blocks: kernel_Out.B2, kernel_Out.B3, kernel_Out.B5"
+        }
+        , {
+          "type":"text"
+          , "text":"Use the %L report to view more details"
+          , "links":
+          [
+            {
+              "view":"Fmax II Report"
+            }
+          ]
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_Out.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                , "line":282
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: disabled."
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_Out.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                    , "line":285
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: disabled."
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_Out.B5"
+                  , "data":
+                  ["Yes", "~1", "0"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                        , "line":287
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: disabled."
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"309"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"312"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"378"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                            , "line":290
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                        {
+                          "name":"Fully unrolled loop"
+                          , "data":
+                          ["n/a", "n/a", "n/a"]
+                          , "debug":
+                          [
+                            [
+                              {
+                                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                                , "line":295
+                              }
+                            ]
+                          ]
+                          , "details":
+                          [
+                            {
+                              "type":"brief"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                            , {
+                              "type":"text"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                          ]
+                          , "children":
+                          [
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                            , "line":316
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_unloader"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+            , "line":387
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: kernel_unloader.B5"
+        }
+        , {
+          "type":"text"
+          , "text":"Use the %L report to view more details"
+          , "links":
+          [
+            {
+              "view":"Fmax II Report"
+            }
+          ]
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_unloader.B1"
+          , "data":
+          ["Yes", ">=1", "4"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                , "line":395
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"Serial exe: Memory dependency"
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"400"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"406"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                      , "line":"404"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: enabled."
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_unloader.B4"
+              , "data":
+              ["Yes", ">=1", "4"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                    , "line":397
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Serial exe: Memory dependency"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"400"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                          , "line":"404"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: enabled."
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_unloader.B5"
+                  , "data":
+                  ["Yes", "~1", "0"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                        , "line":402
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: disabled."
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instruction:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+                              , "line":"406"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

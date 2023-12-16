@@ -1,0 +1,544 @@
+{
+  "performanceSummary":
+  {
+    "name":"Kernel Summary"
+    , "columns":
+    ["Kernel Name", "Kernel Type", "Autorun", "Workgroup Size", "# Compute Units", "Hyper-Optimized Handshaking"]
+    , "children":
+    [
+      {
+        "name":"kernel_DA"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+          , "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+          , {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to loop orchestration compiler optimization being disabled in loop kernel_DA.B6."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":77
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DRightOut"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+          , "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+          , {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to instruction in Kernel kernel_DA"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":413
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DTopOut"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+          , "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+          , {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to instruction in Kernel kernel_DA"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":450
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DX"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+          , "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+          , {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to instruction in Kernel kernel_DA"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":169
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SA"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+          , "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+          , {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to instruction in Kernel kernel_DA"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":137
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SX"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+          , "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+          , {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to instruction in Kernel kernel_DA"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":202
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_TopOut"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+          , "Off"
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+          , {
+            "type":"text"
+            , "text":"Hyper-optimized handshaking disabled due to instruction in Kernel kernel_DA"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":271
+            }
+          ]
+        ]
+      }
+    ]
+  }
+  , "estimatedResources":
+  {
+    "name":"Estimated Resource Usage"
+    , "columns":
+    ["Kernel Name", "ALUTs ", "FFs  ", "RAMs ", "DSPs ", "MLABs"]
+    , "children":
+    [
+      {
+        "name":"kernel_DA"
+        , "data":
+        [25570, 260178, 278, 0, 126]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":77
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DRightOut"
+        , "data":
+        [7893, 16760, 17, 1.5, 214]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":413
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DTopOut"
+        , "data":
+        [3261, 5838, 17, 1.5, 33]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":450
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DX"
+        , "data":
+        [6532, 8910, 50, 7, 21]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":169
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SA"
+        , "data":
+        [2160, 2031, 0, 0, 10]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":137
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SX"
+        , "data":
+        [2264, 2520, 32, 1.5, 16]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":202
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_TopOut"
+        , "data":
+        [10599, 21642, 208, 64, 169]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":271
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Kernel Subtotal"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [58279, 317879, 602, 75, 589]
+      }
+      , {
+        "name":"Global Interconnect"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [16956, 19160, 0, 0, 0]
+      }
+      , {
+        "name":"Board Interface"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [200000, 275150, 467, 0, 0]
+      }
+      , {
+        "name":"System description ROM"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [2, 71, 2, 0, 0]
+      }
+      , {
+        "name":"Pipe and channel resources"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [66, 18756, 159, 0, 0]
+      }
+      , {
+        "name":"Total"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [275303, 631016, 1230, 75, 589]
+        , "data_percent":
+        [14.7517, 16.9061, 10.494, 1.31944]
+      }
+      , {
+        "name":"Available"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [1866240, 3732480, 11721, 5760, 0]
+      }
+    ]
+  }
+  , "compileWarnings":
+  {
+    "name":"Compile Warnings"
+    , "children":
+    [
+      {
+        "name":"Load uses a Burst-coalesced non-aligned cached LSU"
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":101
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Load uses a Burst-coalesced non-aligned cached LSU"
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":104
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Load uses a Burst-coalesced non-aligned cached LSU"
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":108
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Load uses a Burst-coalesced non-aligned cached LSU"
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":112
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Load uses a Burst-coalesced cached LSU"
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Load with a private 512 kilobit cache. Cache is not shared with any other load. It is flushed on kernel start. Use Dynamic Profiler to verify cache effectiveness. Other kernels should not be updating the data in global memory while this kernel is using it. Cache is created when memory access pattern is data-dependent or appears to be repetitive. Simplify access pattern or mark pointer as 'volatile' to disable generation of this cache."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+              , "line":191
+            }
+          ]
+        ]
+      }
+    ]
+  }
+}

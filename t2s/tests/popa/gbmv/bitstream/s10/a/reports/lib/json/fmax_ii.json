@@ -1,0 +1,1415 @@
+{
+  "basicblocks":
+  {
+    "kernel_DA.B0":
+    {
+      "name":"kernel_DA.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DA.B1":
+    {
+      "name":"kernel_DA.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DA.B2":
+    {
+      "name":"kernel_DA.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"89"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DA.B3":
+    {
+      "name":"kernel_DA.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"92"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DA.B4":
+    {
+      "name":"kernel_DA.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DA.B5":
+    {
+      "name":"kernel_DA.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DA.B6":
+    {
+      "name":"kernel_DA.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"432.0"
+      , "achieved_ii":1
+      , "latency":252
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"Yes"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Variable on loop carried feedback path"
+        }
+      ]
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"94"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_SA.B0":
+    {
+      "name":"kernel_SA.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_SA.B1":
+    {
+      "name":"kernel_SA.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_SA.B2":
+    {
+      "name":"kernel_SA.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"144"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_SA.B3":
+    {
+      "name":"kernel_SA.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"147"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_SA.B4":
+    {
+      "name":"kernel_SA.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_SA.B5":
+    {
+      "name":"kernel_SA.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_SA.B6":
+    {
+      "name":"kernel_SA.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"149"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DX.B0":
+    {
+      "name":"kernel_DX.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DX.B1":
+    {
+      "name":"kernel_DX.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DX.B2":
+    {
+      "name":"kernel_DX.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"177"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DX.B3":
+    {
+      "name":"kernel_DX.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":10
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"180"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DX.B4":
+    {
+      "name":"kernel_DX.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DX.B5":
+    {
+      "name":"kernel_DX.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DX.B6":
+    {
+      "name":"kernel_DX.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"432.0"
+      , "achieved_ii":1
+      , "latency":249
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"Yes"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Variable on loop carried feedback path"
+        }
+      ]
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"182"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_SX.B0":
+    {
+      "name":"kernel_SX.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":20
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_SX.B1":
+    {
+      "name":"kernel_SX.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_SX.B2":
+    {
+      "name":"kernel_SX.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":28
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"218"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_TopOut.B0":
+    {
+      "name":"kernel_TopOut.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_TopOut.B1":
+    {
+      "name":"kernel_TopOut.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_TopOut.B2":
+    {
+      "name":"kernel_TopOut.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"432.0"
+      , "achieved_ii":1
+      , "latency":7
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"Yes"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Variable on loop carried feedback path"
+        }
+      ]
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"285"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_TopOut.B3":
+    {
+      "name":"kernel_TopOut.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"432.0"
+      , "achieved_ii":1
+      , "latency":7
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"Yes"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Variable on loop carried feedback path"
+        }
+      ]
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"288"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_TopOut.B4":
+    {
+      "name":"kernel_TopOut.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_TopOut.B5":
+    {
+      "name":"kernel_TopOut.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"432.0"
+      , "achieved_ii":1
+      , "latency":7
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"Yes"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Variable on loop carried feedback path"
+        }
+      ]
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"290"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_TopOut.B6":
+    {
+      "name":"kernel_TopOut.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_TopOut.B7":
+    {
+      "name":"kernel_TopOut.B7"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"432.0"
+      , "achieved_ii":1
+      , "latency":147
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"Yes"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":4
+      , "details":
+      [
+        {
+          "type":"text"
+          , "text":"Variable on loop carried feedback path"
+        }
+      ]
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"292"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_TopOut.B8":
+    {
+      "name":"kernel_TopOut.B8"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":6
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DRightOut.B0":
+    {
+      "name":"kernel_DRightOut.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DRightOut.B1":
+    {
+      "name":"kernel_DRightOut.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DRightOut.B2":
+    {
+      "name":"kernel_DRightOut.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":18
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"420"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DRightOut.B3":
+    {
+      "name":"kernel_DRightOut.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":12
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"423"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DRightOut.B4":
+    {
+      "name":"kernel_DRightOut.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":8
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DRightOut.B5":
+    {
+      "name":"kernel_DRightOut.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DRightOut.B6":
+    {
+      "name":"kernel_DRightOut.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":23
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"425"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DRightOut.B7":
+    {
+      "name":"kernel_DRightOut.B7"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":18
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":4
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"430"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DRightOut.B8":
+    {
+      "name":"kernel_DRightOut.B8"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":3
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DTopOut.B0":
+    {
+      "name":"kernel_DTopOut.B0"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DTopOut.B1":
+    {
+      "name":"kernel_DTopOut.B1"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":0
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DTopOut.B2":
+    {
+      "name":"kernel_DTopOut.B2"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":17
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"457"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DTopOut.B3":
+    {
+      "name":"kernel_DTopOut.B3"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":11
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"460"
+              }
+            ]
+          }
+        ]
+      }
+    }
+    , "kernel_DTopOut.B4":
+    {
+      "name":"kernel_DTopOut.B4"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":1
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DTopOut.B5":
+    {
+      "name":"kernel_DTopOut.B5"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":0
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"No"
+      , "is_single_block_loop":"No"
+      , "loop_layer":2
+      , "loop_location":
+      {
+      }
+    }
+    , "kernel_DTopOut.B6":
+    {
+      "name":"kernel_DTopOut.B6"
+      , "target_fmax":"Not specified"
+      , "target_ii":"Not specified"
+      , "achieved_fmax":"480.0"
+      , "achieved_ii":1
+      , "latency":25
+      , "max_interleaving":1
+      , "is_fmax_bottleneck":"No"
+      , "is_loop_header":"Yes"
+      , "is_single_block_loop":"Yes"
+      , "loop_layer":3
+      , "loop_location":
+      {
+        "details":
+        [
+          {
+            "type":"text"
+            , "text":"Loop:  (%L)"
+            , "links":
+            [
+              {
+                "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+                , "line":"462"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+  , "functions":
+  {
+    "kernel_DA":
+    {
+      "debug":
+      [
+        {
+          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+          , "line":77
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_DA__no_loop":
+        [
+          "kernel_DA.B0"
+          , "kernel_DA.B1"
+        ]
+        , "kernel_DA.B2":
+        [
+          "kernel_DA.B2"
+          , "kernel_DA.B3"
+          , "kernel_DA.B4"
+        ]
+        , "kernel_DA.B3":
+        [
+          "kernel_DA.B3"
+          , "kernel_DA.B6"
+          , "kernel_DA.B5"
+        ]
+        , "kernel_DA.B6":
+        [
+          "kernel_DA.B6"
+        ]
+      }
+    }
+    , "kernel_SA":
+    {
+      "debug":
+      [
+        {
+          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+          , "line":137
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_SA__no_loop":
+        [
+          "kernel_SA.B0"
+          , "kernel_SA.B1"
+        ]
+        , "kernel_SA.B2":
+        [
+          "kernel_SA.B2"
+          , "kernel_SA.B3"
+          , "kernel_SA.B4"
+        ]
+        , "kernel_SA.B3":
+        [
+          "kernel_SA.B3"
+          , "kernel_SA.B6"
+          , "kernel_SA.B5"
+        ]
+        , "kernel_SA.B6":
+        [
+          "kernel_SA.B6"
+        ]
+      }
+    }
+    , "kernel_DX":
+    {
+      "debug":
+      [
+        {
+          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+          , "line":169
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_DX__no_loop":
+        [
+          "kernel_DX.B0"
+          , "kernel_DX.B1"
+        ]
+        , "kernel_DX.B2":
+        [
+          "kernel_DX.B2"
+          , "kernel_DX.B3"
+          , "kernel_DX.B4"
+        ]
+        , "kernel_DX.B3":
+        [
+          "kernel_DX.B3"
+          , "kernel_DX.B6"
+          , "kernel_DX.B5"
+        ]
+        , "kernel_DX.B6":
+        [
+          "kernel_DX.B6"
+        ]
+      }
+    }
+    , "kernel_SX":
+    {
+      "debug":
+      [
+        {
+          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+          , "line":202
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_SX__no_loop":
+        [
+          "kernel_SX.B0"
+          , "kernel_SX.B1"
+        ]
+        , "kernel_SX.B2":
+        [
+          "kernel_SX.B2"
+        ]
+      }
+    }
+    , "kernel_TopOut":
+    {
+      "debug":
+      [
+        {
+          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+          , "line":271
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_TopOut__no_loop":
+        [
+          "kernel_TopOut.B0"
+          , "kernel_TopOut.B1"
+        ]
+        , "kernel_TopOut.B2":
+        [
+          "kernel_TopOut.B2"
+          , "kernel_TopOut.B3"
+          , "kernel_TopOut.B4"
+        ]
+        , "kernel_TopOut.B3":
+        [
+          "kernel_TopOut.B3"
+          , "kernel_TopOut.B5"
+          , "kernel_TopOut.B6"
+        ]
+        , "kernel_TopOut.B5":
+        [
+          "kernel_TopOut.B5"
+          , "kernel_TopOut.B7"
+          , "kernel_TopOut.B8"
+        ]
+        , "kernel_TopOut.B7":
+        [
+          "kernel_TopOut.B7"
+        ]
+      }
+    }
+    , "kernel_DRightOut":
+    {
+      "debug":
+      [
+        {
+          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+          , "line":413
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_DRightOut__no_loop":
+        [
+          "kernel_DRightOut.B0"
+          , "kernel_DRightOut.B1"
+        ]
+        , "kernel_DRightOut.B2":
+        [
+          "kernel_DRightOut.B2"
+          , "kernel_DRightOut.B3"
+          , "kernel_DRightOut.B4"
+        ]
+        , "kernel_DRightOut.B3":
+        [
+          "kernel_DRightOut.B3"
+          , "kernel_DRightOut.B6"
+          , "kernel_DRightOut.B5"
+        ]
+        , "kernel_DRightOut.B6":
+        [
+          "kernel_DRightOut.B6"
+          , "kernel_DRightOut.B7"
+          , "kernel_DRightOut.B8"
+        ]
+        , "kernel_DRightOut.B7":
+        [
+          "kernel_DRightOut.B7"
+        ]
+      }
+    }
+    , "kernel_DTopOut":
+    {
+      "debug":
+      [
+        {
+          "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gbmv/a.cl"
+          , "line":450
+        }
+      ]
+      , "loop_hierachy":
+      {
+        "kernel_DTopOut__no_loop":
+        [
+          "kernel_DTopOut.B0"
+          , "kernel_DTopOut.B1"
+        ]
+        , "kernel_DTopOut.B2":
+        [
+          "kernel_DTopOut.B2"
+          , "kernel_DTopOut.B3"
+          , "kernel_DTopOut.B4"
+        ]
+        , "kernel_DTopOut.B3":
+        [
+          "kernel_DTopOut.B3"
+          , "kernel_DTopOut.B6"
+          , "kernel_DTopOut.B5"
+        ]
+        , "kernel_DTopOut.B6":
+        [
+          "kernel_DTopOut.B6"
+        ]
+      }
+    }
+  }
+}

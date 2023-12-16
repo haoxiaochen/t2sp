@@ -1,0 +1,452 @@
+{
+  "performanceSummary":
+  {
+    "name":"Kernel Summary"
+    , "columns":
+    ["Kernel Name", "Kernel Type", "Autorun", "Workgroup Size", "# Compute Units"]
+    , "children":
+    [
+      {
+        "name":"kernel_DA"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":75
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DRightOut"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":399
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DTopOut"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":436
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DX"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":155
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SA"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":123
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SX"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":188
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_TopOut"
+        , "data":
+        [
+          "Single work-item"
+          , "No"
+          , [1, 1, 1]
+          , 1
+        ]
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Kernel type: Single work-item"
+          }
+          , {
+            "type":"text"
+            , "text":"Required workgroup size: (1, 1, 1)"
+          }
+          , {
+            "type":"text"
+            , "text":"Maximum workgroup size: 1"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":257
+            }
+          ]
+        ]
+      }
+    ]
+  }
+  , "estimatedResources":
+  {
+    "name":"Estimated Resource Usage"
+    , "columns":
+    ["Kernel Name", "ALUTs ", "FFs  ", "RAMs ", "DSPs ", "MLABs"]
+    , "children":
+    [
+      {
+        "name":"kernel_DA"
+        , "data":
+        [7144, 10668, 34, 0, 22]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":75
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DRightOut"
+        , "data":
+        [5394, 13716, 0, 1.5, 124]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":399
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DTopOut"
+        , "data":
+        [2595, 5392, 0, 1.5, 62]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":436
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_DX"
+        , "data":
+        [3617, 5980, 20, 7, 32]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":155
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SA"
+        , "data":
+        [1977, 2729, 0, 0, 13]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":123
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_SX"
+        , "data":
+        [1731, 2928, 32, 1.5, 18]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":188
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"kernel_TopOut"
+        , "data":
+        [6078, 7696, 82, 32, 142]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":257
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Kernel Subtotal"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [28536, 49109, 168, 43, 413]
+      }
+      , {
+        "name":"Global Interconnect"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [1804, 4199, 36, 0, 0]
+      }
+      , {
+        "name":"Board Interface"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [134500, 172452, 397, 0, 0]
+      }
+      , {
+        "name":"System description ROM"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [0, 67, 2, 0, 0]
+      }
+      , {
+        "name":"Pipe and channel resources"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [66, 9540, 81, 0, 0]
+      }
+      , {
+        "name":"Total"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [164906, 235367, 684, 43, 413]
+        , "data_percent":
+        [19.3008, 13.7738, 25.2119, 2.89855]
+      }
+      , {
+        "name":"Available"
+        , "classes":
+        ["summary-highlight", "nohover"]
+        , "data":
+        [854400, 1708800, 2713, 1518, 0]
+      }
+    ]
+  }
+  , "compileWarnings":
+  {
+    "name":"Compile Warnings"
+    , "children":
+    [
+      {
+        "name":"Load uses a Burst-coalesced non-aligned LSU"
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Use Dynamic Profiler to determine performance impact of this LSU."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":97
+            }
+          ]
+        ]
+      }
+      , {
+        "name":"Load uses a Burst-coalesced non-aligned LSU"
+        , "details":
+        [
+          {
+            "type":"text"
+            , "text":"Use Dynamic Profiler to determine performance impact of this LSU."
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"a.cl"
+              , "line":100
+            }
+          ]
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,2511 @@
+{
+  "columns":
+  ["", "Pipelined", "II", "Speculated iterations", "Details"]
+  , "children":
+  [
+    {
+      "name":"Kernel: kernel_aFeeder"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":122
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_aFeeder.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":129
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_aFeeder.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":132
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_aFeeder.B6"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":134
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"136"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"146"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":140
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_xFeeder"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":184
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_xFeeder.B2"
+          , "data":
+          ["Yes", "~1", "3"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":200
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instructions:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Channel Read Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"210"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Channel Write Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"244"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_Out"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":253
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_Out.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":268
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_Out.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":271
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_Out.B5"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":273
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"295"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"298"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"364"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":276
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                        {
+                          "name":"Fully unrolled loop"
+                          , "data":
+                          ["n/a", "n/a", "n/a"]
+                          , "debug":
+                          [
+                            [
+                              {
+                                "filename":"a.cl"
+                                , "line":281
+                              }
+                            ]
+                          ]
+                          , "details":
+                          [
+                            {
+                              "type":"brief"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                            , {
+                              "type":"text"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                          ]
+                          , "children":
+                          [
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":302
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_aLoader"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":74
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_aLoader.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":84
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_aLoader.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":87
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_aLoader.B6"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":89
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"96"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"99"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"113"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":93
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                    , {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":107
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_xLoader"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":154
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_xLoader.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":162
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_xLoader.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":165
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_xLoader.B6"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":167
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"173"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"174"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_unloader"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":373
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_unloader.B1"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":381
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"Serial exe: Memory dependency"
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"386"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_unloader.B4. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"392"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"390"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_unloader.B4"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":383
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Serial exe: Memory dependency"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_unloader.B5. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"386"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"390"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_unloader.B5"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":388
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instruction:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"392"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

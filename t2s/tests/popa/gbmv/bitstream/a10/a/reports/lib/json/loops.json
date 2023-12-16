@@ -1,0 +1,4735 @@
+{
+  "columns":
+  ["", "Pipelined", "II", "Speculated iterations", "Details"]
+  , "children":
+  [
+    {
+      "name":"Kernel: kernel_SA"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":123
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_SA.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":130
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_SA.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":133
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_SA.B6"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":135
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"137"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"147"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":141
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_SX"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":188
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_SX.B2"
+          , "data":
+          ["Yes", "~1", "3"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":204
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"II is an approximation due to the following stallable instructions:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Channel Read Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"214"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Channel Write Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"248"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_TopOut"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":257
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_TopOut.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":271
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_TopOut.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":274
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_TopOut.B5"
+                  , "data":
+                  ["Yes", ">=1", "0"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":276
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Stallable instruction: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Nested Loops"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"kernel_TopOut.B7"
+                      , "data":
+                      ["Yes", "~1", "1"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":278
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":" "
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Hyper-Optimized loop structure: n/a"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"II is an approximation due to the following stallable instructions:"
+                          , "details":
+                          [
+                            {
+                              "type":"text"
+                              , "text":"Channel Read Operation (%L)"
+                              , "links":
+                              [
+                                {
+                                  "filename":"a.cl"
+                                  , "line":"293"
+                                }
+                              ]
+                            }
+                            , {
+                              "type":"text"
+                              , "text":"Channel Read Operation (%L)"
+                              , "links":
+                              [
+                                {
+                                  "filename":"a.cl"
+                                  , "line":"296"
+                                }
+                              ]
+                            }
+                            , {
+                              "type":"text"
+                              , "text":"Channel Write Operation (%L)"
+                              , "links":
+                              [
+                                {
+                                  "filename":"a.cl"
+                                  , "line":"387"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Maximum concurrent iterations: Capacity of loop"
+                          , "details":
+                          [
+                            {
+                              "type":"text"
+                              , "text":"Use the %L viewer to estimate capacity"
+                              , "links":
+                              [
+                                {
+                                  "view":"Fmax II Report"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                            }
+                          ]
+                        }
+                      ]
+                      , "children":
+                      [
+                        {
+                          "name":"Fully unrolled loop"
+                          , "data":
+                          ["n/a", "n/a", "n/a"]
+                          , "debug":
+                          [
+                            [
+                              {
+                                "filename":"a.cl"
+                                , "line":281
+                              }
+                            ]
+                          ]
+                          , "details":
+                          [
+                            {
+                              "type":"brief"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                            , {
+                              "type":"text"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                          ]
+                          , "children":
+                          [
+                            {
+                              "name":"Fully unrolled loop"
+                              , "data":
+                              ["n/a", "n/a", "n/a"]
+                              , "debug":
+                              [
+                                [
+                                  {
+                                    "filename":"a.cl"
+                                    , "line":284
+                                  }
+                                ]
+                              ]
+                              , "details":
+                              [
+                                {
+                                  "type":"brief"
+                                  , "text":"Unrolled by #pragma unroll"
+                                }
+                                , {
+                                  "type":"text"
+                                  , "text":"Unrolled by #pragma unroll"
+                                }
+                              ]
+                              , "children":
+                              [
+                              ]
+                            }
+                          ]
+                        }
+                        , {
+                          "name":"Fully unrolled loop"
+                          , "data":
+                          ["n/a", "n/a", "n/a"]
+                          , "debug":
+                          [
+                            [
+                              {
+                                "filename":"a.cl"
+                                , "line":300
+                              }
+                            ]
+                          ]
+                          , "details":
+                          [
+                            {
+                              "type":"brief"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                            , {
+                              "type":"text"
+                              , "text":"Unrolled by #pragma unroll"
+                            }
+                          ]
+                          , "children":
+                          [
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_DA"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":75
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_DA.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":85
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_DA.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":88
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_DA.B6"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":90
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"97"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"100"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"114"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":94
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                    , {
+                      "name":"Fully unrolled loop"
+                      , "data":
+                      ["n/a", "n/a", "n/a"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":108
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Unrolled by #pragma unroll"
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_DX"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":155
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_DX.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":163
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_DX.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":166
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_DX.B6"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":168
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"177"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Channel Write Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"178"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_DRightOut"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":399
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_DRightOut.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":406
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":"Serial exe: Memory dependency"
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"414"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Iteration executed serially across kernel_DRightOut.B3. Only a single loop iteration will execute inside this region due to memory dependency:"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"From: Store Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"427"
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"To: Load Operation (%L)"
+                  , "links":
+                  [
+                    {
+                      "filename":"a.cl"
+                      , "line":"418"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_DRightOut.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":409
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":"Serial exe: Memory dependency"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"414"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Iteration executed serially across kernel_DRightOut.B6. Only a single loop iteration will execute inside this region due to memory dependency:"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"From: Store Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"427"
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"To: Load Operation (%L)"
+                      , "links":
+                      [
+                        {
+                          "filename":"a.cl"
+                          , "line":"418"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_DRightOut.B6"
+                  , "data":
+                  ["Yes", ">=1", "0"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":411
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":"Serial exe: Memory dependency"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Iteration executed serially across kernel_DRightOut.B7. Only a single loop iteration will execute inside this region due to memory dependency:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"From: Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"414"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"To: Load Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"418"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Stallable instruction: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Nested Loops"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                    {
+                      "name":"kernel_DRightOut.B7"
+                      , "data":
+                      ["Yes", "~1", "1"]
+                      , "debug":
+                      [
+                        [
+                          {
+                            "filename":"a.cl"
+                            , "line":416
+                          }
+                        ]
+                      ]
+                      , "details":
+                      [
+                        {
+                          "type":"brief"
+                          , "text":" "
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Hyper-Optimized loop structure: n/a"
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"II is an approximation due to the following stallable instruction:"
+                          , "details":
+                          [
+                            {
+                              "type":"text"
+                              , "text":"Store Operation (%L)"
+                              , "links":
+                              [
+                                {
+                                  "filename":"a.cl"
+                                  , "line":"427"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Maximum concurrent iterations: Capacity of loop"
+                          , "details":
+                          [
+                            {
+                              "type":"text"
+                              , "text":"Use the %L viewer to estimate capacity"
+                              , "links":
+                              [
+                                {
+                                  "view":"Fmax II Report"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"See %L for more information"
+                          , "links":
+                          [
+                            {
+                              "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                            }
+                          ]
+                        }
+                      ]
+                      , "children":
+                      [
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+    , {
+      "name":"Kernel: kernel_DTopOut"
+      , "data":
+      ["", "", ""]
+      , "debug":
+      [
+        [
+          {
+            "filename":"a.cl"
+            , "line":436
+          }
+        ]
+      ]
+      , "details":
+      [
+        {
+          "type":"brief"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Single work-item execution"
+        }
+        , {
+          "type":"text"
+          , "text":"Fmax bottlenck block: None"
+        }
+        , {
+          "type":"text"
+          , "text":"See %L for more information"
+          , "links":
+          [
+            {
+              "guide":"Best Practices Guide : Kernels"
+              , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#ipp1476408832230"
+            }
+          ]
+        }
+      ]
+      , "children":
+      [
+        {
+          "name":"kernel_DTopOut.B2"
+          , "data":
+          ["Yes", ">=1", "0"]
+          , "debug":
+          [
+            [
+              {
+                "filename":"a.cl"
+                , "line":443
+              }
+            ]
+          ]
+          , "details":
+          [
+            {
+              "type":"brief"
+              , "text":" "
+            }
+            , {
+              "type":"text"
+              , "text":"Hyper-Optimized loop structure: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Stallable instruction: n/a"
+            }
+            , {
+              "type":"text"
+              , "text":"Maximum concurrent iterations: Capacity of loop"
+              , "details":
+              [
+                {
+                  "type":"text"
+                  , "text":"Use the %L viewer to estimate capacity"
+                  , "links":
+                  [
+                    {
+                      "view":"Fmax II Report"
+                    }
+                  ]
+                }
+              ]
+            }
+            , {
+              "type":"text"
+              , "text":"See %L for more information"
+              , "links":
+              [
+                {
+                  "guide":"Best Practices Guide : Nested Loops"
+                  , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                }
+              ]
+            }
+          ]
+          , "children":
+          [
+            {
+              "name":"kernel_DTopOut.B3"
+              , "data":
+              ["Yes", ">=1", "0"]
+              , "debug":
+              [
+                [
+                  {
+                    "filename":"a.cl"
+                    , "line":446
+                  }
+                ]
+              ]
+              , "details":
+              [
+                {
+                  "type":"brief"
+                  , "text":" "
+                }
+                , {
+                  "type":"text"
+                  , "text":"Hyper-Optimized loop structure: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Stallable instruction: n/a"
+                }
+                , {
+                  "type":"text"
+                  , "text":"Maximum concurrent iterations: Capacity of loop"
+                  , "details":
+                  [
+                    {
+                      "type":"text"
+                      , "text":"Use the %L viewer to estimate capacity"
+                      , "links":
+                      [
+                        {
+                          "view":"Fmax II Report"
+                        }
+                      ]
+                    }
+                  ]
+                }
+                , {
+                  "type":"text"
+                  , "text":"See %L for more information"
+                  , "links":
+                  [
+                    {
+                      "guide":"Best Practices Guide : Nested Loops"
+                      , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#rfr1469543500580"
+                    }
+                  ]
+                }
+              ]
+              , "children":
+              [
+                {
+                  "name":"kernel_DTopOut.B6"
+                  , "data":
+                  ["Yes", "~1", "1"]
+                  , "debug":
+                  [
+                    [
+                      {
+                        "filename":"a.cl"
+                        , "line":448
+                      }
+                    ]
+                  ]
+                  , "details":
+                  [
+                    {
+                      "type":"brief"
+                      , "text":" "
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Hyper-Optimized loop structure: n/a"
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"II is an approximation due to the following stallable instructions:"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Channel Read Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"450"
+                            }
+                          ]
+                        }
+                        , {
+                          "type":"text"
+                          , "text":"Store Operation (%L)"
+                          , "links":
+                          [
+                            {
+                              "filename":"a.cl"
+                              , "line":"459"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"Maximum concurrent iterations: Capacity of loop"
+                      , "details":
+                      [
+                        {
+                          "type":"text"
+                          , "text":"Use the %L viewer to estimate capacity"
+                          , "links":
+                          [
+                            {
+                              "view":"Fmax II Report"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    , {
+                      "type":"text"
+                      , "text":"See %L for more information"
+                      , "links":
+                      [
+                        {
+                          "guide":"Best Practices Guide : Loops in a Single Work-Item Kernel"
+                          , "link":"https://www.intel.com/content/www/us/en/programmable/documentation/mwh1391807516407.html#wfa1476380079940"
+                        }
+                      ]
+                    }
+                  ]
+                  , "children":
+                  [
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
