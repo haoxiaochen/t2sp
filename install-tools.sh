@@ -11,3 +11,6 @@
 ./install-tool.sh ninja
 ./install-tool.sh oneapi-esimd
 ./install-tool.sh oneapi-support
+
+cd Halide
+make -j

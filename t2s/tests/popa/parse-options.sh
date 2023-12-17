@@ -48,6 +48,7 @@ fi
 
 if [ "$6" != "" ]; then
     # Add prefix to the bitstream
+    bitdir="$6"
     bitstream="$6/$3/a.aocx"
     echo "Use the bitstream ${bitstream}"
 fi

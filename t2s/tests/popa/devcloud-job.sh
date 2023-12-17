@@ -30,7 +30,7 @@ fi
 
 # It seems we cannot directly pass the options to test.sh with devcloud_login. 
 # So generate a shell script to call test.sh instead.
-echo "cd $PATH_TO_SCRIPT && ./test.sh devcloud $workload $target $size $platform" > job.sh
+echo "cd $PATH_TO_SCRIPT && ./test.sh devcloud $workload $target $size $platform $bitdir" > job.sh
 chmod a+x job.sh
 
 time_budget="24:00:00"

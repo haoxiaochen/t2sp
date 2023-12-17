@@ -22,7 +22,7 @@
 // Inner loop bounds, which are static constant parameters of the design
 #ifdef GPU
     #define KKK         32
-    #define VI          16
+    #define VI          8
     #define III         1
     #define II          8
     #define KK          1
