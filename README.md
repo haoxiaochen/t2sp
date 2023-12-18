@@ -2,15 +2,73 @@ T2SP (Temporal To Spatial Programming, previously called T2S) enables software p
 
 T2SP is available under a permissive license, the [BSD+Patent license](./LICENSE.md). 
 
-Currently, we support only Intel FPGAs and GPUs. We assume your device is local to you, or within Intel DevCloud, and the operating system is Linux (We have tried Ubuntu 18.04 and CentOS 7.9, but our system is not really tied to any specific Linux system or version). Other platforms might also work, although not tested. 
+Currently, we support only Intel FPGAs and GPUs. We assume your device is local to you, or within Intel DevCloud, and the operating system is Linux (We have tried Ubuntu 18.04 and CentOS 7.9, but our system is not really tied to any specific Linux system or version). Other platforms might also work, although not tested.
+
+# Artifact Evaluation
+1. Open a DevCloud account by following the steps below.
+2. Install `git-lfs` before cloning the repository:
+   
+   ```
+   wget -O- https://raw.githubusercontent.com/haoxiaochen/t2sp/popa/install-git-lfs.sh | bash
+   export PATH=~/git-lfs/bin:$PATH
+   ```
+3. Clone our repository into two separate directories:
+   
+   ```
+   git clone -b popa https://github.com/haoxiaochen/t2sp.git t2sp
+   cd t2sp && git lfs install
+   git clone -b popa https://github.com/haoxiaochen/t2sp.git t2sp-s10
+   cd t2sp-s10 && git lfs install
+   ```
+4. Install dependencies. Since A10 and S10 machines have different system environments, it is recommended to install them separately:
+  
+   ```
+   qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
+   qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2 -d $HOME/t2sp-s10 $HOME/t2sp/install-tools.sh
+   ```
+   A job is submitted. You can check its completion status with `qstatus`.
+5. Download our pre-generated bitstreams:
+
+   ```
+   cd t2s/tests/popa
+   sh ./prepare-bitstreams.sh [a10|s10]
+   ```
+6. Run our tests on FPGAs with pre-generated bitstreams:
+
+   ```
+   ./devcloud_jobs.sh [a10|s10] bitstream
+   ```
+   This will submit 6 jobs to run GEMM, Conv, Capsule, PairHMM, GEMV, and GBMV. After the jobs are completed, you can find a file like `job.sh.o[job_id]`.
+   Open this file, and you will see:
+
+   ```
+   ------------------- Testing devcloud gemm a10 large hw bitstream
+   ```
+   indicating a GEMM test. At the end of this file, you can see:
+
+   ```
+   GFlops: 620.383645
+   ```
+   demonstrating the achieved throughput.
+7. [Optional] Run our test on FPGAs by synthesizing a bitstream:
+
+   ```
+   ./devcloud_job.sh devcloud gemm [a10|s10] large hw
+   ```
+   This will submit a job to synthesize our GEMM.
+8. Run our tests on GEN 9 GPU:
+
+   ```
+   ./devcloud_jobs.sh gen9
+   ```
+   Unfortunately, GEN 12 GPU has been retired from DevCloud.
+
 
 # [DevCloud] Open an account (once)
 
- + Register at the [Intel's FPGA DevCloud](https://software.intel.com/content/www/us/en/develop/tools/devcloud/fpga.html). This will enable access to both the FPGAs and the GPUs in the cloud. Currently, the cloud offers Arria 10  and Stratix 10 FPGAs, and GEN 9.5 (Intel UHD Graphics P630) and GEN 12 ( Intel Iris Xe MAX Graphics) GPUs.
+ + Register at the [Intel's FPGA DevCloud](https://software.intel.com/content/www/us/en/develop/tools/devcloud/fpga.html). This will enable access to both the FPGAs and the GPUs in the cloud. Currently, the cloud offers Arria 10  and Stratix 10 FPGAs, and GEN 9.5 (Intel UHD Graphics P630).
 
- + Follow the instructions of an approval email to set up your connection to DevCloud.
-
- + Connect to DevCloud. Now you are at the **head node** named `login-2`.
+ + Connect to DevCloud by following the [document](https://devcloud.intel.com/oneapi/documentation/connect-with-ssh-linux-macos/). Now you are at the **head node** named `login-2`.
    
  + Add the following to your .bashrc:
    
@@ -25,7 +83,6 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
    ```
 
 # Clone T2SP (once)
-
    ```
    git clone https://github.com/IntelLabs/t2sp 
    ```
@@ -38,7 +95,7 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
   qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
   
   # For Stratix 10 FPGA
-  qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2  -d $HOME/t2sp $HOME/t2sp/install-tools.sh
+  qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
   
   # For GEN 9.5 GPU
   qsub -l nodes=1:gen9:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh 
