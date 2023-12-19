@@ -12,3 +12,11 @@
 ./install-tool.sh ninja
 ./install-tool.sh oneapi-esimd
 ./install-tool.sh oneapi-support
+
+# Checkout all files with git-lfs installed
+git checkout -f HEAD
+
+# Compile
+PATH+=:$(pwd)/install/bin
+cd Halide
+make -j

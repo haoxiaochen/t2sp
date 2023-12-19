@@ -16,8 +16,8 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
 3. Install dependencies and compile. Since A10 and S10 machines have different system environments, it is recommended to install them separately:
   
    ```
-   qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/prepare-devcloud-env.sh
-   qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2 -d $HOME/t2sp-s10 $HOME/t2sp/prepare-devcloud-env.sh
+   qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
+   qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2 -d $HOME/t2sp-s10 $HOME/t2sp/install-tools.sh
    ```
    A job is submitted. You can check its completion status with `qstatus`.
 4. Run our tests on FPGAs with pre-generated bitstreams:
