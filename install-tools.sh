@@ -7,10 +7,8 @@
 ./install-tool.sh llvm-clang 
 ./install-tool.sh python-packages
 ./install-tool.sh cm
+./install-tool.sh git-lfs
 ./install-tool.sh re2c
 ./install-tool.sh ninja
 ./install-tool.sh oneapi-esimd
 ./install-tool.sh oneapi-support
-
-cd Halide
-make -j

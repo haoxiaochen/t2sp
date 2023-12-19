@@ -64,8 +64,10 @@ function generate_test_fpga_kernel {
         size="S10"
     fi
     if [ "$bitstream" == "" ]; then
-        echo "Use the default bitstream $(pwd)/${bitstream}"
         bitstream="a.aocx"
+	echo "Synthesize a bitstream at $workload/$bitstream"
+    else
+	git lfs pull --include="t2s/tests/popa/$workload/$bitstream" --exclude=""
     fi
     cleanup
     generate_fpga_kernel
