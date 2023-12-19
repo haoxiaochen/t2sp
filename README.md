@@ -6,34 +6,21 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
 
 # Artifact Evaluation
 1. Open a DevCloud account by following the steps below.
-2. Install `git-lfs` before cloning the repository:
-   
-   ```
-   wget -O- https://raw.githubusercontent.com/haoxiaochen/t2sp/popa/install-git-lfs.sh | bash
-   export PATH=~/git-lfs/bin:$PATH
-   ```
-3. Clone our repository into two separate directories:
+2. Clone our repository into two separate directories:
    
    ```
    git clone -b popa https://github.com/haoxiaochen/t2sp.git t2sp
-   cd t2sp && git lfs install
    git clone -b popa https://github.com/haoxiaochen/t2sp.git t2sp-s10
-   cd t2sp-s10 && git lfs install
    ```
-4. Install dependencies. Since A10 and S10 machines have different system environments, it is recommended to install them separately:
+   You may encounter a checkout failure due to git-lfs not found. The next step will install it and perform the checkout again.
+3. Install dependencies and compile. Since A10 and S10 machines have different system environments, it is recommended to install them separately:
   
    ```
-   qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
-   qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2 -d $HOME/t2sp-s10 $HOME/t2sp/install-tools.sh
+   qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/prepare-devcloud-env.sh
+   qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2 -d $HOME/t2sp-s10 $HOME/t2sp/prepare-devcloud-env.sh
    ```
    A job is submitted. You can check its completion status with `qstatus`.
-5. Download our pre-generated bitstreams:
-
-   ```
-   cd t2s/tests/popa
-   sh ./prepare-bitstreams.sh [a10|s10]
-   ```
-6. Run our tests on FPGAs with pre-generated bitstreams:
+4. Run our tests on FPGAs with pre-generated bitstreams:
 
    ```
    ./devcloud_jobs.sh [a10|s10] bitstream
@@ -50,13 +37,13 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
    GFlops: 620.383645
    ```
    demonstrating the achieved throughput.
-7. [Optional] Run our test on FPGAs by synthesizing a bitstream:
+5. [Optional] Run our test on FPGAs by synthesizing a bitstream:
 
    ```
    ./devcloud_job.sh devcloud gemm [a10|s10] large hw
    ```
    This will submit a job to synthesize our GEMM.
-8. Run our tests on GEN 9 GPU:
+6. Run our tests on GEN 9 GPU:
 
    ```
    ./devcloud_jobs.sh gen9
