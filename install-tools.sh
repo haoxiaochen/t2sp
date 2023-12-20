@@ -14,9 +14,9 @@
 ./install-tool.sh oneapi-support
 
 # Checkout all files with git-lfs installed
+PATH+=:$(pwd)/install/bin
 git checkout -f HEAD
 
 # Compile
-PATH+=:$(pwd)/install/bin
 cd Halide
 make -j
