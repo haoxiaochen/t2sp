@@ -84,13 +84,13 @@ __kernel void kernel_aLoader(
  _cga _aLoader_aFeeder_channel_array;
  int _addr_temp;
  _addr_temp = 0;
- int _0 = _A_extent_0 >> 11;
+ int _0 = _A_extent_0 >> 12;
  for (int _aLoader_s0_i = 0; _aLoader_s0_i < 0 + _0; _aLoader_s0_i++)
  {
   int _1 = _A_extent_1 >> 10;
   for (int _aLoader_s0_k = 0; _aLoader_s0_k < 0 + _1; _aLoader_s0_k++)
   {
-   for (int _aLoader_s0_kk_iii = 0; _aLoader_s0_kk_iii < 0 + 32768; _aLoader_s0_kk_iii++)
+   for (int _aLoader_s0_kk_iii = 0; _aLoader_s0_kk_iii < 0 + 65536; _aLoader_s0_kk_iii++)
    {
     float _aLoader_temp[64];
     #pragma unroll
@@ -139,13 +139,13 @@ __kernel void kernel_aFeeder(
 {
  _cga _aLoader_aFeeder_channel_array;
  _cga _aFeeder_uA_channel_array;
- int _16 = _A_extent_0 >> 11;
+ int _16 = _A_extent_0 >> 12;
  for (int _aFeeder_s0_i = 0; _aFeeder_s0_i < 0 + _16; _aFeeder_s0_i++)
  {
   int _17 = _A_extent_1 >> 10;
   for (int _aFeeder_s0_k = 0; _aFeeder_s0_k < 0 + _17; _aFeeder_s0_k++)
   {
-   for (int _aFeeder_s0_kk_iii = 0; _aFeeder_s0_kk_iii < 0 + 32768; _aFeeder_s0_kk_iii++)
+   for (int _aFeeder_s0_kk_iii = 0; _aFeeder_s0_kk_iii < 0 + 65536; _aFeeder_s0_kk_iii++)
    {
     _cga __18 = read_channel_intel(_aLoader_aFeeder_channel);
     _aLoader_aFeeder_channel_array = __18;
@@ -172,7 +172,7 @@ __kernel void kernel_xLoader(
 {
  int _addr_temp;
  _addr_temp = 0;
- int _20 = _A_extent_0 >> 11;
+ int _20 = _A_extent_0 >> 12;
  for (int _xLoader_s0_i = 0; _xLoader_s0_i < 0 + _20; _xLoader_s0_i++)
  {
   int _21 = _A_extent_1 >> 10;
@@ -200,58 +200,58 @@ __kernel void kernel_xFeeder(
  const int _A_extent_1)
 {
  _cga__1 _xFeeder_uX_channel_array;
- int _28 = _A_extent_0 >> 11;
+ int _28 = _A_extent_0 >> 12;
  int _29 = _A_extent_1 >> 10;
  int _30 = _28 * _29;
  int _xFeeder_cycle_temp;
  float __attribute__((memory, numbanks(1), singlepump)) _xFeeder_DB_0_ibuffer[2][1024];
- _xFeeder_cycle_temp = 31744;
- int _31 = _A_extent_0 >> 11;
+ _xFeeder_cycle_temp = 64512;
+ int _31 = _A_extent_0 >> 12;
  int _32 = _A_extent_1 >> 10;
  int _33 = _31 * _32;
- int _34 = _33 * 32768;
- int _35 = _34 + 32768;
+ int _34 = _33 * 65536;
+ int _35 = _34 + 65536;
  for (int _xFeeder_s0_outermost_loop = 0; _xFeeder_s0_outermost_loop < 0 + _35; _xFeeder_s0_outermost_loop++)
  {
   int _36 = _xFeeder_cycle_temp;
-  int _37 = _36 & 32767;
-  bool _38 = 31744 <= _37;
-  int _39 = _36 >> 15;
+  int _37 = _36 & 65535;
+  bool _38 = 64512 <= _37;
+  int _39 = _36 >> 16;
   bool _40 = _39 < _30;
   bool _41 = _38 && _40;
   if (_41)
   {
    float __42 = read_channel_intel(_xLoader_xFeeder_channel);
    int _43 = _xFeeder_cycle_temp;
-   int _44 = _43 >> 15;
+   int _44 = _43 >> 16;
    int _45 = _44 & 1;
    bool _46 = (bool)(_45);
-   int _47 = _43 & 32767;
+   int _47 = _43 & 65535;
    int _48 = _47 & 1023;
    _xFeeder_DB_0_ibuffer[_46][_48] = __42;
   } // if _41
   int _49 = _xFeeder_cycle_temp;
-  int _50 = _49 >> 15;
+  int _50 = _49 >> 16;
   bool _51 = _50 <= _30;
-  bool _52 = 32767 < _49;
+  bool _52 = 65535 < _49;
   bool _53 = _51 && _52;
   if (_53)
   {
    int _54 = _xFeeder_cycle_temp;
-   int _55 = _54 >> 15;
+   int _55 = _54 >> 16;
    int _56 = _55 & 1;
    bool _57 = (bool)(_56);
    bool _58 = !(_57);
-   int _59 = _54 >> 5;
+   int _59 = _54 >> 6;
    int _60 = _59 & 1023;
    float _61 = _xFeeder_DB_0_ibuffer[_58][_60];
    _xFeeder_uX_channel_array.s = _61;
    (void)_61;
   } // if _53
   int _62 = _xFeeder_cycle_temp;
-  int _63 = _62 >> 15;
+  int _63 = _62 >> 16;
   bool _64 = _63 <= _30;
-  bool _65 = 32767 < _62;
+  bool _65 = 65535 < _62;
   bool _66 = _64 && _65;
   if (_66)
   {
@@ -269,7 +269,7 @@ __kernel void kernel_Out(
  const int _A_extent_1)
 {
  // produce uZ
- float _uZ_shreg[32][64];
+ float _uZ_shreg[64][64];
  // produce uX
  float _uX_shreg;
  float _uZ_temp[64];
@@ -278,24 +278,24 @@ __kernel void kernel_Out(
  _cga _Out_unloader_channel_array;
  _cga__1 _xFeeder_uX_channel_array;
  _cga _aFeeder_uA_channel_array;
- int _69 = _A_extent_0 >> 11;
+ int _69 = _A_extent_0 >> 12;
  for (int _uA_s0_i = 0; _uA_s0_i < 0 + _69; _uA_s0_i++)
  {
   int _70 = _A_extent_1 >> 10;
   for (int _uA_s0_k = 0; _uA_s0_k < 0 + _70; _uA_s0_k++)
   {
-   for (int _uA_s0_kk_iii = 0; _uA_s0_kk_iii < 0 + 32768; _uA_s0_kk_iii++)
+   for (int _uA_s0_kk_iii = 0; _uA_s0_kk_iii < 0 + 65536; _uA_s0_kk_iii++)
    {
     #pragma unroll
     for (int _dummy_s0_vi = 0; _dummy_s0_vi < 0 + 64; _dummy_s0_vi++)
     {
-     float _72 = _uZ_shreg[31][_dummy_s0_vi];
+     float _72 = _uZ_shreg[63][_dummy_s0_vi];
      _uZ_temp[_dummy_s0_vi] = _72;
      #pragma unroll
-     for (int _dummy__1_s0_l0 = 0; _dummy__1_s0_l0 < 0 + 31; _dummy__1_s0_l0++)
+     for (int _dummy__1_s0_l0 = 0; _dummy__1_s0_l0 < 0 + 63; _dummy__1_s0_l0++)
      {
-      int _73 = 31 - _dummy__1_s0_l0;
-      int _74 = 30 - _dummy__1_s0_l0;
+      int _73 = 63 - _dummy__1_s0_l0;
+      int _74 = 62 - _dummy__1_s0_l0;
       float _76 = _uZ_shreg[_74][_dummy_s0_vi];
       _uZ_shreg[_73][_dummy_s0_vi] = _76;
       (void)_76;
@@ -337,7 +337,7 @@ __kernel void kernel_Out(
      _uX_shreg = _88;
      (void)_88;
      float _89;
-     int _90 = _uA_s0_kk_iii >> 5;
+     int _90 = _uA_s0_kk_iii >> 6;
      bool _91 = _90 == 0;
      bool _92 = _uA_s0_k == 0;
      bool _93 = _91 && _92;
@@ -358,7 +358,7 @@ __kernel void kernel_Out(
      float _103 = _97 + _102;
      _uZ_shreg[0][_uA_s0_vi] = _103;
      (void)_103;
-     int _104 = _uA_s0_kk_iii >> 5;
+     int _104 = _uA_s0_kk_iii >> 6;
      bool _105 = _104 == 1023;
      int _106 = _A_extent_1 >> 10;
      int _107 = _106 + -1;
@@ -391,10 +391,10 @@ __kernel void kernel_unloader(
  _cga _Out_unloader_channel_array;
  int _addr_temp;
  _addr_temp = 0;
- int _113 = _A_extent_0 >> 11;
+ int _113 = _A_extent_0 >> 12;
  for (int _unloader_s0_i = 0; _unloader_s0_i < 0 + _113; _unloader_s0_i++)
  {
-  for (int _unloader_s0_iii = 0; _unloader_s0_iii < 0 + 32; _unloader_s0_iii++)
+  for (int _unloader_s0_iii = 0; _unloader_s0_iii < 0 + 64; _unloader_s0_iii++)
   {
    _cga __114 = read_channel_intel(_Out_unloader_channel);
    _Out_unloader_channel_array = __114;

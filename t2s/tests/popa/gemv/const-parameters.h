@@ -33,12 +33,12 @@
         #define KK          32
     #elif S10
         #define VI          64
-        #define III         32
+        #define III         64
         #define II          1
         #define KK          1024
     #else
         #define VI          32
-        #define III         32
+        #define III         64
         #define II          1
         #define KK          1024
     #endif

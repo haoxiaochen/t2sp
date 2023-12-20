@@ -876,31 +876,6 @@
         {
           "type":"text"
           , "text":"Variable on loop carried feedback path"
-          , "details":
-          [
-            {
-              "type":"text"
-              , "text":"From: Store Operation (%L)"
-              , "links":
-              [
-                {
-                  "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-                  , "line":"400"
-                }
-              ]
-            }
-            , {
-              "type":"text"
-              , "text":"To: Load Operation (%L)"
-              , "links":
-              [
-                {
-                  "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-                  , "line":"404"
-                }
-              ]
-            }
-          ]
         }
       ]
       , "loop_location":

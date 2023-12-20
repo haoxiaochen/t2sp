@@ -1,11 +1,11 @@
 {
-  "4067065600":
+  "497762048":
   {
     "nodes":
     [
       {
         "name":"Cluster 1"
-        , "id":4075905408
+        , "id":506301664
         , "details":
         [
           {
@@ -20,7 +20,7 @@
         [
           {
             "name":"Logic"
-            , "id":4075911664
+            , "id":506307920
             , "details":
             [
               {
@@ -34,7 +34,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4076060960
+            , "id":506457216
             , "details":
             [
               {
@@ -52,18 +52,18 @@
     , "links":
     [
       {
-        "from":4075911664
-        , "to":4076060960
+        "from":506307920
+        , "to":506457216
       }
     ]
   }
-  , "4067065680":
+  , "497762128":
   {
     "nodes":
     [
       {
         "name":"Cluster 2"
-        , "id":4076178608
+        , "id":506574864
         , "details":
         [
           {
@@ -78,7 +78,7 @@
         [
           {
             "name":"Logic"
-            , "id":4076185424
+            , "id":506581680
             , "details":
             [
               {
@@ -92,7 +92,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4076395216
+            , "id":506791472
             , "details":
             [
               {
@@ -108,7 +108,7 @@
       }
       , {
         "name":"Loop Input"
-        , "id":4111257440
+        , "id":511437744
         , "details":
         [
           {
@@ -123,12 +123,12 @@
     , "links":
     [
       {
-        "from":4076185424
-        , "to":4076395216
+        "from":506581680
+        , "to":506791472
       }
       , {
-        "from":4111257440
-        , "to":4076185424
+        "from":511437744
+        , "to":506581680
         , "details":
         [
           {
@@ -138,8 +138,8 @@
         ]
       }
       , {
-        "from":4111257440
-        , "to":4076185424
+        "from":511437744
+        , "to":506581680
         , "details":
         [
           {
@@ -149,8 +149,8 @@
         ]
       }
       , {
-        "from":4111257440
-        , "to":4076185424
+        "from":511437744
+        , "to":506581680
         , "details":
         [
           {
@@ -161,13 +161,13 @@
       }
     ]
   }
-  , "4067065760":
+  , "497762208":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4161776032
+        , "id":623730496
         , "details":
         [
           {
@@ -183,13 +183,13 @@
     [
     ]
   }
-  , "4067065840":
+  , "497762288":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4084109568
+        , "id":573460112
         , "details":
         [
           {
@@ -205,7 +205,7 @@
     [
     ]
   }
-  , "4067168464":
+  , "497864480":
   {
     "nodes":
     [
@@ -214,58 +214,13 @@
     [
     ]
   }
-  , "4067168544":
+  , "497864560":
   {
     "nodes":
     [
       {
-        "name":"Cluster 3"
-        , "id":4076682784
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Cluster Name":"i_sfc_s_c0_in_for_body10_kernel_aloaders_c0_enter518_kernel_aloader159"
-            , "Cluster Type":"Stall-Free"
-            , "Cluster Latency":"3"
-          }
-        ]
-        , "type":"bb"
-        , "children":
-        [
-          {
-            "name":"Logic"
-            , "id":4076690368
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Cluster Name":"i_sfc_s_c0_in_for_body10_kernel_aloaders_c0_enter518_kernel_aloader159"
-                , "Cluster Type":"Stall-Free"
-                , "Cluster Latency":"3"
-              }
-            ]
-            , "type":"inst"
-          }
-          , {
-            "name":"Exit"
-            , "id":4077240304
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Exit FIFO Depth":"16"
-                , "Exit FIFO Width":"384"
-                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
-              }
-            ]
-            , "type":"bb"
-          }
-        ]
-      }
-      , {
         "name":"Cluster 4"
-        , "id":4076683584
+        , "id":507079840
         , "details":
         [
           {
@@ -280,7 +235,7 @@
         [
           {
             "name":"Logic"
-            , "id":4077778416
+            , "id":508556496
             , "details":
             [
               {
@@ -294,7 +249,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4080453600
+            , "id":511231760
             , "details":
             [
               {
@@ -309,8 +264,66 @@
         ]
       }
       , {
+        "name":"Cluster 3"
+        , "id":507079040
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Cluster Name":"i_sfc_s_c0_in_for_body10_kernel_aloaders_c0_enter518_kernel_aloader159"
+            , "Cluster Type":"Stall-Free"
+            , "Cluster Latency":"3"
+          }
+        ]
+        , "type":"bb"
+        , "children":
+        [
+          {
+            "name":"Logic"
+            , "id":507086624
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Cluster Name":"i_sfc_s_c0_in_for_body10_kernel_aloaders_c0_enter518_kernel_aloader159"
+                , "Cluster Type":"Stall-Free"
+                , "Cluster Latency":"3"
+              }
+            ]
+            , "type":"inst"
+          }
+          , {
+            "name":"Exit"
+            , "id":508018480
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Exit FIFO Depth":"16"
+                , "Exit FIFO Width":"384"
+                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
+              }
+            ]
+            , "type":"bb"
+          }
+        ]
+      }
+      , {
+        "name":"Loop Input"
+        , "id":511438480
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Instruction":"Loop Input"
+            , "Preceding Blocks":"kernel_aLoader.B6, kernel_aLoader.B3"
+          }
+        ]
+        , "type":"inst"
+      }
+      , {
         "name":"LD"
-        , "id":4075978672
+        , "id":576380880
         , "details":
         [
           {
@@ -329,28 +342,15 @@
           [
             {
               "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":100
+              , "line":111
             }
           ]
         ]
         , "type":"inst"
       }
       , {
-        "name":"Loop Input"
-        , "id":4083719776
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Instruction":"Loop Input"
-            , "Preceding Blocks":"kernel_aLoader.B6, kernel_aLoader.B3"
-          }
-        ]
-        , "type":"inst"
-      }
-      , {
         "name":"WR"
-        , "id":4123759328
+        , "id":576443120
         , "details":
         [
           {
@@ -377,61 +377,7 @@
       }
       , {
         "name":"LD"
-        , "id":4143308448
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Instruction":"Load"
-            , "Width":"512 bits"
-            , "LSU Style":"Burst-coalesced non-aligned cached"
-            , "Start Cycle":"11"
-            , "Latency":"234"
-            , "Stall-free":"No"
-            , "Global Memory":"Yes"
-          }
-        ]
-        , "debug":
-        [
-          [
-            {
-              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":111
-            }
-          ]
-        ]
-        , "type":"inst"
-      }
-      , {
-        "name":"LD"
-        , "id":4221976128
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Instruction":"Load"
-            , "Width":"512 bits"
-            , "LSU Style":"Burst-coalesced non-aligned cached"
-            , "Start Cycle":"11"
-            , "Latency":"234"
-            , "Stall-free":"No"
-            , "Global Memory":"Yes"
-          }
-        ]
-        , "debug":
-        [
-          [
-            {
-              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":107
-            }
-          ]
-        ]
-        , "type":"inst"
-      }
-      , {
-        "name":"LD"
-        , "id":4237015152
+        , "id":576600736
         , "details":
         [
           {
@@ -456,42 +402,74 @@
         ]
         , "type":"inst"
       }
+      , {
+        "name":"LD"
+        , "id":576616272
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Instruction":"Load"
+            , "Width":"512 bits"
+            , "LSU Style":"Burst-coalesced non-aligned cached"
+            , "Start Cycle":"11"
+            , "Latency":"234"
+            , "Stall-free":"No"
+            , "Global Memory":"Yes"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+              , "line":100
+            }
+          ]
+        ]
+        , "type":"inst"
+      }
+      , {
+        "name":"LD"
+        , "id":576647408
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Instruction":"Load"
+            , "Width":"512 bits"
+            , "LSU Style":"Burst-coalesced non-aligned cached"
+            , "Start Cycle":"11"
+            , "Latency":"234"
+            , "Stall-free":"No"
+            , "Global Memory":"Yes"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+              , "line":107
+            }
+          ]
+        ]
+        , "type":"inst"
+      }
     ]
     , "links":
     [
       {
-        "from":4076690368
-        , "to":4077240304
+        "from":508556496
+        , "to":511231760
       }
       , {
-        "from":4077778416
-        , "to":4080453600
+        "from":507086624
+        , "to":508018480
       }
       , {
-        "from":4075978672
-        , "to":4077778416
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"512"
-          }
-        ]
-      }
-      , {
-        "from":4077240304
-        , "to":4075978672
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"384"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
+        "from":511438480
+        , "to":507086624
         , "details":
         [
           {
@@ -501,8 +479,63 @@
         ]
       }
       , {
-        "from":4080453600
-        , "to":4123759328
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":576380880
+        , "to":508556496
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"512"
+          }
+        ]
+      }
+      , {
+        "from":508018480
+        , "to":576380880
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"384"
+          }
+        ]
+      }
+      , {
+        "from":511231760
+        , "to":576443120
         , "details":
         [
           {
@@ -512,8 +545,8 @@
         ]
       }
       , {
-        "from":4077240304
-        , "to":4123759328
+        "from":508018480
+        , "to":576443120
         , "details":
         [
           {
@@ -523,8 +556,8 @@
         ]
       }
       , {
-        "from":4143308448
-        , "to":4077778416
+        "from":576600736
+        , "to":508556496
         , "details":
         [
           {
@@ -534,8 +567,8 @@
         ]
       }
       , {
-        "from":4077240304
-        , "to":4143308448
+        "from":508018480
+        , "to":576600736
         , "details":
         [
           {
@@ -545,107 +578,8 @@
         ]
       }
       , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4083719776
-        , "to":4076690368
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4221976128
-        , "to":4077778416
+        "from":576616272
+        , "to":508556496
         , "details":
         [
           {
@@ -655,8 +589,8 @@
         ]
       }
       , {
-        "from":4077240304
-        , "to":4221976128
+        "from":508018480
+        , "to":576616272
         , "details":
         [
           {
@@ -666,8 +600,8 @@
         ]
       }
       , {
-        "from":4237015152
-        , "to":4077778416
+        "from":576647408
+        , "to":508556496
         , "details":
         [
           {
@@ -677,25 +611,91 @@
         ]
       }
       , {
-        "from":4077240304
-        , "to":4237015152
+        "from":508018480
+        , "to":576647408
         , "details":
         [
           {
             "type":"table"
             , "Width":"384"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511438480
+        , "to":507086624
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
           }
         ]
       }
     ]
   }
-  , "4067227888":
+  , "497923664":
   {
     "nodes":
     [
       {
         "name":"Cluster 0"
-        , "id":4075622112
+        , "id":506018368
         , "details":
         [
           {
@@ -710,7 +710,7 @@
         [
           {
             "name":"Logic"
-            , "id":4075628688
+            , "id":506024944
             , "details":
             [
               {
@@ -724,7 +724,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4075772592
+            , "id":506168848
             , "details":
             [
               {
@@ -742,76 +742,18 @@
     , "links":
     [
       {
-        "from":4075628688
-        , "to":4075772592
+        "from":506024944
+        , "to":506168848
       }
     ]
   }
-  , "4067324784":
-  {
-    "nodes":
-    [
-      {
-        "name":"Cluster 16"
-        , "id":4142586720
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Cluster Name":"i_sfc_s_c0_in_entry_kernel_outs_c0_enter_kernel_out3"
-            , "Cluster Type":"Stall-Free"
-            , "Cluster Latency":"4"
-          }
-        ]
-        , "type":"bb"
-        , "children":
-        [
-          {
-            "name":"Logic"
-            , "id":4142593168
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Cluster Name":"i_sfc_s_c0_in_entry_kernel_outs_c0_enter_kernel_out3"
-                , "Cluster Type":"Stall-Free"
-                , "Cluster Latency":"4"
-              }
-            ]
-            , "type":"inst"
-          }
-          , {
-            "name":"Exit"
-            , "id":4142759296
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Exit FIFO Depth":"16"
-                , "Exit FIFO Width":"16"
-                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
-              }
-            ]
-            , "type":"bb"
-          }
-        ]
-      }
-    ]
-    , "links":
-    [
-      {
-        "from":4142593168
-        , "to":4142759296
-      }
-    ]
-  }
-  , "4067334704":
+  , "497954272":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4161351088
+        , "id":511989648
         , "details":
         [
           {
@@ -827,13 +769,13 @@
     [
     ]
   }
-  , "4067434768":
+  , "498136272":
   {
     "nodes":
     [
       {
         "name":"Cluster 5"
-        , "id":4085896224
+        , "id":528030400
         , "details":
         [
           {
@@ -848,7 +790,7 @@
         [
           {
             "name":"Logic"
-            , "id":4110434064
+            , "id":533334112
             , "details":
             [
               {
@@ -862,7 +804,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4095204736
+            , "id":535354496
             , "details":
             [
               {
@@ -880,18 +822,18 @@
     , "links":
     [
       {
-        "from":4110434064
-        , "to":4095204736
+        "from":533334112
+        , "to":535354496
       }
     ]
   }
-  , "4067444192":
+  , "498145760":
   {
     "nodes":
     [
       {
         "name":"Cluster 6"
-        , "id":4095596832
+        , "id":522213296
         , "details":
         [
           {
@@ -906,7 +848,7 @@
         [
           {
             "name":"Logic"
-            , "id":4101479344
+            , "id":534649328
             , "details":
             [
               {
@@ -920,7 +862,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4102862912
+            , "id":535285648
             , "details":
             [
               {
@@ -938,18 +880,18 @@
     , "links":
     [
       {
-        "from":4101479344
-        , "to":4102862912
+        "from":534649328
+        , "to":535285648
       }
     ]
   }
-  , "4067444272":
+  , "498145840":
   {
     "nodes":
     [
       {
         "name":"Cluster 7"
-        , "id":4096179280
+        , "id":522125248
         , "details":
         [
           {
@@ -964,7 +906,7 @@
         [
           {
             "name":"Logic"
-            , "id":4104355904
+            , "id":533079472
             , "details":
             [
               {
@@ -978,7 +920,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4102379456
+            , "id":541562128
             , "details":
             [
               {
@@ -994,7 +936,7 @@
       }
       , {
         "name":"Loop Input"
-        , "id":4153722384
+        , "id":584404480
         , "details":
         [
           {
@@ -1009,12 +951,12 @@
     , "links":
     [
       {
-        "from":4104355904
-        , "to":4102379456
+        "from":533079472
+        , "to":541562128
       }
       , {
-        "from":4153722384
-        , "to":4104355904
+        "from":584404480
+        , "to":533079472
         , "details":
         [
           {
@@ -1025,7 +967,7 @@
       }
     ]
   }
-  , "4067444528":
+  , "498146096":
   {
     "nodes":
     [
@@ -1034,13 +976,13 @@
     [
     ]
   }
-  , "4067444880":
+  , "498146448":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4086131488
+        , "id":610220080
         , "details":
         [
           {
@@ -1056,13 +998,13 @@
     [
     ]
   }
-  , "4067444960":
+  , "498146528":
   {
     "nodes":
     [
       {
         "name":"Cluster 8"
-        , "id":4103919760
+        , "id":519950512
         , "details":
         [
           {
@@ -1077,7 +1019,7 @@
         [
           {
             "name":"Logic"
-            , "id":4100479616
+            , "id":528748608
             , "details":
             [
               {
@@ -1091,7 +1033,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4099854800
+            , "id":526819840
             , "details":
             [
               {
@@ -1107,7 +1049,7 @@
       }
       , {
         "name":"Loop Input"
-        , "id":4152202752
+        , "id":511989280
         , "details":
         [
           {
@@ -1119,35 +1061,8 @@
         , "type":"inst"
       }
       , {
-        "name":"WR"
-        , "id":4162488464
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Instruction":"Channel Write"
-            , "Width":"2048 bits"
-            , "Depth":"256"
-            , "Channel Name":"_aFeeder_uA_channel"
-            , "Start Cycle":"11"
-            , "Latency":"0"
-            , "Stall-free":"No"
-          }
-        ]
-        , "debug":
-        [
-          [
-            {
-              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":160
-            }
-          ]
-        ]
-        , "type":"inst"
-      }
-      , {
         "name":"RD"
-        , "id":4172876448
+        , "id":541652928
         , "details":
         [
           {
@@ -1172,16 +1087,43 @@
         ]
         , "type":"inst"
       }
+      , {
+        "name":"WR"
+        , "id":637739296
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Instruction":"Channel Write"
+            , "Width":"2048 bits"
+            , "Depth":"256"
+            , "Channel Name":"_aFeeder_uA_channel"
+            , "Start Cycle":"11"
+            , "Latency":"0"
+            , "Stall-free":"No"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+              , "line":160
+            }
+          ]
+        ]
+        , "type":"inst"
+      }
     ]
     , "links":
     [
       {
-        "from":4100479616
-        , "to":4099854800
+        "from":528748608
+        , "to":526819840
       }
       , {
-        "from":4152202752
-        , "to":4100479616
+        "from":511989280
+        , "to":528748608
         , "details":
         [
           {
@@ -1191,41 +1133,8 @@
         ]
       }
       , {
-        "from":4152202752
-        , "to":4100479616
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4152202752
-        , "to":4100479616
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4099854800
-        , "to":4162488464
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"56"
-          }
-        ]
-      }
-      , {
-        "from":4172876448
-        , "to":4162488464
+        "from":541652928
+        , "to":637739296
         , "details":
         [
           {
@@ -1235,8 +1144,41 @@
         ]
       }
       , {
-        "from":4099854800
-        , "to":4172876448
+        "from":526819840
+        , "to":541652928
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"56"
+          }
+        ]
+      }
+      , {
+        "from":511989280
+        , "to":528748608
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":511989280
+        , "to":528748608
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":526819840
+        , "to":637739296
         , "details":
         [
           {
@@ -1247,13 +1189,13 @@
       }
     ]
   }
-  , "4067464304":
+  , "498165904":
   {
     "nodes":
     [
       {
         "name":"Cluster 14"
-        , "id":4075171488
+        , "id":549129392
         , "details":
         [
           {
@@ -1268,7 +1210,7 @@
         [
           {
             "name":"Logic"
-            , "id":4112095056
+            , "id":555919248
             , "details":
             [
               {
@@ -1282,7 +1224,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4114050080
+            , "id":522693680
             , "details":
             [
               {
@@ -1298,7 +1240,7 @@
       }
       , {
         "name":"Cluster 15"
-        , "id":4097820992
+        , "id":543192400
         , "details":
         [
           {
@@ -1313,7 +1255,7 @@
         [
           {
             "name":"Logic"
-            , "id":4122637376
+            , "id":548827600
             , "details":
             [
               {
@@ -1327,7 +1269,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4119812992
+            , "id":547473584
             , "details":
             [
               {
@@ -1343,7 +1285,7 @@
       }
       , {
         "name":"WR"
-        , "id":4175301616
+        , "id":579468560
         , "details":
         [
           {
@@ -1370,7 +1312,7 @@
       }
       , {
         "name":"RD"
-        , "id":4175339056
+        , "id":580436800
         , "details":
         [
           {
@@ -1399,16 +1341,16 @@
     , "links":
     [
       {
-        "from":4112095056
-        , "to":4114050080
+        "from":555919248
+        , "to":522693680
       }
       , {
-        "from":4122637376
-        , "to":4119812992
+        "from":548827600
+        , "to":547473584
       }
       , {
-        "from":4119812992
-        , "to":4175301616
+        "from":547473584
+        , "to":579468560
         , "details":
         [
           {
@@ -1418,8 +1360,8 @@
         ]
       }
       , {
-        "from":4175339056
-        , "to":4122637376
+        "from":580436800
+        , "to":548827600
         , "details":
         [
           {
@@ -1429,8 +1371,8 @@
         ]
       }
       , {
-        "from":4114050080
-        , "to":4175339056
+        "from":522693680
+        , "to":580436800
         , "details":
         [
           {
@@ -1441,13 +1383,13 @@
       }
     ]
   }
-  , "4067475024":
+  , "498176624":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4154586208
+        , "id":592091136
         , "details":
         [
           {
@@ -1463,13 +1405,13 @@
     [
     ]
   }
-  , "4067475104":
+  , "498176704":
   {
     "nodes":
     [
       {
         "name":"Cluster 12"
-        , "id":4118616880
+        , "id":540531312
         , "details":
         [
           {
@@ -1484,7 +1426,7 @@
         [
           {
             "name":"Logic"
-            , "id":4118628176
+            , "id":523669808
             , "details":
             [
               {
@@ -1498,7 +1440,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4106796336
+            , "id":535961968
             , "details":
             [
               {
@@ -1514,7 +1456,7 @@
       }
       , {
         "name":"Loop Input"
-        , "id":4076970464
+        , "id":506801264
         , "details":
         [
           {
@@ -1526,35 +1468,8 @@
         , "type":"inst"
       }
       , {
-        "name":"WR"
-        , "id":4176978848
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Instruction":"Channel Write"
-            , "Width":"32 bits"
-            , "Depth":"256"
-            , "Channel Name":"_xLoader_xFeeder_channel"
-            , "Start Cycle":"297"
-            , "Latency":"0"
-            , "Stall-free":"No"
-          }
-        ]
-        , "debug":
-        [
-          [
-            {
-              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":188
-            }
-          ]
-        ]
-        , "type":"inst"
-      }
-      , {
         "name":"LD"
-        , "id":4224845952
+        , "id":507058912
         , "details":
         [
           {
@@ -1579,16 +1494,43 @@
         ]
         , "type":"inst"
       }
+      , {
+        "name":"WR"
+        , "id":579843792
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Instruction":"Channel Write"
+            , "Width":"32 bits"
+            , "Depth":"256"
+            , "Channel Name":"_xLoader_xFeeder_channel"
+            , "Start Cycle":"297"
+            , "Latency":"0"
+            , "Stall-free":"No"
+          }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+              , "line":188
+            }
+          ]
+        ]
+        , "type":"inst"
+      }
     ]
     , "links":
     [
       {
-        "from":4118628176
-        , "to":4106796336
+        "from":523669808
+        , "to":535961968
       }
       , {
-        "from":4076970464
-        , "to":4118628176
+        "from":506801264
+        , "to":523669808
         , "details":
         [
           {
@@ -1598,118 +1540,8 @@
         ]
       }
       , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4076970464
-        , "to":4118628176
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4106796336
-        , "to":4176978848
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"192"
-          }
-        ]
-      }
-      , {
-        "from":4224845952
-        , "to":4176978848
+        "from":507058912
+        , "to":579843792
         , "details":
         [
           {
@@ -1719,8 +1551,8 @@
         ]
       }
       , {
-        "from":4106796336
-        , "to":4224845952
+        "from":535961968
+        , "to":507058912
         , "details":
         [
           {
@@ -1729,15 +1561,125 @@
           }
         ]
       }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":535961968
+        , "to":579843792
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"192"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506801264
+        , "to":523669808
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
     ]
   }
-  , "4067515040":
+  , "498216560":
   {
     "nodes":
     [
       {
         "name":"Cluster 9"
-        , "id":4111013536
+        , "id":546435168
         , "details":
         [
           {
@@ -1752,7 +1694,7 @@
         [
           {
             "name":"Logic"
-            , "id":4097605664
+            , "id":547795632
             , "details":
             [
               {
@@ -1766,7 +1708,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4105660752
+            , "id":524677760
             , "details":
             [
               {
@@ -1784,18 +1726,18 @@
     , "links":
     [
       {
-        "from":4097605664
-        , "to":4105660752
+        "from":547795632
+        , "to":524677760
       }
     ]
   }
-  , "4067518976":
+  , "498220464":
   {
     "nodes":
     [
       {
         "name":"Cluster 10"
-        , "id":4094861424
+        , "id":529658288
         , "details":
         [
           {
@@ -1810,7 +1752,7 @@
         [
           {
             "name":"Logic"
-            , "id":4115702032
+            , "id":523950880
             , "details":
             [
               {
@@ -1824,7 +1766,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4117203024
+            , "id":521518528
             , "details":
             [
               {
@@ -1842,18 +1784,18 @@
     , "links":
     [
       {
-        "from":4115702032
-        , "to":4117203024
+        "from":523950880
+        , "to":521518528
       }
     ]
   }
-  , "4067519056":
+  , "498220544":
   {
     "nodes":
     [
       {
         "name":"Cluster 11"
-        , "id":4092313712
+        , "id":529174400
         , "details":
         [
           {
@@ -1868,7 +1810,7 @@
         [
           {
             "name":"Logic"
-            , "id":4110315360
+            , "id":529181328
             , "details":
             [
               {
@@ -1882,7 +1824,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4121018448
+            , "id":535793056
             , "details":
             [
               {
@@ -1898,7 +1840,7 @@
       }
       , {
         "name":"Loop Input"
-        , "id":4161687648
+        , "id":511602672
         , "details":
         [
           {
@@ -1913,12 +1855,12 @@
     , "links":
     [
       {
-        "from":4110315360
-        , "to":4121018448
+        "from":529181328
+        , "to":535793056
       }
       , {
-        "from":4161687648
-        , "to":4110315360
+        "from":511602672
+        , "to":529181328
         , "details":
         [
           {
@@ -1928,8 +1870,8 @@
         ]
       }
       , {
-        "from":4161687648
-        , "to":4110315360
+        "from":511602672
+        , "to":529181328
         , "details":
         [
           {
@@ -1939,8 +1881,8 @@
         ]
       }
       , {
-        "from":4161687648
-        , "to":4110315360
+        "from":511602672
+        , "to":529181328
         , "details":
         [
           {
@@ -1951,7 +1893,7 @@
       }
     ]
   }
-  , "4067519280":
+  , "498220768":
   {
     "nodes":
     [
@@ -1960,13 +1902,13 @@
     [
     ]
   }
-  , "4067519632":
+  , "498221120":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4160775728
+        , "id":508131632
         , "details":
         [
           {
@@ -1982,13 +1924,13 @@
     [
     ]
   }
-  , "4067582448":
+  , "498282432":
   {
     "nodes":
     [
       {
         "name":"Cluster 13"
-        , "id":4122745984
+        , "id":545427024
         , "details":
         [
           {
@@ -2003,7 +1945,7 @@
         [
           {
             "name":"Logic"
-            , "id":4093678000
+            , "id":549058432
             , "details":
             [
               {
@@ -2017,7 +1959,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4112117472
+            , "id":545464976
             , "details":
             [
               {
@@ -2035,12 +1977,12 @@
     , "links":
     [
       {
-        "from":4093678000
-        , "to":4112117472
+        "from":549058432
+        , "to":545464976
       }
     ]
   }
-  , "4067629760":
+  , "498329744":
   {
     "nodes":
     [
@@ -2049,103 +1991,13 @@
     [
     ]
   }
-  , "4067695072":
+  , "498395024":
   {
     "nodes":
     [
       {
-        "name":"Cluster 26"
-        , "id":4203555408
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Cluster Name":"i_sfc_s_c1_in_for_body4_kernel_unloaders_c1_enter_kernel_unloader186"
-            , "Cluster Type":"Stall-Free"
-            , "Cluster Latency":"2"
-          }
-        ]
-        , "type":"bb"
-        , "children":
-        [
-          {
-            "name":"Logic"
-            , "id":4179762752
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Cluster Name":"i_sfc_s_c1_in_for_body4_kernel_unloaders_c1_enter_kernel_unloader186"
-                , "Cluster Type":"Stall-Free"
-                , "Cluster Latency":"2"
-              }
-            ]
-            , "type":"inst"
-          }
-          , {
-            "name":"Exit"
-            , "id":4275005120
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Exit FIFO Depth":"16"
-                , "Exit FIFO Width":"8"
-                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
-              }
-            ]
-            , "type":"bb"
-          }
-        ]
-      }
-      , {
-        "name":"Cluster 25"
-        , "id":4203599472
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Cluster Name":"i_sfc_s_c2_in_for_body4_kernel_unloaders_c2_enter_kernel_unloader172"
-            , "Cluster Type":"Stall-Free"
-            , "Cluster Latency":"2"
-          }
-        ]
-        , "type":"bb"
-        , "children":
-        [
-          {
-            "name":"Logic"
-            , "id":4219256640
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Cluster Name":"i_sfc_s_c2_in_for_body4_kernel_unloaders_c2_enter_kernel_unloader172"
-                , "Cluster Type":"Stall-Free"
-                , "Cluster Latency":"2"
-              }
-            ]
-            , "type":"inst"
-          }
-          , {
-            "name":"Exit"
-            , "id":4219644368
-            , "details":
-            [
-              {
-                "type":"table"
-                , "Exit FIFO Depth":"16"
-                , "Exit FIFO Width":"64"
-                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
-              }
-            ]
-            , "type":"bb"
-          }
-        ]
-      }
-      , {
         "name":"Cluster 24"
-        , "id":4203709632
+        , "id":634213088
         , "details":
         [
           {
@@ -2160,7 +2012,7 @@
         [
           {
             "name":"Logic"
-            , "id":4235047024
+            , "id":671490752
             , "details":
             [
               {
@@ -2174,7 +2026,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4219486800
+            , "id":642947440
             , "details":
             [
               {
@@ -2189,8 +2041,111 @@
         ]
       }
       , {
+        "name":"Cluster 25"
+        , "id":634102912
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Cluster Name":"i_sfc_s_c2_in_for_body4_kernel_unloaders_c2_enter_kernel_unloader172"
+            , "Cluster Type":"Stall-Free"
+            , "Cluster Latency":"2"
+          }
+        ]
+        , "type":"bb"
+        , "children":
+        [
+          {
+            "name":"Logic"
+            , "id":610184864
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Cluster Name":"i_sfc_s_c2_in_for_body4_kernel_unloaders_c2_enter_kernel_unloader172"
+                , "Cluster Type":"Stall-Free"
+                , "Cluster Latency":"2"
+              }
+            ]
+            , "type":"inst"
+          }
+          , {
+            "name":"Exit"
+            , "id":684284864
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Exit FIFO Depth":"16"
+                , "Exit FIFO Width":"64"
+                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
+              }
+            ]
+            , "type":"bb"
+          }
+        ]
+      }
+      , {
+        "name":"Cluster 26"
+        , "id":634058848
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Cluster Name":"i_sfc_s_c1_in_for_body4_kernel_unloaders_c1_enter_kernel_unloader186"
+            , "Cluster Type":"Stall-Free"
+            , "Cluster Latency":"2"
+          }
+        ]
+        , "type":"bb"
+        , "children":
+        [
+          {
+            "name":"Logic"
+            , "id":610050768
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Cluster Name":"i_sfc_s_c1_in_for_body4_kernel_unloaders_c1_enter_kernel_unloader186"
+                , "Cluster Type":"Stall-Free"
+                , "Cluster Latency":"2"
+              }
+            ]
+            , "type":"inst"
+          }
+          , {
+            "name":"Exit"
+            , "id":650916960
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Exit FIFO Depth":"16"
+                , "Exit FIFO Width":"8"
+                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
+              }
+            ]
+            , "type":"bb"
+          }
+        ]
+      }
+      , {
+        "name":"Loop Input"
+        , "id":546832896
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Instruction":"Loop Input"
+            , "Preceding Blocks":"kernel_unloader.B6, kernel_unloader.B1"
+          }
+        ]
+        , "type":"inst"
+      }
+      , {
         "name":"?"
-        , "id":4075729392
+        , "id":588890960
         , "details":
         [
           {
@@ -2212,7 +2167,7 @@
       }
       , {
         "name":"RD"
-        , "id":4103946880
+        , "id":598556864
         , "details":
         [
           {
@@ -2237,37 +2192,24 @@
         ]
         , "type":"inst"
       }
-      , {
-        "name":"Loop Input"
-        , "id":4166024720
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Instruction":"Loop Input"
-            , "Preceding Blocks":"kernel_unloader.B6, kernel_unloader.B1"
-          }
-        ]
-        , "type":"inst"
-      }
     ]
     , "links":
     [
       {
-        "from":4179762752
-        , "to":4275005120
+        "from":671490752
+        , "to":642947440
       }
       , {
-        "from":4219256640
-        , "to":4219644368
+        "from":610184864
+        , "to":684284864
       }
       , {
-        "from":4235047024
-        , "to":4219486800
+        "from":610050768
+        , "to":650916960
       }
       , {
-        "from":4075729392
-        , "to":4179762752
+        "from":546832896
+        , "to":671490752
         , "details":
         [
           {
@@ -2277,8 +2219,30 @@
         ]
       }
       , {
-        "from":4219486800
-        , "to":4075729392
+        "from":546832896
+        , "to":671490752
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":588890960
+        , "to":610050768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":642947440
+        , "to":588890960
         , "details":
         [
           {
@@ -2288,8 +2252,19 @@
         ]
       }
       , {
-        "from":4103946880
-        , "to":4219256640
+        "from":546832896
+        , "to":671490752
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":598556864
+        , "to":610184864
         , "details":
         [
           {
@@ -2299,8 +2274,8 @@
         ]
       }
       , {
-        "from":4103946880
-        , "to":4179762752
+        "from":598556864
+        , "to":610050768
         , "details":
         [
           {
@@ -2310,8 +2285,8 @@
         ]
       }
       , {
-        "from":4219486800
-        , "to":4103946880
+        "from":642947440
+        , "to":598556864
         , "details":
         [
           {
@@ -2321,41 +2296,8 @@
         ]
       }
       , {
-        "from":4166024720
-        , "to":4235047024
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4166024720
-        , "to":4235047024
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4166024720
-        , "to":4235047024
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4166024720
-        , "to":4235047024
+        "from":546832896
+        , "to":671490752
         , "details":
         [
           {
@@ -2366,13 +2308,13 @@
       }
     ]
   }
-  , "4067695152":
+  , "498395104":
   {
     "nodes":
     [
       {
         "name":"Cluster 27"
-        , "id":4185478416
+        , "id":650901504
         , "details":
         [
           {
@@ -2387,7 +2329,7 @@
         [
           {
             "name":"Logic"
-            , "id":4185465264
+            , "id":650734768
             , "details":
             [
               {
@@ -2401,7 +2343,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4188637424
+            , "id":640705264
             , "details":
             [
               {
@@ -2416,21 +2358,29 @@
         ]
       }
       , {
-        "name":"Loop Input"
-        , "id":4081642576
+        "name":"Loop Orch"
+        , "id":508040416
         , "details":
         [
           {
             "type":"table"
-            , "Instruction":"Loop Input"
-            , "Preceding Blocks":"kernel_unloader.B5, kernel_unloader.B4"
+            , "Instruction":"Loop Orchestration Logic"
           }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+              , "line":402
+            }
+          ]
         ]
         , "type":"inst"
       }
       , {
         "name":"ST"
-        , "id":4172625312
+        , "id":573748656
         , "details":
         [
           {
@@ -2459,12 +2409,12 @@
     , "links":
     [
       {
-        "from":4185465264
-        , "to":4188637424
+        "from":650734768
+        , "to":640705264
       }
       , {
-        "from":4081642576
-        , "to":4185465264
+        "from":508040416
+        , "to":650734768
         , "details":
         [
           {
@@ -2474,19 +2424,8 @@
         ]
       }
       , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"32"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
+        "from":508040416
+        , "to":650734768
         , "details":
         [
           {
@@ -2496,8 +2435,8 @@
         ]
       }
       , {
-        "from":4081642576
-        , "to":4185465264
+        "from":508040416
+        , "to":650734768
         , "details":
         [
           {
@@ -2507,8 +2446,8 @@
         ]
       }
       , {
-        "from":4081642576
-        , "to":4185465264
+        "from":508040416
+        , "to":650734768
         , "details":
         [
           {
@@ -2518,96 +2457,8 @@
         ]
       }
       , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4081642576
-        , "to":4185465264
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4188637424
-        , "to":4172625312
+        "from":640705264
+        , "to":573748656
         , "details":
         [
           {
@@ -2617,8 +2468,107 @@
         ]
       }
       , {
-        "from":4081642576
-        , "to":4185465264
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"32"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":508040416
+        , "to":650734768
         , "details":
         [
           {
@@ -2629,13 +2579,13 @@
       }
     ]
   }
-  , "4067695232":
+  , "498395184":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4113980496
+        , "id":596727856
         , "details":
         [
           {
@@ -2648,7 +2598,7 @@
       }
       , {
         "name":"Feedback"
-        , "id":4175745936
+        , "id":608944256
         , "details":
         [
           {
@@ -2674,8 +2624,8 @@
     , "links":
     [
       {
-        "from":4113980496
-        , "to":4175745936
+        "from":596727856
+        , "to":608944256
         , "details":
         [
           {
@@ -2685,8 +2635,8 @@
         ]
       }
       , {
-        "from":4113980496
-        , "to":4175745936
+        "from":596727856
+        , "to":608944256
         , "details":
         [
           {
@@ -2697,7 +2647,65 @@
       }
     ]
   }
-  , "4067748192":
+  , "498435872":
+  {
+    "nodes":
+    [
+      {
+        "name":"Cluster 16"
+        , "id":573263360
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Cluster Name":"i_sfc_s_c0_in_entry_kernel_outs_c0_enter_kernel_out3"
+            , "Cluster Type":"Stall-Free"
+            , "Cluster Latency":"4"
+          }
+        ]
+        , "type":"bb"
+        , "children":
+        [
+          {
+            "name":"Logic"
+            , "id":573269808
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Cluster Name":"i_sfc_s_c0_in_entry_kernel_outs_c0_enter_kernel_out3"
+                , "Cluster Type":"Stall-Free"
+                , "Cluster Latency":"4"
+              }
+            ]
+            , "type":"inst"
+          }
+          , {
+            "name":"Exit"
+            , "id":573435936
+            , "details":
+            [
+              {
+                "type":"table"
+                , "Exit FIFO Depth":"16"
+                , "Exit FIFO Width":"16"
+                , "Details":"Exit FIFO depth is sized to accommodate all data that may be in-flight in the stall-free cluster; this depth will be equal to or greater than the latency of the cluster.  The width of the FIFO depends on the amount of data that needs to pass from the stall-free logic cluster to the stall-able logic below it."
+              }
+            ]
+            , "type":"bb"
+          }
+        ]
+      }
+    ]
+    , "links":
+    [
+      {
+        "from":573269808
+        , "to":573435936
+      }
+    ]
+  }
+  , "498449632":
   {
     "nodes":
     [
@@ -2706,13 +2714,13 @@
     [
     ]
   }
-  , "4067751424":
+  , "498452896":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4080528896
+        , "id":591388880
         , "details":
         [
           {
@@ -2728,13 +2736,13 @@
     [
     ]
   }
-  , "4067751504":
+  , "498452976":
   {
     "nodes":
     [
       {
         "name":"Cluster 20"
-        , "id":4143938576
+        , "id":574615248
         , "details":
         [
           {
@@ -2749,7 +2757,7 @@
         [
           {
             "name":"Logic"
-            , "id":4146968400
+            , "id":577650544
             , "details":
             [
               {
@@ -2763,7 +2771,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4161204000
+            , "id":591886384
             , "details":
             [
               {
@@ -2779,7 +2787,7 @@
       }
       , {
         "name":"Cluster 19"
-        , "id":4143936560
+        , "id":574613232
         , "details":
         [
           {
@@ -2794,7 +2802,7 @@
         [
           {
             "name":"Logic"
-            , "id":4143945440
+            , "id":574622112
             , "details":
             [
               {
@@ -2808,7 +2816,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4146425376
+            , "id":577107536
             , "details":
             [
               {
@@ -2824,7 +2832,7 @@
       }
       , {
         "name":"Loop Input"
-        , "id":4080509776
+        , "id":506826608
         , "details":
         [
           {
@@ -2836,17 +2844,17 @@
         , "type":"inst"
       }
       , {
-        "name":"RD"
-        , "id":4085488592
+        "name":"WR"
+        , "id":512081728
         , "details":
         [
           {
             "type":"table"
-            , "Instruction":"Channel Read"
-            , "Width":"32 bits"
+            , "Instruction":"Channel Write"
+            , "Width":"2048 bits"
             , "Depth":"256"
-            , "Channel Name":"_xFeeder_uX_channel"
-            , "Start Cycle":"8"
+            , "Channel Name":"_Out_unloader_channel"
+            , "Start Cycle":"147"
             , "Latency":"0"
             , "Stall-free":"No"
           }
@@ -2856,7 +2864,7 @@
           [
             {
               "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":309
+              , "line":378
             }
           ]
         ]
@@ -2864,7 +2872,7 @@
       }
       , {
         "name":"RD"
-        , "id":4094106512
+        , "id":600303344
         , "details":
         [
           {
@@ -2890,17 +2898,17 @@
         , "type":"inst"
       }
       , {
-        "name":"WR"
-        , "id":4175184336
+        "name":"RD"
+        , "id":613735392
         , "details":
         [
           {
             "type":"table"
-            , "Instruction":"Channel Write"
-            , "Width":"2048 bits"
+            , "Instruction":"Channel Read"
+            , "Width":"32 bits"
             , "Depth":"256"
-            , "Channel Name":"_Out_unloader_channel"
-            , "Start Cycle":"147"
+            , "Channel Name":"_xFeeder_uX_channel"
+            , "Start Cycle":"8"
             , "Latency":"0"
             , "Stall-free":"No"
           }
@@ -2910,7 +2918,7 @@
           [
             {
               "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":378
+              , "line":309
             }
           ]
         ]
@@ -2920,16 +2928,16 @@
     , "links":
     [
       {
-        "from":4146968400
-        , "to":4161204000
+        "from":577650544
+        , "to":591886384
       }
       , {
-        "from":4143945440
-        , "to":4146425376
+        "from":574622112
+        , "to":577107536
       }
       , {
-        "from":4080509776
-        , "to":4143945440
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
@@ -2939,8 +2947,8 @@
         ]
       }
       , {
-        "from":4080509776
-        , "to":4143945440
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
@@ -2950,8 +2958,19 @@
         ]
       }
       , {
-        "from":4080509776
-        , "to":4143945440
+        "from":591886384
+        , "to":512081728
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"2112"
+          }
+        ]
+      }
+      , {
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
@@ -2961,8 +2980,8 @@
         ]
       }
       , {
-        "from":4080509776
-        , "to":4143945440
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
@@ -2972,30 +2991,96 @@
         ]
       }
       , {
-        "from":4085488592
-        , "to":4146968400
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
             "type":"table"
-            , "Width":"32"
+            , "Width":"1"
           }
         ]
       }
       , {
-        "from":4146425376
-        , "to":4085488592
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
             "type":"table"
-            , "Width":"224"
+            , "Width":"1"
           }
         ]
       }
       , {
-        "from":4094106512
-        , "to":4146968400
+        "from":506826608
+        , "to":574622112
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506826608
+        , "to":574622112
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506826608
+        , "to":574622112
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506826608
+        , "to":574622112
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506826608
+        , "to":574622112
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":506826608
+        , "to":574622112
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"1"
+          }
+        ]
+      }
+      , {
+        "from":600303344
+        , "to":577650544
         , "details":
         [
           {
@@ -3005,8 +3090,8 @@
         ]
       }
       , {
-        "from":4146425376
-        , "to":4094106512
+        "from":577107536
+        , "to":600303344
         , "details":
         [
           {
@@ -3016,8 +3101,8 @@
         ]
       }
       , {
-        "from":4080509776
-        , "to":4143945440
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
@@ -3027,30 +3112,8 @@
         ]
       }
       , {
-        "from":4080509776
-        , "to":4143945440
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4080509776
-        , "to":4143945440
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4080509776
-        , "to":4143945440
+        "from":613735392
+        , "to":577650544
         , "details":
         [
           {
@@ -3060,8 +3123,19 @@
         ]
       }
       , {
-        "from":4080509776
-        , "to":4143945440
+        "from":577107536
+        , "to":613735392
+        , "details":
+        [
+          {
+            "type":"table"
+            , "Width":"224"
+          }
+        ]
+      }
+      , {
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
@@ -3071,91 +3145,25 @@
         ]
       }
       , {
-        "from":4080509776
-        , "to":4143945440
+        "from":506826608
+        , "to":574622112
         , "details":
         [
           {
             "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4080509776
-        , "to":4143945440
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4080509776
-        , "to":4143945440
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4080509776
-        , "to":4143945440
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4080509776
-        , "to":4143945440
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4080509776
-        , "to":4143945440
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"1"
-          }
-        ]
-      }
-      , {
-        "from":4161204000
-        , "to":4175184336
-        , "details":
-        [
-          {
-            "type":"table"
-            , "Width":"2112"
+            , "Width":"32"
           }
         ]
       }
     ]
   }
-  , "4067751584":
+  , "498453056":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4166138576
+        , "id":574764208
         , "details":
         [
           {
@@ -3171,13 +3179,13 @@
     [
     ]
   }
-  , "4067751952":
+  , "498453424":
   {
     "nodes":
     [
       {
         "name":"Cluster 17"
-        , "id":4142923552
+        , "id":573600176
         , "details":
         [
           {
@@ -3192,7 +3200,7 @@
         [
           {
             "name":"Logic"
-            , "id":4142930368
+            , "id":573606992
             , "details":
             [
               {
@@ -3206,7 +3214,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4143124000
+            , "id":573800672
             , "details":
             [
               {
@@ -3221,23 +3229,15 @@
         ]
       }
       , {
-        "name":"Loop Orch"
-        , "id":4080688624
+        "name":"Loop Input"
+        , "id":511392832
         , "details":
         [
           {
             "type":"table"
-            , "Instruction":"Loop Orchestration Logic"
+            , "Instruction":"Loop Input"
+            , "Preceding Blocks":"kernel_Out.B4, kernel_Out.B0"
           }
-        ]
-        , "debug":
-        [
-          [
-            {
-              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
-              , "line":282
-            }
-          ]
         ]
         , "type":"inst"
       }
@@ -3245,12 +3245,12 @@
     , "links":
     [
       {
-        "from":4142930368
-        , "to":4143124000
+        "from":573606992
+        , "to":573800672
       }
       , {
-        "from":4080688624
-        , "to":4142930368
+        "from":511392832
+        , "to":573606992
         , "details":
         [
           {
@@ -3260,8 +3260,8 @@
         ]
       }
       , {
-        "from":4080688624
-        , "to":4142930368
+        "from":511392832
+        , "to":573606992
         , "details":
         [
           {
@@ -3272,13 +3272,13 @@
       }
     ]
   }
-  , "4067752432":
+  , "498453904":
   {
     "nodes":
     [
       {
         "name":"Cluster 18"
-        , "id":4143261728
+        , "id":573938384
         , "details":
         [
           {
@@ -3293,7 +3293,7 @@
         [
           {
             "name":"Logic"
-            , "id":4143268064
+            , "id":573944720
             , "details":
             [
               {
@@ -3307,7 +3307,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4143669632
+            , "id":574346288
             , "details":
             [
               {
@@ -3322,15 +3322,23 @@
         ]
       }
       , {
-        "name":"Loop Input"
-        , "id":4075727696
+        "name":"Loop Orch"
+        , "id":507238160
         , "details":
         [
           {
             "type":"table"
-            , "Instruction":"Loop Input"
-            , "Preceding Blocks":"kernel_Out.B6, kernel_Out.B2"
+            , "Instruction":"Loop Orchestration Logic"
           }
+        ]
+        , "debug":
+        [
+          [
+            {
+              "filename":"/home/u146242/t2sp-s10/t2s/tests/performance/gemv/a.cl"
+              , "line":285
+            }
+          ]
         ]
         , "type":"inst"
       }
@@ -3338,12 +3346,12 @@
     , "links":
     [
       {
-        "from":4143268064
-        , "to":4143669632
+        "from":573944720
+        , "to":574346288
       }
       , {
-        "from":4075727696
-        , "to":4143268064
+        "from":507238160
+        , "to":573944720
         , "details":
         [
           {
@@ -3353,8 +3361,8 @@
         ]
       }
       , {
-        "from":4075727696
-        , "to":4143268064
+        "from":507238160
+        , "to":573944720
         , "details":
         [
           {
@@ -3364,8 +3372,8 @@
         ]
       }
       , {
-        "from":4075727696
-        , "to":4143268064
+        "from":507238160
+        , "to":573944720
         , "details":
         [
           {
@@ -3375,8 +3383,8 @@
         ]
       }
       , {
-        "from":4075727696
-        , "to":4143268064
+        "from":507238160
+        , "to":573944720
         , "details":
         [
           {
@@ -3386,8 +3394,8 @@
         ]
       }
       , {
-        "from":4075727696
-        , "to":4143268064
+        "from":507238160
+        , "to":573944720
         , "details":
         [
           {
@@ -3397,8 +3405,8 @@
         ]
       }
       , {
-        "from":4075727696
-        , "to":4143268064
+        "from":507238160
+        , "to":573944720
         , "details":
         [
           {
@@ -3409,13 +3417,13 @@
       }
     ]
   }
-  , "4069183968":
+  , "499956976":
   {
     "nodes":
     [
       {
         "name":"Cluster 22"
-        , "id":4216160768
+        , "id":634367312
         , "details":
         [
           {
@@ -3430,7 +3438,7 @@
         [
           {
             "name":"Logic"
-            , "id":4189087600
+            , "id":615117920
             , "details":
             [
               {
@@ -3444,7 +3452,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4218970480
+            , "id":651550224
             , "details":
             [
               {
@@ -3460,7 +3468,7 @@
       }
       , {
         "name":"?"
-        , "id":4174897264
+        , "id":530205168
         , "details":
         [
           {
@@ -3484,12 +3492,12 @@
     , "links":
     [
       {
-        "from":4189087600
-        , "to":4218970480
+        "from":615117920
+        , "to":651550224
       }
       , {
-        "from":4218970480
-        , "to":4174897264
+        "from":651550224
+        , "to":530205168
         , "details":
         [
           {
@@ -3500,13 +3508,13 @@
       }
     ]
   }
-  , "4069315520":
+  , "500088512":
   {
     "nodes":
     [
       {
         "name":"Cluster 23"
-        , "id":4203775728
+        , "id":634279184
         , "details":
         [
           {
@@ -3521,7 +3529,7 @@
         [
           {
             "name":"Logic"
-            , "id":4228534400
+            , "id":661797920
             , "details":
             [
               {
@@ -3535,7 +3543,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4219119696
+            , "id":642239136
             , "details":
             [
               {
@@ -3553,18 +3561,18 @@
     , "links":
     [
       {
-        "from":4228534400
-        , "to":4219119696
+        "from":661797920
+        , "to":642239136
       }
     ]
   }
-  , "4069315600":
+  , "500088592":
   {
     "nodes":
     [
       {
         "name":"Input"
-        , "id":4081548944
+        , "id":519962560
         , "details":
         [
           {
@@ -3577,7 +3585,7 @@
       }
       , {
         "name":"Feedback"
-        , "id":4175798352
+        , "id":609193984
         , "details":
         [
           {
@@ -3603,8 +3611,8 @@
     , "links":
     [
       {
-        "from":4081548944
-        , "to":4175798352
+        "from":519962560
+        , "to":609193984
         , "details":
         [
           {
@@ -3614,8 +3622,8 @@
         ]
       }
       , {
-        "from":4081548944
-        , "to":4175798352
+        "from":519962560
+        , "to":609193984
         , "details":
         [
           {
@@ -3626,13 +3634,13 @@
       }
     ]
   }
-  , "4069315856":
+  , "500088848":
   {
     "nodes":
     [
       {
         "name":"Cluster 21"
-        , "id":4216155600
+        , "id":618866896
         , "details":
         [
           {
@@ -3647,7 +3655,7 @@
         [
           {
             "name":"Logic"
-            , "id":4193423984
+            , "id":559535552
             , "details":
             [
               {
@@ -3661,7 +3669,7 @@
           }
           , {
             "name":"Exit"
-            , "id":4218907200
+            , "id":641051632
             , "details":
             [
               {
@@ -3679,8 +3687,8 @@
     , "links":
     [
       {
-        "from":4193423984
-        , "to":4218907200
+        "from":559535552
+        , "to":641051632
       }
     ]
   }

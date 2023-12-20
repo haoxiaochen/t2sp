@@ -28,7 +28,7 @@
     #define I           4
 #else
     #define K           32
-    #define I           16
+    #define I           8
 #endif
 
 // Roofline utilities

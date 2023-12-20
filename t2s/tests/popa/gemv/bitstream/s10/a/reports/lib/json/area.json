@@ -4,9 +4,9 @@
   , "debug_enabled":"true"
   , "type":"module"
   , "total_percent":
-  [31.4252, 15.3447, 16.8227, 9.43606, 1.14583]
+  [31.3478, 15.2086, 16.8565, 10.0418, 1.14583]
   , "total":
-  [273409, 627905, 1106, 66, 648]
+  [273749, 629167, 1177, 66, 504]
   , "name":"Kernel System"
   , "max_resources":
   [1866240, 3732480, 11721, 5760, 93312]
@@ -274,9 +274,9 @@
       , "compute_units":1
       , "type":"function"
       , "total_percent":
-      [1.51773, 0.986583, 0.624571, 1.14325, 1.11111]
+      [1.44004, 0.850212, 0.658329, 1.749, 1.11111]
       , "total_kernel_resources":
-      [11692, 23312, 134, 64, 336]
+      [12027, 24572, 205, 64, 192]
       , "details":
       [
         {
@@ -315,7 +315,7 @@
           "name":"Coalesced Private Variables: \n - '_uZ_shreg' (a.cl:272)\n - '_89' (a.cl:339)"
           , "type":"resource"
           , "data":
-          [1048, 1568, 0, 0, 128]
+          [961, 1376, 64, 0, 0]
           , "debug":
           [
             [
@@ -339,15 +339,15 @@
             }
             , {
               "type":"text"
-              , "text":"64 registers of width 6 and depth 1"
+              , "text":"64 registers of width 7 and depth 1"
             }
             , {
               "type":"text"
-              , "text":"64 registers of width 32 and depth 32"
+              , "text":"64 registers of width 32 and depth 64"
             }
             , {
               "type":"brief"
-              , "text":"Shift Register,\n64 regs, 6 width by 1 depth,\n64 regs, 32 width by 32 depth"
+              , "text":"Shift Register,\n64 regs, 7 width by 1 depth,\n64 regs, 32 width by 64 depth"
             }
           ]
         }
@@ -355,7 +355,7 @@
           "name":"Private Variable: \n - '_Out_unloader_channel_array' (a.cl:278)"
           , "type":"resource"
           , "data":
-          [465, 2369, 0, 0, 0]
+          [669, 3149, 0, 0, 0]
           , "debug":
           [
             [
@@ -449,7 +449,7 @@
           "name":"Private Variable: \n - '_uA_s0_kk_iii' (a.cl:287)"
           , "type":"resource"
           , "data":
-          [14, 56, 0, 0, 0]
+          [14, 57, 0, 0, 0]
           , "debug":
           [
             [
@@ -467,7 +467,7 @@
             }
             , {
               "type":"text"
-              , "text":"1 register of width 16 and depth 1"
+              , "text":"1 register of width 17 and depth 1"
             }
             , {
               "type":"text"
@@ -475,7 +475,7 @@
             }
             , {
               "type":"brief"
-              , "text":"Register,\n1 reg, 16 width by 1 depth,\n1 reg, 32 width by 1 depth"
+              , "text":"Register,\n1 reg, 17 width by 1 depth,\n1 reg, 32 width by 1 depth"
             }
           ]
         }
@@ -1337,7 +1337,7 @@
               "name":"State"
               , "type":"resource"
               , "data":
-              [1727, 12504, 82, 0, 194]
+              [1679, 12727, 89, 0, 178]
               , "details":
               [
                 {
@@ -1370,7 +1370,7 @@
                   "name":"No Source Line"
                   , "type":"resource"
                   , "data":
-                  [1727, 12504, 82, 0, 194]
+                  [1679, 12727, 89, 0, 178]
                 }
               ]
             }
@@ -1378,7 +1378,7 @@
               "name":"Feedback"
               , "type":"resource"
               , "data":
-              [913.998, 470, 0, 0, 0]
+              [1042, 534, 0, 0, 0]
               , "details":
               [
                 {
@@ -1403,7 +1403,7 @@
                   "name":"a.cl:272"
                   , "type":"resource"
                   , "data":
-                  [192, 96, 0, 0, 0]
+                  [224, 112, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1418,7 +1418,7 @@
                   "name":"a.cl:278"
                   , "type":"resource"
                   , "data":
-                  [27, 0, 0, 0, 0]
+                  [26.3333, 0, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1478,7 +1478,7 @@
                   "name":"a.cl:299"
                   , "type":"resource"
                   , "data":
-                  [192, 96, 0, 0, 0]
+                  [224, 112, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1493,7 +1493,7 @@
                   "name":"a.cl:358"
                   , "type":"resource"
                   , "data":
-                  [203, 96, 0, 0, 0]
+                  [236.333, 112, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1508,7 +1508,7 @@
                   "name":"a.cl:359"
                   , "type":"resource"
                   , "data":
-                  [192, 96, 0, 0, 0]
+                  [224, 112, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1538,7 +1538,7 @@
                   "name":"a.cl:370"
                   , "type":"resource"
                   , "data":
-                  [27, 0, 0, 0, 0]
+                  [26.3333, 0, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1609,7 +1609,7 @@
                   "name":"a.cl:272"
                   , "type":"resource"
                   , "data":
-                  [112.25, 0.25, 0, 0, 0]
+                  [128.25, 0.25, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1629,14 +1629,14 @@
                       [0.25, 0.25, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Integer Subtract"
+                      "name":"7-bit Integer Subtract"
                       , "type":"resource"
                       , "count":64
                       , "data":
-                      [96, 0, 0, 0, 0]
+                      [112, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Select"
+                      "name":"7-bit Select"
                       , "type":"resource"
                       , "count":128
                       , "data":
@@ -1675,7 +1675,7 @@
                   "name":"a.cl:287"
                   , "type":"resource"
                   , "data":
-                  [54, 0, 0, 0, 0]
+                  [56, 0, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1695,18 +1695,18 @@
                       [1, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"16-bit Integer Add"
+                      "name":"17-bit Integer Add"
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [16, 0, 0, 0, 0]
+                      [17, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"16-bit Integer Compare"
+                      "name":"17-bit Integer Compare"
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [5, 0, 0, 0, 0]
+                      [6, 0, 0, 0, 0]
                     }
                     , {
                       "name":"32-bit Integer Add"
@@ -1722,7 +1722,7 @@
                   "name":"a.cl:299"
                   , "type":"resource"
                   , "data":
-                  [112.25, 0.25, 0, 0, 0]
+                  [128.25, 0.25, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1742,14 +1742,14 @@
                       [0.25, 0.25, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Integer Subtract"
+                      "name":"7-bit Integer Subtract"
                       , "type":"resource"
                       , "count":64
                       , "data":
-                      [96, 0, 0, 0, 0]
+                      [112, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Select"
+                      "name":"7-bit Select"
                       , "type":"resource"
                       , "count":128
                       , "data":
@@ -1873,7 +1873,7 @@
                   "name":"a.cl:358"
                   , "type":"resource"
                   , "data":
-                  [112.25, 0.25, 0, 64, 0]
+                  [128.25, 0.25, 0, 64, 0]
                   , "debug":
                   [
                     [
@@ -1893,14 +1893,14 @@
                       [0.25, 0.25, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Integer Subtract"
+                      "name":"7-bit Integer Subtract"
                       , "type":"resource"
                       , "count":64
                       , "data":
-                      [96, 0, 0, 0, 0]
+                      [112, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Select"
+                      "name":"7-bit Select"
                       , "type":"resource"
                       , "count":128
                       , "data":
@@ -1920,7 +1920,7 @@
                   "name":"a.cl:359"
                   , "type":"resource"
                   , "data":
-                  [112.25, 0.25, 0, 0, 0]
+                  [128.25, 0.25, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -1940,14 +1940,14 @@
                       [0.25, 0.25, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Integer Subtract"
+                      "name":"7-bit Integer Subtract"
                       , "type":"resource"
                       , "count":64
                       , "data":
-                      [96, 0, 0, 0, 0]
+                      [112, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Select"
+                      "name":"7-bit Select"
                       , "type":"resource"
                       , "count":128
                       , "data":
@@ -2012,7 +2012,7 @@
                   "name":"a.cl:367"
                   , "type":"resource"
                   , "data":
-                  [1670, 32, 0, 0, 0]
+                  [1742, 416, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -2029,7 +2029,7 @@
                       , "type":"resource"
                       , "count":64
                       , "data":
-                      [1670, 32, 0, 0, 0]
+                      [1742, 416, 0, 0, 0]
                     }
                   ]
                   , "replace_name":"true"
@@ -2071,9 +2071,9 @@
       , "compute_units":1
       , "type":"function"
       , "total_percent":
-      [0.165736, 0.126029, 0.0541999, 0, 0]
+      [0.16593, 0.12619, 0.0542535, 0, 0]
       , "total_kernel_resources":
-      [2152, 2023, 0, 0, 10]
+      [2155, 2025, 0, 0, 10]
       , "details":
       [
         {
@@ -2172,7 +2172,7 @@
           "name":"Private Variable: \n - '_aFeeder_s0_kk_iii' (a.cl:148)"
           , "type":"resource"
           , "data":
-          [8, 32, 0, 0, 0]
+          [8, 34, 0, 0, 0]
           , "debug":
           [
             [
@@ -2190,11 +2190,11 @@
             }
             , {
               "type":"text"
-              , "text":"1 register of width 16"
+              , "text":"1 register of width 17"
             }
             , {
               "type":"brief"
-              , "text":"Register,\n1 reg, 16 width"
+              , "text":"Register,\n1 reg, 17 width"
             }
           ]
         }
@@ -2858,7 +2858,7 @@
               "name":"Feedback"
               , "type":"resource"
               , "data":
-              [42, 13, 0, 0, 0]
+              [43, 13, 0, 0, 0]
               , "details":
               [
                 {
@@ -2913,7 +2913,7 @@
                   "name":"a.cl:148"
                   , "type":"resource"
                   , "data":
-                  [24, 9, 0, 0, 0]
+                  [25, 9, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -2952,7 +2952,7 @@
                   "name":"a.cl:148"
                   , "type":"resource"
                   , "data":
-                  [23, 1, 0, 0, 0]
+                  [25, 1, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -2972,18 +2972,18 @@
                       [2, 1, 0, 0, 0]
                     }
                     , {
-                      "name":"16-bit Integer Add"
+                      "name":"17-bit Integer Add"
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [16, 0, 0, 0, 0]
+                      [17, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"16-bit Integer Compare"
+                      "name":"17-bit Integer Compare"
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [5, 0, 0, 0, 0]
+                      [6, 0, 0, 0, 0]
                     }
                   ]
                   , "replace_name":"true"
@@ -3051,9 +3051,9 @@
       , "compute_units":1
       , "type":"function"
       , "total_percent":
-      [8.93441, 1.50474, 6.97038, 2.37181, 0]
+      [8.93452, 1.50484, 6.97041, 2.37181, 0]
       , "total_kernel_resources":
-      [25562, 260168, 278, 0, 126]
+      [25564, 260169, 278, 0, 126]
       , "details":
       [
         {
@@ -3188,7 +3188,7 @@
           "name":"Private Variable: \n - '_aLoader_s0_kk_iii' (a.cl:93)"
           , "type":"resource"
           , "data":
-          [7, 20, 0, 0, 0]
+          [7, 21, 0, 0, 0]
           , "debug":
           [
             [
@@ -3206,11 +3206,11 @@
             }
             , {
               "type":"text"
-              , "text":"1 register of width 16 and depth 1"
+              , "text":"1 register of width 17 and depth 1"
             }
             , {
               "type":"brief"
-              , "text":"Register,\n1 reg, 16 width by 1 depth"
+              , "text":"Register,\n1 reg, 17 width by 1 depth"
             }
           ]
         }
@@ -4285,7 +4285,7 @@
                   "name":"a.cl:93"
                   , "type":"resource"
                   , "data":
-                  [22, 0, 0, 0, 0]
+                  [24, 0, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -4305,18 +4305,18 @@
                       [1, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"16-bit Integer Add"
+                      "name":"17-bit Integer Add"
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [16, 0, 0, 0, 0]
+                      [17, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"16-bit Integer Compare"
+                      "name":"17-bit Integer Compare"
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [5, 0, 0, 0, 0]
+                      [6, 0, 0, 0, 0]
                     }
                   ]
                   , "replace_name":"true"
@@ -4532,9 +4532,9 @@
       , "compute_units":1
       , "type":"function"
       , "total_percent":
-      [0.540664, 0.369459, 0.208708, 0.145039, 0]
+      [0.540813, 0.369567, 0.208762, 0.145039, 0]
       , "total_kernel_resources":
-      [3915, 7790, 17, 0, 149]
+      [3917, 7792, 17, 0, 149]
       , "details":
       [
         {
@@ -4639,7 +4639,7 @@
           "name":"Private Variable: \n - '_unloader_s0_iii' (a.cl:397)"
           , "type":"resource"
           , "data":
-          [8, 12, 0, 0, 0]
+          [8, 14, 0, 0, 0]
           , "debug":
           [
             [
@@ -4657,11 +4657,11 @@
             }
             , {
               "type":"text"
-              , "text":"1 register of width 6"
+              , "text":"1 register of width 7"
             }
             , {
               "type":"brief"
-              , "text":"Register,\n1 reg, 6 width"
+              , "text":"Register,\n1 reg, 7 width"
             }
           ]
         }
@@ -5452,7 +5452,7 @@
               "name":"Feedback"
               , "type":"resource"
               , "data":
-              [62, 19, 0, 0, 0]
+              [63, 19, 0, 0, 0]
               , "details":
               [
                 {
@@ -5477,7 +5477,7 @@
                   "name":"a.cl:392"
                   , "type":"resource"
                   , "data":
-                  [3, 0, 0, 0, 0]
+                  [4, 0, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -5561,7 +5561,7 @@
                   "name":"a.cl:397"
                   , "type":"resource"
                   , "data":
-                  [10, 1, 0, 0, 0]
+                  [11, 1, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -5581,14 +5581,14 @@
                       [2, 1, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Integer Add"
+                      "name":"7-bit Integer Add"
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [6, 0, 0, 0, 0]
+                      [7, 0, 0, 0, 0]
                     }
                     , {
-                      "name":"6-bit Integer Compare"
+                      "name":"7-bit Integer Compare"
                       , "type":"resource"
                       , "count":1
                       , "data":
@@ -6162,9 +6162,9 @@
       , "compute_units":1
       , "type":"function"
       , "total_percent":
-      [0.190617, 0.138567, 0.0672207, 0.0341268, 0.0347222]
+      [0.190438, 0.13846, 0.0671403, 0.0341268, 0.0347222]
       , "total_kernel_resources":
-      [2266, 2509, 4, 1.5, 16]
+      [2264, 2506, 4, 1.5, 16]
       , "details":
       [
         {
@@ -6361,7 +6361,7 @@
               "name":"State"
               , "type":"resource"
               , "data":
-              [4, 239, 0, 0, 0]
+              [4, 236, 0, 0, 0]
               , "details":
               [
                 {
@@ -6394,7 +6394,7 @@
                   "name":"No Source Line"
                   , "type":"resource"
                   , "data":
-                  [4, 173, 0, 0, 0]
+                  [4, 170, 0, 0, 0]
                 }
                 , {
                   "name":"a.cl:205"
@@ -6522,7 +6522,7 @@
                   "name":"a.cl:213"
                   , "type":"resource"
                   , "data":
-                  [17, 0, 0, 0, 0]
+                  [16, 0, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -6539,7 +6539,7 @@
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [17, 0, 0, 0, 0]
+                      [16, 0, 0, 0, 0]
                     }
                   ]
                   , "replace_name":"true"
@@ -6548,7 +6548,7 @@
                   "name":"a.cl:214"
                   , "type":"resource"
                   , "data":
-                  [144, 2, 0, 0, 0]
+                  [143, 2, 0, 0, 0]
                   , "debug":
                   [
                     [
@@ -6579,7 +6579,7 @@
                       , "type":"resource"
                       , "count":1
                       , "data":
-                      [9, 0, 0, 0, 0]
+                      [8, 0, 0, 0, 0]
                     }
                     , {
                       "name":"33-bit Integer Add"
