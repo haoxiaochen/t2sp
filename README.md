@@ -9,23 +9,33 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
 2. Clone our repository into two separate directories:
    
    ```
-   git clone -b popa https://github.com/haoxiaochen/t2sp.git t2sp
-   git clone -b popa https://github.com/haoxiaochen/t2sp.git t2sp-s10
+   git clone -b popa git@github.com:haoxiaochen/t2sp.git t2sp
+   git clone -b popa git@github.com:haoxiaochen/t2sp.git t2sp-s10
    ```
-   You may encounter a checkout failure due to git-lfs not found. The next step will install it and perform the checkout again.
-3. Install dependencies and compile. Since A10 and S10 machines have different system environments, it is recommended to install them separately:
+   - This step requires setting up your GitHub certificate, needed when fetching pre-generated bitstreams from Git LFS. You have the option to clone using an HTTPS link and manually enter your password, as shown below.
+   - You may encounter a checkout failure due to git-lfs not found. The next step will install it and perform the checkout again.
+4. Install dependencies and compile. Since A10 and S10 machines have different system environments, it is recommended to install them separately:
   
    ```
    qsub -q batch@v-qsvr-fpga -l nodes=1:arria10:ppn=2 -d $HOME/t2sp $HOME/t2sp/install-tools.sh
    qsub -q batch@v-qsvr-fpga -l nodes=1:stratix10:ppn=2 -d $HOME/t2sp-s10 $HOME/t2sp/install-tools.sh
    ```
    A job is submitted. You can check its completion status with `qstatus`.
-4. Run our tests on FPGAs with pre-generated bitstreams:
+5. Run our tests on FPGAs with pre-generated bitstreams:
 
    ```
+   cd t2s/tests/popa
    ./devcloud_jobs.sh [a10|s10] bitstream
    ```
-   This will submit 6 jobs to run GEMM, Conv, Capsule, PairHMM, GEMV, and GBMV. After the jobs are completed, you can find a file like `job.sh.o[job_id]`.
+   This will submit 6 jobs to run GEMM, Conv, Capsule, PairHMM, GEMV, and GBMV. After the jobs are completed, you can find a file named 'job.sh.o[job_id]'.
+   Alternatively, you can log into a DevCloud compute node and test each one separately:
+
+   ```
+   devcloud_login
+   cd t2s/tests/popa
+   ./test.sh devcloud gemm a10 large hw bitstream
+   ```
+   You might be prompted to enter your Github username and password if you choose to clone using an HTTPS link.
    Open this file, and you will see:
 
    ```
@@ -37,13 +47,13 @@ Currently, we support only Intel FPGAs and GPUs. We assume your device is local 
    GFlops: 620.383645
    ```
    demonstrating the achieved throughput.
-5. [Optional] Run our test on FPGAs by synthesizing a bitstream:
+7. [Optional] Run our test on FPGAs by synthesizing a bitstream:
 
    ```
    ./devcloud_job.sh devcloud gemm [a10|s10] large hw
    ```
    This will submit a job to synthesize our GEMM.
-6. Run our tests on GEN 9 GPU:
+8. Run our tests on GEN 9 GPU:
 
    ```
    ./devcloud_jobs.sh gen9
