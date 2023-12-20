@@ -14,8 +14,7 @@
 ./install-tool.sh oneapi-support
 
 # Add tools
-export T2S_PATH="$( cd "$(dirname $(realpath "$BASH_SOURCE") )" >/dev/null 2>&1 ; pwd -P )" # The path to this script
-TOOLS_PATH=$T2S_PATH/install
+TOOLS_PATH=$(pwd)/install
 GCC_PATH=$TOOLS_PATH/gcc-7.5.0
 export PATH=$TOOLS_PATH/bin:$GCC_PATH/bin:$PATH
 export LD_LIBRARY_PATH=$TOOLS_PATH/lib:$GCC_PATH/lib64:$LD_LIBRARY_PATH
