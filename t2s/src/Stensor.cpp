@@ -29,15 +29,85 @@ using namespace Internal;
 using std::vector;
 using std::map;
 using std::string;
+using std::set;
 
 struct Schain {
-    bool is_output;                 // Output chain needs different primitives
-    Func outf;                      // The output chain starts from a function
-    Stensor fork_from;              // The input chain starts from another stensor
-    vector<ImageParam> imp;         // The input chain starts from external inputs
-    vector<Stensor> stensors;
-    vector<Func> funcs;
+    bool is_output;                     // Is this chain for output? An output chain needs different primitives
+    // Starting point(s) of the chain
+    Func outf;                          // Valid only if is_output is true. An output chain starts from a function
+    vector<ImageParam> imp;             // Valid only if is_output is false. The image params (i.e. tensors), if any, that start an input chain.
+    Stensor fork_from;                  // Valid only if is_output is false. The other stensor, if any, that start an input chain.
+    vector<Stensor> stensors;           // Stensors in the chain
+    vector<Func> funcs;                 // Corresponding funcs of the stensors in the chain.
+    Func control_ure;                   // The above outf, imp or starting_exprs, belongs to a group of merged UREs. This is the control URE of the group.
+    vector<Var> free_vars;              // Variables appeared in the definition of the control URE
+    map<string, vector<Expr>> access_expr;  // From image param to its access expressions
+    map<string, set<string>> used_vars; // From image param to its indices.
+
+    int var_index(Var v) {
+        for (size_t i = 0; i < free_vars.size(); i++) {
+            if (v.same_as(free_vars[i]))
+                return i;
+        }
+        return -1;
+    }
+
+    bool exists(const vector<Var> &vars) {
+        for (const auto &v : vars) {
+            if (var_index(v) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool exists(Var v) {
+        return this->exists(vector<Var>{v});
+    }
+
+    vector<VarOrRVar> find_reuse_vars(const set<string> &used_vars, Var scope) {
+        vector<VarOrRVar> reuse_vars;
+        for (const auto &v : free_vars) {
+            if (v.same_as(scope)) {
+                break;
+            }
+            if (used_vars.count(v.name()) == 0) {
+                reuse_vars.push_back(v);
+            }
+        }
+        return reuse_vars;
+    }
+
+    // Find the first var below/above the given var v whose extent is not 1
+    Var find_non_unit_var(Var v, bool above = true) {
+        size_t j = var_index(v);
+        while (j > 0 && j < free_vars.size()) {
+            auto bound = control_ure.function().get_bounds(free_vars[j].name());
+            if (!is_one(bound.second)) break;
+            j = above ? j + 1 : j - 1;
+        }
+        return free_vars[j];
+    }
+
+    vector<Expr> get_access_expr(string name, Var scope) {
+        auto args = access_expr[name];
+        map<string, Expr> loop_to_0;
+        for (int i = free_vars.size()-1; i >= 0; i--) {
+            loop_to_0[free_vars[i].name()] = 0;
+            if (free_vars[i].name() == scope.name()) {
+                break;
+            }
+        }
+        vector<Expr> new_args;
+        for (size_t i = 0; i < args.size(); i++) {
+            Expr tmp = substitute(loop_to_0, args[i]);
+            new_args.push_back(simplify(tmp));
+        }
+        return new_args;
+    }
 };
+
+// All the chains of stensors
 vector<Schain> schains;
 
 Stensor &Stensor::scope(Var v) {
@@ -139,7 +209,7 @@ void operator>>(const vector<ImageParam> &im, const vector<FuncOrStensor> &fs) {
 void operator>>(Stensor &s, Func &f) {
     if (s.schain_idx >= 0) {
         auto &sc = schains[s.schain_idx];
-        sc.outf = f;
+        sc.control_ure = f;
     } else {
         internal_assert(!s.producer.empty());
         Stensor producer;
@@ -149,7 +219,7 @@ void operator>>(Stensor &s, Func &f) {
         tmp.is_output = schains[producer.schain_idx].is_output;
         tmp.fork_from = producer;
         tmp.stensors.push_back(s);
-        tmp.outf = f;
+        tmp.control_ure = f;
         schains.push_back(std::move(tmp));
     }
 }
@@ -197,92 +267,40 @@ Stensor &operator>>(Func &f, Stensor &s) {
 
 struct FindVars
 {
-    vector<Func> ures;
-    map<string, vector<Var>> all_free_vars;      // Variables appeared in the function definition
+    struct ImageParamReferencesInAFunc {
+        Func func; // The function that refers image params. Only one reference of each image param is allowed in an entire T2S specification.
+        map<string, set<string>> used_vars; // Map from image param to variables used in its subscripts.
+        map<string, vector<Expr>> access_expr;
+    };
 
-    int var_index(Var v, Func func = Func()) {
-        func = find_main_ure(func);
-        auto free_vars = all_free_vars[func.name()];
-        for (size_t i = 0; i < free_vars.size(); i++) {
-            if (v.same_as(free_vars[i]))
-                return i;
-        }
-        return -1;
-    }
-
-    bool exists(const vector<Var> &vars) {
-        for (auto &v : vars) {
-            if (var_index(v) == -1) {
-                return false;
+    // Find out which function references which image param, and the variables used in referencing an image param
+    void collect_image_param_references(const map<string, Func> &env, vector<ImageParamReferencesInAFunc> &references) {
+        for (const auto &entry : env) {
+            const Func& f = entry.second;
+            fuv.access_expr.clear();
+            fuv.used_vars.clear();
+            f.value().accept(&fuv);
+            if (!fuv.used_vars.empty()) {
+                ImageParamReferencesInAFunc reference;
+                reference.func = f;
+                reference.access_expr = fuv.access_expr;
+                reference.used_vars = fuv.used_vars;
+                references.push_back(reference);
             }
         }
-        return true;
     }
 
-    bool exists(Var v) {
-        return this->exists(vector<Var>{v});
-    }
-
-    vector<VarOrRVar> find_reuse_vars(string imp, Var scope, Func func = Func()) {
-        vector<VarOrRVar> reuse_vars;
-        auto &used_vars = fuv.used_vars;
-        internal_assert(used_vars.count(imp) > 0);
-        func = find_main_ure(func);
-        for (Var v : all_free_vars[func.name()]) {
-            if (v.same_as(scope)) {
-                break;
-            }
-            if (used_vars[imp].count(v.name()) == 0) {
-                reuse_vars.push_back(Var(v));
+    Func control_ure_of_func(const map<string, Func> &env, const Func &func) {
+        for (const auto &entry : env) {
+            const Func& f = entry.second;
+            if (f.function().has_merged_defs()) {
+                for (const auto &name : f.function().merged_func_names()) {
+                    if (func.name() == name)
+                        return std::move(Func(f));
+                }
             }
         }
-        return reuse_vars;
-    }
-
-    // Find the first var below/above the given var v whose extent is not 1
-    Var find_non_unit_var(Var v, bool above = true, Func func = Func()) {
-        func = find_main_ure(func);
-        auto free_vars = all_free_vars[func.name()];
-        size_t j = var_index(v, func);
-        while (j > 0 && j < free_vars.size()) {
-            auto bound = func.function().get_bounds(free_vars[j].name());
-            if (!is_one(bound.second)) break;
-            j = above ? j + 1 : j - 1;
-        }
-        return free_vars[j];
-    }
-
-    vector<Expr> get_access_index(string name, Var scope, Func func = Func()) {
-        func = find_main_ure(func);
-        auto free_vars = all_free_vars[func.name()];
-        auto args = fuv.access_indexes[name];
-        map<string, Expr> loop_to_0;
-        for (int i = free_vars.size()-1; i >= 0; i--) {
-            loop_to_0[free_vars[i].name()] = 0;
-            if (free_vars[i].name() == scope.name()) {
-                break;
-            }
-        }
-        vector<Expr> new_args;
-        for (size_t i = 0; i < args.size(); i++) {
-            Expr tmp = substitute(loop_to_0, args[i]);
-            new_args.push_back(simplify(tmp));
-        }
-        return new_args;
-    }
-
-    Func find_main_ure(Func func = Func()) {
-        if (!func.defined()) {
-            return ures[0];
-        }
-        for (auto u : ures) {
-            auto merged_funcs = u.function().definition().schedule().merged_funcs();
-            auto it = std::find_if(merged_funcs.begin(), merged_funcs.end(),
-                                   [&](Function &f){ return f.name() == func.name(); });
-            if (it != merged_funcs.end()) {
-                return u;
-            }
-        }
+        // If no control URE, the func controls itself
         return func;
     }
 
@@ -292,8 +310,8 @@ struct FindVars
         string image_param;
     public:
         using IRVisitor::visit;
-        map<string, vector<Expr>> access_indexes;
-        map<string, std::set<string>> used_vars;
+        map<string, vector<Expr>> access_expr;
+        map<string, std::set<string>> used_vars; // From image param to vars used in its indices.
 
         void visit(const Variable *op) override {
             if (!image_param.empty()) {
@@ -304,31 +322,75 @@ struct FindVars
         void visit(const Call *op) override {
             if (ends_with(op->name, "_im")) {
                 image_param = remove_postfix(op->name, "_im");
-                access_indexes[image_param] = op->args;
+                access_expr[image_param] = op->args;
+                user_assert(used_vars.find(image_param) == used_vars.end()) << "Error: ImageParam " << image_param << " is referenced more than once.";
                 for (size_t i = 0; i < op->args.size(); i++) {
                     op->args[i].accept(this);
                 }
                 image_param.clear();
+            } else if (op->is_extern()) {
+                for (size_t i = 0; i < op->args.size(); i++) {
+                    op->args[i]->accept(this);
+                }
             }
         }
     } fuv;
 
+    std::vector<ImageParamReferencesInAFunc> find_image_param_references(string im, const vector<ImageParamReferencesInAFunc> &references) {
+        std::vector<ImageParamReferencesInAFunc> refs;
+        for (const auto &refs_in_a_func : references) {
+            for (const auto &ref : refs_in_a_func.used_vars) {
+                if (im == ref.first) refs.push_back(refs_in_a_func);
+            }
+        }
+        return refs;
+    }
+
     FindVars(const map<string, Func> &env) {
-        for (auto &p : env) {
-            const Func &f = p.second;
-            f.value().accept(&fuv);
-            // UREs have the same iteration space, so we just check the one applied merge_ures
-            if (f.function().place() == Place::Device && !f.function().definition().schedule().is_merged()) {
-                if (f.function().has_merged_defs()) {
-                    ures.push_back(f);
+        // Find references of image params
+        vector<ImageParamReferencesInAFunc> references;
+        collect_image_param_references(env, references);
+
+        // Find control_ure, free_vars and used_vars for each stensor chain
+        for (auto &chain : schains) {
+            if (chain.is_output) {
+                internal_assert(!chain.control_ure.defined());
+                chain.control_ure = control_ure_of_func(env, chain.outf);
+            } else {
+                vector<ImageParam> imp = chain.imp;
+                if (imp.empty()) {
+                    internal_assert(chain.fork_from.schain_idx != -1);
+                    Schain &fork_from_chain = schains[chain.fork_from.schain_idx];
+                    imp = fork_from_chain.imp;
                 }
-                for (auto &d : f.function().definition().schedule().dims()) {
-                    all_free_vars[f.name()].push_back(d.var);
+                // The input chain starts with image params
+                for (const auto &i : imp) {
+                    auto image_param = ends_with(i.name(), "_im") ? remove_postfix(i.name(), "_im") : i.name();
+                    auto refs = find_image_param_references(image_param, references);
+                    ImageParamReferencesInAFunc isolated_from;
+                    if (!chain.control_ure.defined()) {
+                        user_assert(refs.size() == 1) << "Error: ImageParam " << to_string(i) << " is referenced in multiple groups of merged UREs";
+                        isolated_from = refs[0];
+                        chain.control_ure = control_ure_of_func(env, refs[0].func);
+                    } else {
+                        chain.control_ure = control_ure_of_func(env, chain.control_ure);
+                        for (auto r : refs) {
+                            Func control_ure = control_ure_of_func(env, r.func);
+                            if (control_ure.name() == chain.control_ure.name()) {
+                                internal_assert(!isolated_from.func.defined()) << "Error: ImageParam " << to_string(i) << " is referenced more than once";
+                                isolated_from = r;
+                            }
+                        }
+                    }
+                    user_assert(isolated_from.func.defined()) << "Error: ImageParams " << to_string(chain.imp) << " are not from the same group of merged UREs";
+                    chain.used_vars = isolated_from.used_vars;
+                    chain.access_expr = isolated_from.access_expr;
+                }
+                for (const auto &d : chain.control_ure.function().definition().schedule().dims()) {
+                    chain.free_vars.push_back(d.var);
                 }
             }
         }
-        user_assert(!ures.empty())
-            << "Cannot find merged UREs. Do you forget to apply merge_ures?";
     }
 };
 
@@ -396,18 +458,16 @@ class RealizeOnFPGA
             internal_assert(fork_func.defined());
             vector<FuncOrExpr> imp_expr;
             std::copy(imp.begin(), imp.end(), std::back_inserter(imp_expr));
-            auto func = fv.find_main_ure(c.outf);
             auto tmp_producers = producers;
             tmp_producers.insert(tmp_producers.begin(), fork_func);
-            func.isolate_producer_chain(imp_expr, tmp_producers);
-            debug(1) << "T2X emits: " << func.name() << ".isolate_producer_chain("
+            c.control_ure.isolate_producer_chain(imp_expr, tmp_producers);
+            debug(1) << "T2X emits: " << c.control_ure.name() << ".isolate_producer_chain("
                      << names_to_string(imp) << ", " << names_to_string(tmp_producers) << ");\n";
         } else {
             vector<FuncOrExpr> imp_expr;
             std::copy(c.imp.begin(), c.imp.end(), std::back_inserter(imp_expr));
-            auto func = fv.find_main_ure(c.outf);
-            func.isolate_producer_chain(imp_expr, producers);
-            debug(1) << "T2X emits: " << func.name() << ".isolate_producer_chain("
+            c.control_ure.isolate_producer_chain(imp_expr, producers);
+            debug(1) << "T2X emits: " << c.control_ure.name() << ".isolate_producer_chain("
                      << names_to_string(c.imp) << ", " << names_to_string(producers) << ");\n";
         }
         c.funcs = producers;
@@ -507,18 +567,20 @@ class RealizeOnFPGA
         vector<VarOrRVar> loops;
         Var scope = c.stensors.back().v_scope;
 
+        // Merge all the image params' (and starting expressions') used variables
+        set<string> all_used_vars;
+        for (auto image_param : c.imp) {
+            const set<string> & used_variables = c.used_vars[image_param.name()];
+            all_used_vars.insert(used_variables.begin(), used_variables.end());
+        }
+
         for (int i = producers.size()-2; i >= 0; i--) {
-            ImageParam im;
-            if (!c.imp.empty()) {
-                im = c.imp[0];
-            } else {
-                int ori_chain = c.fork_from.schain_idx;
-                im = schains[ori_chain].imp[0];
+            loops = c.find_reuse_vars(all_used_vars, scope);
+            if (!loops.empty()) {
+                debug(1) << "T2X emits: " << producers[i].name() << ".remove("
+                         << names_to_string(loops) << ");\n";
+                producers[i].remove(loops);
             }
-            loops = fv.find_reuse_vars(im.name(), scope, c.outf);
-            producers[i].remove(loops);
-            debug(1) << "T2X emits: " << producers[i].name() << ".remove("
-                     << names_to_string(loops) << ");\n";
             scope = (i > 0) ? c.stensors[i].v_scope : scope;
         }
     }
@@ -615,7 +677,7 @@ class RealizeOnFPGA
         internal_assert(c.stensors.size() == producers.size());
         for (size_t i = 0; i < c.stensors.size(); i++) {
             Var v_scope = c.stensors[i].v_scope;
-            if (fv.exists(v_scope) && c.stensors[i].position == SRAM) {
+            if (c.exists(v_scope) && c.stensors[i].position == SRAM) {
                 Func prev;
                 if (i != 0) {
                     prev = producers[i-1];
@@ -633,7 +695,7 @@ class RealizeOnFPGA
                         imp = schains[ori_chain].imp;
                     }
                     internal_assert(imp.size() == 1);
-                    auto args = fv.get_access_index(imp[0].name(), v_scope, c.outf);
+                    auto args = c.get_access_expr(imp[0].name(), v_scope);
                     internal_assert(args.size() == 2);
                     vector<Expr> transposed_args = { args[1], args[0] };
 
@@ -666,7 +728,7 @@ class RealizeOnFPGA
             user_assert(c.stensors[i].v_width.size() == 1)
                 << "Currently we only support packing one dimension as a vector\n";
             Var v_width = c.stensors[i].v_width[0];
-            if (fv.exists(v_width)) {
+            if (c.exists(v_width)) {
                 const auto &dims = funcs[i].function().definition().schedule().dims();
                 const auto iter = std::find_if(dims.begin(), dims.end(), [](const Dim &d){
                     return d.for_type == ForType::Vectorized;
@@ -686,18 +748,17 @@ class RealizeOnFPGA
         auto &last_stensor = c.stensors.back();
         if (!c.is_output && last_stensor.v_width.size() > 0) {
             Var last_width = last_stensor.v_width[0];
-            Func main_func = fv.find_main_ure(c.outf);
-            const auto &dims = main_func.function().definition().schedule().dims();
+            const auto &dims = c.control_ure.function().definition().schedule().dims();
             const auto iter = std::find_if(dims.begin(), dims.end(), [](const Dim &d){
                 return d.for_type == ForType::Vectorized;
             });
             if (iter != dims.end() && iter->var != last_width.name() && !ends_with(iter->var, "." + last_width.name())) {
-                user_warning << "Func " << main_func.name() << " can't vectorize across "
+                user_warning << "Func " << c.control_ure.name() << " can't vectorize across "
                              << last_width <<", because Func is already vectorized across " << iter->var << "\n";
             } else {
-                debug(1) << "T2X emits: " << main_func.name() << ".vectorize("
+                debug(1) << "T2X emits: " << c.control_ure.name() << ".vectorize("
                         << last_width << ");\n";
-                main_func.vectorize(last_width);
+                c.control_ure.vectorize(last_width);
             }
         }
     }
@@ -712,14 +773,13 @@ class RealizeOnFPGA
                 user_assert(c.stensors[i].v_outs.size() == 1)
                     << "Currently we only support packing one dimension as a vector\n";
                 auto v_width = c.stensors[i].v_outs[0];
-                if (fv.exists(v_width)) {
-                    Func main_ure = fv.find_main_ure(c.outf);
-                    Type type = main_ure.output_types()[0];
-                    auto bound = main_ure.function().get_bounds(v_width.name());
+                if (c.exists(v_width)) {
+                    Type type = c.control_ure.output_types()[0];
+                    auto bound = c.control_ure.function().get_bounds(v_width.name());
                     auto ext_node = bound.second.as<IntImm>();
                     internal_assert(ext_node);
                     int num_banks = (ext_node->value * type.bits()) / 512;
-                    if (num_banks > 1 && v_width.name() == main_ure.function().definition().schedule().dims()[0].var) {
+                    if (num_banks > 1 && v_width.name() == c.control_ure.function().definition().schedule().dims()[0].var) {
                         internal_assert(c.imp.size() == 1);
                         funcs[i-1].partition(c.imp[0], funcs[i], v_width, num_banks);
                         debug(1) << "T2X emits: " << funcs[i-1].name() << ".partition("
@@ -749,20 +809,19 @@ class RealizeOnFPGA
     // for output chain the scope of consumer cannot below its predecessor
     // If not specified, the scope is inherited
     void check_inclusiveness(Schain &c) {
-        Func func = fv.find_main_ure(c.outf);
         if (!c.is_output) {
             // start from the outermost loop
-            int i = fv.all_free_vars[func.name()].size()-1;
+            int i = c.free_vars.size()-1;
             for (auto &s: c.stensors) {
-                if (!fv.exists(s.v_scope)) {
-                    s.v_scope = fv.all_free_vars[func.name()][i];
+                if (!c.exists(s.v_scope)) {
+                    s.v_scope = c.free_vars[i];
                     continue;
                 }
-                int j = fv.var_index(s.v_scope, func);
+                int j = c.var_index(s.v_scope);
                 user_assert(j > 0 && j <= i)
                     << "The scope of " << s.name << " is beyond its predecessor\n";
                 // Find a loop whose extent is not 1, otherwise this loop would be removed in lowering
-                s.v_scope = fv.find_non_unit_var(s.v_scope, true, func);
+                s.v_scope = c.find_non_unit_var(s.v_scope, true);
                 i = j;
             }
         }
@@ -818,8 +877,7 @@ class RealizeOnFPGA
 
     void find_banks(Schain &c) {
         // The dst_vars includes space loops plus one time loop
-        Func func = fv.find_main_ure(c.outf);
-        auto stt_param = func.function().definition().schedule().transform_params();
+        auto stt_param = c.control_ure.function().definition().schedule().transform_params();
         if (stt_param.empty()) {
             return;
         }
@@ -880,19 +938,17 @@ class RealizeOnGPU
     void check_inclusiveness(Schain &c) {
         if (!c.is_output) {
             // start from the outermost loop
-            Func f = fv.ures[0];
-            auto free_vars = fv.all_free_vars[f.name()];
-            int i = free_vars.size()-1;
+            int i = c.free_vars.size()-1;
             for (auto &s: c.stensors) {
-                if (!fv.exists(s.v_scope)) {
-                    s.v_scope = free_vars[i];
+                if (!c.exists(s.v_scope)) {
+                    s.v_scope = c.free_vars[i];
                     continue;
                 }
-                int j = fv.var_index(s.v_scope);
+                int j = c.var_index(s.v_scope);
                 user_assert(j > 0 && j <= i)
                     << "The scope of " << s.name << " is beyond its predecessor\n";
                 // Find a loop whose extent is not 1, otherwise this loop would be removed in lowering
-                s.v_scope = fv.find_non_unit_var(s.v_scope);
+                s.v_scope = c.find_non_unit_var(s.v_scope);
                 i = j;
             }
         }
@@ -904,10 +960,8 @@ class RealizeOnGPU
             // throughout threads as an unified SRAM storage, to realize stensors on GPUs.
             if (s.position == SRAM) {
                 for (auto &p : c.imp) {
-                    Func f = fv.ures[0];
-                    auto free_vars = fv.all_free_vars[f.name()];
-                    int gpu_var_index = free_vars.size() - num_gpu_vars -1;
-                    Var loop = fv.var_index(s.v_scope) < gpu_var_index ? s.v_scope : free_vars[gpu_var_index];
+                    int gpu_var_index = c.free_vars.size() - num_gpu_vars -1;
+                    Var loop = c.var_index(s.v_scope) < gpu_var_index ? s.v_scope : c.free_vars[gpu_var_index];
                     p.gpu_fetch(loop, MemoryType::Register, s.v_outs);
                     debug(1) << "T2X emits: " << p.name() << ".gpu_fetch("
                              << loop.name() << ", {" << names_to_string(s.v_outs) << "});\n";
