@@ -299,6 +299,8 @@ std::string type_to_c_type(Type type, bool include_space, bool c_plus_plus) {
                 }
             }
         }
+    } else if (type.is_complex()) {
+        oss << (type.bits() == 64 ? "float _Complex" : "double _Complex");
     } else {
         // This ends up using different type names than OpenCL does
         // for the integer vector types. E.g. uint16x8_t rather than

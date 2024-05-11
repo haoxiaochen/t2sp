@@ -1619,7 +1619,6 @@ void CodeGen_LLVM::visit(const Add *op) {
         codegen(cast(op->type, Add::make(cast(t, op->a), cast(t, op->b))));
         return;
     }
-
     Value *a = codegen(op->a);
     Value *b = codegen(op->b);
     if (op->type.is_float()) {

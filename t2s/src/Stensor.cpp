@@ -1013,10 +1013,12 @@ Stensor &operator>>(Stensor &s, const FIFO &fifo) {
 
 void Stensor::realize(Starget t) {
     map<string, Func> env;
-    user_assert(schains.back().is_output)
-        << "Please specify an output path as the last stensor chain\n";
-    Func outf = schains.back().outf;
-    env = outf.pipeline().compute_environment();
+    for (auto s : schains) {
+        if (s.is_output) {
+            auto temp_env = s.outf.pipeline().compute_environment();
+            env.insert(temp_env.begin(), temp_env.end());
+        }
+    }
 
     Func f;
     if (t == Starget::IntelFPGA) {
@@ -1054,7 +1056,7 @@ Func Stensor::stensor_realize_wrapper(Starget t) {
     Func f;
     realize(t);
     for (auto &sc : schains) {
-        if (sc.is_output) {
+        if (sc.is_output && !sc.funcs.empty()) {
             internal_assert(!f.defined());
             f = sc.funcs.back();
             internal_assert(f.function().place() == Place::Host);

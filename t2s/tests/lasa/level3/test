@@ -1,0 +1,358 @@
+------------------- Testing local gemm a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/gemm/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 16384 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 16384 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+ *** FPGA execution finished!
+
+Command queue 4: copying 16384 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success
+------------------- Testing local hemm a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/hemm/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 32768 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 32768 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+ *** FPGA execution finished!
+
+Command queue 4: copying 32768 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success
+------------------- Testing local her2k a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/her2k/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_aLoader_T
+Creating kernel[4]: kernel_bLoader_T
+Creating kernel[5]: kernel_Out_T
+Creating kernel[6]: kernel_Add
+Creating kernel[7]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 32768 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 32768 bytes data from host to device. Done.
+Command queue 3: copying 32768 bytes data from host to device. Done.
+Command queue 4: copying 32768 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_aLoader_T!
+clEnqueueNDRangeKernel[4]: kernel_bLoader_T!
+clEnqueueNDRangeKernel[5]: kernel_Out_T!
+clEnqueueNDRangeKernel[6]: kernel_Add!
+clEnqueueNDRangeKernel[7]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+cmd queue: 4
+cmd queue: 5
+cmd queue: 6
+cmd queue: 7
+ *** FPGA execution finished!
+
+Command queue 8: copying 24576 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success
+------------------- Testing local herk a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/herk/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 32768 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 32768 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+ *** FPGA execution finished!
+
+Command queue 4: copying 24576 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success
+------------------- Testing local syr2k a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/syr2k/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_aLoader_T
+Creating kernel[4]: kernel_bLoader_T
+Creating kernel[5]: kernel_Out_T
+Creating kernel[6]: kernel_Add
+Creating kernel[7]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 16384 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 16384 bytes data from host to device. Done.
+Command queue 3: copying 16384 bytes data from host to device. Done.
+Command queue 4: copying 16384 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_aLoader_T!
+clEnqueueNDRangeKernel[4]: kernel_bLoader_T!
+clEnqueueNDRangeKernel[5]: kernel_Out_T!
+clEnqueueNDRangeKernel[6]: kernel_Add!
+clEnqueueNDRangeKernel[7]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+cmd queue: 4
+cmd queue: 5
+cmd queue: 6
+cmd queue: 7
+ *** FPGA execution finished!
+
+Command queue 8: copying 12288 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success
+------------------- Testing local syrk a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/syrk/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 16384 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 16384 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+ *** FPGA execution finished!
+
+Command queue 4: copying 12288 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success
+------------------- Testing local trmm a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/trmm/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 12288 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 16384 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+ *** FPGA execution finished!
+
+Command queue 4: copying 16384 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success
+------------------- Testing local trsm a10 tiny emulator
+Use the default bitstream /home/hxc/t2sp-new/t2s/tests/lasa/level3/trsm/
+aoc: Running OpenCL parser....
+aoc: OpenCL parser completed successfully.
+aoc: Linking Object files....
+aoc: Compiling for Emulation ....
+Success
+Generate input matrix by performing matrix multiplication...
+Input generated
+Initializing IDs
+Intel(R) Corporation
+Total number of devices: 1
+
+===== Host-CPU setting up OpenCL program and kernels ======
+
+Create program with binary
+Creating kernel[0]: kernel_aLoader
+Creating kernel[1]: kernel_bLoader
+Creating kernel[2]: kernel_Out
+Creating kernel[3]: kernel_unloader
+All kernels created
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 0: copying 1048576 bytes data from host to device. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Command queue 1: copying 131072 bytes data from host to device. Done.
+
+===== Host-CPU enqeuing the OpenCL kernels to the FPGA device ======
+
+clEnqueueNDRangeKernel[0]: kernel_aLoader!
+clEnqueueNDRangeKernel[1]: kernel_bLoader!
+clEnqueueNDRangeKernel[2]: kernel_Out!
+clEnqueueNDRangeKernel[3]: kernel_unloader!
+
+ *** FPGA execution started!
+cmd queue: 0
+cmd queue: 1
+cmd queue: 2
+cmd queue: 3
+ *** FPGA execution finished!
+
+Command queue 4: copying 131072 bytes data from device to host. Done.
+halide_opencl_buffer_copy: host to host copy with source address equal to destination address. Do nothing. 
+Success

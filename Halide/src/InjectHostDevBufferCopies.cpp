@@ -838,9 +838,12 @@ public:
     Stmt mutate(const Stmt &stmt) override {
         if (is_injected_buffer_action_for_FPGA(stmt)) {
             if (FPGA_buffer_actions.find(kernel_name) == FPGA_buffer_actions.end()) {
-                FPGA_buffer_actions[kernel_name] = call_extern_and_assert("halide_opencl_wait_for_kernels_finish", {});
+                wait_for_finish = kernel_name;
+                FPGA_buffer_actions[kernel_name] = stmt;
+                // FPGA_buffer_actions[kernel_name] = call_extern_and_assert("halide_opencl_wait_for_kernels_finish", {});
+            } else {
+                FPGA_buffer_actions[kernel_name] = Block::make(FPGA_buffer_actions[kernel_name], stmt);
             }
-            FPGA_buffer_actions[kernel_name] = Block::make(FPGA_buffer_actions[kernel_name], stmt);
             debug(4) << "Buffer action for FPGA: ****\n" << stmt << "******\n\n";
             // Effectively remove the buffer action from its current position
             Stmt do_nothing = Evaluate::make(Expr(0));
@@ -862,6 +865,7 @@ public:
 
 public:
     map<string, Stmt>  FPGA_buffer_actions; // All the actions to be put behind the output kernel
+    string wait_for_finish;
 
 private:
     const vector<string> &FPGA_kernels; // Funcs running on an FPGA
@@ -873,8 +877,8 @@ class ApplyFPGABufferActions : public IRMutator {
     using IRMutator::visit;
 
 public:
-    ApplyFPGABufferActions(const map<string, string> &_names_to_match_for_output_kernel, const map<string, Stmt> &_FPGA_buffer_actions) :
-        names_to_match_for_output_kernel(_names_to_match_for_output_kernel), FPGA_buffer_actions(_FPGA_buffer_actions) { }
+    ApplyFPGABufferActions(const map<string, string> &_names_to_match_for_output_kernel, const map<string, Stmt> &_FPGA_buffer_actions, const string &_wait_for_finish) :
+        names_to_match_for_output_kernel(_names_to_match_for_output_kernel), FPGA_buffer_actions(_FPGA_buffer_actions), wait_for_finish(_wait_for_finish) { }
 
 public:
     Stmt visit(const ProducerConsumer *op) override {
@@ -883,7 +887,11 @@ public:
                 // This is the output kernel. Simply append all the buffer actions behind it.
                 string output_kernel = names_to_match_for_output_kernel.at(op->name);
                 internal_assert(FPGA_buffer_actions.find(output_kernel) != FPGA_buffer_actions.end());
-                Stmt new_stmt = ProducerConsumer::make(op->name, true, Block::make(op->body, FPGA_buffer_actions.at(output_kernel)));
+                Stmt buffer_action = FPGA_buffer_actions.at(output_kernel);
+                if (output_kernel == wait_for_finish) {
+                    buffer_action = Block::make(call_extern_and_assert("halide_opencl_wait_for_kernels_finish", {}), buffer_action);
+                }
+                Stmt new_stmt = ProducerConsumer::make(op->name, true, Block::make(op->body, buffer_action));
                 return new_stmt;
             }
         }
@@ -897,6 +905,7 @@ private:
                                                                  // "Produce x ...", and x is one of the given names, this piece of IR
                                                                  // is for the unique output kernel on an FPGA that outputs the final results.
     const map<string, Stmt> &FPGA_buffer_actions;                // All the actions to be put behind the output kernel
+    const string &wait_for_finish;
 };
 
 }  // namespace
@@ -1012,7 +1021,7 @@ Stmt move_around_host_dev_buffer_copies(Stmt s, const Target &t, const std::map<
                     }
                 }
             }
-            s = ApplyFPGABufferActions(names_to_match_for_output_kernel, gatherer.FPGA_buffer_actions).mutate(s);
+            s = ApplyFPGABufferActions(names_to_match_for_output_kernel, gatherer.FPGA_buffer_actions, gatherer.wait_for_finish).mutate(s);
         }
     }
 

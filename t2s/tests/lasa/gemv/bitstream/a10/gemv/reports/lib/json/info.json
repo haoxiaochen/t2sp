@@ -1,8 +1,0 @@
-{"name":"Info","rows":[
-{"classes":["info-table"],"data":["gemv"],"name":"Project Name"},
-{"data":["Arria 10, 10AX115S2F45I2SGES, dcp_bsp:pac_a10"],"name":"Target Family, Device, Board"},
-{"data":["19.4.0 Build 64"],"name":"AOC Version"},
-{"data":["19.2.0 Build 57 Pro"],"name":"Quartus Version"},
-{"data":["aoc -v -profile -fpc -fp-relaxed -report -no-interleaving=default -board=pac_a10 gemv.cl -o gemv.aocx"],"name":"Command"},
-{"data":["Fri May  5 07:06:45 2023"],"name":"Reports Generated At"}
-]}

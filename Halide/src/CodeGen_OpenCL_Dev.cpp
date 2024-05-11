@@ -1217,6 +1217,11 @@ void CodeGen_OpenCL_Dev::CodeGen_OpenCL_C::visit(const Call *op) {
         stream << get_indent() << "task.inputs = inputs;\n";
         stream << get_indent() << "write_channel_intel(qt, task);\n";
         stream << get_indent() << "mem_fence(CLK_CHANNEL_MEM_FENCE);\n\n";
+    } else if (starts_with(op->name, "conjugate") && op->type.lanes() > 1) {
+        print_expr(op->args[0]);
+        for (int i = 0; i < op->type.lanes(); i++) {
+            stream << get_indent() << id << ".s[" << i << "] = " << op->name << "(" << id << ".s[" << i << "]);\n";
+        }
     } else {
         // Other intrinsics
         CodeGen_C::visit(op);

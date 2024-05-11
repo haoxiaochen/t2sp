@@ -252,10 +252,19 @@ public:
 class GetRegName : public IRVisitor {
     using IRVisitor::visit;
     string channel_name;
+    map<string, string> ele2reg;
 public:
-    string reg_name;
+    vector<string> reg_name;
 
     GetRegName(const string& name) : channel_name{name}, reg_name{} {}
+
+    void visit(const Provide *op) override {
+        auto pc = op->values[0].as<Call>();
+        if (pc && pc->is_intrinsic(Call::read_shift_reg)) {
+            internal_assert(pc->args[0].as<StringImm>());
+            ele2reg[op->name] = pc->args[0].as<StringImm>()->value;
+        }
+    }
 
     void visit(const Call *op) override {
         if (op->is_intrinsic(Call::write_channel)) {
@@ -263,10 +272,20 @@ public:
             string name = op->args[0].as<StringImm>()->value;
             if (name == channel_name + ".channel") {
                 const auto *func_call = op->args[1].as<Call>();
-                if (func_call != nullptr && func_call->is_intrinsic(Call::read_shift_reg)) {
-                    internal_assert(func_call->args[0].as<StringImm>());
-                    reg_name = func_call->args[0].as<StringImm>()->value;
-                } 
+                if (func_call != nullptr) {
+                    if (func_call->is_intrinsic(Call::read_shift_reg)) {
+                        internal_assert(func_call->args[0].as<StringImm>());
+                        reg_name.push_back(func_call->args[0].as<StringImm>()->value);
+                    }
+                    if (func_call->is_intrinsic(Call::make_struct)) {
+                        for (auto arg : func_call->args) {
+                            auto s = arg.as<Call>();
+                            if (s && ele2reg.find(s->name) != ele2reg.end()) {
+                                reg_name.push_back(ele2reg[s->name]);
+                            }
+                        }
+                    }
+                }
             }
         }
         IRVisitor::visit(op);
@@ -277,6 +296,7 @@ class ReplaceChannelsWithFlattenedRegs : public IRMutator {
     using IRMutator::visit;
     string reg_name;
     string channel_name;
+    vector<Type> channel_type;
     string result_func_name;
     bool contain_write_or_read_regs;
 
@@ -329,9 +349,13 @@ public:
           contain_write_or_read_regs{false}, kernel_infos{}, realize_infos{} {}
 
     Stmt visit(const Realize *op) override {
+        if (op->name == channel_name + ".channel") {
+            channel_type = op->types;
+        }
         if (op->name == reg_name) {
             auto body = mutate(op->body);
-            body = Realize::make(channel_name + "_temp.shreg", op->types,
+            internal_assert(!channel_type.empty());
+            body = Realize::make(channel_name + "_temp.shreg", channel_type,
                     op->memory_type, op->bounds, op->condition, body);
             body = Realize::make(reg_name, op->types,
                     op->memory_type, op->bounds, op->condition, body);
@@ -369,7 +393,7 @@ public:
     }
 
     Stmt visit(const ProducerConsumer *op) override {
-        if (op->is_producer && starts_with(channel_name, op->name)) {
+        if (op->is_producer && extract_first_token(channel_name) == op->name) {
             GetAllMergedKernels finder{kernel_infos, realize_infos};
             finder.visit(op);
             mutate(op->body);
@@ -380,7 +404,7 @@ public:
     }
 
     Stmt visit(const For *op) override {
-        if (starts_with(op->name, result_func_name) and ends_with(op->name, ".run_on_device")) {
+        if (extract_first_token(op->name) == result_func_name and ends_with(op->name, ".run_on_device")) {
             auto body = mutate(op->body);
             for (auto iter = kernel_infos.rbegin(); iter != kernel_infos.rend(); iter++) {
                 body = For::make(iter->name, iter->min,
@@ -689,7 +713,7 @@ Stmt do_late_fuse(Stmt stmt, const std::map<std::string, Function> &env) {
                 ReplaceChannelsWithRegs replacer(channel_name, bounds, access_args, processor.buffer_stmt);
                 stmt = replacer.mutate(stmt);
             } else if (producer_first || consumer_first){ // Case 2
-                ReplaceChannelsWithFlattenedRegs replacer(finder.reg_name, channel_name, extract_late_fuse_name);
+                ReplaceChannelsWithFlattenedRegs replacer(finder.reg_name[0], channel_name, extract_late_fuse_name);
                 stmt = replacer.mutate(stmt);
             } else { // Case 1
                 ReplaceChannelsWithRegs replacer(channel_name, bounds, access_args, processor.buffer_stmt);

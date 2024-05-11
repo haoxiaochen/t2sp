@@ -432,6 +432,7 @@ WEAK int halide_opencl_buffer_copy(void *user_context, struct halide_buffer_t *s
         status = clEnqueueReadBuffer(cmdQueue[current_kernel], ((device_handle *)src->device)->mem,
                                      CL_TRUE, 0, src->size_in_bytes(), (void *)(dst->host),
                                      0, NULL, NULL);
+        CHECK(status);
         std::cout << "Done.\n";
     } else if (from_host && !to_host) {
         if (dst->device == 0) {
@@ -443,12 +444,14 @@ WEAK int halide_opencl_buffer_copy(void *user_context, struct halide_buffer_t *s
         status = clEnqueueWriteBuffer(cmdQueue[current_kernel], ((device_handle *)dst->device)->mem,
                                       CL_TRUE, 0, src->size_in_bytes(), (void *)(src->host),
                                       0, NULL, NULL);
+        CHECK(status);
         std::cout << "Done.\n";
     } else if (!from_host && !to_host) {
         std::cout << "Command queue " << current_kernel << ": copying " << src->size_in_bytes() << " bytes data from device to device. ";
         status = clEnqueueCopyBuffer(cmdQueue[current_kernel], ((device_handle *)src->device)->mem, ((device_handle *)dst->device)->mem,
                                      0, 0,
                                      src->size_in_bytes(), 0, NULL, NULL);
+        CHECK(status);
         std::cout << "Done.\n";
     } else if (dst->host != src->host) {
         std::cout << "Copying " << src->size_in_bytes() << " bytes data from host to host. ";

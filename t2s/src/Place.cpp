@@ -140,7 +140,7 @@ private:
                                         0,
                                         1,
                                         ForType::Parallel, // The loop type is arbitrarily chosen here: it does not really matter.
-                                        DeviceAPI::OneAPI, 
+                                        DeviceAPI::OneAPI,
                                         body);
 
             } else {
@@ -962,10 +962,9 @@ class RegCallInserter : public IRMutator {
     bool inside_if;
 
     Expr get_read_node(string write_name, Expr arg) {
-        // To be safe, only three patterns are found:
+        // To be safe, only two patterns can be found:
         // 1.  write_shift_regs("X.shreg", i, j, read_shift_regs("X.shreg", i-1, j))
-        // 2.  write_shift_regs("X.shreg", i, j, select(?, read_shift_regs("X.shreg", i-1, j), ?))
-        // 3.  write_shift_regs("X.shreg", i, j, select(?, ?, read_shift_regs("X.shreg", i-1, j)))
+        // 2.  write_shift_regs("X.shreg", i, j, select(boundary_cond, ?, read_shift_regs("X.shreg", i-1, j)))
         auto call_node = arg.as<Call>();
         if (call_node && call_node->is_intrinsic(Call::read_shift_reg)) {
             auto name = call_node->args[0].as<StringImm>();
@@ -975,18 +974,19 @@ class RegCallInserter : public IRMutator {
         }
         auto sel_node = arg.as<Select>();
         if (sel_node) {
-            auto true_as_call = sel_node->true_value.as<Call>();
-            if (true_as_call && true_as_call->is_intrinsic(Call::read_shift_reg)) {
-                auto name = true_as_call->args[0].as<StringImm>();
-                if (name && name->value == write_name) {
-                    return true_as_call;
-                }
-            }
-            auto false_as_call = sel_node->false_value.as<Call>();
-            if (false_as_call && false_as_call->is_intrinsic(Call::read_shift_reg)) {
-                auto name = false_as_call->args[0].as<StringImm>();
-                if (name && name->value == write_name) {
-                    return false_as_call;
+            auto cond = sel_node->condition.as<EQ>();
+            if (cond) {
+                auto a = cond->a.as<Variable>();
+                if (!a) return Expr();
+                auto it = std::find(space_loops.begin(), space_loops.end(), extract_last_token(a->name));
+                if (it == space_loops.end() || !is_const(cond->b)) return Expr();
+
+                auto false_as_call = sel_node->false_value.as<Call>();
+                if (false_as_call && false_as_call->is_intrinsic(Call::read_shift_reg)) {
+                    auto name = false_as_call->args[0].as<StringImm>();
+                    if (name && name->value == write_name) {
+                        return false_as_call;
+                    }
                 }
             }
         }

@@ -415,8 +415,9 @@ void decide_channels_to_combine(const vector<ChannelAccess>  &channel_accesses,
                 continue;
             }
             if (combined.original_channel_writes.empty()) {
-                string suffix = ends_with(c1.channel, ".mem_channel") ? ".mem_channel" : ".channel";
-                combined.combined_channel = c1.func + suffix;
+                // string suffix = ends_with(c1.channel, ".mem_channel") ? ".mem_channel" : ".channel";
+                // combined.combined_channel = c1.func + suffix;
+                combined.combined_channel = c1.channel;
                 combined.original_channel_writes.push_back(c1);
                 combined.producer = c1.func;
                 combined.consumer = consumer1;
