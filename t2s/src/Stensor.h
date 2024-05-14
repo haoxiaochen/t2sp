@@ -31,6 +31,13 @@ enum SMemType {
     REG
 };
 
+enum SMemFlag {
+    CHANNEL_1,
+    CHANNEL_2,
+    CHANNEL_3,
+    CHANNEL_4
+};
+
 enum Starget {
     IntelGPU,
     IntelFPGA
@@ -50,8 +57,19 @@ struct Stensor
     vector<Expr> dims;
     int schain_idx = -1;
     int fifo_depth = 0;
+    int channel_num = 0;
     bool transposed = false;
 
+    Stensor(std::string _n, SMemType _p, SMemFlag _f)
+        : Stensor(_n, _p) {
+            switch (_f) {
+                case CHANNEL_1: channel_num = 1; break;
+                case CHANNEL_2: channel_num = 2; break;
+                case CHANNEL_3: channel_num = 3; break;
+                case CHANNEL_4: channel_num = 4; break;
+                default: ;
+            }
+        }
     Stensor(std::string _n, SMemType _p)
         : name(_n), position(_p) {}
     Stensor(std::string _n)

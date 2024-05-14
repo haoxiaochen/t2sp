@@ -35,7 +35,7 @@
 
 using namespace std;
 
-#define I           1024
+#define I           1024*1024
 #define TOTAL_I     I*II
 
 int main()

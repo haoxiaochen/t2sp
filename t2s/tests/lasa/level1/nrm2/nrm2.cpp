@@ -24,12 +24,11 @@ using namespace Halide;
 int main()
 {
    // Dependences
-    #define P_1             kkk,             kk,      k,     b
-    #define P_1_k_minus_1   kkk + KKK - 1,   kk,      k - 1, b
-    #define P_1_kkk_minus_1 kkk - 1,         kk,      k,     b
-    #define P_2                              kk,             b
-    #define P_2_kk_minus_1                   kk - 1,         b
-    #define P_out                                            b
+    #define P               kkk,        kk,       k,    b
+    #define P_kkk_minus_1   kkk-1,      kk,       k,    b
+    #define P_kk_minus_1    kkk+KKK-1,  kk-1,     k,    b
+    #define P_k_minus_1     kkk+KKK-1,  kk+KK-1,  k-1,  b
+    #define P_out                                       b
     // Linearized addresses
     #define total_k         (kkk + KKK * kk + KKK * KK * k)
 
@@ -42,34 +41,23 @@ int main()
 
     // UREs
     Var kkk("kkk"), kk("kk"), k("k"), b("b");
-    URE uX("uX", TTYPE, {P_1}), uY("uY", TTYPE, {P_1}), uZ_1("uZ_1", TTYPE, {P_1}), Z("Z");
-    URE uZ_2("uZ_2", TTYPE, {P_2}), Out("Out");
+    URE uX("uX", TTYPE, {P}), uZ("uZ", TTYPE, {P}), Out("Out");
 
-    uX(P_1) = X(total_k, b);
-    uY(P_1) = uX(P_1);
-    uZ_1(P_1) = select(k == 0 && kkk == 0, 0, select(kkk == 0, uZ_1(P_1_k_minus_1), uZ_1(P_1_kkk_minus_1))) + uX(P_1)*uY(P_1);
-    Z(P_2) = select(k == K - 1 && kkk == KKK - 1, uZ_1(P_1));
-
-    uZ_2(P_2) = select(kk == 0, 0, uZ_2(P_2_kk_minus_1)) + Z(P_2);
-    Out(P_out) = select(kk == KK - 1, sqrt(uZ_2(P_2)));
+    uX(P) = X(total_k, b);
+    uZ(P) = select(k == 0 && kk == 0 && kkk == 0, 0,
+                  select(kkk == 0, select(kk == 0, uZ(P_k_minus_1), uZ(P_kk_minus_1)), uZ(P_kkk_minus_1)))
+                  + uX(P) * uX(P);
+    Out(P_out) = select(kkk == KKK-1 && kk == KK-1 && k == K-1, sqrt(uZ(P)));
 
     // Put all the UREs inside the same loop nest of X.
-    uX.merge_ures(uY, uZ_1, Z);
-    uZ_2.merge_ures(Out);
-    uX.late_fuse(uZ_2);
-
-    // Explicitly set the loop bounds
+    uX.merge_ures(uZ, Out);
     uX.set_bounds(kkk,  0, KKK, kk,  0, KK,  k,  0, K)
       .set_bounds(b,    0, 1);
-    uZ_2.set_bounds(kk,  0, KK)
-        .set_bounds(b,   0, 1);
     uX.space_time_transform(kkk);
-    uX.vectorize(kkk);
-    uZ_2.unroll(kk);
 
     // I/O network
     Stensor DX("xLoader", DRAM), DY("yLoader", DRAM), DC("unloader", DRAM), C("deserializer");
-    X >> DX.out(kk) >> FIFO(256);
+    X >> DX.out(kkk) >> FIFO(256);
     Out >> FIFO(256) >> DC >> C(b);
 
     C.compile_to_host("nrm2-interface", { X }, "nrm2", IntelFPGA);

@@ -1,8 +1,8 @@
 #pragma once
 
 #ifdef TINY // For verifying correctness only
-    #define KKK         4
-    #define KK          4
+    #define KKK         8
+    #define KK          1
     #ifdef T2SP_DDOT
         #define TTYPE Float(64)
     #elif defined(T2SP_CDOT)
@@ -13,7 +13,7 @@
         #define TTYPE Float(32)
     #endif
 #else
-    #define KK 64
+    #define KK          1
     #ifdef T2SP_DDOT
         #define KKK 8
         #define TTYPE Float(64)

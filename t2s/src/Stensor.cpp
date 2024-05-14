@@ -429,6 +429,9 @@ class RealizeOnFPGA
             // The device stensors needs serialized inputs
             // If the host stensor is not specified, we automatically generate it
             string host_name = c.imp[0].name() + (c.outf.defined() ? "_" + c.outf.name() : "") + "_serializer";
+            if (c.stensors[0].position == SMemType::DRAM && c.stensors[0].channel_num) {
+                host_name += "_c" + to_string(c.stensors[0].channel_num-1);
+            }
             Stensor s_host(host_name);
             s_host.schain_idx = c.stensors[0].schain_idx;
             c.stensors.insert(c.stensors.begin(), s_host);
@@ -505,7 +508,11 @@ class RealizeOnFPGA
         // Isolate subsequent consumers
         for (auto &s : c.stensors) {
             Place place = s.position == SMemType::HOST ? Place::Host : Place::Device;
-            Func new_func(s.name, place);
+            string name = s.name;
+            if (s.position == SMemType::DRAM && s.channel_num) {
+                name += "_c" + to_string(s.channel_num-1);
+            }
+            Func new_func(name, place);
             consumers.push_back(std::move(new_func));
             debug(1) << "T2X emits: " << "Func " << s.name << "(\"" << s.name << "\", "
                      << (place == Place::Host ? "Place::Host" : "Place::Device") << ");\n";
@@ -767,8 +774,7 @@ class RealizeOnFPGA
         vector<Func> &funcs = c.funcs;
         internal_assert(c.stensors.size() == funcs.size());
         for (size_t i = 0; i < c.stensors.size(); i++) {
-            if (c.stensors[i].v_outs.size() == 0)
-                continue;
+            if (c.stensors[i].v_outs.size() == 0) continue;
             if (c.stensors[i].position == DRAM) {
                 user_assert(c.stensors[i].v_outs.size() == 1)
                     << "Currently we only support packing one dimension as a vector\n";

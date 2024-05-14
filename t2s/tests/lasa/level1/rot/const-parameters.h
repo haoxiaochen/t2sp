@@ -1,7 +1,7 @@
 #pragma once
 
 #ifdef TINY // For verifying correctness only
-    #define II  32
+    #define II  8
 #else
-    #define II  32
+    #define II  8
 #endif

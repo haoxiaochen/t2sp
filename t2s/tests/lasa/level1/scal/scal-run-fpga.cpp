@@ -35,7 +35,7 @@
 
 using namespace std;
 
-#define I           1024
+#define I           1024*1024
 #define TOTAL_I     I*II
 
 int main()
@@ -69,7 +69,7 @@ int main()
     }
 #endif
 
-    printf("Size of Vector X = %d\nSize of Vector Y = %d\n", TOTAL_I, TOTAL_I);
+    printf("Size of Vector X = %d\n", TOTAL_I);
     printf("Success\n");
     return 0;
 }

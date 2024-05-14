@@ -50,8 +50,8 @@ int main()
     X.space_time_transform(ii);
 
     // I/O network
-    Stensor DX("xLoader", DRAM), DY("yLoader", DRAM);
-    Stensor DOutX("xUnloader", DRAM), DOutY("yUnloader", DRAM);
+    Stensor DX("xLoader", DRAM, CHANNEL_1), DY("yLoader", DRAM, CHANNEL_2);
+    Stensor DOutX("xUnloader", DRAM, CHANNEL_1), DOutY("yUnloader", DRAM, CHANNEL_2);
     x >> DX.out(ii) >> FIFO(256);
     y >> DY.out(ii) >> FIFO(256);
     OutX >> FIFO(256) >> DOutX.out(ii);

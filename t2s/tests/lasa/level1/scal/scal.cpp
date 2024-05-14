@@ -46,7 +46,8 @@ int main()
     Out.space_time_transform(ii);
 
     // I/O network
-    Stensor DX("xLoader", DRAM), DY("yLoader", DRAM), DC("unloader", DRAM), C("deserializer");
+    Stensor DX("xLoader", DRAM, CHANNEL_1), DC("unloader", DRAM, CHANNEL_2);
+    Stensor C("deserializer");
     X >> DX.out(ii) >> FIFO(256);
     Out >> FIFO(256) >> DC >> C(total_i);
 
