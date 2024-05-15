@@ -28,12 +28,18 @@
     #define KK          1
 #else // FPGA
     #ifdef TINY // For verifying correctness only
+        #define JJJ         16
+        #define III         16
         #define JJ          16
         #define II          16
     #elif S10
-        #define JJ          32
-        #define II          32
+        #define JJJ         32
+        #define III         32
+        #define JJJ         16
+        #define III         16
     #else
+        #define JJJ         16
+        #define III         16
         #define JJ          16
         #define II          16
     #endif
