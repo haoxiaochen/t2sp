@@ -27,8 +27,8 @@
     #define J           2
     #define I           2
 #else
-    #define J           32
-    #define I           32
+    #define J           1024
+    #define I           1024
 #endif
 
 // Roofline utilities

@@ -28,8 +28,8 @@
     #define J           2
     #define I           2
 #else
-    #define J           32
-    #define I           32
+    #define J           1024
+    #define I           1024
 #endif
 
 // Roofline utilities
@@ -89,7 +89,7 @@ int main()
     double mem_bandwidth = 33;
 #endif
     double compute_roof = 2 * DSPs() * FMax();
-    double number_ops = 2 * (double)(II * I) * (double)(JJ * J); // Total operations (GFLOP for GER), independent of designs
+    double number_ops = 8 * (double)(II * I) * (double)(JJ * J); // Total operations (GFLOP for GER), independent of designs
     double number_bytes = (double)(II * I) * (double)(JJ * J) * 4 +
                           (double)(II * I) * 4 + 
                           (double)(JJ * J) * 4;

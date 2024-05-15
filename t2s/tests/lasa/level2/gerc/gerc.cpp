@@ -48,8 +48,8 @@ int main()
     Var jj("jj"), ii("ii"), j("j"), i("i");
     URE uY("uY", TTYPE, {P}), uX("uX", TTYPE, {P}), uZ("uZ", TTYPE, {P});
     uX(P) = select(jj == 0, X(total_i), uX(P_jj_minus_1));
-    uY(P) = conjugate(Y(total_j));
-    uZ(P) = A(total_j, total_i) + uX(P) * uY(P);
+    uY(P) = Y(total_j);
+    uZ(P) = A(total_j, total_i) + uX(P) * conjugate(uY(P));
 
     // Put all the UREs inside the same loop nest of X.
     uX.merge_ures(uY, uZ);
@@ -62,14 +62,14 @@ int main()
     uX.space_time_transform(jj);
 
     // I/O network
-    Stensor DA("aLoader", DRAM);
+    Stensor DA("aLoader", DRAM, CHANNEL_1);
     Stensor DX("xLoader", DRAM);
-    Stensor DY("yLoader", DRAM);
-    Stensor DZ("unloader", DRAM), Z("deserializer");
-    A >> DA >> FIFO(256);
+    Stensor DY("yLoader", DRAM), SY("yFeeder", SRAM);
+    Stensor DZ("unloader", DRAM, CHANNEL_2), Z("deserializer");
+    A >> DA.out(jj) >> FIFO(256);
     X >> DX >> FIFO(256);
-    Y >> DY >> FIFO(256);
-    uZ >> FIFO(256) >> DZ >> Z(total_i);
+    Y >> DY >> FIFO(256) >> SY.scope(j).out(jj) >> FIFO(256);
+    uZ >> FIFO(256) >> DZ.out(jj) >> Z(total_i);
 
     // Compile the kernel to an FPGA bitstream, a d expose a C interface for the host to invoke
     Z.compile_to_host("gerc-interface", { A, X, Y }, "gerc", IntelFPGA);

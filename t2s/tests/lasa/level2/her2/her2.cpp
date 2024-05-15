@@ -77,19 +77,19 @@ int main()
     Add.space_time_transform(jj);
 
     // I/O network
-    Stensor DX("xLoader", DRAM), DY("yLoader", DRAM);
+    Stensor DX("xLoader", DRAM), DY("yLoader", DRAM), SY("yFeeder", SRAM);
     X >> DX >> FIFO(256) >> uX;
-    Y >> DY >> FIFO(256) >> uY;
+    Y >> DY >> FIFO(256) >> SY.scope(j).out(jj) >> FIFO(256) >> uY;
 
-    Stensor DX_T("xLoader_T", DRAM), DY_T("yLoader_T", DRAM);
-    X >> DX_T >> FIFO(256) >> uX_T;
+    Stensor DX_T("xLoader_T", DRAM), DY_T("yLoader_T", DRAM), SX("xFeeder", SRAM);
+    X >> DX >> FIFO(256) >> SX.scope(j).out(jj) >> FIFO(256) >> uX_T;
     Y >> DY_T >> FIFO(256) >> uY_T;
 
     Stensor DA("aLoader", DRAM);
     A >> DA.out(jj) >> FIFO(256) >> Add;
 
     Stensor DZ("unloader", DRAM), Z("deserializer");
-    Add >> DZ.out(jj) >> FIFO(256) >> Z;
+    Add >> FIFO(256) >> DZ.out(jj) >> Z;
 
     // Compile the kernel to an FPGA bitstream, a d expose a C interface for the host to invoke
     Z.compile_to_host("her2-interface", { A, X, Y }, "her2", IntelFPGA);
