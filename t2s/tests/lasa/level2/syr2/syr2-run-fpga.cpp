@@ -27,8 +27,8 @@
     #define J           2
     #define I           2
 #else
-    #define J           1024
-    #define I           1024
+    #define J           64
+    #define I           64
 #endif
 
 // Roofline utilities
@@ -48,8 +48,8 @@ using namespace std;
 
 int main()
 {
-    const int TOTAL_I = II * I;
-    const int TOTAL_J = JJ * J;
+    const int TOTAL_I = III * II * I;
+    const int TOTAL_J = JJJ * JJ * J;
 
     Halide::Runtime::Buffer<float> a(TOTAL_J, TOTAL_I), x(TOTAL_I), y(TOTAL_J);
     for (size_t i = 0; i < TOTAL_I; i++) {
@@ -63,23 +63,25 @@ int main()
         y(i) = random();
     }
 
-    Halide::Runtime::Buffer<float> z(JJ, II, J, I);
+    Halide::Runtime::Buffer<float> z(JJJ, III, JJ, II, J, I);
     syr2(a, x, y, z);
 
 #ifdef TINY
     // Validate the results
     for (int i = 0; i < I; i++)
      for (int j = 0; j < J; j++)
-        for (int ii = 0; ii < II; ii++)
-         for (int jj = 0; jj < JJ; jj++) {
-            size_t total_i = ii + II * i;
-            size_t total_j = jj + JJ * j;
+      for (int ii = 0; ii < II; ii++)
+       for (int jj = 0; jj < JJ; jj++)
+        for (int iii = 0; iii < III; iii++)
+         for (int jjj = 0; jjj < JJJ; jjj++) {
+            size_t total_i = iii + III*ii + III*II*i;
+            size_t total_j = jjj + JJJ*jj + JJJ*JJ*j;
             float golden = a(total_j, total_i) + x(total_i) * y(total_j) + x(total_j) * y(total_i);
             if (i < j) {
-                assert(fabs(golden - z(jj, ii, j, i))
+                assert(fabs(golden - z(jjj, iii, jj, ii, j, i))
                     <= 0.005*fabs(golden));
             } else {
-                assert(fabs(golden - z(ii, jj, i, j))
+                assert(fabs(golden - z(iii, jjj, ii, jj, i, j))
                     <= 0.005*fabs(golden));
             }
         }
@@ -92,9 +94,9 @@ int main()
     double mem_bandwidth = 33;
 #endif
     double compute_roof = 2 * DSPs() * FMax();
-    double number_ops = 2 * (double)(II * I) * (double)(JJ * J); // Total operations (GFLOP for GER), independent of designs
+    double number_ops = 2 * (double)(TOTAL_I) * (double)(TOTAL_J); // Total operations (GFLOP for GER), independent of designs
     double number_bytes = (double)(II * I) * (double)(JJ * J) * 4 +
-                          (double)(II * I) * 4 + 
+                          (double)(II * I) * 4 +
                           (double)(JJ * J) * 4;
     double exec_time = ExecTime("kernel_unloader");
     roofline(mem_bandwidth, compute_roof, number_ops, number_bytes, exec_time);

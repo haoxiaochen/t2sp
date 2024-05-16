@@ -71,7 +71,7 @@ int main()
     for (int i = 0; i < I; i++)
      for (int j = 0; j < J; j++)
       for (int ii = 0; ii < II; ii++)
-       for (int jj = 0; jj < JJ; jj++) 
+       for (int jj = 0; jj < JJ; jj++)
         for (int iii = 0; iii < III; iii++)
          for (int jjj = 0; jjj < JJJ; jjj++) {
             size_t total_i = iii + III*ii + III*II*i;
@@ -94,9 +94,9 @@ int main()
     double mem_bandwidth = 33;
 #endif
     double compute_roof = 2 * DSPs() * FMax();
-    double number_ops = 2 * (double)(II * I) * (double)(JJ * J); // Total operations (GFLOP for GER), independent of designs
+    double number_ops = 2 * (double)(TOTAL_I) * (double)(TOTAL_J); // Total operations (GFLOP for GER), independent of designs
     double number_bytes = (double)(II * I) * (double)(JJ * J) * 4 +
-                          (double)(II * I) * 4 + 
+                          (double)(II * I) * 4 +
                           (double)(JJ * J) * 4;
     double exec_time = ExecTime("kernel_unloader");
     roofline(mem_bandwidth, compute_roof, number_ops, number_bytes, exec_time);

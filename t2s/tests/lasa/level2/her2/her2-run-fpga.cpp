@@ -28,8 +28,8 @@
     #define J           2
     #define I           2
 #else
-    #define J           1024
-    #define I           1024
+    #define J           64
+    #define I           64
 #endif
 
 // Roofline utilities
@@ -49,8 +49,8 @@ using namespace std;
 
 int main()
 {
-    const int TOTAL_I = II * I;
-    const int TOTAL_J = JJ * J;
+    const int TOTAL_I = III * II * I;
+    const int TOTAL_J = JJJ * JJ * J;
 
     Halide::Runtime::Buffer<complex32_t> a(TOTAL_J, TOTAL_I), x(TOTAL_I), y(TOTAL_J);
     for (size_t i = 0; i < TOTAL_I; i++) {
@@ -64,25 +64,27 @@ int main()
         y(i) = complex32_t(random(), random());
     }
 
-    Halide::Runtime::Buffer<complex32_t> z(JJ, II, J, I);
+    Halide::Runtime::Buffer<complex32_t> z(JJJ, III, JJ, II, J, I);
     her2(a, x, y, z);
 
 #ifdef TINY
     // Validate the results
     for (int i = 0; i < I; i++)
      for (int j = 0; j < J; j++)
-        for (int ii = 0; ii < II; ii++)
-         for (int jj = 0; jj < JJ; jj++) {
-            size_t total_i = ii + II * i;
-            size_t total_j = jj + JJ * j;
+      for (int ii = 0; ii < II; ii++)
+       for (int jj = 0; jj < JJ; jj++) 
+        for (int iii = 0; iii < III; iii++)
+         for (int jjj = 0; jjj < JJJ; jjj++) {
+            size_t total_i = iii + III*ii + III*II*i;
+            size_t total_j = jjj + JJJ*jj + JJJ*JJ*j;
             if (i < j) {
                 complex32_t golden = x(total_i) * y(total_j).conj() + x(total_j).conj() * y(total_i) + a(total_j, total_i);
-                assert(fabs(golden.re() - z(jj, ii, j, i).re()) <= 0.005 * fabs(golden.re()) &&
-                       fabs(golden.im() - z(jj, ii, j, i).im()) <= 0.005 * fabs(golden.im()));
+                assert(fabs(golden.re() - z(jjj, iii, jj, ii, j, i).re()) <= 0.005 * fabs(golden.re()) &&
+                       fabs(golden.im() - z(jjj, iii, jj, ii, j, i).im()) <= 0.005 * fabs(golden.im()));
             } else {
                 complex32_t golden = x(total_i) * y(total_j).conj() + x(total_j).conj() * y(total_i) + a(total_j, total_i).conj();
-                assert(fabs(golden.re() - z(ii, jj, i, j).re()) <= 0.005 * fabs(golden.re()) &&
-                       fabs(golden.im() + z(ii, jj, i, j).im()) <= 0.005 * fabs(golden.im()));
+                assert(fabs(golden.re() - z(iii, jjj, ii, jj, i, j).re()) <= 0.005 * fabs(golden.re()) &&
+                       fabs(golden.im() + z(iii, jjj, ii, jj, i, j).im()) <= 0.005 * fabs(golden.im()));
             }
         }
 #else
@@ -94,7 +96,7 @@ int main()
     double mem_bandwidth = 33;
 #endif
     double compute_roof = 2 * DSPs() * FMax();
-    double number_ops = 8 * (double)(II * I) * (double)(JJ * J); // Total operations (GFLOP for GER), independent of designs
+    double number_ops = 8 * (double)(TOTAL_I) * (double)(TOTAL_J); // Total operations (GFLOP for GER), independent of designs
     double number_bytes = (double)(II * I) * (double)(JJ * J) * 4 +
                           (double)(II * I) * 4 + 
                           (double)(JJ * J) * 4;
