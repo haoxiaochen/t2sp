@@ -684,7 +684,7 @@ class RealizeOnFPGA
         internal_assert(c.stensors.size() == producers.size());
         for (size_t i = 0; i < c.stensors.size(); i++) {
             Var v_scope = c.stensors[i].v_scope;
-            if (c.exists(v_scope) && c.stensors[i].position == SRAM) {
+            if (v_scope.name() != "__outermost" && c.stensors[i].position == SRAM) {
                 Func prev;
                 if (i != 0) {
                     prev = producers[i-1];
@@ -780,7 +780,7 @@ class RealizeOnFPGA
                     << "Currently we only support packing one dimension as a vector\n";
                 auto v_width = c.stensors[i].v_outs[0];
                 if (c.exists(v_width)) {
-                    Type type = c.control_ure.output_types()[0];
+                    Type type = c.imp[0].type();
                     auto bound = c.control_ure.function().get_bounds(v_width.name());
                     auto ext_node = bound.second.as<IntImm>();
                     internal_assert(ext_node);

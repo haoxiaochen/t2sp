@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function show_usage {
-   echo "Options: (devcloud|local) (asum|axpy|dot|dotc|sdsdot|nrm2|rot|scal|iamax) (a10|s10|gen9|gen12) (tiny|large) (hw|emulator) [bitstream]"
+   echo "Options: (devcloud|local) (asum|axpy|dot|dotu|dotc|sdsdot|nrm2|rot|scal|iamax) (a10|s10|gen9|gen12) (tiny|large) (hw|emulator) [bitstream]"
 }
 
 if [ $0 == $BASH_SOURCE ]; then
@@ -18,7 +18,7 @@ else
     location="$1"
 fi
 
-if [[ ! "$2" =~ ^(asum|axpy|dot|dotc|sdsdot|nrm2|rot|scal|iamax)$ ]]; then
+if [[ ! "$2" =~ ^(asum|axpy|dot|dotu|dotc|sdsdot|nrm2|rot|scal|iamax)$ ]]; then
     show_usage
     return
 else
