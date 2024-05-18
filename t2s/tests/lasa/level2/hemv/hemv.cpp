@@ -36,8 +36,8 @@ int main()
     #define P_T             iii,   ii, kk,      i,   k
     #define P_T_iii_minus_1 iii-1, ii, kk,      i,   k
     #define P_T_kk_minus_1  iii,   ii, kk-1,    i,   k
-    #define P_s0            iii,   ii,          i,   k
     #define P_T_k_minus_1   iii,   ii,          i,   k-1
+    #define P_T_out         iii,   ii,          i,   k
 
     // Linearized addresses
     #define lin_k           (kk + KK*k)
@@ -47,15 +47,13 @@ int main()
     #define TTYPE Complex(32)
 
     // Inputs
-    ImageParam A("A", TTYPE, 2), x("x", TTYPE, 1), y("y", TTYPE, 1);
+    ImageParam A("A", TTYPE, 2), x("x", TTYPE, 1);
 
     // UREs
     Var kk("kk"), iii("iii"), ii("ii"), k("k"), i("i");
     URE UpFx("UpFx", TTYPE, {P}), LowFx("LowFx", TTYPE, {P_T});
-    URE UpMV("UpMV", TTYPE, {P}), UpMVOut("UpMVOut", TTYPE, {P_out});
-    URE LowMV_s0("LowMV_s0", TTYPE, {P_T}), LowMVOut_s0("LowMVOut_s0", TTYPE, {P_s0});
-    URE LowMV_s1("LowMV_s1", TTYPE, {P_s0}), LowMVOut_s1("LowMVOut_s1", TTYPE, {P_out});
-    URE Add("Add", TTYPE, {P_out});
+    URE UpMV("UpMV", TTYPE, {P}), UpMVOut("UpMVOut");
+    URE LowMV("LowMV", TTYPE, {P_T}), LowMVOut("LowMVOut");
 
     UpFx(P) = select(iii == 0, x(lin_k), UpFx(P_iii_minus_1));
     UpMV(P) = select(kk == 0 && k == i, 0,
@@ -64,45 +62,49 @@ int main()
     UpMVOut(P_out) = select(kk == KK-1 && k == K-1, UpMV(P));
 
     LowFx(P_T) = select(iii == 0, x(lin_k), LowFx(P_T_iii_minus_1));
-    LowMV_s0(P_T) = select(kk == 0, 0, LowMV_s0(P_T_kk_minus_1)
+    LowMV(P_T) = select(kk == 0, 0, LowMV(P_T_kk_minus_1)
                     ) + conjugate(A(lin_k, lin_i)) * LowFx(P_T);
-    LowMVOut_s0(P_s0) = select(kk == KK-1, LowMV_s0(P_T));
-    LowMV_s1(P_s0) = select(k == 0, 0, LowMV_s1(P_T_k_minus_1)) + LowMVOut_s0(P_s0);
-    LowMVOut_s1(P_out) = select(k == i-1, LowMV_s1(P_s0));
-
-    Add(P_out) = select(i == 0, UpMVOut(P_out), UpMVOut(P_out) + LowMVOut_s1(P_out)) + y(lin_i);
+    LowMVOut(P_T_out) = select(kk == KK-1, LowMV(P_T));
 
     UpFx.merge_ures(UpMV, UpMVOut);
     UpFx.set_bounds(iii, 0, III)
         .set_bounds(ii,  0, II,  kk,  0, KK)
         .set_bounds(i,   0, I,   k,   i, K-i);
     UpFx.space_time_transform(iii);
-    LowFx.merge_ures(LowMV_s0, LowMVOut_s0);
+    LowFx.merge_ures(LowMV, LowMVOut);
     LowFx.set_bounds(iii, 0, III)
          .set_bounds(ii,  0, II,   kk,  0, KK)
          .set_bounds(i,   k, I-k,  k,   0, K);
     LowFx.space_time_transform(iii);
-    LowMV_s1.merge_ures(LowMVOut_s1);
-    LowMV_s1.set_bounds(iii, 0, III, ii, 0, II)
-            .set_bounds(i,   k, I-k, k,  0, K);
-    LowMV_s1.space_time_transform(iii);
-    Add.set_bounds(iii, 0, III)
-       .set_bounds(ii,  0, II)
-       .set_bounds(i,   0, I);
 
     Stensor DA("DA", DRAM), SA("SA", SRAM);
     Stensor DX_Up("DX_Up", DRAM), DX_Low("DX_Low", DRAM);
     Stensor SX_Up("SX_Up", SRAM), SX_Low("SX_Low", SRAM);
-    Stensor DY("DY", DRAM), DZ("DZ", DRAM), z("z");
-    A >> DA.out(iii) >> vector<FuncOrStensor>{UpMV, SA};
-    SA.scope(i).transpose().out(iii) >> LowMV_s0;
+    Stensor DUpOut("DUpOut", DRAM), DLowOut("DLowOut", DRAM);
+    A >> DA.out(iii) >> FIFO(128) >> vector<FuncOrStensor>{UpMV, SA};
+    SA.scope(i).transpose().out(iii) >> FIFO(128) >> LowMV;
     x >> vector<FuncOrStensor>{DX_Up, DX_Low};
-    DX_Up >> SX_Up.scope(k) >> UpFx;
-    DX_Low >> SX_Low.scope(i) >> LowMV_s0;
-    y >> DY >> Add;
-    Add >> DZ >> z(lin_i);
+    DX_Up >> FIFO(128) >> SX_Up.scope(k) >> FIFO(128) >> UpFx;
+    DX_Low >> FIFO(128) >> SX_Low.scope(i) >> FIFO(128) >> LowMV;
+    UpMVOut >> FIFO(128) >> DUpOut, LowMVOut >> FIFO(128) >> DLowOut;
+    Stensor::realize(IntelFPGA);
 
-    z.compile_to_host("hemv-interface", { A, x, y}, "hemv", IntelFPGA);
+    Func DUpOutWrapper = DUpOut.get_wrapper_func();
+    Func DLowOutWrapper = DLowOut.get_wrapper_func();
+    Func LowReduce(TTYPE, {P_T_out}, Place::Host), LowOut(Place::Host), Out(Place::Host);
+    LowReduce(P_T_out) = select(k == 0, 0, LowReduce(P_T_k_minus_1)) + DLowOutWrapper(P_T_out);
+    LowOut(P_out) = select(k == i-1, LowReduce(P_T_out));
+    Out(P_out) = select(i == 0, DUpOutWrapper(P_out), LowOut(P_out) + DUpOutWrapper(P_out));
+    DLowOutWrapper.bound_storage(i, 0, I);
+    LowReduce.merge_ures(LowOut);
+    LowReduce.set_bounds(iii, 0, III, ii, 0, II)
+             .set_bounds(i,   k, I-k,  k, 0, K);
+    Out.set_bounds(iii, 0, III, ii, 0, II, i, 0, I);
+
+    Target acc = get_host_target();
+    acc.set_feature(Target::IntelFPGA);
+    acc.set_feature(Target::EnableSynthesis);
+    Out.compile_to_host("hemv-interface", { A, x }, "hemv", acc);
     printf("Success\n");
     return 0;
 }

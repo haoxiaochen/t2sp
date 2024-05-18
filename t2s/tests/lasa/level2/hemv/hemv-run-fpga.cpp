@@ -43,7 +43,7 @@ int main()
     const int TOTAL_I = III * II * I;
     const int TOTAL_K = KK * K;
 
-    Halide::Runtime::Buffer<complex32_t> A(TOTAL_K, TOTAL_I), x(TOTAL_K), y(TOTAL_I);
+    Halide::Runtime::Buffer<complex32_t> A(TOTAL_K, TOTAL_I), x(TOTAL_K);
     for (size_t i = 0; i < TOTAL_I; i++) {
         for (size_t k = i; k < TOTAL_K; k++) {
             A(k, i) = complex32_t(random(), random());
@@ -53,12 +53,9 @@ int main()
     for (size_t k = 0; k < TOTAL_K; k++) {
         x(k) = complex32_t(random(), random());
     }
-    for (size_t i = 0; i < TOTAL_I; i++) {
-        y(i) = complex32_t(random(), random());
-    }
 
     Halide::Runtime::Buffer<complex32_t> c(III, II, I);
-    hemv(A, x, y, c);
+    hemv(A, x, c);
 
 #ifdef TINY
     // Validate the results
@@ -82,7 +79,7 @@ int main()
     double mem_bandwidth = 33;
 #endif
     double compute_roof = 2 * DSPs() * FMax();
-    double number_ops = 2 * (double)(TOTAL_I) * (double)(TOTAL_K); // Total operations (GFLOP for GEMM), independent of designs
+    double number_ops = 8 * (double)(TOTAL_I) * (double)(TOTAL_K); // Total operations (GFLOP for GEMM), independent of designs
     double number_bytes = ((double)(TOTAL_I * TOTAL_K) + (double)(TOTAL_K) + (double)(TOTAL_I)) * 4;
     double exec_time = ExecTime("kernel_unloader");
     roofline(mem_bandwidth, compute_roof, number_ops, number_bytes, exec_time);
