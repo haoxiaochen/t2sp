@@ -27,7 +27,7 @@
     #define K           4
     #define Kl          64
 #else
-    #define K           64
+    #define K           128
     #define Kl          2047
 #endif
 

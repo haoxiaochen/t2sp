@@ -87,13 +87,16 @@ int main()
     LowFx.space_time_transform(vi);
 
     Stensor DA("DA", DRAM), SA("SA", SRAM);
-    Stensor DX_Up("DX_Up", DRAM), DX_Low("DX_Low", DRAM), SX_Low("SX_Low", SRAM);
+    Stensor DX_Up("DX_Up", DRAM), DX_Low("DX_Low", DRAM);
+    Stensor SX_Up("SX_Up", SRAM), SX_Low("SX_Low", SRAM);
     Stensor DLowTop("DLowTop", DRAM), DLowOut("DLowOut", DRAM), DUpOut("DUpOut", DRAM);
-    A >> DA.out(vi) >> vector<FuncOrStensor>{LowMV, SA};
-    SA.scope(k).transpose().out(vi) >> UpMV;
+    A >> DA.out(vi) >> FIFO(128) >> vector<FuncOrStensor>{LowMV, SA};
+    SA.scope(k).transpose().out(vi) >> FIFO(128) >> UpMV;
     x >> vector<FuncOrStensor>{DX_Up, DX_Low};
-    DX_Up >> UpMV, DX_Low >> SX_Low.scope(i) >> LowFx;
-    UpOut >> DUpOut, LowTop >> DLowTop, LowOut >> DLowOut;
+    DX_Up >> SX_Up.scope(k) >> FIFO(128) >> UpMV;
+    DX_Low >> SX_Low.scope(i) >> FIFO(128) >> LowFx;
+    UpOut >> FIFO(128) >> DUpOut;
+    LowTop >> FIFO(128) >> DLowTop, LowOut >> FIFO(128) >> DLowOut;
     Stensor::realize(IntelFPGA);
 
     Func Out("Out", Place::Host);

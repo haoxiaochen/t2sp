@@ -63,8 +63,8 @@ int main()
     // during FPGA synthesis and and the dynamic profile during the FGPA execution.
     float mem_bandwidth = 34; // pac_a10 on DevCloud has 34GB/s memory bandwidth
     float compute_roof = 2 * DSPs() * FMax();
-    float number_ops = COEFFICIENT * TOTAL_K; // Total operations (GFLOP for GEMV), independent of designs
-    float number_bytes = number_ops * sizeof(DATA_TYPE);
+    float number_ops = 6 * TOTAL_I; // Total operations (GFLOP for GEMV), independent of designs
+    float number_bytes = number_ops * sizeof(float);
     float exec_time = ExecTime();
     roofline(mem_bandwidth, compute_roof, number_ops, number_bytes,exec_time);
     if (fopen("roofline.png", "r") == NULL) {

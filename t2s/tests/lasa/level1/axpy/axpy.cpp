@@ -24,11 +24,11 @@ using namespace Halide;
 int main()
 {
     // Dependences
-    #define P               ii, i
+    #define P               iii, ii, i
     // Linearized addresses
-    #define total_i         (ii + II*i)
+    #define total_i         (iii + III*ii + III*II*i)
     // Outer loop bounds, which are determined by input sizes
-    #define I               (X.dim(0).extent()/II)
+    #define I               (X.dim(0).extent()/(III*II))
 
     #define TTYPE           Float(32)
 
@@ -37,20 +37,20 @@ int main()
     Param<float> alpha;
 
     // UREs
-    Var ii("ii"), i("i");
+    Var iii("iii"), ii("ii"), i("i");
     URE Out("out");
     Out(P) = alpha*X(total_i) + Y(total_i);
 
     // Explicitly set the loop bounds
-    Out.set_bounds(ii, 0, II, i, 0, I);
-    Out.space_time_transform(ii);
+    Out.set_bounds(iii, 0, III, ii, 0, II, i, 0, I);
+    Out.space_time_transform(iii);
 
     // I/O network
     Stensor DX("xLoader", DRAM, CHANNEL_1), DY("yLoader", DRAM, CHANNEL_2);
     Stensor DC("unloader", DRAM), C("deserializer");
-    X >> DX.out(ii) >> FIFO(256);
-    Y >> DY.out(ii) >> FIFO(256);
-    Out >> FIFO(256) >> DC >> C(total_i);
+    X >> DX.out(iii) >> FIFO(64);
+    Y >> DY.out(iii) >> FIFO(64);
+    Out >> FIFO(64) >> DC >> C(total_i);
 
     C.compile_to_host("axpy-interface", { X, Y, alpha }, "axpy", IntelFPGA);
     printf("Success\n");

@@ -35,12 +35,12 @@
 
 using namespace std;
 
-#define I           1024*1024
-#define TOTAL_I     I*II
+#define I           64
+#define TOTAL_I     I*II*III
 
 int main()
 {
-    Halide::Runtime::Buffer<float> x(TOTAL_I), y(TOTAL_I), o(II, I);
+    Halide::Runtime::Buffer<float> x(TOTAL_I), y(TOTAL_I), o(III, II, I);
 
     for (size_t i = 0; i < TOTAL_I; i++) {
         x(i) = random();

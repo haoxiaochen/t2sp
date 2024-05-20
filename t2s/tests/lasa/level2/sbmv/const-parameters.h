@@ -39,8 +39,8 @@
         #define KK	        8192
     #else
         #define VI          32
-        #define II          16
-        #define KK          512
+        #define II          8
+        #define KK          256
     #endif
 #endif
 
