@@ -25,8 +25,8 @@
 
 // Outer loop bounds for testing
 #ifdef TINY
-    #define K           2
-    #define Kl          31
+    #define K           128
+    #define Kl          2047
 #else
     #define K           64
     #define Kl          2047

@@ -30,8 +30,8 @@
 #else // FPGA
     #ifdef TINY // For verifying correctness only
         #define VI          16
-        #define II          8
-        #define KK          128
+        #define II          16
+        #define KK          256
     #elif S10
         #define KKK	        1
         #define III	        64
@@ -39,8 +39,8 @@
         #define KK	        8192
     #else
         #define VI          16
-        #define II          8
-        #define KK          128
+        #define II          16
+        #define KK          256
     #endif
 #endif
 
